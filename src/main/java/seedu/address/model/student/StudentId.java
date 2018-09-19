@@ -21,7 +21,7 @@ public class StudentId {
      */
     public StudentId(String studentId) {
         requireNonNull(studentId);
-        checkArgument(isValidStudentId(studentId), "Oh no");
+        checkArgument(isValidStudentId(studentId), MESSAGE_STUDENT_ID_CONSTRAINTS);
         this.studentId = studentId;
     }
 

@@ -19,6 +19,7 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final StudentId studentId;
 
     // Data fields
     private final Address address;
@@ -27,12 +28,13 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Student(Name name, Phone phone, Email email, Address address, StudentId studentId, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, studentId, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.studentId = studentId;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +53,8 @@ public class Student {
     public Address getAddress() {
         return address;
     }
+
+    public StudentId getStudentId() { return studentId; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -93,13 +97,14 @@ public class Student {
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getAddress().equals(getAddress())
+                && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, studentId, tags);
     }
 
     @Override
@@ -112,6 +117,8 @@ public class Student {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Student ID: ")
+                .append(getStudentId())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
