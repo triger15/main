@@ -15,6 +15,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,6 +33,8 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required=true)
+    private String studentId;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,11 +48,12 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given student details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String studentId, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.studentId = studentId;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -65,6 +69,7 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        studentId = source.getStudentId().studentId;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -112,9 +117,17 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        if (studentId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName()));
+        }
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_STUDENT_ID_CONSTRAINTS);
+        }
+        final StudentId modelStudentId = new StudentId(studentId);
+
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTags);
     }
 
     @Override
@@ -132,6 +145,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
+                && Objects.equals(studentId, otherPerson.studentId)
                 && tagged.equals(otherPerson.tagged);
     }
 }

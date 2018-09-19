@@ -25,6 +25,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,7 +77,7 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
+        Student editedStudent = createEditedStudent(studentToEdit, editPersonDescriptor);
 
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -92,16 +93,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Student createEditedPerson(Student studentToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert studentToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(studentToEdit.getAddress());
+        StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags);
     }
 
     @Override
@@ -131,6 +133,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private StudentId studentId;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -144,6 +147,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setStudentId(toCopy.studentId);
             setTags(toCopy.tags);
         }
 
@@ -186,6 +190,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setStudentId(StudentId studentId) { this.studentId = studentId; }
+
+        public Optional<StudentId> getStudentId() { return Optional.ofNullable(studentId); }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -222,6 +230,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getStudentId().equals(e.getStudentId())
                     && getTags().equals(e.getTags());
         }
     }

@@ -6,6 +6,7 @@
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
+        <studentId>A1234567Y</studentId>
     </students>
     <!-- Student with invalid phone field -->
     <students>
