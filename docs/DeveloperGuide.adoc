@@ -820,13 +820,24 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* <<teaching-assistant,TAs>> and <<professor,Profs>> in <<school-of-computing,SoC>>
+* has a need to manage a significant number of students
+* keeps track of student performance in tutorials
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: 
+
+* Current situation:
+** TAs use IVLE, excel spreadsheets and many other systems to keep track of students performances, class participation and other information
+** Difficult to organize multitude of information
+** Hard to share data with other TAs, when they could be building on pre-existing data.
+
+* Proposed solution:
+** Central management system to keep track of students performances, tutorial attendance
+** Provide a platform for Tutors/TAs to better keep track of individual students and provide help early
 
 [appendix]
 == User Stories
@@ -836,49 +847,71 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |TA |record the tutorial participation of my students |cater to each individual's learning ability
 
-|`* * *` |user |add a new student |
+|`* * *` |TA |profile my students |tweak my lessons better
 
-|`* * *` |user |delete a student |remove entries that I no longer need
+|`* * *` |Prof/TA|track student attendance | know which student may be potentially lagging behind
 
-|`* * *` |user |find a student by name |locate details of students without having to go through the entire list
+|`* * *` |TA |check on students' past academic records |know which student may need more help during class
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |TA |search through a list of students |easily find the students in a specific tutorial group
 
-|`*` |user with many students in the address book |sort students by name |locate a student easily
+|`* * *` |TA |insert/update/delete student performance |keep track of their performance
+
+|`* * *` |TA |add students to a tutorial group |find them easily
+
+|`* *` |TA |view the performance of my students over time through visual aids |easily view their progress at a glance
+
+|`* *` |TA |get recommendations on my teaching style |improve or change my teaching style
+
+|`* *` |TA |data trending of the performance of my students |track the progress of the students
+
+|`* *` |TA |plan consultations with students through a calendar system |better manage my time and the learning of the students
+
+|`* *` |TA |get suggestions on how to cater my teaching style to a specific student |teach that student better
+
+|`* *` |TA |flag a student that needs help |easily filter out the students that need help
+
+|`* *` |TA |plan non-clashing consultation sessions with students |reduce tht time needed to find a suitable date and time and better manage my schedule
+
+|`* *` |Prof/TA |access the academic records of my students with a secure password |prevent leaking of personal data
+
+|`*` |TA |share student records with other TAs |build on pre-existing data about the student
+
+|`*` |TA |receive student records from other TAs |understand my students better
+
+|`*` |TA |send emails to tutorial groups |relay important information to my students
+
+|`*` |TA |export student data to a CSV/PDF |easily share the data with related parties
+
+|`*` |Student |feedback to my TAs about their teaching style |learn better during classes
+
 |=======================================================================
 
 _{More to be added}_
 
 [appendix]
 == Use Cases
-
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases, the *System* is the `SuperTA Client` and the *Actor* is `TA`.)
 
 [discrete]
-=== Use case: Delete student
+=== UC01 - Add Tutorial Group
 
-*MSS*
+*MSS:*
 
-1.  User requests to list students
-2.  AddressBook shows a list of students
-3.  User requests to delete a specific student in the list
-4.  AddressBook deletes the student
+1. User clicks “Add Tutorial Group” button or enters command “add [tg/[NAME]] *[s/[STUDENT-ID]]”
+2. The tutorial group is created.
+
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
+* 1a. User enters invalid student details.
+** 1a1. System prompt user invalid student details entered.
+** 1a2. User re-enter student details.
 +
 Use case resumes at step 2.
 
@@ -887,20 +920,31 @@ _{More to be added}_
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+. The client should work without an Internet connection.
+. The client should be able to be used by a first-timer without having to refer to the documentation all the time.
+. The program should be responsive to the user’s input and display the results fast (<3s).
+. The project is expected to adhere to semantic versioning.
+. The client should not need to do syncing over the Internet.
+. The codebase should have high code coverage (90%).
+. The codebase should adhere to the Google Java style guide.
+. The codebase should use Continuous Integration (CI).
+. The master branch should always be functional.
 
 _{More to be added}_
 
 [appendix]
 == Glossary
 
-[[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X
+[[school-of-computing]] SoC::
+School of Computing. A term used loosely for:
+1. anyone or anything that has to do with computing
+2. the building in NUS.
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+[[teaching-assistant]] TA::
+Teaching Assistant. An individual, usually an SoC undergraduate, who is responsible for tutorial sessions in a given module.
+
+[[professor]] Prof::
+Professor. An individual who teaches SoC modules.
 
 [appendix]
 == Product Survey
