@@ -13,8 +13,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.tag.Tag;
 
@@ -33,7 +33,7 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
-    @XmlElement(required=true)
+    @XmlElement(required = true)
     private String studentId;
 
     @XmlElement
@@ -48,7 +48,8 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given student details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String studentId, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String studentId,
+                            List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -118,7 +119,8 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
         if (studentId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
         }
         if (!StudentId.isValidStudentId(studentId)) {
             throw new IllegalValueException(StudentId.MESSAGE_STUDENT_ID_CONSTRAINTS);

@@ -54,7 +54,9 @@ public class Student {
         return address;
     }
 
-    public StudentId getStudentId() { return studentId; }
+    public StudentId getStudentId() {
+        return studentId;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

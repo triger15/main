@@ -8,10 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidStudentId(String)}
  */
 public class StudentId {
-
+    public static final String MESSAGE_STUDENT_ID_CONSTRAINTS = "Student IDs should follow the NUS "
+            + "Student Card number.";
     private static final String STUDENT_ID_VALIDATION_REGEX = "[A-Z](\\d){7}[A-Z]";
-    public static final String MESSAGE_STUDENT_ID_CONSTRAINTS = "Student IDs should follow the NUS " +
-            "Student Card number.";
     public final String studentId;
 
     /**

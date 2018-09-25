@@ -42,8 +42,8 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -61,7 +61,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
          */
         Student toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + STUDENT_ID_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + STUDENT_ID_DESC_AMY + "   " + TAG_DESC_FRIEND
+                + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -101,19 +102,19 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: add a student, missing tags -> added */
         assertCommandSuccess(HOON);
 
-        /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
+        /* -------------------------- Perform add operation on the shown filtered list ----------------------------- */
 
         /* Case: filters the student list before adding -> added */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a student card is selected --------------------------- */
+        /* ------------------------ Perform add operation while a student card is selected -------------------------- */
 
         /* Case: selects first card in the student list, add a student -> added, card selection remains unchanged */
         selectPerson(Index.fromOneBased(1));
         assertCommandSuccess(CARL);
 
-        /* ----------------------------------- Perform invalid add operations --------------------------------------- */
+        /* ----------------------------------- Perform invalid add operations -------------------------------------- */
 
         /* Case: add a duplicate student -> rejected */
         command = PersonUtil.getAddCommand(HOON);
@@ -197,6 +198,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Student toAdd) {
@@ -206,6 +208,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(Student)}. Executes {@code command}
      * instead.
+     *
      * @see AddCommandSystemTest#assertCommandSuccess(Student)
      */
     private void assertCommandSuccess(String command, Student toAdd) {
@@ -222,6 +225,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 1. Result display box displays {@code expectedResultMessage}.<br>
      * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
+     *
      * @see AddCommandSystemTest#assertCommandSuccess(String, Student)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
@@ -241,6 +245,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {

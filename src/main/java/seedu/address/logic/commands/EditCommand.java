@@ -23,8 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.tag.Tag;
 
@@ -190,9 +190,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setStudentId(StudentId studentId) { this.studentId = studentId; }
+        public void setStudentId(StudentId studentId) {
+            this.studentId = studentId;
+        }
 
-        public Optional<StudentId> getStudentId() { return Optional.ofNullable(studentId); }
+        public Optional<StudentId> getStudentId() {
+            return Optional.ofNullable(studentId);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
