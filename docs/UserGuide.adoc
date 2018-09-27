@@ -182,7 +182,7 @@ Adds the students with student IDs `A1231231Y` and `A2342342T` to the tutorial g
 
 NOTE: Coming in v1.1
 
-Removes students from a tutorial group. + 
+Removes students from a tutorial group. +
 Format: `remove-from-tutorial-group tg/[TUTORIAL_GROUP_ID] [s/STUDENT_ID] ...`
 
 Examples:

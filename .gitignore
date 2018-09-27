@@ -3,6 +3,8 @@ build/
 .checkstyle
 .settings/
 .idea/
+.project
+.classpath
 lib/*
 *.iml
 *.log
