@@ -20,7 +20,7 @@ Responsibilities: Team Lead, Integration
 '''
 
 === Keith Tan
-image::keithtan.jpg[width="150", align="left"]
+image::keithtan.png[width="150", align="left"]
 {empty}[http://github.com/keithtan[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Documentation
