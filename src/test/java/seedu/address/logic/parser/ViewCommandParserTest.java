@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import org.junit.Test;
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.model.student.SameStudentIDPredicate;
+import seedu.address.model.student.SameStudentIdPredicate;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -35,7 +35,7 @@ public class ViewCommandParserTest {
     public void parse_validArgs_returnsViewCommand() {
         // no leading and trailing whitespaces
         ViewCommand expectedViewCommand =
-                new ViewCommand(new SameStudentIDPredicate("A0123456Z"));
+                new ViewCommand(new SameStudentIdPredicate("A0123456Z"));
 
         assertParseSuccess(parser, PREFIX_STUDENT_ID + "A0123456Z", expectedViewCommand);
     }

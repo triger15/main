@@ -1,17 +1,17 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.SameStudentIDPredicate;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.model.student.StudentId.isValidStudentId;
 
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.SameStudentIdPredicate;
+
 /**
  * Parses input arguments and creates a new ViewCommand object.
  */
-public class ViewCommandParser implements Parser<ViewCommand>{
+public class ViewCommandParser implements Parser<ViewCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
@@ -42,6 +42,6 @@ public class ViewCommandParser implements Parser<ViewCommand>{
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        return new ViewCommand(new SameStudentIDPredicate(trimmedStudentId));
+        return new ViewCommand(new SameStudentIdPredicate(trimmedStudentId));
     }
 }

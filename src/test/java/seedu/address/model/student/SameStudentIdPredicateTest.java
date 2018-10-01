@@ -11,7 +11,7 @@ public class SameStudentIdPredicateTest {
 
     @Test
     public void test_sameStudentIdPredicate() {
-        SameStudentIDPredicate predicate = new SameStudentIDPredicate("A0123456Z");
+        SameStudentIdPredicate predicate = new SameStudentIdPredicate("A0123456Z");
 
         assertTrue(predicate.test(new Student(
                 new Name("Tester Tester"),
