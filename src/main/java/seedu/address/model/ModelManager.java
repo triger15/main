@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.student.Student;
 
 /**
@@ -81,6 +83,33 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook.updatePerson(target, editedStudent);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addTutorialGroup(TutorialGroup tutorialGroup) {
+        versionedAddressBook.addTutorialGroup(tutorialGroup);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
+        versionedAddressBook.removeTutorialGroup(tutorialGroup);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean hasTutorialGroup(String id) {
+        return versionedAddressBook.hasTutorialGroup(id);
+    }
+
+    @Override
+    public Optional<TutorialGroup> getTutorialGroup(String id) {
+        return versionedAddressBook.getTutorialGroup(id);
+    }
+
+    @Override
+    public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
+
     }
 
     //=========== Filtered Student List Accessors =============================================================

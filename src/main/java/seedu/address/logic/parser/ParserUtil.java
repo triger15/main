@@ -111,6 +111,14 @@ public class ParserUtil {
         return new StudentId(trimmedStudentId);
     }
 
+    public static String parseTutorialGroupName(String tgName) {
+        return tgName.trim();
+    }
+
+    public static String parseTutorialGroupId(String tgId) {
+        return tgId.trim();
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

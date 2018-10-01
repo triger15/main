@@ -1,8 +1,10 @@
 package seedu.address.model;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.student.Student;
 
 /**
@@ -42,6 +44,40 @@ public interface Model {
      * address book.
      */
     void updatePerson(Student target, Student editedStudent);
+
+    /**
+     * Adds the given tutorial group.
+     * {@code tutorialGroup} must not already exist.
+     */
+    void addTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
+     * Deletes the given tutorial group.
+     * The tutorial group must exist in the client.
+     */
+    void deleteTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
+     * Returns true if a tutorial group with the given id exists.
+     * @param id ID of the tutorial group.
+     */
+    boolean hasTutorialGroup(String id);
+
+    /**
+     * Returns the tutorial group with the given id, if present.
+     */
+    Optional<TutorialGroup> getTutorialGroup(String id);
+
+    /**
+     * Replaces the given tutorial group {@code target} with {@code edited}.
+     * {@code target} must exist in the client.
+     * The ID of {@code edited} must not be the same as another existing tutorial group
+     * in the client.
+     * @param target The tutorial group to be edited.
+     * @param edited The tutorial group with edited details.
+     */
+    void updateTutorialGroup(TutorialGroup target, TutorialGroup edited);
+
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredPersonList();

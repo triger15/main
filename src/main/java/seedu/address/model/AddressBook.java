@@ -3,8 +3,11 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.TutorialGroup.TutorialGroup;
+import seedu.address.model.TutorialGroup.TutorialGroupMaster;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -14,7 +17,8 @@ import seedu.address.model.student.UniqueStudentList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueStudentList persons;
+    private final UniqueStudentList students;
+    private final TutorialGroupMaster tutorialGroupMaster;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +28,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueStudentList();
+        students = new UniqueStudentList();
+        tutorialGroupMaster = new TutorialGroupMaster();
     }
 
     public AddressBook() {}
@@ -43,8 +48,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the student list with {@code students}.
      * {@code students} must not contain duplicate students.
      */
-    public void setPersons(List<Student> students) {
-        this.persons.setPersons(students);
+    public void setStudents(List<Student> students) {
+        this.students.setPersons(students);
+    }
+
+    public void setTutorialGroups(List<TutorialGroup> tutorialGroups) {
+        this.tutorialGroupMaster.setTutorialGroups(tutorialGroups);
     }
 
     /**
@@ -53,7 +62,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setStudents(newData.getPersonList());
+        setTutorialGroups(newData.getTutorialGroupList());
     }
 
     //// student-level operations
@@ -63,7 +73,43 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Student student) {
         requireNonNull(student);
-        return persons.contains(student);
+        return students.contains(student);
+    }
+
+    /**
+     * Returns true if a tutorial group with the same id as {@code tutorialGroup} exists in the directory.
+     */
+    public boolean hasTutorialGroup(String id) {
+        return tutorialGroupMaster.contains(id);
+    }
+
+    public Optional<TutorialGroup> getTutorialGroup(String id) {
+        return tutorialGroupMaster.getTutorialGroup(id);
+    }
+
+    /**
+     * Adds a tutorial group to the directory.
+     */
+    public void addTutorialGroup(TutorialGroup tg) {
+        tutorialGroupMaster.addTutorialGroup(tg);
+    }
+
+    /**
+     * Replaces the given tutorial group {@code target} in the list with {@code edited}.
+     * {@code target} must exist in the client.
+     */
+    public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
+        requireNonNull(edited);
+
+        tutorialGroupMaster.setTutorialGroup(target, edited);
+    }
+
+    /**
+     * Removes a tutorial group from the directory.
+     * The tutorial group must exist in the directory.
+     */
+    public void removeTutorialGroup(TutorialGroup key) {
+        tutorialGroupMaster.removeTutorialGroup(key);
     }
 
     /**
@@ -71,7 +117,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The student must not already exist in the address book.
      */
     public void addPerson(Student p) {
-        persons.add(p);
+        students.add(p);
     }
 
     /**
@@ -83,7 +129,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updatePerson(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
-        persons.setPerson(target, editedStudent);
+        students.setPerson(target, editedStudent);
     }
 
     /**
@@ -91,31 +137,37 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Student key) {
-        persons.remove(key);
+        students.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return students.asUnmodifiableObservableList().size() + " students";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Student> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+        return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<TutorialGroup> getTutorialGroupList() {
+        return tutorialGroupMaster.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && students.equals(((AddressBook) other).students)
+                && tutorialGroupMaster.equals(((AddressBook) other).tutorialGroupMaster));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return students.hashCode();
     }
 }

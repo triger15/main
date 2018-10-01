@@ -96,6 +96,15 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns a clone of this list.
+     */
+    public UniqueStudentList clone() {
+        UniqueStudentList other = new UniqueStudentList();
+        other.internalList.addAll(this.internalList);
+        return other;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
