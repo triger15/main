@@ -21,12 +21,12 @@ public class ViewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-    
+
     @Test
     public void equals() {
         SameStudentIDPredicate firstPredicate = new SameStudentIDPredicate("A1234567Z");
         SameStudentIDPredicate secondPredicate = new SameStudentIDPredicate("B1234567Y");
-        
+
         ViewCommand firstViewCommand = new ViewCommand(firstPredicate);
         ViewCommand secondViewCommand = new ViewCommand(secondPredicate);
 
@@ -46,7 +46,7 @@ public class ViewCommandTest {
         // different student -> returns false
         assertFalse(firstViewCommand.equals(secondViewCommand));
     }
-    
+
     @Test
     public void execute_ViewCommand_success() {
         Student expectedStudent = new PersonBuilder().withName("Alice Pauline")
@@ -54,13 +54,13 @@ public class ViewCommandTest {
                 .withPhone("94351253")
                 .withStudentId("A0166733Y")
                 .withTags("friends").build();
-        
+
         assertCommandSuccess(new ViewCommand(new SameStudentIDPredicate("A0166733Y")),
-                model, 
-                commandHistory, 
+                model,
+                commandHistory,
                 String.format("%s\n %s\n", ViewCommand.MESSAGE_SUCCESS, expectedStudent),
                 expectedModel);
-        
+
         assertCommandSuccess(new ViewCommand(new SameStudentIDPredicate("B0123456Z")),
                 model,
                 commandHistory,

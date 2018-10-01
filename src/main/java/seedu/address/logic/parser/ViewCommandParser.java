@@ -35,14 +35,13 @@ public class ViewCommandParser implements Parser<ViewCommand>{
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
-        
+
         String trimmedStudentId = studentId[0].substring(3);
         if (!isValidStudentId(trimmedStudentId)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
-        
+
         return new ViewCommand(new SameStudentIDPredicate(trimmedStudentId));
     }
-    
 }

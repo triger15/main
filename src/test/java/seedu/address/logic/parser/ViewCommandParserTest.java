@@ -13,17 +13,17 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 public class ViewCommandParserTest {
 
     private ViewCommandParser parser = new ViewCommandParser();
-    
+
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
-    
+
     @Test
     public void parse_inValidArg_throwsParseException() {
-        assertParseFailure(parser, PREFIX_NAME + "A0123456Z", 
+        assertParseFailure(parser, PREFIX_NAME + "A0123456Z",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, PREFIX_STUDENT_ID + "A01234567", 
+        assertParseFailure(parser, PREFIX_STUDENT_ID + "A01234567",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         assertParseFailure(parser, PREFIX_STUDENT_ID + "01234567Z",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
@@ -36,7 +36,7 @@ public class ViewCommandParserTest {
         // no leading and trailing whitespaces
         ViewCommand expectedViewCommand =
                 new ViewCommand(new SameStudentIDPredicate("A0123456Z"));
-        
+
         assertParseSuccess(parser, PREFIX_STUDENT_ID + "A0123456Z", expectedViewCommand);
     }
 }

@@ -8,11 +8,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class SameStudentIdPredicateTest {
-    
+
     @Test
     public void test_sameStudentIdPredicate() {
         SameStudentIDPredicate predicate = new SameStudentIDPredicate("A0123456Z");
-        
+
         assertTrue(predicate.test(new Student(
                 new Name("Tester Tester"),
                 new Phone("98765432"),
@@ -20,7 +20,7 @@ public class SameStudentIdPredicateTest {
                 new Address("Testing Street 123"),
                 new StudentId("A0123456Z"),
                 new HashSet<>())));
-        
+
         assertFalse(predicate.test(new Student(
                 new Name("Tester Tester"),
                 new Phone("98765432"),
