@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= SuperTA - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,19 +12,19 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103-AY1819S1-T16-2/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2103T T16-2`      Since: `September 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+SuperTA is a desktop app for *Teaching Assistants* and *Professors* of NUS School of Computing to manage their tutorials and students. It is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). Jump to <<Quick Start>> section to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `superTA.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your SuperTA client.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,8 +33,8 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* *`list`* : lists all students in the directory
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 id/A0123456Y` : adds a student named `John Doe` to the student directory.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -58,26 +58,26 @@ Format: `help`
 
 === Adding a student: `add`
 
-Adds a student to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a student to the directory +
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS id/STUDENT_ID [t/TAG]...`
 
 [TIP]
 A student can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 id/A0123456Y`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 id/A1234567T tag/needs-help`
 
 === Listing all students : `list`
 
-Shows a list of all students in the address book. +
+Shows a list of all students in the directory. +
 Format: `list`
 
 === Editing a student : `edit`
 
-Edits an existing student in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing student in the directory. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [id/STUDENT_ID] [t/TAG]...`
 
 ****
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index *must be a positive integer* 1, 2, 3, ...
@@ -116,7 +116,7 @@ Returns any student having names `Betsy`, `Tim`, or `John`
 
 === Deleting a student : `delete`
 
-Deletes the specified student from the address book. +
+Deletes the specified student from the directory. +
 Format: `delete INDEX`
 
 ****
@@ -129,7 +129,7 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd student in the address book.
+Deletes the 2nd student in the directory.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st student in the results of the `find` command.
@@ -152,7 +152,110 @@ Examples:
 Selects the 2nd student in the address book.
 * `find Betsy` +
 `select 1` +
-Selects the 1st student in the results of the `find` command.
+Selects the 1st studenot in the results of the `find` command.
+
+=== Creating a Tutorial Group: `create-tutorial-group`
+
+NOTE: Coming in v1.1
+
+Creates a tutorial group. +
+Format: `create-tutorial-group n/[NAME] [s/STUDENT_ID] ...`
+
+Examples:
+
+* `create-tutorial-group n/CS1101S Studio 04A s/A0123456Y s/A1234567T s/A0132435Y`
+Creates a tutorial group named `CS1101S Studio 04A` with three students with their student IDs being `A0123456Y`, `A1234567T`, and `A0132435Y`.
+
+=== Add to Tutorial Group: `add-to-tutorial-group`
+
+NOTE: Coming in v1.1
+
+Adds students to a tutorial group. +
+Format: `add-to-tutorial-group tg/[TUTORIAL_GROUP_ID] [s/STUDENT_ID] ...`
+
+Examples:
+
+* `add-to-tutorial-group tg/1 s/A1231231Y s/A2342342T`
+Adds the students with student IDs `A1231231Y` and `A2342342T` to the tutorial group with an ID of `1`.
+
+=== Remove from Tutorial Group: `remove-from-tutorial-group`
+
+NOTE: Coming in v1.1
+
+Removes students from a tutorial group. +
+Format: `remove-from-tutorial-group tg/[TUTORIAL_GROUP_ID] [s/STUDENT_ID] ...`
+
+Examples:
+
+* `remove-from-tutorial-group tg/1 s/A1231231Y s/A2342342T`
+Removes the students with student IDs `A1231231Y` and `A2342342T` from the tutorial group with an ID of `1`.
+
+=== Filter by Tutorial Group: `filter`
+
+NOTE: Coming in v1.1
+
+Filters students by a specific tutorial group ID.
+Format: `filter tg/[TUTORIAL_GROUP_ID]`
+
+Examples:
+* `filter tg/1`
+Shows a list of all the students in the tutorial group with an ID of `1`.
+
+=== Create Attendance: `create-attendance`
+
+NOTE: Coming in v1.2
+
+Creates an attendance for a specific tutorial group, identified by its ID.
+Format: `create-attendance tg/[TUTORIAL_GROUP_ID] n/[NAME] [s/STUDENT_ID] ...`
+
+Examples:
+* `create-attendance tg/1 n/W4 Tutorial s/A1234567T s/A0123456Y`
+Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `1`, marking the students with IDs `A1234567T` and `A0123456Y` as present.
+
+=== Create Assignment: `create-assignment`
+
+NOTE: Coming in v1.2
+
+Creates an assignment for a specific tutorial group, identified by its ID.
+Format: `create-assignment tg/[TUTORIAL_GROUP_ID] n/[NAME] m/[MAX_MARKS]`
+
+Examples:
+* `create-assignment tg/1 n/Take Home Lab 1 m/40`
+Creates an assignment named `Take Home Lab 1` for the tutorial group with an ID of `1`, with the maximum marks for this assignment as `40`.
+
+=== Grade Assignment for Student: `grade`
+
+NOTE: Coming in v1.2
+
+Enters a grade for a student for a specific assignment, identified by its ID.
+Format: `grade s/[STUDENT_ID] tg/[TUTORIAL_GROUP_ID] a/[ASSIGNMENT_ID] g/[GRADE]`
+
+Examples:
+* `grade s/A0123456Y tg/1 a/1 g/30`
+Creates a grade with marks `30` for the student with an ID of `A0123456Y` in the tutorial group `1` for the assignment with ID `1`.
+
+=== Sort by assignment grade: `sort`
+
+NOTE: Coming in v1.3
+
+Sorts students in order of their grade for a particular assignment.
+Format: `sort tg/[TUTORIAL_GROUP_ID] a/[ASSIGNMENT_ID]`
+
+Examples:
+* `sort tg/1 a/1`
+Displays a list of students in tutorial group `1` by their grade on assignment `1`.
+
+=== Feedback to Student: `feedback`
+
+NOTE: Coming in v1.4
+
+Adds feedback to a student with a specified Student ID.
+Format: `feedback s/[STUDENT_ID] f/[FEEDBACK]`
+
+Examples:
+* `feedback s/A1234566T f/Is generally attentive during class. However, needs to speak up more.`
+Adds the given feedback `Is generally attentive during class. However, needs to speak up more.` to the student with Student ID `A1234566T`.
+
 
 === Listing entered commands : `history`
 
@@ -226,14 +329,8 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+The SuperTA clients' data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
 
 == FAQ
 
@@ -242,12 +339,12 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS id/STUDENT_ID [t/TAG]...` +
+e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 id/A0123456Y t/needs-help t/on-loa`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [id/STUDENT_ID] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
