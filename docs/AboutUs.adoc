@@ -28,8 +28,8 @@ Responsibilities: Documentation
 '''
 
 === Yu-He Ong
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+image::triger15.png[width="150", align="left"]
+{empty}[http://github.com/triger15[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Code Quality
 
