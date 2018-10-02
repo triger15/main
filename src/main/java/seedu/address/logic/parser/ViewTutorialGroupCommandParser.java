@@ -8,6 +8,9 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ViewTutorialGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parser for the view-tutorial-group command.
+ */
 public class ViewTutorialGroupCommandParser implements Parser<ViewTutorialGroupCommand> {
     @Override
     public ViewTutorialGroupCommand parse(String args) throws ParseException {

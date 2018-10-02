@@ -1,4 +1,4 @@
-package seedu.address.model.TutorialGroup;
+package seedu.address.model.tutorialgroup;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,6 +10,9 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
+/**
+ * Model for Tutorial Group.
+ */
 public class TutorialGroup {
     private final String id;
     private final String name;
@@ -92,7 +95,7 @@ public class TutorialGroup {
                 .stream()
                 .map(st -> st.getStudentId().toString())
                 .collect(Collectors.joining(", "))
-            +"\n"
+            + "\n"
             + "Assignments: \n"
             + assignments;
     }

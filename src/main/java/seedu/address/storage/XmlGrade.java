@@ -6,6 +6,9 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.model.student.StudentId;
 
+/**
+ * An XML Representation of a Grade in a gradebook.
+ */
 public class XmlGrade {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Grade's %s field is missing!";
 

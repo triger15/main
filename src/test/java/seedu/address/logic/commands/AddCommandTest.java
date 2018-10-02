@@ -20,11 +20,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {

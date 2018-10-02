@@ -7,6 +7,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Command that views a tutorial group's information.
+ */
 public class ViewTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "view-tutorial-group";
 

@@ -9,6 +9,9 @@ import seedu.address.logic.commands.AddStudentToTutorialGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentId;
 
+/**
+ * Parser for the add-to-tutorial-group command.
+ */
 public class AddStudentToTutorialGroupCommandParser implements Parser<AddStudentToTutorialGroupCommand> {
     @Override
     public AddStudentToTutorialGroupCommand parse(String args) throws ParseException {

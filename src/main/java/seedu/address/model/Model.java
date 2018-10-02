@@ -4,11 +4,11 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * The API of the Model component.

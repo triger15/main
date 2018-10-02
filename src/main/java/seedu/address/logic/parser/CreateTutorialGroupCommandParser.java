@@ -6,10 +6,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CreateTutorialGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.TutorialGroup.TutorialGroup;
-import seedu.address.model.TutorialGroup.TutorialGroupMaster;
+import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.TutorialGroupMaster;
 
+/**
+ * Parser for the create-tutorial-group command.
+ */
 public class CreateTutorialGroupCommandParser implements Parser<CreateTutorialGroupCommand> {
+    @Override
     public CreateTutorialGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap =
             ArgumentTokenizer.tokenize(args,

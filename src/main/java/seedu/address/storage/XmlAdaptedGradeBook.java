@@ -9,6 +9,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.GradeBook;
 
+/**
+ * Class for XML-Adapted GradeBook
+ */
 public class XmlAdaptedGradeBook implements XmlAdapted<GradeBook> {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "GradeBook's %s field is missing!";
 

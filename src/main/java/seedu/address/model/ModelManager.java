@@ -13,13 +13,13 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.TutorialGroup.TutorialGroup;
-import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.

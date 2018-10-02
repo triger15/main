@@ -2,6 +2,9 @@ package seedu.address.model.assignment;
 
 import seedu.address.model.student.StudentId;
 
+/**
+ * Model for Grading details.
+ */
 public class Grade {
     private final String tgId;
     private final String asId;

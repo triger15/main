@@ -5,9 +5,12 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
+/**
+ * Command that creates an assignment.
+ */
 public class CreateAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "create-assignment";

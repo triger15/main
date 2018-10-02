@@ -9,6 +9,9 @@ import seedu.address.logic.commands.CreateAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Assignment;
 
+/**
+ * Parser for the create-assignment command.
+ */
 public class CreateAssignmentCommandParser implements Parser<CreateAssignmentCommand> {
     @Override
     public CreateAssignmentCommand parse(String args) throws ParseException {

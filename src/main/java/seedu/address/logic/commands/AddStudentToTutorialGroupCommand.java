@@ -6,11 +6,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.exceptions.DuplicatePersonException;
 import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
+/**
+ * Command that adds student to a tutorial group.
+ */
 public class AddStudentToTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "add-to-tutorial-group";
 

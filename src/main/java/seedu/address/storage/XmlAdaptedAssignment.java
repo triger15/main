@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.assignment.Assignment;
 
+/**
+ * Class for XML-Adapted Assignment
+ */
 public class XmlAdaptedAssignment implements XmlAdapted<Assignment> {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Assignment's %s field is missing!";
     @XmlElement(required = true)

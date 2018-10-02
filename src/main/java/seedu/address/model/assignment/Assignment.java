@@ -13,23 +13,8 @@ public class Assignment {
     private final int maxMarks;
     private final GradeBook gradebook;
 
-    public String getName() {
-        return name;
-    }
-
-    public int getMaxMarks() {
-        return maxMarks;
-    }
-
-    public GradeBook getGradebook() {
-        return gradebook;
-    }
-
     /**
      * Constructs a {@code Assignment}.
-     *
-     * @param name The name of the assignment.
-     *
      */
     public Assignment(String name, int maxMarks) {
         this.name = name;
@@ -51,6 +36,24 @@ public class Assignment {
             .forEach(e -> gradebook.addGrade(e.getKey(), e.getValue()));
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMaxMarks() {
+        return maxMarks;
+    }
+
+    public GradeBook getGradebook() {
+        return gradebook;
+    }
+
+    /**
+     * Grades a certain student with specified marks.
+     * @param studentId the student id.
+     * @param marks the marks given.
+     */
     public void grade(StudentId studentId, int marks) {
         // TODO: Enforce marks < maxMarks, if not throw exception
         gradebook.addGrade(studentId, marks);

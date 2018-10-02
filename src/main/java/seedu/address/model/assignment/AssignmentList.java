@@ -10,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 
+/**
+ * Class for storing the assignments in a list.
+ */
 public class AssignmentList implements Iterable<Assignment> {
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
 
@@ -19,11 +22,19 @@ public class AssignmentList implements Iterable<Assignment> {
 
     public AssignmentList() { }
 
+    /**
+     * Method to add an assignment to the list.
+     * @param toAdd the assignment to add
+     */
     public void add(Assignment toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
     }
 
+    /**
+     * Method to remove an assignment from the list.
+     * @param toRemove the assignment to remove
+     */
     public void remove(Assignment toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -31,6 +42,10 @@ public class AssignmentList implements Iterable<Assignment> {
         }
     }
 
+    /**
+     * Method to clone this instance.
+     * @return a cloned instance
+     */
     public AssignmentList clone() {
         AssignmentList other = new AssignmentList();
         other.internalList.addAll(internalList.stream()

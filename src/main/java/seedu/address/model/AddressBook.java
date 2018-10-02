@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.TutorialGroup.TutorialGroup;
-import seedu.address.model.TutorialGroup.TutorialGroupMaster;
-import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
@@ -16,6 +13,9 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.TutorialGroupMaster;
+import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -126,6 +126,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         tutorialGroupMaster.removeTutorialGroup(key);
     }
 
+    /**
+     * Adds an assignment to a tutorial group.
+     */
     public void addAssignment(TutorialGroup tg, Assignment assignment) {
         requireNonNull(assignment);
         requireNonNull(tg);
@@ -133,6 +136,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         tg.addAssignment(assignment);
     }
 
+    /**
+     * Performs an addition of a grade to an assignment gradebook, if possible.
+     */
     public void grade(Grade grade) {
         Optional<TutorialGroup> otg = tutorialGroupMaster.getTutorialGroup(grade.getTgId());
         if (!otg.isPresent()) {

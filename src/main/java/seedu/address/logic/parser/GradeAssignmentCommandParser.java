@@ -12,6 +12,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.StudentId;
 
+/**
+ * Parser for the grade-assignment command.
+ */
 public class GradeAssignmentCommandParser implements Parser<GradeAssignmentCommand> {
 
     @Override
@@ -31,7 +34,8 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
             PREFIX_GENERAL_STUDENT_ID,
             PREFIX_ASSIGNMENT_MARKS
         ) || !argMap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeAssignmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, GradeAssignmentCommand.MESSAGE_USAGE));
         }
 
         String tgId = ParserUtil.parseTutorialGroupId(

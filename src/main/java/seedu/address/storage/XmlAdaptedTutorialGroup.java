@@ -8,13 +8,16 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
+/**
+ * Class for XML-Adapted Tutorial Group
+ */
 public class XmlAdaptedTutorialGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial Group's %s field is missing!";
