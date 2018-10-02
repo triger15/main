@@ -62,7 +62,7 @@ public class XmlSerializableAddressBook {
             addressBook.addPerson(student);
         }
         for (XmlAdaptedTutorialGroup xmlTg : tutorialGroups) {
-            TutorialGroup tg = xmlTg.toModelType();
+            TutorialGroup tg = xmlTg.toModelType(addressBook);
             addressBook.addTutorialGroup(tg);
         }
         return addressBook;

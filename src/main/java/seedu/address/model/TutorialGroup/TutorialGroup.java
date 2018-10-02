@@ -2,6 +2,8 @@ package seedu.address.model.TutorialGroup;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Collectors;
+
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
@@ -37,31 +39,20 @@ public class TutorialGroup {
         this.assignments = assignments;
     }
 
-    public TutorialGroup addStudent(Student student) {
-        TutorialGroup result = new TutorialGroup(this);
-        result.students.add(student);
-        return result;
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
-    public TutorialGroup removeStudent(Student student) {
-        TutorialGroup result = new TutorialGroup(this);
-        result.students.remove(student);
-        return result;
+    public void removeStudent(Student student) {
+        students.remove(student);
     }
 
     public void addAssignment(Assignment assignment) {
         assignments.add(assignment);
     }
 
-    public TutorialGroup removeAssignment(Assignment assignment) {
-        TutorialGroup result = new TutorialGroup(this);
-        result.assignments.remove(assignment);
-        return result;
-    }
-
-    public TutorialGroup setName(String name) {
-        return new TutorialGroup(id, name,
-             this.students.clone(), this.assignments.clone());
+    public void removeAssignment(Assignment assignment) {
+        assignments.remove(assignment);
     }
 
     public String getName() {
@@ -87,7 +78,13 @@ public class TutorialGroup {
     @Override
     public String toString() {
         return "[Tutorial Group] ID: " + id + ", Name: " + name + "\n"
-            + "Students: " + students +"\n"
-            + "Assignments: " + assignments;
+            + "Students: "
+            + students.asUnmodifiableObservableList()
+                .stream()
+                .map(st -> st.getStudentId().toString())
+                .collect(Collectors.joining(", "))
+            +"\n"
+            + "Assignments: "
+            + assignments;
     }
 }

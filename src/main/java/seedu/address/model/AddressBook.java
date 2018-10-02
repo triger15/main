@@ -10,6 +10,7 @@ import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.TutorialGroup.TutorialGroupMaster;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
@@ -86,6 +87,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public Optional<TutorialGroup> getTutorialGroup(String id) {
         return tutorialGroupMaster.getTutorialGroup(id);
+    }
+
+    public Optional<Student> getStudentWithId(StudentId studentId) {
+        return students.getStudentWithId(studentId);
+    }
+
+    public void addStudentToTutorialGroup(TutorialGroup tg, Student st) {
+        tg.addStudent(st);
     }
 
     /**

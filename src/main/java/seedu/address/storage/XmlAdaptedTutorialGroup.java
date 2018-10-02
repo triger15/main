@@ -8,13 +8,15 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
 
-public class XmlAdaptedTutorialGroup implements XmlAdapted<TutorialGroup> {
+public class XmlAdaptedTutorialGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial Group's %s field is missing!";
 
@@ -23,7 +25,7 @@ public class XmlAdaptedTutorialGroup implements XmlAdapted<TutorialGroup> {
     @XmlElement(required = true)
     private String id;
     @XmlElement
-    private List<XmlAdaptedPerson> students = new ArrayList<>();
+    private List<String> studentIds = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedAssignment> assignments = new ArrayList<>();
 
@@ -37,8 +39,8 @@ public class XmlAdaptedTutorialGroup implements XmlAdapted<TutorialGroup> {
     public XmlAdaptedTutorialGroup(TutorialGroup source) {
         name = source.getName();
         id = source.getId();
-        students = source.getStudents().asUnmodifiableObservableList().stream()
-            .map(XmlAdaptedPerson::new)
+        studentIds = source.getStudents().asUnmodifiableObservableList().stream()
+            .map(st -> st.getStudentId().toString())
             .collect(Collectors.toList());
         Iterator<Assignment> it = source.getAssignments().iterator();
         while (it.hasNext()) {
@@ -46,11 +48,14 @@ public class XmlAdaptedTutorialGroup implements XmlAdapted<TutorialGroup> {
         }
     }
 
-    @Override
-    public TutorialGroup toModelType() throws IllegalValueException {
+    /**
+     * Requires the data store so that we don't recreate students.
+     */
+    public TutorialGroup toModelType(AddressBook addressBook) throws IllegalValueException {
         final List<Student> modelStudents = new ArrayList<>();
-        for (XmlAdaptedPerson student : students) {
-            modelStudents.add(student.toModelType());
+        for (String id : studentIds) {
+            Student student = addressBook.getStudentWithId(new StudentId(id)).get();
+            modelStudents.add(student);
         }
         UniqueStudentList studentList = new UniqueStudentList();
         studentList.setPersons(modelStudents);

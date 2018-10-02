@@ -43,7 +43,7 @@ public class CreateAssignmentCommand extends Command {
         } catch (TutorialGroupNotFoundException e) {
             throw new CommandException("No such tutorial group.");
         }
-
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }

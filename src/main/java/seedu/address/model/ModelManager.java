@@ -17,6 +17,8 @@ import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -94,6 +96,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void addStudentToTutorialGroup(String tgId, StudentId studentId) {
+        Optional<TutorialGroup> tg = versionedAddressBook.getTutorialGroup(tgId);
+        Optional<Student> st = versionedAddressBook.getStudentWithId(studentId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        if (!st.isPresent()) {
+            throw new PersonNotFoundException();
+        }
+        TutorialGroup tutorialGroup = tg.get();
+        Student student = st.get();
+        versionedAddressBook.addStudentToTutorialGroup(tutorialGroup, student);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
         versionedAddressBook.removeTutorialGroup(tutorialGroup);
         indicateAddressBookChanged();
@@ -109,6 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.addAssignment(t, assignment);
         indicateAddressBookChanged();
     }
+
 
     @Override
     public boolean hasTutorialGroup(String id) {

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 
 /**
  * The API of the Model component.
@@ -51,6 +52,11 @@ public interface Model {
      * {@code tutorialGroup} must not already exist.
      */
     void addTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
+     * Adds the student to the tutorial group.
+     */
+    void addStudentToTutorialGroup(String tgId, StudentId studentId);
 
     /**
      * Deletes the given tutorial group.
