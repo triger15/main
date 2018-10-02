@@ -79,8 +79,9 @@ public class TutorialGroup {
             .findFirst();
     }
 
-    public boolean isSameAs(TutorialGroup tg) {
-        return id.equals(tg.id);
+    @Override
+    public boolean equals(Object other) {
+        return id.equals(((TutorialGroup) other).id);
     }
 
     @Override

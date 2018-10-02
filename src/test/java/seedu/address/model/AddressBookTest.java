@@ -19,6 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -104,6 +105,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Student> getPersonList() {
             return students;
+        }
+
+        @Override
+        public ObservableList<TutorialGroup> getTutorialGroupList() {
+            return null;
         }
     }
 

@@ -103,4 +103,17 @@ public class TutorialGroupMaster {
         }
         return uidCandidate;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (other instanceof TutorialGroupMaster) {
+            TutorialGroupMaster o = (TutorialGroupMaster) other;
+            return uids.equals(o.uids)
+                && tutorialGroups.equals(o.tutorialGroups);
+        }
+        return false;
+    }
 }

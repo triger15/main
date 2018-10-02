@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -19,7 +20,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.TutorialGroup.TutorialGroup;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -116,6 +121,46 @@ public class AddCommandTest {
         @Override
         public void updatePerson(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTutorialGroup(TutorialGroup tutorialGroup) {
+
+        }
+
+        @Override
+        public void addStudentToTutorialGroup(String tgId, StudentId studentId) {
+
+        }
+
+        @Override
+        public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
+
+        }
+
+        @Override
+        public void addAssignment(String tgId, Assignment assignment) {
+
+        }
+
+        @Override
+        public void grade(Grade grade) {
+
+        }
+
+        @Override
+        public boolean hasTutorialGroup(String id) {
+            return false;
+        }
+
+        @Override
+        public Optional<TutorialGroup> getTutorialGroup(String id) {
+            return Optional.empty();
+        }
+
+        @Override
+        public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
+
         }
 
         @Override
