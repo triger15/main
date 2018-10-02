@@ -36,8 +36,8 @@ Responsibilities: Code Quality
 '''
 
 === Darieca Lim
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+image::darieca.JPG[width="150", align="left"]
+{empty}[http://github.com/darieca[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Testing
 
