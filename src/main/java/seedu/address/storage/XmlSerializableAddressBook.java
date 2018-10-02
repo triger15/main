@@ -44,7 +44,6 @@ public class XmlSerializableAddressBook {
         students.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tutorialGroups.addAll(src.getTutorialGroupList().stream().map(XmlAdaptedTutorialGroup::new).collect
             (Collectors.toList()));
-        System.out.println(tutorialGroups);
     }
 
     /**

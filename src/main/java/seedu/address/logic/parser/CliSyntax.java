@@ -14,4 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_TUTORIAL_GROUP_NAME = new Prefix("n/");
     public static final Prefix PREFIX_TUTORIAL_GROUP_ID = new Prefix("id/");
+    public static final Prefix PREFIX_ASSIGNMENT_TUTORIAL_GROUP_ID = new Prefix("tg/");
+    public static final Prefix PREFIX_ASSIGNMENT_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_ASSIGNMENT_MAX_MARKS = new Prefix("m/");
 }

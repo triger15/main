@@ -49,10 +49,8 @@ public class TutorialGroup {
         return result;
     }
 
-    public TutorialGroup addAssignment(Assignment assignment) {
-        TutorialGroup result = new TutorialGroup(this);
-        result.assignments.add(assignment);
-        return result;
+    public void addAssignment(Assignment assignment) {
+        assignments.add(assignment);
     }
 
     public TutorialGroup removeAssignment(Assignment assignment) {
@@ -88,6 +86,8 @@ public class TutorialGroup {
 
     @Override
     public String toString() {
-        return "[Tutorial Group] ID: " + id + ", Name: " + name;
+        return "[Tutorial Group] ID: " + id + ", Name: " + name + "\n"
+            + "Students: " + students +"\n"
+            + "Assignments: " + assignments;
     }
 }

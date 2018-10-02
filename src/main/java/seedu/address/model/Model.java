@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.TutorialGroup.TutorialGroup;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 
 /**
@@ -56,6 +57,11 @@ public interface Model {
      * The tutorial group must exist in the client.
      */
     void deleteTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
+     * Adds the given assignment to the tutorial group.
+     */
+    void addAssignment(String tgId, Assignment assignment);
 
     /**
      * Returns true if a tutorial group with the given id exists.

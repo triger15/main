@@ -8,6 +8,7 @@ import java.util.Optional;
 import javafx.collections.ObservableList;
 import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.TutorialGroup.TutorialGroupMaster;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -110,6 +111,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTutorialGroup(TutorialGroup key) {
         tutorialGroupMaster.removeTutorialGroup(key);
+    }
+
+    public void addAssignment(TutorialGroup tg, Assignment assignment) {
+        requireNonNull(assignment);
+        requireNonNull(tg);
+
+        tg.addAssignment(assignment);
     }
 
     /**

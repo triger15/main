@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.assignment.Assignment;
 
 public class CreateAssignmentCommand extends Command {
@@ -13,18 +14,23 @@ public class CreateAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an assignment."
         + "Parameters: "
-        + "n/NAME"
-        + "tg/TUTORIAL-GROUP-ID"
+        + "tg/TUTORIAL-GROUP-ID "
+        + "n/NAME "
+        + "m/MAXMARKS "
         + "Example: " + COMMAND_WORD + " "
+        + "tg/04a "
         + "n/Take Home Lab 1 "
-        + "tg/1";
+        + "m/40";
 
     public static final String MESSAGE_SUCCESS = "New assignment created: %1$s";
 
     private final Assignment toAdd;
+    private final String tgId;
 
-    public CreateAssignmentCommand(Assignment assignment) {
+    public CreateAssignmentCommand(String tutorialGroupId, Assignment assignment) {
         requireNonNull(assignment);
+        requireNonNull(tutorialGroupId);
+        tgId = tutorialGroupId;
         toAdd = assignment;
     }
 
@@ -32,7 +38,12 @@ public class CreateAssignmentCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        return new CommandResult("Hello");
+        try {
+            model.addAssignment(tgId, toAdd);
+        } catch (TutorialGroupNotFoundException e) {
+            throw new CommandException("No such tutorial group.");
+        }
 
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }

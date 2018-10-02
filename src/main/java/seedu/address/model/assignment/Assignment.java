@@ -1,15 +1,21 @@
 package seedu.address.model.assignment;
 
-import seedu.address.model.TutorialGroup.TutorialGroup;
-
 /**
  * Represents an Assignment in the client.
  * Guarantees: immutable.
  */
 public class Assignment {
 
-    public final String name;
-    public final TutorialGroup tutorialGroup;
+    public String getName() {
+        return name;
+    }
+
+    public int getMaxMarks() {
+        return maxMarks;
+    }
+
+    private final String name;
+    private final int maxMarks;
 
     /**
      * Constructs a {@code Assignment}.
@@ -17,8 +23,14 @@ public class Assignment {
      * @param name The name of the assignment.
      *
      */
-    public Assignment(String name, TutorialGroup tg) {
+    public Assignment(String name, int maxMarks) {
         this.name = name;
-        this.tutorialGroup = tg;
+        this.maxMarks = maxMarks;
+    }
+
+    @Override
+    public String toString() {
+        return "[Assignment]" + name + " [Max Marks: " + maxMarks
+            + "]";
     }
 }

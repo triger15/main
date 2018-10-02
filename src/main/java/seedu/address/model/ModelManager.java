@@ -14,6 +14,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.TutorialGroup.TutorialGroup;
+import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 
 /**
@@ -94,6 +96,17 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
         versionedAddressBook.removeTutorialGroup(tutorialGroup);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addAssignment(String tgId, Assignment assignment) {
+        Optional<TutorialGroup> tg = versionedAddressBook.getTutorialGroup(tgId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup t = tg.get();
+        versionedAddressBook.addAssignment(t, assignment);
         indicateAddressBookChanged();
     }
 
