@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -8,11 +14,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.student.SameStudentIdPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.PersonBuilder;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class ViewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -45,7 +46,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void execute_ViewCommand_success() {
+    public void execute_viewCommand_success() {
         Student expectedStudent = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253")
