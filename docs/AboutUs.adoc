@@ -44,8 +44,8 @@ Responsibilities: Testing
 '''
 
 === Wenshei Ong
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+image::wenshei.jpg[width="150", align="left"]
+{empty}[http://github.com/wenshei[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Deliverables/Deadlines, Scheduling and Tracking
 
