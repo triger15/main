@@ -11,17 +11,21 @@ public class XmlAdaptedAssignment implements XmlAdapted<Assignment> {
     private String name;
     @XmlElement(required = true)
     private Integer maxMarks;
+    @XmlElement
+    private XmlAdaptedGradeBook gradebook;
 
     public XmlAdaptedAssignment() { }
 
-    public XmlAdaptedAssignment(String name, int maxMarks) {
+    public XmlAdaptedAssignment(String name, int maxMarks, XmlAdaptedGradeBook gradebook) {
         this.name = name;
         this.maxMarks = maxMarks;
+        this.gradebook = gradebook;
     }
 
     public XmlAdaptedAssignment(Assignment source) {
         name = source.getName();
         maxMarks = source.getMaxMarks();
+        gradebook = new XmlAdaptedGradeBook(source.getGradebook());
     }
 
     @Override
@@ -33,7 +37,9 @@ public class XmlAdaptedAssignment implements XmlAdapted<Assignment> {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "ID"));
         }
 
-        return new Assignment(name, maxMarks);
-
+        if (gradebook == null) {
+            return new Assignment(name, maxMarks);
+        }
+        return new Assignment(name, maxMarks, gradebook.toModelType());
     }
 }

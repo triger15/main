@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,9 +33,19 @@ public class AssignmentList implements Iterable<Assignment> {
 
     public AssignmentList clone() {
         AssignmentList other = new AssignmentList();
-        other.internalList.addAll(this.internalList);
+        other.internalList.addAll(internalList.stream()
+            .map(Assignment::new)
+            .collect(Collectors.toList()));
         return other;
     }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Assignment> asUnmodifiableObservableList() {
+        return FXCollections.unmodifiableObservableList(internalList);
+    }
+
 
     @Override
     public Iterator<Assignment> iterator() {
@@ -43,12 +54,8 @@ public class AssignmentList implements Iterable<Assignment> {
 
     @Override
     public String toString() {
-        String result = "";
-        Iterator<Assignment> it = iterator();
-        while (it.hasNext()) {
-            result += it.next();
-            result += ", ";
-        }
-        return result;
+        return internalList.stream()
+            .map(Assignment::toString)
+            .collect(Collectors.joining("\n"));
     }
 }

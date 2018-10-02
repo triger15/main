@@ -16,6 +16,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.exceptions.PersonNotFoundException;
@@ -125,6 +126,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
         TutorialGroup t = tg.get();
         versionedAddressBook.addAssignment(t, assignment);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void grade(Grade grade) {
+        versionedAddressBook.grade(grade);
         indicateAddressBookChanged();
     }
 

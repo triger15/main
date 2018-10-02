@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,10 +41,10 @@ public class XmlAdaptedTutorialGroup {
         studentIds = source.getStudents().asUnmodifiableObservableList().stream()
             .map(st -> st.getStudentId().toString())
             .collect(Collectors.toList());
-        Iterator<Assignment> it = source.getAssignments().iterator();
-        while (it.hasNext()) {
-            assignments.add(new XmlAdaptedAssignment(it.next()));
-        }
+        source.getAssignments().asUnmodifiableObservableList()
+            .stream()
+            .map(XmlAdaptedAssignment::new)
+            .forEach(assignments::add);
     }
 
     /**

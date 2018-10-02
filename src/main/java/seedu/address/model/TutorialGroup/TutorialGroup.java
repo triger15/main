@@ -2,6 +2,7 @@ package seedu.address.model.TutorialGroup;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.model.assignment.Assignment;
@@ -71,6 +72,13 @@ public class TutorialGroup {
         return assignments;
     }
 
+    public Optional<Assignment> getAssignment(String name) {
+        return assignments.asUnmodifiableObservableList()
+            .stream()
+            .filter(as -> as.getName().equals(name))
+            .findFirst();
+    }
+
     public boolean isSameAs(TutorialGroup tg) {
         return id.equals(tg.id);
     }
@@ -84,7 +92,7 @@ public class TutorialGroup {
                 .map(st -> st.getStudentId().toString())
                 .collect(Collectors.joining(", "))
             +"\n"
-            + "Assignments: "
+            + "Assignments: \n"
             + assignments;
     }
 }

@@ -51,7 +51,7 @@ public class TutorialGroupMaster {
     public void setTutorialGroups(List<TutorialGroup> tutorialGroups) {
         requireAllNonNull(tutorialGroups);
         for (TutorialGroup tg : tutorialGroups) {
-            this.tutorialGroups.put(tg.getId(), tg);
+            this.tutorialGroups.put(tg.getId(), new TutorialGroup(tg));
         }
     }
 

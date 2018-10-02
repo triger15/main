@@ -8,10 +8,14 @@ import java.util.Optional;
 import javafx.collections.ObservableList;
 import seedu.address.model.TutorialGroup.TutorialGroup;
 import seedu.address.model.TutorialGroup.TutorialGroupMaster;
+import seedu.address.model.TutorialGroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -127,6 +131,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(tg);
 
         tg.addAssignment(assignment);
+    }
+
+    public void grade(Grade grade) {
+        Optional<TutorialGroup> otg = tutorialGroupMaster.getTutorialGroup(grade.getTgId());
+        if (!otg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup tg = otg.get();
+        Optional<Assignment> oas = tg.getAssignment(grade.getAsId());
+        if (!oas.isPresent()) {
+            throw new AssignmentNotFoundException();
+        }
+        Assignment as = oas.get();
+        Optional<Student> ost = students.getStudentWithId(grade.getStId());
+        if (!ost.isPresent()) {
+            throw new PersonNotFoundException();
+        }
+        Student st = ost.get();
+        as.grade(st.getStudentId(), grade.getMarks());
     }
 
     /**
