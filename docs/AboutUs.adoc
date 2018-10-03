@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Gabriel
-image::caephler.jpg[width="150", align="left"]
+image::caephler.png[width="150", align="left"]
 {empty}[https://blog.caephler.com[homepage]] [https://github.com/caephler[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Team Lead, Integration
@@ -34,7 +34,7 @@ Responsibilities: Code Quality
 '''
 
 === Darieca Lim
-image::darieca.JPG[width="150", align="left"]
+image::darieca.png[width="150", align="left"]
 {empty}[http://github.com/darieca[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Testing
@@ -42,7 +42,7 @@ Responsibilities: Testing
 '''
 
 === Wenshei Ong
-image::wenshei.jpg[width="150", align="left"]
+image::wenshei.png[width="150", align="left"]
 {empty}[http://github.com/wenshei[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Deliverables/Deadlines, Scheduling and Tracking
