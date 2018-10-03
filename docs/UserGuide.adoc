@@ -154,6 +154,16 @@ Selects the 2nd student in the address book.
 `select 1` +
 Selects the 1st studenot in the results of the `find` command.
 
+=== Viewing a student's information: `view`
+
+Views a student's information and any feedback that is left for him. +
+Format: `view id/STUDENT_ID`
+
+Examples:
+
+* `view id/A0166733Y` +
+Views the information of the student with the ID A0166733Y.
+
 === Creating a Tutorial Group: `create-tutorial-group`
 
 Creates a tutorial group with an identifier. If there is already a tutorial group with the same identifier, the identifier will have a random suffix appended to it. +
