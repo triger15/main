@@ -81,6 +81,14 @@ public class Student {
     }
 
     /**
+     * Returns a String containing the student's information and feedback given to this student.
+     */
+    public String getFeedback() {
+        //temporary implementation. Need to implement feedback.
+        return this.toString();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
