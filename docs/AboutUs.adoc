@@ -36,15 +36,15 @@ Responsibilities: Code Quality
 '''
 
 === Darieca Lim
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+image::darieca.JPG[width="150", align="left"]
+{empty}[http://github.com/darieca[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Testing
 
 '''
 
 === Wenshei Ong
-image::yl_coder.jpg[width="150", align="left"]
+image::wenshei.jpg[width="150", align="left"]
 {empty}[http://github.com/wenshei[github]] [<<johndoe#, portfolio>>]
 
 Responsibilities: Deliverables/Deadlines, Scheduling and Tracking
