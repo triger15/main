@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +13,13 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
+import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -81,6 +88,67 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook.updatePerson(target, editedStudent);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addTutorialGroup(TutorialGroup tutorialGroup) {
+        versionedAddressBook.addTutorialGroup(tutorialGroup);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addStudentToTutorialGroup(String tgId, StudentId studentId) {
+        Optional<TutorialGroup> tg = versionedAddressBook.getTutorialGroup(tgId);
+        Optional<Student> st = versionedAddressBook.getStudentWithId(studentId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        if (!st.isPresent()) {
+            throw new PersonNotFoundException();
+        }
+        TutorialGroup tutorialGroup = tg.get();
+        Student student = st.get();
+        versionedAddressBook.addStudentToTutorialGroup(tutorialGroup, student);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
+        versionedAddressBook.removeTutorialGroup(tutorialGroup);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addAssignment(String tgId, Assignment assignment) {
+        Optional<TutorialGroup> tg = versionedAddressBook.getTutorialGroup(tgId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup t = tg.get();
+        versionedAddressBook.addAssignment(t, assignment);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void grade(Grade grade) {
+        versionedAddressBook.grade(grade);
+        indicateAddressBookChanged();
+    }
+
+
+    @Override
+    public boolean hasTutorialGroup(String id) {
+        return versionedAddressBook.hasTutorialGroup(id);
+    }
+
+    @Override
+    public Optional<TutorialGroup> getTutorialGroup(String id) {
+        return versionedAddressBook.getTutorialGroup(id);
+    }
+
+    @Override
+    public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
+
     }
 
     //=========== Filtered Student List Accessors =============================================================

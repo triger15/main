@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Student;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -23,12 +24,16 @@ public class XmlSerializableAddressBook {
     @XmlElement
     private List<XmlAdaptedPerson> students;
 
+    @XmlElement
+    private List<XmlAdaptedTutorialGroup> tutorialGroups;
+
     /**
      * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
         students = new ArrayList<>();
+        tutorialGroups = new ArrayList<>();
     }
 
     /**
@@ -37,6 +42,8 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         students.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tutorialGroups.addAll(src.getTutorialGroupList().stream().map(XmlAdaptedTutorialGroup::new).collect
+            (Collectors.toList()));
     }
 
     /**
@@ -53,6 +60,10 @@ public class XmlSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(student);
+        }
+        for (XmlAdaptedTutorialGroup xmlTg : tutorialGroups) {
+            TutorialGroup tg = xmlTg.toModelType(addressBook);
+            addressBook.addTutorialGroup(tg);
         }
         return addressBook;
     }

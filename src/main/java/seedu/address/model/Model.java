@@ -1,9 +1,14 @@
 package seedu.address.model;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.Grade;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * The API of the Model component.
@@ -42,6 +47,55 @@ public interface Model {
      * address book.
      */
     void updatePerson(Student target, Student editedStudent);
+
+    /**
+     * Adds the given tutorial group.
+     * {@code tutorialGroup} must not already exist.
+     */
+    void addTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
+     * Adds the student to the tutorial group.
+     */
+    void addStudentToTutorialGroup(String tgId, StudentId studentId);
+
+    /**
+     * Deletes the given tutorial group.
+     * The tutorial group must exist in the client.
+     */
+    void deleteTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
+     * Adds the given assignment to the tutorial group.
+     */
+    void addAssignment(String tgId, Assignment assignment);
+
+    /**
+     * Grades a student on an assignment.
+     */
+    void grade(Grade grade);
+
+    /**
+     * Returns true if a tutorial group with the given id exists.
+     * @param id ID of the tutorial group.
+     */
+    boolean hasTutorialGroup(String id);
+
+    /**
+     * Returns the tutorial group with the given id, if present.
+     */
+    Optional<TutorialGroup> getTutorialGroup(String id);
+
+    /**
+     * Replaces the given tutorial group {@code target} with {@code edited}.
+     * {@code target} must exist in the client.
+     * The ID of {@code edited} must not be the same as another existing tutorial group
+     * in the client.
+     * @param target The tutorial group to be edited.
+     * @param edited The tutorial group with edited details.
+     */
+    void updateTutorialGroup(TutorialGroup target, TutorialGroup edited);
+
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredPersonList();
