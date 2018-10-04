@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -111,6 +112,22 @@ public class ParserUtil {
         return new StudentId(trimmedStudentId);
     }
 
+    public static String parseTutorialGroupName(String tgName) {
+        return tgName.trim();
+    }
+
+    public static String parseTutorialGroupId(String tgId) {
+        return tgId.trim();
+    }
+
+    public static int parseInt(String str) {
+        return Integer.parseInt(str.trim());
+    }
+
+    public static String parseString(String str) {
+        return str.trim();
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -136,5 +153,9 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
