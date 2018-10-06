@@ -29,9 +29,8 @@ public class TutorialGroupMaster {
         "dusty"
     );
 
-    private Set<String> uids = new HashSet<>();
-
     public final HashMap<String, TutorialGroup> tutorialGroups;
+    private Set<String> uids = new HashSet<>();
 
     public TutorialGroupMaster() {
         tutorialGroups = new HashMap<>();

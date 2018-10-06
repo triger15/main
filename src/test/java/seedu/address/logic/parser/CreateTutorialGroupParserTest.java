@@ -38,5 +38,4 @@ public class CreateTutorialGroupParserTest {
         // all prefixes missing
         assertParseFailure(parser, "", expectedMessage);
     }
-    
 }
