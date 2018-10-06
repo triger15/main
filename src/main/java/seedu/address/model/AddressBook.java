@@ -184,6 +184,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Student key) {
         students.remove(key);
+        tutorialGroupMaster.removeStudentReferences(key);
     }
 
     //// util methods

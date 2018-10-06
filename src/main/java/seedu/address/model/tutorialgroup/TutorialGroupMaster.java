@@ -13,6 +13,7 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.student.Student;
 
 /**
  * Model for Tutorial Group Master.
@@ -150,6 +151,10 @@ public class TutorialGroupMaster {
             uidCandidate = uidCandidate + "-" + TutorialGroupMaster.randomPrefix();
         }
         return uidCandidate;
+    }
+
+    public void removeStudentReferences(Student target) {
+        asUnmodifiableObservableList().stream().forEach(tg -> tg.removeStudent(target));
     }
 
     @Override

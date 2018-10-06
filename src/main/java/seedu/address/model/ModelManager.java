@@ -70,7 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deletePerson(Student target) {
+    public void deleteStudent(Student target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
     }

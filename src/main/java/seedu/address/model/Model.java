@@ -32,7 +32,7 @@ public interface Model {
      * Deletes the given student.
      * The student must exist in the address book.
      */
-    void deletePerson(Student target);
+    void deleteStudent(Student target);
 
     /**
      * Adds the given student.
