@@ -53,6 +53,9 @@ public class CreateTutorialGroupSystemTest extends AddressBookSystemTest {
 
     }
 
+    /**
+     * Checks whether the executed command will produced the expected model with the expected message.
+     */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
