@@ -153,8 +153,16 @@ public class TutorialGroupMaster {
         return uidCandidate;
     }
 
+    /**
+     * Removes all references to this student in this tutorial group, as well as its assignments.
+     * @param target the student to be removed.
+     */
     public void removeStudentReferences(Student target) {
-        asUnmodifiableObservableList().stream().forEach(tg -> tg.removeStudent(target));
+        asUnmodifiableObservableList().stream().forEach(tg -> {
+            tg.removeStudent(target);
+            tg.getAssignments().asUnmodifiableObservableList().forEach(assignment -> assignment
+                .removeStudentReferences(target));
+        });
     }
 
     @Override
