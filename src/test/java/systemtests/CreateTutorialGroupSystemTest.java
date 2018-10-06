@@ -18,11 +18,47 @@ public class CreateTutorialGroupSystemTest extends AddressBookSystemTest {
         Student firstStudent = TypicalPersons.ALICE;
         Student secondStudent = TypicalPersons.BOB;
 
+        /* Case: Adding a tutorial group with leading spaces and trailing spaces should add the tutorial group. */
         TutorialGroupBuilder tgBuilder = new TutorialGroupBuilder();
         TutorialGroup typicalTg = tgBuilder.build();
-        String command = "  " + CreateTutorialGroupCommand.COMMAND_WORD + " n/CS1101S Studio 04A " + "id/04a";
+        String command = "  " + CreateTutorialGroupCommand.COMMAND_WORD + " n/CS1101S Studio 04A " + "id/04a    ";
 
         assertCommandSuccess(command, typicalTg, String.format(CreateTutorialGroupCommand.MESSAGE_SUCCESS, typicalTg));
+
+        /* Case: undo creation -> TutorialGroup deleted. */
+        /**
+        command = UndoCommand.COMMAND_WORD;
+        executeCommand(command);
+        Model expected = getModel();
+
+        assertEquals(model, expected);
+         **/
+
+        /* Case: redo -> TutorialGroup added again. */
+        /**
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
+        model.addTutorialGroup(typicalTg);
+        assertCommandSuccess(command, model, expectedResultMessage);
+         **/
+
+        /* Case: Add a tutorial group with the same name, but different ID. -> Added. */
+        /**
+        command = CreateTutorialGroupCommand.COMMAND_WORD + " n/CS1101S Studio 04A " + "id/cs1101s04a";
+        TutorialGroup tester = tgBuilder.withId("cs1101s04a").build();
+        model.addTutorialGroup(tester);
+        expectedResultMessage = String.format(CreateTutorialGroupCommand.MESSAGE_SUCCESS, tester);
+        assertCommandSuccess(command, tester, expectedResultMessage);
+         **/
+
+    }
+
+    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
+        executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        assertSelectedCardUnchanged();
+        assertCommandBoxShowsDefaultStyle();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**
@@ -31,11 +67,7 @@ public class CreateTutorialGroupSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, TutorialGroup expected, String expectedMessage) {
         Model expectedModel = getModel();
         expectedModel.addTutorialGroup(expected);
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedMessage, expectedModel);
-        assertSelectedCardUnchanged();
-        assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
+        assertCommandSuccess(command, expectedModel, expectedMessage);
     }
 
 }
