@@ -53,10 +53,10 @@ public class XmlAdaptedTutorialGroup {
     /**
      * Requires the data store so that we don't recreate students.
      */
-    public TutorialGroup toModelType(SuperTaClient superTAClient) throws IllegalValueException {
+    public TutorialGroup toModelType(SuperTaClient superTaClient) throws IllegalValueException {
         final List<Student> modelStudents = new ArrayList<>();
         for (String id : studentIds) {
-            Student student = superTAClient.getStudentWithId(new StudentId(id)).get();
+            Student student = superTaClient.getStudentWithId(new StudentId(id)).get();
             modelStudents.add(student);
         }
         UniqueStudentList studentList = new UniqueStudentList();
