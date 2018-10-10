@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.FeedbackCommand.MESSAGE_SUCCESS;
 
 import org.junit.Rule;
@@ -22,8 +23,8 @@ public class FeedbackCommandTest {
 
     @Test
     public void execute_feedback_success() {
-        //CommandResult result = new FeedbackCommand().execute(model, commandHistory);
-        //assertEquals(MESSAGE_SUCCESS, result.feedbackToUser);
+        FeedbackCommand feedbackCommand = new FeedbackCommand();
+        assertCommandSuccess(feedbackCommand, model, commandHistory, MESSAGE_SUCCESS, model);
         //assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
         //assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }

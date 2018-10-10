@@ -94,7 +94,6 @@ public class AddressBookParser {
 
         case FeedbackCommand.COMMAND_WORD:
 
-
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
 

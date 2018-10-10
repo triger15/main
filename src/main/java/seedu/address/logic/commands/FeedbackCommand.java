@@ -21,7 +21,7 @@ public class FeedbackCommand extends Command {
         + "s/A01234566T"
         + "f/Is generally attentive during class. However, needs to speak up more.";
 
-    public static final String MESSAGE_SUCCESS = "New feedback created: %1$s";
+    public static final String MESSAGE_SUCCESS = "New feedback created: ";//%1$s";
 
     //private final TutorialGroup toAdd;
 
@@ -33,12 +33,11 @@ public class FeedbackCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        //requireNonNull(model);
+        requireNonNull(model);
 
         //model.addTutorialGroup(toAdd);
-        //model.commitAddressBook();
-        //return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        return null;
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
     /*
     @Override
