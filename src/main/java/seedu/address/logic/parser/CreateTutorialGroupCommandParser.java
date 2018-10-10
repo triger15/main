@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.CreateTutorialGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tutorialgroup.TutorialGroup;
-import seedu.address.model.tutorialgroup.TutorialGroupMaster;
 
 /**
  * Parser for the create-tutorial-group command.
@@ -33,7 +32,7 @@ public class CreateTutorialGroupCommandParser implements Parser<CreateTutorialGr
             argumentMultimap.getValue(CliSyntax.PREFIX_TUTORIAL_GROUP_ID).get()
         );
 
-        TutorialGroup tg = TutorialGroupMaster.createTutorialGroup(name, id);
+        TutorialGroup tg = new TutorialGroup(id, name);
         return new CreateTutorialGroupCommand(tg);
     }
 
