@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.StudentId;
 
 /**
@@ -25,9 +26,9 @@ public class FeedbackCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New feedback created: %1$s";
 
     private final StudentId studentId;
-    private final String feedback;
+    private final Feedback feedback;
 
-    public FeedbackCommand(StudentId studentId, String feedback) {
+    public FeedbackCommand(StudentId studentId, Feedback feedback) {
         requireAllNonNull(studentId, feedback);
         this.studentId = studentId;
         this.feedback = feedback;
@@ -42,11 +43,22 @@ public class FeedbackCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, feedback));
     }
-    /*
+
     @Override
     public boolean equals(Object other) {
-        return other == this
-            || (other instanceof FeedbackCommand
-            && toAdd.equals(((FeedbackCommand) other).toAdd));
-    }*/
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FeedbackCommand)) {
+            return false;
+        }
+
+        // state check
+        FeedbackCommand e = (FeedbackCommand) other;
+        return studentId.equals(e.studentId)
+                && feedback.equals(e.feedback);
+    }
 }

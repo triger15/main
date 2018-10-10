@@ -3,12 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
-import seedu.address.logic.commands.AddStudentToTutorialGroupCommand;
 import seedu.address.logic.commands.FeedbackCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.StudentId;
 
 /**
@@ -40,6 +39,6 @@ public class FeedbackCommandParser implements Parser<FeedbackCommand> {
                 argMap.getValue(PREFIX_FEEDBACK).get()
         );
 
-        return new FeedbackCommand(stId, feedback);
+        return new FeedbackCommand(stId, new Feedback(feedback));
     }
 }
