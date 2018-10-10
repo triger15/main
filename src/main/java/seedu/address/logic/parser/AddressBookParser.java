@@ -93,6 +93,7 @@ public class AddressBookParser {
             return new GradeAssignmentCommandParser().parse(arguments);
 
         case FeedbackCommand.COMMAND_WORD:
+            return new FeedbackCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

@@ -120,6 +120,10 @@ public class ParserUtil {
         return tgId.trim();
     }
 
+    public static String parseFeedback(String feedback) {
+        return feedback.trim();
+    }
+
     public static int parseInt(String str) {
         return Integer.parseInt(str.trim());
     }
