@@ -6,10 +6,10 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.student.Student;
+import seedu.superta.model.student.Student;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
+ * Provides a handle for {@code PersonListPanel} containing the list of {@code StudentCard}.
  */
 public class PersonListPanelHandle extends NodeHandle<ListView<Student>> {
     public static final String PERSON_LIST_VIEW_ID = "#personListView";
@@ -91,7 +91,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Student>> {
     }
 
     /**
-     * Selects the {@code PersonCard} at {@code index} in the list.
+     * Selects the {@code StudentCard} at {@code index} in the list.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
@@ -123,7 +123,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Student>> {
     }
 
     /**
-     * Remembers the selected {@code PersonCard} in the list.
+     * Remembers the selected {@code StudentCard} in the list.
      */
     public void rememberSelectedPersonCard() {
         List<Student> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
@@ -136,7 +136,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Student>> {
     }
 
     /**
-     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
+     * Returns true if the selected {@code StudentCard} is different from the value remembered by the most recent
      * {@code rememberSelectedPersonCard()} call.
      */
     public boolean isSelectedPersonCardChanged() {

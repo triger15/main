@@ -3,54 +3,54 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.superta.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.superta.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.superta.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.superta.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.superta.testutil.TypicalStudents.AMY;
+import static seedu.superta.testutil.TypicalStudents.BOB;
+import static seedu.superta.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.superta.commons.core.Messages;
+import seedu.superta.commons.core.index.Index;
+import seedu.superta.logic.commands.EditCommand;
+import seedu.superta.logic.commands.RedoCommand;
+import seedu.superta.logic.commands.UndoCommand;
+import seedu.superta.model.Model;
+import seedu.superta.model.student.Address;
+import seedu.superta.model.student.Email;
+import seedu.superta.model.student.Name;
+import seedu.superta.model.student.Phone;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.tag.Tag;
+import seedu.superta.testutil.StudentBuilder;
+import seedu.superta.testutil.StudentUtil;
 
-public class EditCommandSystemTest extends AddressBookSystemTest {
+public class EditCommandSystemTest extends SuperTaClientSystemTest {
 
     @Test
     public void edit() {
@@ -65,7 +65,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
             + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " "
             + STUDENT_ID_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Student editedStudent = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Student editedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedStudent);
 
         /* Case: undo editing the last student in the list -> last student restored */
@@ -76,8 +76,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: redo editing the last student in the list -> last student edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.updatePerson(
-            getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedStudent);
+        model.updateStudent(
+            getModel().getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased()), editedStudent);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a student with new values same as existing values -> edited */
@@ -86,12 +86,12 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a student with new values same as another student's values but with different name -> edited */
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        assertTrue(getModel().getSuperTaClient().getStudentList().contains(BOB));
         index = INDEX_SECOND_PERSON;
-        assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredStudentList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ADDRESS_DESC_BOB + STUDENT_ID_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedStudent = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        editedStudent = new StudentBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedStudent);
 
         /* Case: edit a student with new values same as another student's values but with different phone and email
@@ -100,14 +100,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         index = INDEX_SECOND_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
             + ADDRESS_DESC_BOB + STUDENT_ID_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedStudent = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedStudent = new StudentBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedStudent);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Student studentToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedStudent = new PersonBuilder(studentToEdit).withTags().build();
+        Student studentToEdit = getModel().getFilteredStudentList().get(index.getZeroBased());
+        editedStudent = new StudentBuilder(studentToEdit).withTags().build();
         assertCommandSuccess(command, index, editedStudent);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -115,17 +115,17 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered student list, edit index within bounds of address book and student list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredStudentList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
-        studentToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        editedStudent = new PersonBuilder(studentToEdit).withName(VALID_NAME_BOB).build();
+        studentToEdit = getModel().getFilteredStudentList().get(index.getZeroBased());
+        editedStudent = new StudentBuilder(studentToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedStudent);
 
         /* Case: filtered student list, edit index within bounds of address book but out of bounds of student list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getSuperTaClient().getStudentList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                              Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -154,7 +154,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
+        invalidIndex = getModel().getFilteredStudentList().size() + 1;
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                              Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -187,10 +187,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                              Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a student with new values same as another student's values -> rejected */
-        executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        executeCommand(StudentUtil.getAddCommand(BOB));
+        assertTrue(getModel().getSuperTaClient().getStudentList().contains(BOB));
         index = INDEX_FIRST_PERSON;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredStudentList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ADDRESS_DESC_BOB + STUDENT_ID_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
@@ -240,8 +240,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Student editedStudent,
                                       Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedStudent);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateStudent(expectedModel.getFilteredStudentList().get(toEdit.getZeroBased()), editedStudent);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(command, expectedModel,
                              String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedStudent),
@@ -267,15 +267,15 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.<br>
      * 5. Asserts that the command box has the default style class.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
+     * @see SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see SuperTaClientSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
@@ -293,9 +293,9 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
