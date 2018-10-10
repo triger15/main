@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 
 /**
@@ -29,6 +30,24 @@ public class GradeBook {
      */
     public int getGradeFor(StudentId stId) {
         return internalHashmap.get(stId);
+    }
+
+    /**
+     * Checks if a student has a grade in this grade book.
+     * @param student the student who we want to check.
+     */
+    public boolean isStudentIn(Student student) {
+        return internalHashmap.containsKey(student.getStudentId());
+    }
+
+    /**
+     * Removes a student's grade from the grade book, if present.
+     * @param student the student who we want its reference removed from.
+     */
+    public void removeStudentReference(Student student) {
+        if (isStudentIn(student)) {
+            internalHashmap.remove(student.getStudentId());
+        }
     }
 
     /**
