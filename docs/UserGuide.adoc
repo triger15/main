@@ -195,8 +195,6 @@ Adds the student with student IDs `A1231231Y` to the tutorial group with an ID o
 
 === Remove from Tutorial Group: `remove-from-tutorial-group`
 
-NOTE: Coming in v1.2
-
 Removes students from a tutorial group. +
 Format: `remove-from-tutorial-group tg/[TUTORIAL_GROUP_ID] [s/STUDENT_ID] ...`
 
@@ -207,8 +205,6 @@ Removes the students with student IDs `A1231231Y` and `A2342342T` from the tutor
 
 === Filter by Tutorial Group: `filter`
 
-NOTE: Coming in v1.1
-
 Filters students by a specific tutorial group ID.
 Format: `filter tg/[TUTORIAL_GROUP_ID]`
 
@@ -217,8 +213,6 @@ Examples:
 Shows a list of all the students in the tutorial group with an ID of `1`.
 
 === Create Attendance: `create-attendance`
-
-NOTE: Coming in v1.2
 
 Creates an attendance for a specific tutorial group, identified by its ID.
 Format: `create-attendance tg/[TUTORIAL_GROUP_ID] n/[NAME] [s/STUDENT_ID] ...`
@@ -247,8 +241,6 @@ Creates a grade with marks `40` for the student with an ID of `A0166733Y` in the
 
 === Sort by assignment grade: `sort`
 
-NOTE: Coming in v1.3
-
 Sorts students in order of their grade for a particular assignment.
 Format: `sort tg/[TUTORIAL_GROUP_ID] a/[ASSIGNMENT_ID]`
 
@@ -257,8 +249,6 @@ Examples:
 Displays a list of students in tutorial group `1` by their grade on assignment `1`.
 
 === Feedback to Student: `feedback`
-
-NOTE: Coming in v1.4
 
 Adds feedback to a student with a specified Student ID.
 Format: `feedback s/[STUDENT_ID] f/[FEEDBACK]`

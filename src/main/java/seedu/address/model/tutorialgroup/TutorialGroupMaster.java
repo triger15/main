@@ -13,6 +13,7 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.student.Student;
 
 /**
  * Model for Tutorial Group Master.
@@ -28,9 +29,8 @@ public class TutorialGroupMaster {
         "dusty"
     );
 
-    private static Set<String> uids = new HashSet<>();
-
     public final HashMap<String, TutorialGroup> tutorialGroups;
+    private Set<String> uids = new HashSet<>();
 
     public TutorialGroupMaster() {
         tutorialGroups = new HashMap<>();
@@ -49,8 +49,13 @@ public class TutorialGroupMaster {
      * @param tg The tutorial group to be added.
      */
     public void addTutorialGroup(TutorialGroup tg) {
-        tutorialGroups.put(tg.getId(), tg);
-        uids.add(tg.getId());
+        TutorialGroup toAdd = tg;
+        if (contains(tg.getId())) {
+            String finalUid = generateUid(tg.getId());
+            toAdd = new TutorialGroup(finalUid, tg.getName());
+        }
+        tutorialGroups.put(toAdd.getId(), toAdd);
+        uids.add(toAdd.getId());
     }
 
     /**
@@ -121,14 +126,6 @@ public class TutorialGroupMaster {
     }
 
     /**
-     * tutorialgroup creation helper.
-     */
-    public static TutorialGroup createTutorialGroup(String name, String uid) {
-        String finalUid = generateUid(uid);
-        return new TutorialGroup(finalUid, name);
-    }
-
-    /**
      * Utility function: generates a random prefix for appending to IDs.
      */
     private static String randomPrefix() {
@@ -144,12 +141,24 @@ public class TutorialGroupMaster {
      * @param uid The UID candidate
      * @return The UID candidate, if there are no naming conflicts, or an altered version otherwise.
      */
-    public static String generateUid(String uid) {
+    public String generateUid(String uid) {
         String uidCandidate = uid;
         while (uids.contains(uidCandidate)) {
             uidCandidate = uidCandidate + "-" + TutorialGroupMaster.randomPrefix();
         }
         return uidCandidate;
+    }
+
+    /**
+     * Removes all references to this student in this tutorial group, as well as its assignments.
+     * @param target the student to be removed.
+     */
+    public void removeStudentReferences(Student target) {
+        asUnmodifiableObservableList().stream().forEach(tg -> {
+            tg.removeStudent(target);
+            tg.getAssignments().asUnmodifiableObservableList().forEach(assignment -> assignment
+                .removeStudentReferences(target));
+        });
     }
 
     @Override

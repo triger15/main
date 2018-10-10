@@ -142,7 +142,7 @@ public class CommandTestUtil {
      */
     public static void deleteFirstPerson(Model model) {
         Student firstStudent = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstStudent);
+        model.deleteStudent(firstStudent);
         model.commitAddressBook();
     }
 

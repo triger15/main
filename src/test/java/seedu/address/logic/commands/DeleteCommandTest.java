@@ -37,7 +37,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, studentToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(studentToDelete);
+        expectedModel.deleteStudent(studentToDelete);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -61,7 +61,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, studentToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(studentToDelete);
+        expectedModel.deleteStudent(studentToDelete);
         expectedModel.commitAddressBook();
         showNoPerson(expectedModel);
 
@@ -86,7 +86,7 @@ public class DeleteCommandTest {
         Student studentToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(studentToDelete);
+        expectedModel.deleteStudent(studentToDelete);
         expectedModel.commitAddressBook();
 
         // delete -> first student deleted
@@ -128,7 +128,7 @@ public class DeleteCommandTest {
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Student studentToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        expectedModel.deletePerson(studentToDelete);
+        expectedModel.deleteStudent(studentToDelete);
         expectedModel.commitAddressBook();
 
         // delete -> deletes second student in unfiltered student list / first student in filtered student list
