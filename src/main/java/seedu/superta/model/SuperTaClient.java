@@ -184,6 +184,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+        tutorialGroupMaster.removeStudentReferences(key);
     }
 
     //// util methods

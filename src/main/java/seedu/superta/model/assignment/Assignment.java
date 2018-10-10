@@ -2,6 +2,7 @@ package seedu.superta.model.assignment;
 
 import java.util.stream.Collectors;
 
+import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 
 /**
@@ -57,6 +58,13 @@ public class Assignment {
     public void grade(StudentId studentId, int marks) {
         // TODO: Enforce marks < maxMarks, if not throw exception
         gradebook.addGrade(studentId, marks);
+    }
+
+    /**
+     * Removes a students reference from the grade book, if student is inside.
+     */
+    public void removeStudentReferences(Student target) {
+        gradebook.removeStudentReference(target);
     }
 
     @Override

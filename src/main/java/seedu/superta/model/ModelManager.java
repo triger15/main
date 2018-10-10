@@ -50,7 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlySuperTaClient newData) {
         versionedSuperTaClient.resetData(newData);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateSuperTaClientChanged() {
         raise(new SuperTaClientChangedEvent(versionedSuperTaClient));
     }
 
@@ -72,14 +72,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         versionedSuperTaClient.removeStudent(target);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
     public void addStudent(Student student) {
         versionedSuperTaClient.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
@@ -87,13 +87,13 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedStudent);
 
         versionedSuperTaClient.updateStudent(target, editedStudent);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
         versionedSuperTaClient.addTutorialGroup(tutorialGroup);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
@@ -109,13 +109,13 @@ public class ModelManager extends ComponentManager implements Model {
         TutorialGroup tutorialGroup = tg.get();
         Student student = st.get();
         versionedSuperTaClient.addStudentToTutorialGroup(tutorialGroup, student);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
     public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
         versionedSuperTaClient.removeTutorialGroup(tutorialGroup);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
@@ -126,13 +126,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
         TutorialGroup t = tg.get();
         versionedSuperTaClient.addAssignment(t, assignment);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
     public void grade(Grade grade) {
         versionedSuperTaClient.grade(grade);
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
 
@@ -183,13 +183,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undoSuperTaClient() {
         versionedSuperTaClient.undo();
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
     public void redoSuperTaClient() {
         versionedSuperTaClient.redo();
-        indicateAddressBookChanged();
+        indicateSuperTaClientChanged();
     }
 
     @Override
