@@ -29,24 +29,24 @@ public class SuperTaClientTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final SuperTaClient superTAClient = new SuperTaClient();
+    private final SuperTaClient superTaClient = new SuperTaClient();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), superTAClient.getStudentList());
+        assertEquals(Collections.emptyList(), superTaClient.getStudentList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        superTAClient.resetData(null);
+        superTaClient.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         SuperTaClient newData = getTypicalSuperTaClient();
-        superTAClient.resetData(newData);
-        assertEquals(newData, superTAClient);
+        superTaClient.resetData(newData);
+        assertEquals(newData, superTaClient);
     }
 
     @Test
@@ -58,38 +58,38 @@ public class SuperTaClientTest {
         SuperTaClientStub newData = new SuperTaClientStub(newStudents);
 
         thrown.expect(DuplicateStudentException.class);
-        superTAClient.resetData(newData);
+        superTaClient.resetData(newData);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        superTAClient.hasStudent(null);
+        superTaClient.hasStudent(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(superTAClient.hasStudent(ALICE));
+        assertFalse(superTaClient.hasStudent(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        superTAClient.addStudent(ALICE);
-        assertTrue(superTAClient.hasStudent(ALICE));
+        superTaClient.addStudent(ALICE);
+        assertTrue(superTaClient.hasStudent(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        superTAClient.addStudent(ALICE);
+        superTaClient.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(superTAClient.hasStudent(editedAlice));
+        assertTrue(superTaClient.hasStudent(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        superTAClient.getStudentList().remove(0);
+        superTaClient.getStudentList().remove(0);
     }
 
     /**

@@ -6,9 +6,9 @@ import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
 import org.junit.Test;
 
 import seedu.superta.logic.CommandHistory;
-import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.Model;
 import seedu.superta.model.ModelManager;
+import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.UserPrefs;
 
 public class ClearCommandTest {

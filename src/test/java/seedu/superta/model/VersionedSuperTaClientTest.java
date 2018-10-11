@@ -225,7 +225,8 @@ public class VersionedSuperTaClientTest {
         assertFalse(versionedAddressBook.equals(1));
 
         // different state list -> returns false
-        VersionedSuperTaClient differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
+        VersionedSuperTaClient differentAddressBookList = prepareAddressBookList(addressBookWithBob,
+                addressBookWithCarl);
         assertFalse(versionedAddressBook.equals(differentAddressBookList));
 
         // different current pointer index -> returns false

@@ -19,8 +19,8 @@ import seedu.superta.model.SuperTaClient;
 import seedu.superta.storage.XmlAdaptedStudent;
 import seedu.superta.storage.XmlAdaptedTag;
 import seedu.superta.storage.XmlSerializableSuperTaClient;
-import seedu.superta.testutil.SuperTaClientBuilder;
 import seedu.superta.testutil.StudentBuilder;
+import seedu.superta.testutil.SuperTaClientBuilder;
 import seedu.superta.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -72,7 +72,9 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        SuperTaClient dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableSuperTaClient.class).toModelType();
+        SuperTaClient dataFromFile = XmlUtil
+                .getDataFromFile(VALID_FILE, XmlSerializableSuperTaClient.class)
+                .toModelType();
         assertEquals(9, dataFromFile.getStudentList().size());
     }
 
@@ -126,7 +128,8 @@ public class XmlUtilTest {
         FileUtil.createFile(TEMP_FILE);
         XmlSerializableSuperTaClient dataToWrite = new XmlSerializableSuperTaClient(new SuperTaClient());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableSuperTaClient dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableSuperTaClient.class);
+        XmlSerializableSuperTaClient dataFromFile = XmlUtil
+                .getDataFromFile(TEMP_FILE, XmlSerializableSuperTaClient.class);
         assertEquals(dataToWrite, dataFromFile);
 
         SuperTaClientBuilder builder = new SuperTaClientBuilder(new SuperTaClient());

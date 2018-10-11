@@ -1,9 +1,7 @@
 package systemtests;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static seedu.superta.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.superta.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.superta.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -38,8 +36,8 @@ import seedu.superta.logic.commands.ClearCommand;
 import seedu.superta.logic.commands.FindCommand;
 import seedu.superta.logic.commands.ListCommand;
 import seedu.superta.logic.commands.SelectCommand;
-import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.Model;
+import seedu.superta.model.SuperTaClient;
 import seedu.superta.testutil.TypicalStudents;
 import seedu.superta.ui.BrowserPanel;
 import seedu.superta.ui.CommandBox;

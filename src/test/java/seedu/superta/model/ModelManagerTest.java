@@ -47,13 +47,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        SuperTaClient superTAClient = new SuperTaClientBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        SuperTaClient superTaClient = new SuperTaClientBuilder().withPerson(ALICE).withPerson(BENSON).build();
         SuperTaClient differentSuperTaClient = new SuperTaClient();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(superTAClient, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(superTAClient, userPrefs);
+        modelManager = new ModelManager(superTaClient, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(superTaClient, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -71,7 +71,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(superTAClient, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(superTaClient, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
@@ -79,6 +79,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(superTAClient, differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(superTaClient, differentUserPrefs)));
     }
 }

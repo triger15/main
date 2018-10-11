@@ -10,25 +10,25 @@ import seedu.superta.model.student.Student;
  */
 public class SuperTaClientBuilder {
 
-    private SuperTaClient superTAClient;
+    private SuperTaClient superTaClient;
 
     public SuperTaClientBuilder() {
-        superTAClient = new SuperTaClient();
+        superTaClient = new SuperTaClient();
     }
 
-    public SuperTaClientBuilder(SuperTaClient superTAClient) {
-        this.superTAClient = superTAClient;
+    public SuperTaClientBuilder(SuperTaClient superTaClient) {
+        this.superTaClient = superTaClient;
     }
 
     /**
      * Adds a new {@code Student} to the {@code SuperTaClient} that we are building.
      */
     public SuperTaClientBuilder withPerson(Student student) {
-        superTAClient.addStudent(student);
+        superTaClient.addStudent(student);
         return this;
     }
 
     public SuperTaClient build() {
-        return superTAClient;
+        return superTaClient;
     }
 }

@@ -1,8 +1,6 @@
 package seedu.superta.storage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
 
 import java.io.IOException;
@@ -16,8 +14,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
 import seedu.superta.commons.events.storage.DataSavingExceptionEvent;
-import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.ReadOnlySuperTaClient;
+import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.UserPrefs;
 import seedu.superta.ui.testutil.EventsCollectorRule;
 

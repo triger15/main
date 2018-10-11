@@ -2,12 +2,7 @@ package seedu.superta.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.superta.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,8 +11,8 @@ import java.util.List;
 import seedu.superta.commons.core.index.Index;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
-import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.Model;
+import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.student.NameContainsKeywordsPredicate;
 import seedu.superta.model.student.Student;
 import seedu.superta.testutil.EditStudentDescriptorBuilder;
