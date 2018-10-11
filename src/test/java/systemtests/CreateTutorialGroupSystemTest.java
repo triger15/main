@@ -7,16 +7,16 @@ import seedu.superta.model.Model;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 import seedu.superta.testutil.TutorialGroupBuilder;
-import seedu.superta.testutil.TypicalPersons;
+import seedu.superta.testutil.TypicalStudents;
 
-public class CreateTutorialGroupSystemTest extends AddressBookSystemTest {
+public class CreateTutorialGroupSystemTest extends SuperTaClientSystemTest {
 
     @Test
     public void createTutorialGroup() {
         Model model = getModel();
 
-        Student firstStudent = TypicalPersons.ALICE;
-        Student secondStudent = TypicalPersons.BOB;
+        Student firstStudent = TypicalStudents.ALICE;
+        Student secondStudent = TypicalStudents.BOB;
 
         /* Case: Adding a tutorial group with leading spaces and trailing spaces should add the tutorial group. */
         TutorialGroupBuilder tgBuilder = new TutorialGroupBuilder();
