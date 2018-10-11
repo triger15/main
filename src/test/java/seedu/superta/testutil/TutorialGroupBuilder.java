@@ -1,10 +1,10 @@
-package seedu.address.testutil;
+package seedu.superta.testutil;
 
-import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.AssignmentList;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.UniqueStudentList;
-import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.AssignmentList;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.student.UniqueStudentList;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
  * A utility class to help with building TutorialGroup objects.

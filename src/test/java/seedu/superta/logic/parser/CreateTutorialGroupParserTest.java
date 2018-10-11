@@ -1,15 +1,15 @@
-package seedu.address.logic.parser;
+package seedu.superta.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.superta.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.CreateTutorialGroupCommand;
-import seedu.address.model.tutorialgroup.TutorialGroup;
-import seedu.address.testutil.TutorialGroupBuilder;
+import seedu.superta.logic.commands.CreateTutorialGroupCommand;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
+import seedu.superta.testutil.TutorialGroupBuilder;
 
 public class CreateTutorialGroupParserTest {
     private CreateTutorialGroupCommandParser parser = new CreateTutorialGroupCommandParser();

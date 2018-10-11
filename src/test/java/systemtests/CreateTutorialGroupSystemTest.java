@@ -2,12 +2,12 @@ package systemtests;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.CreateTutorialGroupCommand;
-import seedu.address.model.Model;
-import seedu.address.model.student.Student;
-import seedu.address.model.tutorialgroup.TutorialGroup;
-import seedu.address.testutil.TutorialGroupBuilder;
-import seedu.address.testutil.TypicalPersons;
+import seedu.superta.logic.commands.CreateTutorialGroupCommand;
+import seedu.superta.model.Model;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
+import seedu.superta.testutil.TutorialGroupBuilder;
+import seedu.superta.testutil.TypicalPersons;
 
 public class CreateTutorialGroupSystemTest extends AddressBookSystemTest {
 
