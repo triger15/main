@@ -1,7 +1,9 @@
 package systemtests;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.superta.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.superta.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.superta.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
