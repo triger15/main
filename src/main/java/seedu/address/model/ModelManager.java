@@ -93,7 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //=========== Tutorial Group Accessors =================================================================================
+    //=========== Tutorial Group Accessors ==========================================================================
 
     @Override
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
@@ -138,7 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //=========== Assignment Accessors =================================================================================
+    //=========== Assignment Accessors ===================================================================
 
     @Override
     public void addAssignment(String tutorialGroupId, Assignment assignment) {
@@ -151,7 +151,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //=========== Grade Accessors =================================================================================
+    //=========== Grade Accessors =========================================================================
 
     @Override
     public void grade(Grade grade) {
@@ -160,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    //=========== Filtered Student List Accessors =============================================================
+    //=========== Filtered Student List Accessors ==========================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
