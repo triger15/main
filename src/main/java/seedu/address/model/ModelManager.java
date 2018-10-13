@@ -66,8 +66,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasPerson(Student student) {
         requireNonNull(student);
+
         return versionedAddressBook.hasPerson(student);
     }
+
+    //=========== Student Accessors =================================================================================
 
     @Override
     public void deleteStudent(Student target) {
@@ -90,25 +93,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //=========== Tutorial Group Accessors ==========================================================================
+
     @Override
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
         versionedAddressBook.addTutorialGroup(tutorialGroup);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void addStudentToTutorialGroup(String tgId, StudentId studentId) {
-        Optional<TutorialGroup> tg = versionedAddressBook.getTutorialGroup(tgId);
-        Optional<Student> st = versionedAddressBook.getStudentWithId(studentId);
-        if (!tg.isPresent()) {
-            throw new TutorialGroupNotFoundException();
-        }
-        if (!st.isPresent()) {
-            throw new PersonNotFoundException();
-        }
-        TutorialGroup tutorialGroup = tg.get();
-        Student student = st.get();
-        versionedAddressBook.addStudentToTutorialGroup(tutorialGroup, student);
         indicateAddressBookChanged();
     }
 
@@ -117,24 +106,6 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.removeTutorialGroup(tutorialGroup);
         indicateAddressBookChanged();
     }
-
-    @Override
-    public void addAssignment(String tgId, Assignment assignment) {
-        Optional<TutorialGroup> tg = versionedAddressBook.getTutorialGroup(tgId);
-        if (!tg.isPresent()) {
-            throw new TutorialGroupNotFoundException();
-        }
-        TutorialGroup t = tg.get();
-        versionedAddressBook.addAssignment(t, assignment);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void grade(Grade grade) {
-        versionedAddressBook.grade(grade);
-        indicateAddressBookChanged();
-    }
-
 
     @Override
     public boolean hasTutorialGroup(String id) {
@@ -151,7 +122,45 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    //=========== Filtered Student List Accessors =============================================================
+    @Override
+    public void addStudentToTutorialGroup(String tutorialGroupId, StudentId studentId) {
+        Optional<TutorialGroup> tutorialGroupOptional = versionedAddressBook.getTutorialGroup(tutorialGroupId);
+        Optional<Student> studentOptional = versionedAddressBook.getStudentWithId(studentId);
+        if (!tutorialGroupOptional.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        if (!studentOptional.isPresent()) {
+            throw new PersonNotFoundException();
+        }
+        TutorialGroup tutorialGroup = tutorialGroupOptional.get();
+        Student student = studentOptional.get();
+        versionedAddressBook.addStudentToTutorialGroup(tutorialGroup, student);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Assignment Accessors ===================================================================
+
+    @Override
+    public void addAssignment(String tutorialGroupId, Assignment assignment) {
+        Optional<TutorialGroup> tutorialGroupOptional = versionedAddressBook.getTutorialGroup(tutorialGroupId);
+        if (!tutorialGroupOptional.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup tutorialGroup = tutorialGroupOptional.get();
+        versionedAddressBook.addAssignment(tutorialGroup, assignment);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Grade Accessors =========================================================================
+
+    @Override
+    public void grade(Grade grade) {
+        versionedAddressBook.grade(grade);
+        indicateAddressBookChanged();
+    }
+
+
+    //=========== Filtered Student List Accessors ==========================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
