@@ -120,8 +120,8 @@ public class ParserUtil {
         return tgId.trim();
     }
 
-    public static int parseInt(String str) {
-        return Integer.parseInt(str.trim());
+    public static Double parseDouble(String str) {
+        return Double.parseDouble(str.trim());
     }
 
     public static String parseString(String str) {
