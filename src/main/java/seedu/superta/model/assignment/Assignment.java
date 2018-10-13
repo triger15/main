@@ -11,19 +11,19 @@ import seedu.superta.model.student.StudentId;
  */
 public class Assignment {
     private final String name;
-    private final int maxMarks;
+    private final Double maxMarks;
     private final GradeBook gradebook;
 
     /**
      * Constructs a {@code Assignment}.
      */
-    public Assignment(String name, int maxMarks) {
+    public Assignment(String name, Double maxMarks) {
         this.name = name;
         this.maxMarks = maxMarks;
         this.gradebook = new GradeBook();
     }
 
-    public Assignment(String name, int maxMarks, GradeBook gradebook) {
+    public Assignment(String name, Double maxMarks, GradeBook gradebook) {
         this.name = name;
         this.maxMarks = maxMarks;
         this.gradebook = gradebook;
@@ -42,7 +42,7 @@ public class Assignment {
         return name;
     }
 
-    public int getMaxMarks() {
+    public Double getMaxMarks() {
         return maxMarks;
     }
 
@@ -55,7 +55,7 @@ public class Assignment {
      * @param studentId the student id.
      * @param marks the marks given.
      */
-    public void grade(StudentId studentId, int marks) {
+    public void grade(StudentId studentId, Double marks) {
         // TODO: Enforce marks < maxMarks, if not throw exception
         gradebook.addGrade(studentId, marks);
     }

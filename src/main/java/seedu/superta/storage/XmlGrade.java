@@ -15,16 +15,16 @@ public class XmlGrade {
     @XmlElement(required = true)
     private String studentId;
     @XmlElement(required = true)
-    private Integer marks;
+    private Double marks;
 
     public XmlGrade() { }
 
-    public XmlGrade(String studentId, int marks) {
+    public XmlGrade(String studentId, Double marks) {
         this.studentId = studentId;
         this.marks = marks;
     }
 
-    public XmlGrade(Map.Entry<StudentId, Integer> entry) {
+    public XmlGrade(Map.Entry<StudentId, Double> entry) {
         studentId = entry.getKey().toString();
         marks = entry.getValue();
     }
@@ -33,7 +33,7 @@ public class XmlGrade {
         return studentId;
     }
 
-    public Integer getMarks() {
+    public Double getMarks() {
         return marks;
     }
 }

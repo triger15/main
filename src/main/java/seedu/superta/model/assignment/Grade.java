@@ -9,9 +9,9 @@ public class Grade {
     private final String tgId;
     private final String asId;
     private final StudentId stId;
-    private final Integer marks;
+    private final Double marks;
 
-    public Grade(String tgId, String asId, StudentId stId, Integer marks) {
+    public Grade(String tgId, String asId, StudentId stId, Double marks) {
         this.tgId = tgId;
         this.asId = asId;
         this.stId = stId;
@@ -30,7 +30,7 @@ public class Grade {
         return stId;
     }
 
-    public Integer getMarks() {
+    public Double getMarks() {
         return marks;
     }
 }

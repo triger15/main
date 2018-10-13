@@ -13,13 +13,13 @@ public class XmlAdaptedAssignment implements XmlAdapted<Assignment> {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private Integer maxMarks;
+    private Double maxMarks;
     @XmlElement
     private XmlAdaptedGradeBook gradebook;
 
     public XmlAdaptedAssignment() { }
 
-    public XmlAdaptedAssignment(String name, int maxMarks, XmlAdaptedGradeBook gradebook) {
+    public XmlAdaptedAssignment(String name, Double maxMarks, XmlAdaptedGradeBook gradebook) {
         this.name = name;
         this.maxMarks = maxMarks;
         this.gradebook = gradebook;
