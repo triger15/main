@@ -128,7 +128,7 @@ public class EditCommand extends Command {
      * Stores the details to edit the student with. Each non-empty field value will replace the
      * corresponding field value of the student.
      */
-    public static class EditStudentDescriptor {
+    public static class EditStudentDescriptor implements Descriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -154,6 +154,7 @@ public class EditCommand extends Command {
         /**
          * Returns true if at least one field is edited.
          */
+        @Override
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags,
                                                studentId);
