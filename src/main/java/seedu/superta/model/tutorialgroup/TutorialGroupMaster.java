@@ -172,8 +172,15 @@ public class TutorialGroupMaster {
         }
         if (other instanceof TutorialGroupMaster) {
             TutorialGroupMaster o = (TutorialGroupMaster) other;
-            return uids.equals(o.uids)
-                && tutorialGroups.equals(o.tutorialGroups);
+            if (uids.size() != o.uids.size()) {
+                return false;
+            }
+            for (String id : uids) {
+                if (!o.uids.contains(id)) {
+                    return false;
+                }
+            }
+            return tutorialGroups.equals(o.tutorialGroups);
         }
         return false;
     }

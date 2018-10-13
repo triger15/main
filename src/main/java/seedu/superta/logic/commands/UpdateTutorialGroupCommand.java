@@ -80,7 +80,7 @@ public class UpdateTutorialGroupCommand extends Command {
         }
 
         public Optional<String> getName() {
-            return Optional.of(name);
+            return Optional.ofNullable(name);
         }
 
         @Override
