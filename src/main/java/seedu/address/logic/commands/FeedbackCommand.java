@@ -38,8 +38,8 @@ public class FeedbackCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        model.addFeedback(feedback, studentId);
 
-        //model.addTutorialGroup(toAdd);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, feedback));
     }

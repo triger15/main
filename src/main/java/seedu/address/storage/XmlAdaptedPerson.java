@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -38,6 +39,9 @@ public class XmlAdaptedPerson {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    @XmlElement
+    private String feedback;
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -74,6 +78,7 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        feedback = source.getFeedback().value;
     }
 
     /**
@@ -126,10 +131,15 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(StudentId.MESSAGE_STUDENT_ID_CONSTRAINTS);
         }
         final StudentId modelStudentId = new StudentId(studentId);
-
+        if (feedback == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Feedback.class.getSimpleName()));
+        }
+        final Feedback modelFeedback = new Feedback(feedback);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTags);
+        Student modelStudent = new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTags);
+        modelStudent.setFeedback(modelFeedback);
+        return modelStudent;
     }
 
     @Override

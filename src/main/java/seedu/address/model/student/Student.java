@@ -19,6 +19,8 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    // TODO: change to final variable
+    private Feedback feedback;
     private final StudentId studentId;
 
     // Data fields
@@ -36,6 +38,8 @@ public class Student {
         this.address = address;
         this.studentId = studentId;
         this.tags.addAll(tags);
+        // TODO: change this feedbackstyle.
+        this.feedback = new Feedback("");
     }
 
     public Name getName() {
@@ -81,11 +85,15 @@ public class Student {
     }
 
     /**
-     * Returns a String containing the student's information and feedback given to this student.
+     * Returns the feedback given to this student.
      */
-    public String getFeedback() {
-        //temporary implementation. Need to implement feedback.
-        return this.toString();
+    public Feedback getFeedback() {
+        return this.feedback;
+    }
+
+    // TODO: remove this in future.
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
     }
 
     /**

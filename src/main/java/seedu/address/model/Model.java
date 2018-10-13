@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.tutorialgroup.TutorialGroup;
@@ -74,6 +75,11 @@ public interface Model {
      * Grades a student on an assignment.
      */
     void grade(Grade grade);
+
+    /**
+     * Adds feedback to a student.
+     */
+    void addFeedback(Feedback feedback, StudentId studentId);
 
     /**
      * Returns true if a tutorial group with the given id exists.

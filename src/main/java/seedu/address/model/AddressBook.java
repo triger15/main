@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.UniqueStudentList;
@@ -156,6 +157,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         Student st = ost.get();
         as.grade(st.getStudentId(), grade.getMarks());
+    }
+
+    /**
+     * Adds feedback to a student.
+     */
+    public void addFeedback(Feedback feedback, StudentId studentId) {
+        Optional<Student> ost = students.getStudentWithId(studentId);
+        if (!ost.isPresent()) {
+            throw new PersonNotFoundException();
+        }
+        Student st = ost.get();
+        // TODO: change this method. Update person instead!
+        st.setFeedback(feedback);
     }
 
     /**

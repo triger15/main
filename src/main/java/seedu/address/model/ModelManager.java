@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.exceptions.PersonNotFoundException;
@@ -132,6 +133,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void grade(Grade grade) {
         versionedAddressBook.grade(grade);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addFeedback(Feedback feedback, StudentId studentId) {
+        versionedAddressBook.addFeedback(feedback, studentId);
         indicateAddressBookChanged();
     }
 
