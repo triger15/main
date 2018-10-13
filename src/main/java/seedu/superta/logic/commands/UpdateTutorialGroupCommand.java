@@ -54,6 +54,9 @@ public class UpdateTutorialGroupCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Creates an edited tutorial group with the given descriptor supplied in the constructor.
+     */
     private TutorialGroup createEditedTutorialGroup(TutorialGroup toEdit) {
         requireNonNull(toEdit);
 
