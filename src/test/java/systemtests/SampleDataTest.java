@@ -1,6 +1,6 @@
 package systemtests;
 
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.superta.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,17 +8,17 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.student.Student;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.superta.model.SuperTaClient;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.util.SampleDataUtil;
+import seedu.superta.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookSystemTest {
+public class SampleDataTest extends SuperTaClientSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected AddressBook getInitialData() {
+    protected SuperTaClient getInitialData() {
         return null;
     }
 
