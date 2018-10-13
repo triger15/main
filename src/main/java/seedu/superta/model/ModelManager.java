@@ -149,6 +149,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateTutorialGroup(TutorialGroup edited) {
         versionedSuperTaClient.updateTutorialGroup(edited);
+        indicateSuperTaClientChanged();
     }
 
     //=========== Filtered Student List Accessors =============================================================
