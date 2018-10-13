@@ -61,6 +61,19 @@ public class UpdateTutorialGroupCommand extends Command {
         return new TutorialGroup(id, updatedName);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof UpdateTutorialGroupCommand)) {
+            return false;
+        }
+        UpdateTutorialGroupCommand o = (UpdateTutorialGroupCommand) other;
+        return id.equals(o.id) && descriptor.equals(o.descriptor);
+
+    }
+
     /**
      * Stores the details to edit the tutorial group with. Eeach non-empty field value will replace the corresponding
      * field value of the tutorial group.
