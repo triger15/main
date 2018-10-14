@@ -1,48 +1,71 @@
-package seedu.address.logic.commands;
+package seedu.superta.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FEEDBACK_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FEEDBACK_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.FeedbackCommand.MESSAGE_SUCCESS;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_FEEDBACK_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_FEEDBACK_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.superta.logic.commands.FeedbackCommand.MESSAGE_SUCCESS;
+import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.student.Feedback;
-import seedu.address.model.student.StudentId;
-import seedu.address.ui.testutil.EventsCollectorRule;
+//import seedu.superta.commons.events.ui.ExitAppRequestEvent;
+import seedu.superta.logic.CommandHistory;
+import seedu.superta.model.Model;
+import seedu.superta.model.ModelManager;
+import seedu.superta.model.UserPrefs;
+import seedu.superta.model.student.Feedback;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.student.StudentId;
+import seedu.superta.testutil.StudentBuilder;
+import seedu.superta.ui.testutil.EventsCollectorRule;
 
 public class FeedbackCommandTest {
+
+    private static final String FEEDBACK_STUB = "Some feedback";
+
+    private Model model;
+    private CommandHistory commandHistory = new CommandHistory();
+
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager();
-    private CommandHistory commandHistory = new CommandHistory();
+    private StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
+    private Feedback amyFeedback = new Feedback(VALID_FEEDBACK_AMY);
+    private StudentId bob = new StudentId(VALID_STUDENT_ID_BOB);
+    private Feedback bobFeedback = new Feedback(VALID_FEEDBACK_BOB);
+
+    @Before
+    public void setUp() {
+        model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+    }
 
     @Test
     public void execute_feedback_success() {
-        FeedbackCommand feedbackCommand = new FeedbackCommand(new StudentId(VALID_STUDENT_ID_AMY), new Feedback(VALID_FEEDBACK_AMY));
-        String createdFeedback = String.format(MESSAGE_SUCCESS, VALID_FEEDBACK_AMY);
-        assertCommandSuccess(feedbackCommand, model, commandHistory, createdFeedback, model);
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student editedStudent = new StudentBuilder(firstStudent).withFeedback(FEEDBACK_STUB).build();
+
+        FeedbackCommand feedbackCommand = new FeedbackCommand(firstStudent.getStudentId(), new Feedback(FEEDBACK_STUB));
+
+        String expectedMessage = String.format(MESSAGE_SUCCESS, FEEDBACK_STUB);
+
+        Model expectedModel = new ModelManager(model.getSuperTaClient(), new UserPrefs());
+        expectedModel.updateStudent(firstStudent, editedStudent);
+        expectedModel.commitSuperTaClient();
+
+        assertCommandSuccess(feedbackCommand, model, commandHistory, expectedMessage, expectedModel);
         //assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
         //assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }
 
     @Test
     public void equals() {
-        StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
-        Feedback amyFeedback = new Feedback(VALID_FEEDBACK_AMY);
-        StudentId bob = new StudentId(VALID_STUDENT_ID_BOB);
-        Feedback bobFeedback = new Feedback(VALID_FEEDBACK_BOB);
-
         final FeedbackCommand standardCommand = new FeedbackCommand(amy, amyFeedback);
         // same values -> returns true
         FeedbackCommand commandWithSameValues = new FeedbackCommand(amy, amyFeedback);
