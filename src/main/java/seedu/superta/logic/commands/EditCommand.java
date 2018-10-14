@@ -105,7 +105,8 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
         Feedback updatedFeedback = studentToEdit.getFeedback(); // edit command does not allow editing feedback
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags, updatedFeedback);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags,
+                updatedFeedback);
     }
 
     @Override

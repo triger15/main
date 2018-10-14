@@ -29,7 +29,8 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, StudentId studentId, Set<Tag> tags, Feedback feedback) {
+    public Student(Name name, Phone phone, Email email, Address address, StudentId studentId, Set<Tag> tags,
+                   Feedback feedback) {
         requireAllNonNull(name, phone, email, address, studentId, tags, feedback);
         this.name = name;
         this.phone = phone;

@@ -125,6 +125,12 @@ public class ParserUtil {
         return Double.parseDouble(str.trim());
     }
 
+    /**
+     * Parses a {@code String feedback} into a {@code Feedback}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code feedback} is invalid.
+     */
     public static Feedback parseFeedback(String feedback) {
         requireNonNull(feedback);
         return new Feedback(feedback.trim());

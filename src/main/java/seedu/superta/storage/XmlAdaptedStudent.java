@@ -132,12 +132,14 @@ public class XmlAdaptedStudent {
         }
         final StudentId modelStudentId = new StudentId(studentId);
         if (feedback == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Feedback.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Feedback.class.getSimpleName()));
         }
         final Feedback modelFeedback = new Feedback(feedback);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        Student modelStudent = new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTags, modelFeedback);
+        Student modelStudent = 
+                new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTags, modelFeedback);
         return modelStudent;
     }
 

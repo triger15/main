@@ -168,8 +168,8 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
             throw new StudentNotFoundException();
         }
         Student st = ost.get();
-        Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(), st.getAddress(), st.getStudentId(),
-                st.getTags(), feedback);
+        Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(), st.getAddress(),
+                st.getStudentId(), st.getTags(), feedback);
         updateStudent(st, editedStudent);
     }
 
