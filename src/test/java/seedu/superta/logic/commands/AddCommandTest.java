@@ -22,6 +22,7 @@ import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -164,7 +165,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Student> getFilteredStudentList() {
+        public void addFeedback(Feedback feedback, StudentId studentId) {
+
+        }
+
+        @Override
+        public ObservableList<Student> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 

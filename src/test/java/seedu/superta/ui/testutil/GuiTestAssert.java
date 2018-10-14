@@ -28,6 +28,8 @@ public class GuiTestAssert {
 
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedStudent}.
+
+
      */
     public static void assertCardDisplaysPerson(Student expectedStudent, PersonCardHandle actualCard) {
         assertEquals(expectedStudent.getName().fullName, actualCard.getName());
@@ -36,6 +38,7 @@ public class GuiTestAssert {
         assertEquals(expectedStudent.getAddress().value, actualCard.getAddress());
         assertEquals(expectedStudent.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+        assertEquals(expectedStudent.getFeedback().value, actualCard.getFeedback());
     }
 
     /**

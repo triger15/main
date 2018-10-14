@@ -43,7 +43,7 @@ public class TypicalStudents {
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
         .withEmail("werner@example.com").withStudentId("A1403293Y").withAddress("michegan ave").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-        .withEmail("lydia@example.com").withStudentId("A1820123Y").withAddress("little tokyo").build();
+        .withEmail("lydia@example.com").withStudentId("A1820123Y").withAddress("little tokyo").withFeedback("A little dumb.").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
         .withEmail("anna@example.com").withStudentId("A1309482Y").withAddress("4th street").build();
 

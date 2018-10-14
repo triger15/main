@@ -15,6 +15,7 @@ import seedu.superta.logic.commands.CreateTutorialGroupCommand;
 import seedu.superta.logic.commands.DeleteCommand;
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.ExitCommand;
+import seedu.superta.logic.commands.FeedbackCommand;
 import seedu.superta.logic.commands.FindCommand;
 import seedu.superta.logic.commands.GradeAssignmentCommand;
 import seedu.superta.logic.commands.HelpCommand;
@@ -90,6 +91,9 @@ public class AddressBookParser {
 
         case GradeAssignmentCommand.COMMAND_WORD:
             return new GradeAssignmentCommandParser().parse(arguments);
+
+        case FeedbackCommand.COMMAND_WORD:
+            return new FeedbackCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

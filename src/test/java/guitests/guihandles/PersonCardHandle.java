@@ -20,6 +20,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String FEEDBACK_FIELD_ID = "#feedback";
 
     private final Label idLabel;
     private final Label nameLabel;
@@ -27,6 +28,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final List<Label> tagLabels;
+    private final Label feedbackLabel;
 
     public PersonCardHandle(Node cardNode) {
         super(cardNode);
@@ -43,6 +45,8 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 .stream()
                 .map(Label.class::cast)
                 .collect(Collectors.toList());
+
+        feedbackLabel = getChildNode(FEEDBACK_FIELD_ID);
     }
 
     public String getId() {
@@ -72,6 +76,10 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    public String getFeedback() {
+        return feedbackLabel.getText();
+    }
+
     /**
      * Returns true if this handle contains {@code student}.
      */
@@ -83,5 +91,6 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(student.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
+        // TODO: add equality tester for feedback?
     }
 }

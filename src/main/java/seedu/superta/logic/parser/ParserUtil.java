@@ -12,6 +12,7 @@ import seedu.superta.commons.util.StringUtil;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Name;
 import seedu.superta.model.student.Phone;
 import seedu.superta.model.student.StudentId;
@@ -122,6 +123,11 @@ public class ParserUtil {
 
     public static Double parseDouble(String str) {
         return Double.parseDouble(str.trim());
+    }
+
+    public static Feedback parseFeedback(String feedback) {
+        requireNonNull(feedback);
+        return new Feedback(feedback.trim());
     }
 
     public static String parseString(String str) {
