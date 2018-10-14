@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 //import seedu.superta.commons.events.ui.ExitAppRequestEvent;
+
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
 import seedu.superta.model.ModelManager;
@@ -30,12 +31,11 @@ public class FeedbackCommandTest {
 
     private static final String FEEDBACK_STUB = "Some feedback";
 
-    private Model model;
-    private CommandHistory commandHistory = new CommandHistory();
-
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
+    private Model model;
+    private CommandHistory commandHistory = new CommandHistory();
     private StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
     private Feedback amyFeedback = new Feedback(VALID_FEEDBACK_AMY);
     private StudentId bob = new StudentId(VALID_STUDENT_ID_BOB);
