@@ -12,6 +12,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.StudentId;
@@ -120,8 +121,8 @@ public class ParserUtil {
         return tgId.trim();
     }
 
-    public static String parseFeedback(String feedback) {
-        return feedback.trim();
+    public static Feedback parseFeedback(String feedback) {
+        return new Feedback(feedback.trim());
     }
 
     public static int parseInt(String str) {

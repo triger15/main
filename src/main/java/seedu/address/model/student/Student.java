@@ -19,8 +19,7 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    // TODO: change to final variable
-    private Feedback feedback;
+    private final Feedback feedback;
     private final StudentId studentId;
 
     // Data fields
@@ -30,16 +29,15 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, StudentId studentId, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, studentId, tags);
+    public Student(Name name, Phone phone, Email email, Address address, StudentId studentId, Set<Tag> tags, Feedback feedback) {
+        requireAllNonNull(name, phone, email, address, studentId, tags, feedback);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.studentId = studentId;
         this.tags.addAll(tags);
-        // TODO: change this feedbackstyle.
-        this.feedback = new Feedback("");
+        this.feedback = feedback;
     }
 
     public Name getName() {
@@ -88,12 +86,7 @@ public class Student {
      * Returns the feedback given to this student.
      */
     public Feedback getFeedback() {
-        return this.feedback;
-    }
-
-    // TODO: remove this in future.
-    public void setFeedback(Feedback feedback) {
-        this.feedback = feedback;
+        return feedback;
     }
 
     /**

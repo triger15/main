@@ -35,10 +35,10 @@ public class FeedbackCommandParser implements Parser<FeedbackCommand> {
             argMap.getValue(PREFIX_GENERAL_STUDENT_ID).get()
         );
 
-        String feedback = ParserUtil.parseFeedback(
+        Feedback feedback = ParserUtil.parseFeedback(
                 argMap.getValue(PREFIX_FEEDBACK).get()
         );
 
-        return new FeedbackCommand(stId, new Feedback(feedback));
+        return new FeedbackCommand(stId, feedback);
     }
 }

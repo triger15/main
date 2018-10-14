@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDBACK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,11 +20,11 @@ public class FeedbackCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a feedback to a student. "
         + "Parameters: "
-        + "s/STUDENT-ID "
-        + "f/FEEDBACK\n"
+        + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID "
+        + PREFIX_FEEDBACK + "FEEDBACK\n"
         + "Example: " + COMMAND_WORD + " "
-        + "s/A01234566T "
-        + "f/Is generally attentive during class. However, needs to speak up more.";
+        + PREFIX_GENERAL_STUDENT_ID + "A01234566T "
+        + PREFIX_FEEDBACK + "Is generally attentive during class. However, needs to speak up more.";
 
     public static final String MESSAGE_SUCCESS = "New feedback created: %1$s";
 
@@ -39,7 +42,7 @@ public class FeedbackCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         model.addFeedback(feedback, studentId);
-
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, feedback));
     }

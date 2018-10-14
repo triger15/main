@@ -168,8 +168,9 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new PersonNotFoundException();
         }
         Student st = ost.get();
-        // TODO: change this method. Update person instead!
-        st.setFeedback(feedback);
+        Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(), st.getAddress(), st.getStudentId(),
+                st.getTags(), feedback);
+        updatePerson(st, editedStudent);
     }
 
     /**

@@ -22,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -102,8 +103,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(studentToEdit.getAddress());
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
+        Feedback updatedFeedback = studentToEdit.getFeedback(); // edit command does not allow editing feedback
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags, updatedFeedback);
     }
 
     @Override
