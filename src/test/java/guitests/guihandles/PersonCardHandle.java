@@ -91,5 +91,6 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(student.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
+        // TODO: add equality tester for feedback?
     }
 }

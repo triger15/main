@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
@@ -11,11 +12,12 @@ import seedu.address.model.student.Feedback;
 import seedu.address.model.student.StudentId;
 
 /**
- * Parser for the add-to-tutorial-group command.
+ * Parser for the feedback command.
  */
 public class FeedbackCommandParser implements Parser<FeedbackCommand> {
     @Override
     public FeedbackCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMap = ArgumentTokenizer.tokenize(
             args,
             PREFIX_GENERAL_STUDENT_ID,

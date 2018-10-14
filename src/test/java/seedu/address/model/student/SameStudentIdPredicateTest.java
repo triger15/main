@@ -19,7 +19,8 @@ public class SameStudentIdPredicateTest {
                 new Email("tester@tester.com"),
                 new Address("Testing Street 123"),
                 new StudentId("A0123456Z"),
-                new HashSet<>())));
+                new HashSet<>(),
+                new Feedback(""))));
 
         assertFalse(predicate.test(new Student(
                 new Name("Tester Tester"),
@@ -27,6 +28,7 @@ public class SameStudentIdPredicateTest {
                 new Email("tester@tester.com"),
                 new Address("Testing Street 123"),
                 new StudentId("A0123456A"),
-                new HashSet<>())));
+                new HashSet<>(),
+                new Feedback(""))));
     }
 }

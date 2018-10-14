@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Grade;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.tutorialgroup.TutorialGroup;
@@ -160,6 +161,11 @@ public class AddCommandTest {
 
         @Override
         public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
+
+        }
+
+        @Override
+        public void addFeedback(Feedback feedback, StudentId studentId) {
 
         }
 

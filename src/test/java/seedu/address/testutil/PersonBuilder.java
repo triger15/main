@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.Feedback;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STUDENT_ID = "A0166733Y";
+    public static final String DEFAULT_FEEDBACK = "";
 
     private Name name;
     private Phone phone;
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private StudentId studentId;
     private Set<Tag> tags;
+    private Feedback feedback;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -37,6 +40,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         tags = new HashSet<>();
+        feedback = new Feedback(DEFAULT_FEEDBACK);
     }
 
     /**
@@ -49,6 +53,7 @@ public class PersonBuilder {
         address = studentToCopy.getAddress();
         studentId = studentToCopy.getStudentId();
         tags = new HashSet<>(studentToCopy.getTags());
+        feedback = studentToCopy.getFeedback();
     }
 
     /**
@@ -99,8 +104,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Feedback} of the {@code Student} that we are building.
+     */
+    public PersonBuilder withFeedback(String feedback) {
+        this.feedback = new Feedback(feedback);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, studentId, tags);
+        return new Student(name, phone, email, address, studentId, tags, feedback);
     }
 
 }

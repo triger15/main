@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FEEDBACK_AMY;
@@ -54,7 +53,7 @@ public class FeedbackCommandTest {
         assertFalse(standardCommand.equals(null));
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
-        // different index -> returns false
+        // different student -> returns false
         assertFalse(standardCommand.equals(new FeedbackCommand(bob, amyFeedback)));
         // different remark -> returns false
         assertFalse(standardCommand.equals(new FeedbackCommand(amy, bobFeedback)));

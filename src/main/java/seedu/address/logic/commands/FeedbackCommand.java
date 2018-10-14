@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Feedback;
 import seedu.address.model.student.StudentId;
+import seedu.address.model.student.exceptions.PersonNotFoundException;
 
 /**
  * Command that adds feedback for a student.
@@ -23,7 +24,7 @@ public class FeedbackCommand extends Command {
         + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID "
         + PREFIX_FEEDBACK + "FEEDBACK\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GENERAL_STUDENT_ID + "A01234566T "
+        + PREFIX_GENERAL_STUDENT_ID + "A0123566T "
         + PREFIX_FEEDBACK + "Is generally attentive during class. However, needs to speak up more.";
 
     public static final String MESSAGE_SUCCESS = "New feedback created: %1$s";
@@ -31,6 +32,10 @@ public class FeedbackCommand extends Command {
     private final StudentId studentId;
     private final Feedback feedback;
 
+    /**
+     * @param studentId of the student to add feedback to
+     * @param feedback of the student to create
+     */
     public FeedbackCommand(StudentId studentId, Feedback feedback) {
         requireAllNonNull(studentId, feedback);
         this.studentId = studentId;
@@ -41,7 +46,11 @@ public class FeedbackCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.addFeedback(feedback, studentId);
+        try {
+            model.addFeedback(feedback, studentId);
+        } catch (PersonNotFoundException e) {
+            throw new CommandException("No such student.");
+        }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, feedback));

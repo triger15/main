@@ -122,6 +122,7 @@ public class ParserUtil {
     }
 
     public static Feedback parseFeedback(String feedback) {
+        requireNonNull(feedback);
         return new Feedback(feedback.trim());
     }
 
