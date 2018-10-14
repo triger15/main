@@ -138,8 +138,8 @@ public class XmlAdaptedStudent {
         final Feedback modelFeedback = new Feedback(feedback);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        Student modelStudent = 
-                new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTags, modelFeedback);
+        Student modelStudent = new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId,
+                modelTags, modelFeedback);
         return modelStudent;
     }
 
