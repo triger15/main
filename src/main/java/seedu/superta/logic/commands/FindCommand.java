@@ -2,19 +2,11 @@ package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-<<<<<<< HEAD:src/main/java/seedu/address/logic/commands/FindCommand.java
 import java.util.function.Predicate;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
-=======
 import seedu.superta.commons.core.Messages;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
-import seedu.superta.model.student.NameContainsKeywordsPredicate;
->>>>>>> master:src/main/java/seedu/superta/logic/commands/FindCommand.java
 
 /**
  * Finds and lists all persons in the SuperTA client whose name contains any of the argument keywords.
