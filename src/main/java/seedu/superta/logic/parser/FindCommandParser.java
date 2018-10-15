@@ -11,8 +11,10 @@ import java.util.ArrayList;
 
 import seedu.superta.logic.commands.FindCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
+import seedu.superta.model.student.EmailContainsKeywordsPredicate;
 import seedu.superta.model.student.NameContainsKeywordsPredicate;
 import seedu.superta.model.student.PhoneContainsKeywordsPredicate;
+import seedu.superta.model.student.StudentidContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -33,13 +35,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                                                                   PREFIX_STUDENT_ID);
         ArrayList<String> nameField = new ArrayList<>();
         ArrayList<String> phoneField = new ArrayList<>();
+        ArrayList<String> emailField = new ArrayList<>();
+        ArrayList<String> studentidField = new ArrayList<>();
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap,
-                                           PREFIX_NAME,
-                                           PREFIX_PHONE,
-                                           PREFIX_EMAIL,
-                                           PREFIX_STUDENT_ID)
-            || args.isEmpty()) {
+        if (args.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -50,9 +49,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             phoneField.add(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value);
         }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            emailField.add(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value);
+        }
+        if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
+            studentidField.add(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get()).studentId);
+        }
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameField)
-                               .or(new PhoneContainsKeywordsPredicate(phoneField)));
+                               .or(new PhoneContainsKeywordsPredicate(phoneField))
+                               .or(new EmailContainsKeywordsPredicate(emailField))
+                               .or(new StudentidContainsKeywordsPredicate(studentidField)));
     }
 
 }
