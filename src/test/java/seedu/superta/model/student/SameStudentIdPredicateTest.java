@@ -3,6 +3,7 @@ package seedu.superta.model.student;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class SameStudentIdPredicateTest {
                 new Address("Testing Street 123"),
                 new StudentId("A0123456Z"),
                 new HashSet<>(),
-                new Feedback(""))));
+                new ArrayList<>())));
 
         assertFalse(predicate.test(new Student(
                 new Name("Tester Tester"),
@@ -29,6 +30,6 @@ public class SameStudentIdPredicateTest {
                 new Address("Testing Street 123"),
                 new StudentId("A0123456A"),
                 new HashSet<>(),
-                new Feedback(""))));
+                new ArrayList<>())));
     }
 }

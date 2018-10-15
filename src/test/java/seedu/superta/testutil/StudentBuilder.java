@@ -1,6 +1,8 @@
 package seedu.superta.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.superta.model.student.Address;
@@ -31,7 +33,7 @@ public class StudentBuilder {
     private Address address;
     private StudentId studentId;
     private Set<Tag> tags;
-    private Feedback feedback;
+    private List<Feedback> allFeedback;
 
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -40,7 +42,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         tags = new HashSet<>();
-        feedback = new Feedback(DEFAULT_FEEDBACK);
+        allFeedback = new ArrayList<>();
     }
 
     /**
@@ -53,7 +55,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         studentId = studentToCopy.getStudentId();
         tags = new HashSet<>(studentToCopy.getTags());
-        feedback = studentToCopy.getFeedback();
+        allFeedback = new ArrayList<>(studentToCopy.getFeedback());
     }
 
     /**
@@ -105,15 +107,15 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Feedback} of the {@code Student} that we are building.
+     * Parses the {@code feedbacks} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
      */
-    public StudentBuilder withFeedback(String feedback) {
-        this.feedback = new Feedback(feedback);
+    public StudentBuilder withFeedback(String ... feedbacks) {
+        this.allFeedback = SampleDataUtil.getFeedbackList(feedbacks);
         return this;
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, studentId, tags, feedback);
+        return new Student(name, phone, email, address, studentId, tags, allFeedback);
     }
 
 }
