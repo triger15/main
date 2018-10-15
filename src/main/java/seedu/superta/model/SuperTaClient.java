@@ -2,8 +2,10 @@ package seedu.superta.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.superta.model.assignment.Assignment;
@@ -168,8 +170,13 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
             throw new StudentNotFoundException();
         }
         Student st = ost.get();
+        List<Feedback> studentFeedback = st.getFeedback()
+                .stream()
+                .collect(Collectors.toList());
+        studentFeedback.add(feedback);
+        System.out.println(studentFeedback);
         Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(), st.getAddress(),
-                st.getStudentId(), st.getTags(), feedback);
+                st.getStudentId(), st.getTags(), studentFeedback);
         updateStudent(st, editedStudent);
     }
 

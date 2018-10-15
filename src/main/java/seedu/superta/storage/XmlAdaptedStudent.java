@@ -41,7 +41,7 @@ public class XmlAdaptedStudent {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     @XmlElement
-    private String feedback;
+    private List<XmlAdaptedFeedback> allFeedback = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedStudent.
@@ -78,7 +78,9 @@ public class XmlAdaptedStudent {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        feedback = source.getFeedback().value;
+        allFeedback = source.getFeedback().stream()
+                .map(XmlAdaptedFeedback::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -90,6 +92,11 @@ public class XmlAdaptedStudent {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Feedback> allStudentFeedback = new ArrayList<>();
+        for (XmlAdaptedFeedback feedback : allFeedback) {
+            allStudentFeedback.add(feedback.toModelType());
         }
 
         if (name == null) {
@@ -131,11 +138,12 @@ public class XmlAdaptedStudent {
             throw new IllegalValueException(StudentId.MESSAGE_STUDENT_ID_CONSTRAINTS);
         }
         final StudentId modelStudentId = new StudentId(studentId);
-        if (feedback == null) {
+        // TODO: remove?
+        /*if (feedback == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Feedback.class.getSimpleName()));
-        }
-        final Feedback modelFeedback = new Feedback(feedback);
+        }*/
+        final List<Feedback> modelFeedback = new ArrayList<>(allStudentFeedback);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         Student modelStudent = new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId,
@@ -159,6 +167,7 @@ public class XmlAdaptedStudent {
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(studentId, otherPerson.studentId)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && allFeedback.equals(otherPerson.allFeedback);
     }
 }

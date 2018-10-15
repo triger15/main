@@ -49,7 +49,7 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
-        feedback.setText(student.getFeedback().value);
+        //feedback.setText(student.getFeedback().value);
         student.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

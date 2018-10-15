@@ -8,6 +8,8 @@ import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -53,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Feedback feedback = new Feedback(""); // add command does not allow adding feedback straight away
+        List<Feedback> feedback = new ArrayList<>(); // add command does not allow adding feedback straight away
 
         Student student = new Student(name, phone, email, address, studentId, tagList, feedback);
 

@@ -2,8 +2,10 @@ package seedu.superta.model.student;
 
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,18 +21,18 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Feedback feedback;
     private final StudentId studentId;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final List<Feedback> feedback = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, StudentId studentId, Set<Tag> tags,
-                   Feedback feedback) {
+                   List<Feedback> feedback) {
         requireAllNonNull(name, phone, email, address, studentId, tags, feedback);
         this.name = name;
         this.phone = phone;
@@ -38,7 +40,7 @@ public class Student {
         this.address = address;
         this.studentId = studentId;
         this.tags.addAll(tags);
-        this.feedback = feedback;
+        this.feedback.addAll(feedback);
     }
 
     public Name getName() {
@@ -84,10 +86,11 @@ public class Student {
     }
 
     /**
-     * Returns the feedback given to this student.
+     * Returns an immutable list of feedback, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
-    public Feedback getFeedback() {
-        return feedback;
+    public List<Feedback> getFeedback() {
+        return Collections.unmodifiableList(feedback);
     }
 
     /**
@@ -116,7 +119,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, studentId, tags);
+        return Objects.hash(name, phone, email, address, studentId, tags, feedback);
     }
 
     @Override
@@ -133,6 +136,7 @@ public class Student {
                 .append(getStudentId())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        // TODO: feedback?
         return builder.toString();
     }
 
