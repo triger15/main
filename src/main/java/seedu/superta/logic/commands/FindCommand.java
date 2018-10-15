@@ -1,6 +1,8 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.superta.logic.parser.CliSyntax.*;
+
 
 import java.util.function.Predicate;
 
@@ -9,17 +11,23 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
 
 /**
- * Finds and lists all persons in the SuperTA client whose name contains any of the argument keywords.
+ * Finds and lists all students in the SuperTA client whose information matched with the entered keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose information match any of "
+            + "the entered keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_STUDENT_ID + "STUDENTID] "
+            + "Example: " + COMMAND_WORD
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     private final Predicate predicate;
 
