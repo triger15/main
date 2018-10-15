@@ -2,7 +2,6 @@ package seedu.superta.storage;
 
 import javax.xml.bind.annotation.XmlValue;
 
-import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.student.Feedback;
 
 /**
