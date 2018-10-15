@@ -1,54 +1,54 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.superta.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.superta.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.superta.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.superta.testutil.TypicalStudents.ALICE;
+import static seedu.superta.testutil.TypicalStudents.AMY;
+import static seedu.superta.testutil.TypicalStudents.BOB;
+import static seedu.superta.testutil.TypicalStudents.CARL;
+import static seedu.superta.testutil.TypicalStudents.HOON;
+import static seedu.superta.testutil.TypicalStudents.IDA;
+import static seedu.superta.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.superta.commons.core.Messages;
+import seedu.superta.commons.core.index.Index;
+import seedu.superta.logic.commands.AddCommand;
+import seedu.superta.logic.commands.RedoCommand;
+import seedu.superta.logic.commands.UndoCommand;
+import seedu.superta.model.Model;
+import seedu.superta.model.student.Address;
+import seedu.superta.model.student.Email;
+import seedu.superta.model.student.Name;
+import seedu.superta.model.student.Phone;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.tag.Tag;
+import seedu.superta.testutil.StudentBuilder;
+import seedu.superta.testutil.StudentUtil;
 
-public class AddCommandSystemTest extends AddressBookSystemTest {
+public class AddCommandSystemTest extends SuperTaClientSystemTest {
 
     @Test
     public void add() {
@@ -72,12 +72,12 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addStudent(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a student with all fields same as another student in the address book except name -> added */
-        toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
+        toAdd = new StudentBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + STUDENT_ID_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
@@ -85,8 +85,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: add a student with all fields same as another student in the address book except phone and email
          * -> added
          */
-        toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new StudentBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        command = StudentUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
@@ -117,26 +117,26 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* ----------------------------------- Perform invalid add operations -------------------------------------- */
 
         /* Case: add a duplicate student -> rejected */
-        command = PersonUtil.getAddCommand(HOON);
+        command = StudentUtil.getAddCommand(HOON);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different phone -> rejected */
-        toAdd = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new StudentBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
+        command = StudentUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different email -> rejected */
-        toAdd = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new StudentBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
+        command = StudentUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different address -> rejected */
-        toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new StudentBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        command = StudentUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: add a duplicate student except with different tags -> rejected */
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = StudentUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: missing name -> rejected */
@@ -156,7 +156,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + PersonUtil.getPersonDetails(toAdd);
+        command = "adds " + StudentUtil.getStudentDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
@@ -197,12 +197,12 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Student toAdd) {
-        assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
+        assertCommandSuccess(StudentUtil.getAddCommand(toAdd), toAdd);
     }
 
     /**
@@ -213,7 +213,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(String command, Student toAdd) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toAdd);
+        expectedModel.addStudent(toAdd);
         String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -244,9 +244,9 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
