@@ -1,7 +1,10 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.superta.logic.parser.CliSyntax.*;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 
 import java.util.function.Predicate;
