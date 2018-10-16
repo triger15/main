@@ -22,6 +22,7 @@ import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Name;
 import seedu.superta.model.student.Phone;
 import seedu.superta.model.student.Student;
@@ -102,8 +103,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        List<Feedback> updatedFeedback = studentToEdit.getFeedback(); // edit command does not allow editing feedback
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags,
+                updatedFeedback);
     }
 
     @Override

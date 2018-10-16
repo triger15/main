@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -19,6 +22,7 @@ import seedu.superta.logic.commands.ClearCommand;
 import seedu.superta.logic.commands.DeleteCommand;
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.ExitCommand;
+import seedu.superta.logic.commands.FeedbackCommand;
 import seedu.superta.logic.commands.FindCommand;
 import seedu.superta.logic.commands.HelpCommand;
 import seedu.superta.logic.commands.HistoryCommand;
@@ -27,8 +31,10 @@ import seedu.superta.logic.commands.RedoCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.logic.commands.UndoCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.NameContainsKeywordsPredicate;
 import seedu.superta.model.student.Student;
+import seedu.superta.model.student.StudentId;
 import seedu.superta.testutil.EditStudentDescriptorBuilder;
 import seedu.superta.testutil.StudentBuilder;
 import seedu.superta.testutil.StudentUtil;
@@ -138,5 +144,14 @@ public class SuperTaClientParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+
+    @Test
+    public void parseCommand_feedback() throws Exception {
+        final Feedback feedback = new Feedback("Some feedback.");
+        final StudentId studentId = new StudentId(VALID_STUDENT_ID_AMY);
+        FeedbackCommand command = (FeedbackCommand) parser.parseCommand(FeedbackCommand.COMMAND_WORD + " "
+                + PREFIX_GENERAL_STUDENT_ID + studentId + " " + PREFIX_FEEDBACK + feedback.value);
+        assertEquals(new FeedbackCommand(studentId, feedback), command);
     }
 }
