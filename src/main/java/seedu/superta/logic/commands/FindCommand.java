@@ -6,7 +6,6 @@ import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
-
 import java.util.function.Predicate;
 
 import seedu.superta.commons.core.Messages;
