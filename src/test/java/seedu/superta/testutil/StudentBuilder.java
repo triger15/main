@@ -1,10 +1,13 @@
 package seedu.superta.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Name;
 import seedu.superta.model.student.Phone;
 import seedu.superta.model.student.Student;
@@ -22,6 +25,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STUDENT_ID = "A0166733Y";
+    public static final String DEFAULT_FEEDBACK = "";
 
     private Name name;
     private Phone phone;
@@ -29,6 +33,7 @@ public class StudentBuilder {
     private Address address;
     private StudentId studentId;
     private Set<Tag> tags;
+    private List<Feedback> allFeedback;
 
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -37,6 +42,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         tags = new HashSet<>();
+        allFeedback = new ArrayList<>();
     }
 
     /**
@@ -49,6 +55,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         studentId = studentToCopy.getStudentId();
         tags = new HashSet<>(studentToCopy.getTags());
+        allFeedback = new ArrayList<>(studentToCopy.getFeedback());
     }
 
     /**
@@ -99,8 +106,16 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code feedbacks} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withFeedback(String ... feedbacks) {
+        this.allFeedback = SampleDataUtil.getFeedbackList(feedbacks);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, studentId, tags);
+        return new Student(name, phone, email, address, studentId, tags, allFeedback);
     }
 
 }

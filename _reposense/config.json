@@ -1,0 +1,26 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "caephler",
+      "authorNames": ["caephler"]
+    },
+    {
+      "githubId": "keithtan",
+      "authorNames": ["keithtan"]
+    },
+    {
+      "githubId": "triger15",
+      "displayName": "Ong Yu-He",
+      "authorNames": ["Ong Yu-He", "triger15"]
+    },
+    {
+      "githubId": "darieca",
+      "authorNames": ["darieca"]
+    },
+    {
+      "githubId": "wenshei",
+      "authorNames": ["wenshei"]
+    }
+  ]
+}

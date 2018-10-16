@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.UniqueStudentList;
@@ -156,6 +158,24 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         }
         Student st = ost.get();
         as.grade(st.getStudentId(), grade.getMarks());
+    }
+
+    /**
+     * Adds feedback to a student.
+     */
+    public void addFeedback(Feedback feedback, StudentId studentId) {
+        Optional<Student> ost = students.getStudentWithId(studentId);
+        if (!ost.isPresent()) {
+            throw new StudentNotFoundException();
+        }
+        Student st = ost.get();
+        List<Feedback> studentFeedback = st.getFeedback()
+                .stream()
+                .collect(Collectors.toList());
+        studentFeedback.add(feedback);
+        Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(), st.getAddress(),
+                st.getStudentId(), st.getTags(), studentFeedback);
+        updateStudent(st, editedStudent);
     }
 
     /**
