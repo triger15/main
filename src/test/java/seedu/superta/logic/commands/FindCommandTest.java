@@ -70,7 +70,7 @@ public class FindCommandTest {
     @Test
     public void execute_oneParameter_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        Predicate predicate = preparePredicate("n/Bernara");
+        Predicate predicate = preparePredicate("Bernara");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
