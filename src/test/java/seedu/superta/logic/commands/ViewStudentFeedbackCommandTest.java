@@ -46,9 +46,11 @@ public class ViewStudentFeedbackCommandTest {
     }
 
     @Test
-    public void execute_viewCommand_success() {
-        Student expectedStudent = new StudentBuilder().withName("Alice Pauline")
-                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+    public void execute_viewStudentFeedbackCommand_success() {
+        Student expectedStudent = new StudentBuilder()
+                .withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withEmail("alice@example.com")
                 .withPhone("94351253")
                 .withStudentId("A0166733Y")
                 .withTags("friends").build();
@@ -58,7 +60,10 @@ public class ViewStudentFeedbackCommandTest {
                 commandHistory,
                 String.format("%s\n %s\n", ViewStudentFeedbackCommand.MESSAGE_SUCCESS, expectedStudent),
                 expectedModel);
+    }
 
+    @Test
+    public void execute_viewStudentFeedbackCommand_failure() {
         assertCommandSuccess(new ViewStudentFeedbackCommand(new SameStudentIdPredicate("B0123456Z")),
                 model,
                 commandHistory,
