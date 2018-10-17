@@ -15,6 +15,7 @@ import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.exceptions.StudentNotFoundException;
@@ -135,6 +136,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSuperTaClientChanged();
     }
 
+    @Override
+    public void addFeedback(Feedback feedback, StudentId studentId) {
+        versionedSuperTaClient.addFeedback(feedback, studentId);
+        indicateSuperTaClientChanged();
+    }
 
     @Override
     public boolean hasTutorialGroup(String id) {
@@ -147,8 +153,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
-
+    public void updateTutorialGroup(TutorialGroup edited) {
+        versionedSuperTaClient.updateTutorialGroup(edited);
+        indicateSuperTaClientChanged();
     }
 
     //=========== Filtered Student List Accessors =============================================================

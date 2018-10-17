@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Name;
 import seedu.superta.model.student.Phone;
 import seedu.superta.model.student.Student;
@@ -38,6 +39,9 @@ public class XmlAdaptedStudent {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    @XmlElement
+    private List<XmlAdaptedFeedback> allFeedback = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedStudent.
@@ -74,6 +78,9 @@ public class XmlAdaptedStudent {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        allFeedback = source.getFeedback().stream()
+                .map(XmlAdaptedFeedback::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -85,6 +92,11 @@ public class XmlAdaptedStudent {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Feedback> allStudentFeedback = new ArrayList<>();
+        for (XmlAdaptedFeedback feedback : allFeedback) {
+            allStudentFeedback.add(feedback.toModelType());
         }
 
         if (name == null) {
@@ -126,10 +138,17 @@ public class XmlAdaptedStudent {
             throw new IllegalValueException(StudentId.MESSAGE_STUDENT_ID_CONSTRAINTS);
         }
         final StudentId modelStudentId = new StudentId(studentId);
-
+        // TODO: remove?
+        /*if (feedback == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Feedback.class.getSimpleName()));
+        }*/
+        final List<Feedback> modelFeedback = new ArrayList<>(allStudentFeedback);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId, modelTags);
+        Student modelStudent = new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudentId,
+                modelTags, modelFeedback);
+        return modelStudent;
     }
 
     @Override
@@ -148,6 +167,7 @@ public class XmlAdaptedStudent {
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(studentId, otherPerson.studentId)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && allFeedback.equals(otherPerson.allFeedback);
     }
 }

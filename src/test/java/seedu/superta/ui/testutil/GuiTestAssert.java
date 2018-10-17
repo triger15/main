@@ -28,6 +28,8 @@ public class GuiTestAssert {
 
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedStudent}.
+
+
      */
     public static void assertCardDisplaysPerson(Student expectedStudent, PersonCardHandle actualCard) {
         assertEquals(expectedStudent.getName().fullName, actualCard.getName());

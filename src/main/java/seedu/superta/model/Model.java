@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -76,6 +77,11 @@ public interface Model {
     void grade(Grade grade);
 
     /**
+     * Adds feedback to a student.
+     */
+    void addFeedback(Feedback feedback, StudentId studentId);
+
+    /**
      * Returns true if a tutorial group with the given id exists.
      * @param id ID of the tutorial group.
      */
@@ -87,14 +93,12 @@ public interface Model {
     Optional<TutorialGroup> getTutorialGroup(String id);
 
     /**
-     * Replaces the given tutorial group {@code target} with {@code edited}.
+     * Replaces the given tutorial group in the master with this ID with {@code edited}.
      * {@code target} must exist in the client.
-     * The ID of {@code edited} must not be the same as another existing tutorial group
-     * in the client.
-     * @param target The tutorial group to be edited.
+     * The ID of {@code edited} must exist in the client.
      * @param edited The tutorial group with edited details.
      */
-    void updateTutorialGroup(TutorialGroup target, TutorialGroup edited);
+    void updateTutorialGroup(TutorialGroup edited);
 
 
     /** Returns an unmodifiable view of the filtered student list */
