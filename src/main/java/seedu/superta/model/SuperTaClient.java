@@ -114,10 +114,10 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
      * Replaces the given tutorial group {@code target} in the list with {@code edited}.
      * {@code target} must exist in the client.
      */
-    public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
+    public void updateTutorialGroup(TutorialGroup edited) {
         requireNonNull(edited);
 
-        tutorialGroupMaster.setTutorialGroup(target, edited);
+        tutorialGroupMaster.setTutorialGroup(edited);
     }
 
     /**

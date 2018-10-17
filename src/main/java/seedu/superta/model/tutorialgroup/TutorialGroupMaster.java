@@ -14,6 +14,7 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.superta.model.student.Student;
+import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
  * Model for Tutorial Group Master.
@@ -60,11 +61,13 @@ public class TutorialGroupMaster {
 
     /**
      * Updates a tutorial group.
-     * @param target the target tutorial group to be edited.
      * @param edited the tutorialgroup with updated parameters.
      */
-    public void setTutorialGroup(TutorialGroup target, TutorialGroup edited) {
-        tutorialGroups.put(target.getId(), edited);
+    public void setTutorialGroup(TutorialGroup edited) throws TutorialGroupNotFoundException {
+        if (!contains(edited.getId())) {
+            throw new TutorialGroupNotFoundException();
+        }
+        tutorialGroups.put(edited.getId(), edited);
     }
 
     /**
@@ -169,8 +172,15 @@ public class TutorialGroupMaster {
         }
         if (other instanceof TutorialGroupMaster) {
             TutorialGroupMaster o = (TutorialGroupMaster) other;
-            return uids.equals(o.uids)
-                && tutorialGroups.equals(o.tutorialGroups);
+            if (uids.size() != o.uids.size()) {
+                return false;
+            }
+            for (String id : uids) {
+                if (!o.uids.contains(id)) {
+                    return false;
+                }
+            }
+            return tutorialGroups.equals(o.tutorialGroups);
         }
         return false;
     }

@@ -160,7 +160,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateTutorialGroup(TutorialGroup target, TutorialGroup edited) {
+        public void updateTutorialGroup(TutorialGroup edited) {
 
         }
 
