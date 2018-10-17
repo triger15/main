@@ -43,10 +43,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent() &&
-            !argMultimap.getValue(PREFIX_PHONE).isPresent() &&
-            !argMultimap.getValue(PREFIX_EMAIL).isPresent() &&
-            !argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_NAME).isPresent()
+            && !argMultimap.getValue(PREFIX_PHONE).isPresent()
+            && !argMultimap.getValue(PREFIX_EMAIL).isPresent()
+            && !argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
             );
