@@ -6,12 +6,14 @@ import static org.junit.Assert.assertTrue;
 import static seedu.superta.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.superta.testutil.TypicalStudents.CARL;
+import static seedu.superta.testutil.TypicalStudents.DANIEL;
 import static seedu.superta.testutil.TypicalStudents.ELLE;
 import static seedu.superta.testutil.TypicalStudents.FIONA;
 import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import org.junit.Test;
 
@@ -19,7 +21,10 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
 import seedu.superta.model.ModelManager;
 import seedu.superta.model.UserPrefs;
+import seedu.superta.model.student.EmailContainsKeywordsPredicate;
 import seedu.superta.model.student.NameContainsKeywordsPredicate;
+import seedu.superta.model.student.PhoneContainsKeywordsPredicate;
+import seedu.superta.model.student.StudentidContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -31,10 +36,16 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        Predicate firstPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"))
+                        .or(new PhoneContainsKeywordsPredicate(Collections.singletonList("first"))
+                        .or(new EmailContainsKeywordsPredicate(Collections.singletonList("first")))
+                        .or(new StudentidContainsKeywordsPredicate(Collections.singletonList("first"))));
+        Predicate secondPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("second"))
+                        .or(new PhoneContainsKeywordsPredicate(Collections.singletonList("second"))
+                        .or(new EmailContainsKeywordsPredicate(Collections.singletonList("second")))
+                        .or(new StudentidContainsKeywordsPredicate(Collections.singletonList("second"))));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,9 +68,9 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_oneParameter_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        Predicate predicate = preparePredicate("Bernara");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -67,19 +78,32 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+    public void execute_oneParameter_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        Predicate predicate = preparePredicate("Kurz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(CARL), model.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_multipleParameters_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        Predicate predicate = preparePredicate("Meyer 87652533 heinz@example.com A1820123Y");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, DANIEL, ELLE, FIONA), model.getFilteredStudentList());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code Predicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private Predicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")))
+                .or(new PhoneContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))))
+                .or(new EmailContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))))
+                .or(new StudentidContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
     }
 }
