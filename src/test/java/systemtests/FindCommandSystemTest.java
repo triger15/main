@@ -3,6 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.superta.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.superta.testutil.TypicalStudents.BENSON;
 import static seedu.superta.testutil.TypicalStudents.CARL;
 import static seedu.superta.testutil.TypicalStudents.DANIEL;
@@ -28,7 +32,7 @@ public class FindCommandSystemTest extends SuperTaClientSystemTest {
         /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
-        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
+        String command = "   " + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
@@ -37,36 +41,24 @@ public class FindCommandSystemTest extends SuperTaClientSystemTest {
         /* Case: repeat previous find command where student list is displaying the persons we are finding
          * -> 2 persons found
          */
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find student where student list is not displaying the student we are finding -> 1 student found */
-        command = FindCommand.COMMAND_WORD + " Carl";
+        command = FindCommand.COMMAND_WORD + " n/Carl";
         ModelHelper.setFilteredList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords -> 2 persons found */
-        command = FindCommand.COMMAND_WORD + " Benson Daniel";
+        /* Case: find multiple persons in address book using name and phone number. */
+        command = FindCommand.COMMAND_WORD + " n/Benson p/87652533";
         ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords in reversed order -> 2 persons found */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson";
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find multiple persons in address book, 2 keywords with 1 repeat -> 2 persons found */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find multiple persons in address book, 2 matching keywords and 1 non-matching keyword
-         * -> 2 persons found
-         */
-        command = FindCommand.COMMAND_WORD + " Daniel Benson NonMatchingKeyWord";
+        /* Case: find multiple persons in address book using name and phone number in reversed order. */
+        command = FindCommand.COMMAND_WORD + " p/87652533 n/Benson";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -83,46 +75,50 @@ public class FindCommandSystemTest extends SuperTaClientSystemTest {
         /* Case: find same persons in address book after deleting 1 of them -> 1 student found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getSuperTaClient().getStudentList().contains(BENSON));
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find student in address book, keyword is same as name but of different case -> 1 student found */
-        command = FindCommand.COMMAND_WORD + " MeIeR";
+        command = FindCommand.COMMAND_WORD + " n/MeIeR";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find student in address book, keyword is substring of name -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Mei";
+        command = FindCommand.COMMAND_WORD + " n/Mei";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find student in address book, name is substring of keyword -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Meiers";
+        command = FindCommand.COMMAND_WORD + " n/Meiers";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find student not in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " Mark";
+        command = FindCommand.COMMAND_WORD + " n/Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of student in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
+        /* Case: find phone number of student in address book -> 1 student found */
+        command = FindCommand.COMMAND_WORD + " " + PREFIX_PHONE + DANIEL.getPhone().value;
+        expectedModel = getModel();
+        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find email of student in address book -> 1 persons found */
+        command = FindCommand.COMMAND_WORD + " " + PREFIX_EMAIL + DANIEL.getEmail().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find address of student in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find email of student in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
+        command = FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS + DANIEL.getAddress().value;
+        expectedModel = getModel();
+        ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -136,14 +132,14 @@ public class FindCommandSystemTest extends SuperTaClientSystemTest {
         showAllPersons();
         selectPerson(Index.fromOneBased(1));
         assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
-        command = FindCommand.COMMAND_WORD + " Daniel";
+        command = FindCommand.COMMAND_WORD + " n/Daniel";
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
         /* Case: find student in empty address book -> 0 persons found */
         deleteAllPersons();
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + PREFIX_NAME + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
