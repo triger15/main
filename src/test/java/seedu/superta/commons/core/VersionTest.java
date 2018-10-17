@@ -1,6 +1,7 @@
 package seedu.superta.commons.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
@@ -130,6 +131,42 @@ public class VersionTest {
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
         assertTrue(one.equals(another));
+    }
+
+    @Test
+    public void getVersion_isCorrect() {
+        int major = 1;
+        int minor = 2;
+        int patch = 3;
+        boolean isEarlyAccess = true;
+        Version one = new Version(major, minor, patch, isEarlyAccess);
+        assertTrue(one.getMajor() == major);
+        assertTrue(one.getMinor() == minor);
+        assertTrue(one.getPatch() == patch);
+        assertTrue(one.isEarlyAccess() == isEarlyAccess);
+    }
+
+    @Test
+    public void fromString_isCorrect() {
+        Version one = Version.fromString("V1.2.3ea");
+        assertTrue(one.compareTo(new Version(1, 2, 3, true)) == 0);
+    }
+
+    @Test
+    public void fromString_invalid() {
+        thrown.expect(IllegalArgumentException.class);
+        Version.fromString("v22.2.1.2");
+    }
+
+    @Test
+    public void toString_success() {
+        String v = "V1.2.3ea";
+        assertTrue(Version.fromString(v).toString().equals(v));
+    }
+
+    @Test
+    public void hashCode_success() {
+        assertNotNull(new Version(1, 2, 3, true).hashCode());
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

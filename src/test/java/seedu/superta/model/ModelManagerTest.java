@@ -13,7 +13,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.NameContainsKeywordsPredicate;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.student.exceptions.StudentNotFoundException;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
+import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 import seedu.superta.testutil.SuperTaClientBuilder;
 
 public class ModelManagerTest {
@@ -43,6 +50,124 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredStudentList().remove(0);
+    }
+
+    @Test
+    public void addStudentToTutorialGroup_tutorialGroupNotFound_failure() {
+        thrown.expect(TutorialGroupNotFoundException.class);
+        modelManager.addStudent(ALICE);
+        modelManager.addStudentToTutorialGroup(getModelTutorialGroup().getId(), ALICE.getStudentId());
+    }
+
+    @Test
+    public void addStudentToTutorialGroup_studentNotFound_failure() {
+        thrown.expect(StudentNotFoundException.class);
+        TutorialGroup tg = getModelTutorialGroup();
+        modelManager.addTutorialGroup(tg);
+        modelManager.addStudentToTutorialGroup(tg.getId(), ALICE.getStudentId());
+    }
+
+    @Test
+    public void addStudentToTutorialGroup_success() {
+        TutorialGroup tg = getModelTutorialGroup();
+        modelManager.addTutorialGroup(tg);
+        modelManager.addStudent(ALICE);
+        modelManager.addStudentToTutorialGroup(tg.getId(), ALICE.getStudentId());
+    }
+
+    @Test
+    public void deleteTutorialGroup_tutorialGroupNotFound_failure() {
+        TutorialGroup tg = getModelTutorialGroup();
+        assertFalse(modelManager.hasTutorialGroup(tg.getId()));
+        thrown.expect(TutorialGroupNotFoundException.class);
+        modelManager.deleteTutorialGroup(tg);
+    }
+
+    @Test
+    public void deleteTutorialGroup_success() {
+        TutorialGroup tg = getModelTutorialGroup();
+        modelManager.addTutorialGroup(tg);
+        assertTrue(modelManager.hasTutorialGroup(tg.getId()));
+        modelManager.deleteTutorialGroup(tg);
+        assertFalse(modelManager.hasTutorialGroup(tg.getId()));
+    }
+
+    @Test
+    public void addAssignment_tutorialGroupNotFound_failure() {
+        TutorialGroup tg = getModelTutorialGroup();
+        assertFalse(modelManager.hasTutorialGroup(tg.getId()));
+        Assignment assignment = getModelAssignment();
+        thrown.expect(TutorialGroupNotFoundException.class);
+        modelManager.addAssignment(tg.getId(), assignment);
+    }
+
+    @Test
+    public void addAssignment_success() {
+        TutorialGroup tg = getModelTutorialGroup();
+        assertTrue(!modelManager.hasTutorialGroup(tg.getId()));
+
+        modelManager.addTutorialGroup(tg);
+        Assignment assignment = getModelAssignment();
+        modelManager.addAssignment(tg.getId(), assignment);
+        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().getAssignment(assignment.getName()).isPresent());
+    }
+
+    @Test
+    public void grade_success() {
+        TutorialGroup tg = getModelTutorialGroup();
+        Assignment assignment = getModelAssignment();
+        Student student = ALICE;
+        modelManager.addStudent(student);
+        modelManager.addTutorialGroup(tg);
+        modelManager.addStudentToTutorialGroup(tg.getId(), student.getStudentId());
+        modelManager.addAssignment(tg.getId(), assignment);
+
+        double marks = 35.5;
+
+        Grade grade = new Grade(tg.getId(), assignment.getName(), student.getStudentId(), marks);
+        modelManager.grade(grade);
+        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().getAssignment(assignment.getName()).get()
+                       .getGradebook().getGradeFor(student.getStudentId()).equals(marks));
+    }
+
+    @Test
+    public void addFeedback_success() {
+        Feedback feedback = new Feedback("Have a nice day");
+        modelManager.addStudent(ALICE);
+        modelManager.addFeedback(feedback, ALICE.getStudentId());
+        // TODO: Add getting feedback / student method.
+    }
+
+    @Test
+    public void hasTutorialGroup_success() {
+        TutorialGroup tg = getModelTutorialGroup();
+        assertFalse(modelManager.hasTutorialGroup(tg.getId()));
+        modelManager.addTutorialGroup(tg);
+        assertTrue(modelManager.hasTutorialGroup(tg.getId()));
+    }
+
+    @Test
+    public void getTutorialGroup_success() {
+        TutorialGroup tg = getModelTutorialGroup();
+        assertFalse(modelManager.hasTutorialGroup(tg.getId()));
+        modelManager.addTutorialGroup(tg);
+        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().equals(tg));
+    }
+
+    @Test
+    public void getTutorialGroup_tutorialGroupNotFound_failure() {
+        assertFalse(modelManager.hasTutorialGroup(getModelTutorialGroup().getId()));
+        assertFalse(modelManager.getTutorialGroup(getModelTutorialGroup().getId()).isPresent());
+    }
+
+    @Test
+    public void updateTutorialGroup_success() {
+        TutorialGroup tg = getModelTutorialGroup();
+        modelManager.addTutorialGroup(tg);
+        String updatedName = "updated_name";
+        TutorialGroup clone = new TutorialGroup(tg.getId(), updatedName);
+        modelManager.updateTutorialGroup(clone);
+        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().getName().equals(updatedName));
     }
 
     @Test
@@ -80,5 +205,13 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertTrue(modelManager.equals(new ModelManager(superTaClient, differentUserPrefs)));
+    }
+
+    private TutorialGroup getModelTutorialGroup() {
+        return new TutorialGroup("testing_id", "testing_name");
+    }
+
+    private Assignment getModelAssignment() {
+        return new Assignment("test_assignment", 40.0);
     }
 }

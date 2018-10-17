@@ -115,6 +115,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
+        if (!versionedSuperTaClient.hasTutorialGroup(tutorialGroup.getId())) {
+            throw new TutorialGroupNotFoundException();
+        }
         versionedSuperTaClient.removeTutorialGroup(tutorialGroup);
         indicateSuperTaClientChanged();
     }
