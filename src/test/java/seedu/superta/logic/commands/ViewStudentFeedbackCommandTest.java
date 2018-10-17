@@ -56,7 +56,7 @@ public class ViewStudentFeedbackCommandTest {
         assertCommandSuccess(new ViewStudentFeedbackCommand(new SameStudentIdPredicate("A0166733Y")),
                 model,
                 commandHistory,
-                String.format("%s\n %s\n", ViewStudentFeedbackCommand.MESSAGE_SUCCESS, expectedStudent),
+                String.format("%s\n %s\n", ViewStudentFeedbackCommand.MESSAGE_SUCCESS, expectedStudent.getFeedback()),
                 expectedModel);
 
         assertCommandSuccess(new ViewStudentFeedbackCommand(new SameStudentIdPredicate("B0123456Z")),

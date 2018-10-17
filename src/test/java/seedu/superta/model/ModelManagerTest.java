@@ -95,7 +95,7 @@ public class ModelManagerTest {
     @Test
     public void addAssignment_tutorialGroupNotFound_failure() {
         TutorialGroup tg = getModelTutorialGroup();
-        assertTrue(modelManager.hasTutorialGroup(tg.getId()));
+        assertFalse(modelManager.hasTutorialGroup(tg.getId()));
         Assignment assignment = getModelAssignment();
         thrown.expect(TutorialGroupNotFoundException.class);
         modelManager.addAssignment(tg.getId(), assignment);
@@ -104,7 +104,7 @@ public class ModelManagerTest {
     @Test
     public void addAssignment_success() {
         TutorialGroup tg = getModelTutorialGroup();
-        assertTrue(modelManager.hasTutorialGroup(tg.getId()));
+        assertTrue(!modelManager.hasTutorialGroup(tg.getId()));
 
         modelManager.addTutorialGroup(tg);
         Assignment assignment = getModelAssignment();
@@ -157,7 +157,7 @@ public class ModelManagerTest {
     @Test
     public void getTutorialGroup_tutorialGroupNotFound_failure() {
         assertFalse(modelManager.hasTutorialGroup(getModelTutorialGroup().getId()));
-        assertTrue(modelManager.getTutorialGroup(getModelTutorialGroup().getId()).isPresent());
+        assertFalse(modelManager.getTutorialGroup(getModelTutorialGroup().getId()).isPresent());
     }
 
     @Test
