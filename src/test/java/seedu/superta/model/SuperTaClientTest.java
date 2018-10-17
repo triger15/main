@@ -2,6 +2,7 @@ package seedu.superta.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -19,9 +20,14 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.exceptions.DuplicateStudentException;
+import seedu.superta.model.student.exceptions.StudentNotFoundException;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
+import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 import seedu.superta.testutil.StudentBuilder;
 
 public class SuperTaClientTest {
@@ -90,6 +96,138 @@ public class SuperTaClientTest {
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         superTaClient.getStudentList().remove(0);
+    }
+
+    @Test
+    public void hasTutorialGroup_sameTutorialGroup_returnsTrue() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        superTaClient.addTutorialGroup(tutorialGroup);
+        assertTrue(superTaClient.hasTutorialGroup(tutorialGroup.getId()));
+    }
+
+    @Test
+    public void getTutorialGroup_getsCorrectTutorialGroup() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        superTaClient.addTutorialGroup(tutorialGroup);
+        assertTrue(superTaClient.getTutorialGroup(tutorialGroup.getId()).get().equals(tutorialGroup));
+    }
+
+    @Test
+    public void getStudentWithId_getsCorrectStudent() {
+        superTaClient.addStudent(ALICE);
+        assertTrue(superTaClient.getStudentWithId(ALICE.getStudentId()).get().equals(ALICE));
+    }
+
+    @Test
+    public void addStudentToTutorialGroup_success() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        superTaClient.addTutorialGroup(tutorialGroup);
+        superTaClient.addStudentToTutorialGroup(tutorialGroup, ALICE);
+        assertTrue(superTaClient.getTutorialGroup(tutorialGroup.getId()).get().getStudents().contains(ALICE));
+    }
+
+    @Test
+    public void updateTutorialGroup_success() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        String updatedName = "updated_name";
+        assertFalse(updatedName.equals(tutorialGroup.getName()));
+        TutorialGroup updated = new TutorialGroup(tutorialGroup.getId(), updatedName);
+        superTaClient.addTutorialGroup(tutorialGroup);
+        superTaClient.updateTutorialGroup(updated);
+        assertTrue(superTaClient.getTutorialGroup(tutorialGroup.getId()).get().getName().equals(updatedName));
+    }
+
+    @Test
+    public void removeTutorialGroup_success() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        superTaClient.addTutorialGroup(tutorialGroup);
+        assertTrue(superTaClient.hasTutorialGroup(tutorialGroup.getId()));
+        superTaClient.removeTutorialGroup(tutorialGroup);
+        assertFalse(superTaClient.hasTutorialGroup(tutorialGroup.getId()));
+    }
+
+    @Test
+    public void addAssignment_success() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        Assignment assignment = getModelAssignment();
+        superTaClient.addTutorialGroup(tutorialGroup);
+        superTaClient.addAssignment(tutorialGroup, assignment);
+        assertTrue(superTaClient.getTutorialGroup(tutorialGroup.getId()).get().getAssignment(assignment.getName())
+                       .isPresent());
+    }
+
+    @Test
+    public void grade_noSuchTutorialGroup_failure() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        Assignment assignment = getModelAssignment();
+        Student student = ALICE;
+
+        Grade grade = new Grade(tutorialGroup.getId(), assignment.getName(), student.getStudentId(), 40.0);
+        superTaClient.addStudent(student);
+
+        thrown.expect(TutorialGroupNotFoundException.class);
+        superTaClient.grade(grade);
+    }
+
+    @Test
+    public void grade_noSuchAssignment_failure() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        Assignment assignment = getModelAssignment();
+        Student student = ALICE;
+
+        Grade grade = new Grade(tutorialGroup.getId(), assignment.getName(), student.getStudentId(), 40.0);
+        superTaClient.addStudent(student);
+        superTaClient.addTutorialGroup(tutorialGroup);
+
+        thrown.expect(AssignmentNotFoundException.class);
+        superTaClient.grade(grade);
+    }
+
+    @Test
+    public void grade_noSuchStudentInTutorialGroup_failure() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        Assignment assignment = getModelAssignment();
+        tutorialGroup.addAssignment(assignment);
+        Student student = ALICE;
+
+        Grade grade = new Grade(tutorialGroup.getId(), assignment.getName(), student.getStudentId(), 40.0);
+        superTaClient.addStudent(student);
+        superTaClient.addTutorialGroup(tutorialGroup);
+
+        thrown.expect(StudentNotFoundException.class);
+        superTaClient.grade(grade);
+    }
+
+    @Test
+    public void grade_success() {
+        TutorialGroup tutorialGroup = getModelTutorialGroup();
+        Assignment assignment = getModelAssignment();
+        tutorialGroup.addAssignment(assignment);
+        Student student = ALICE;
+        superTaClient.addStudent(student);
+        superTaClient.addTutorialGroup(tutorialGroup);
+        tutorialGroup.addStudent(student);
+
+        double marks = 40.0;
+
+        Grade grade = new Grade(tutorialGroup.getId(), assignment.getName(), student.getStudentId(), marks);
+        superTaClient.grade(grade);
+
+        assertTrue(superTaClient.getTutorialGroup(tutorialGroup.getId()).get().getAssignment(assignment.getName()).get()
+            .getGradebook().getGradeFor(student.getStudentId()).equals(marks));
+    }
+
+    @Test
+    public void hashCode_isNotNull() {
+        assertNotNull(superTaClient.hashCode());
+    }
+
+    private TutorialGroup getModelTutorialGroup() {
+        return new TutorialGroup("testing_id", "Test Tutorial Group");
+    }
+
+    private Assignment getModelAssignment() {
+        return new Assignment("testing_name", 40.0);
     }
 
     /**

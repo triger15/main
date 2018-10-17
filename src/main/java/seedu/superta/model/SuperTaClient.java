@@ -152,7 +152,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
             throw new AssignmentNotFoundException();
         }
         Assignment as = oas.get();
-        Optional<Student> ost = students.getStudentWithId(grade.getStId());
+        Optional<Student> ost = tg.getStudents().getStudentWithId(grade.getStId());
         if (!ost.isPresent()) {
             throw new StudentNotFoundException();
         }
