@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.AssignmentList;
+import seedu.superta.model.assignment.UniqueAssignmentList;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.UniqueStudentList;
@@ -66,7 +66,7 @@ public class XmlAdaptedTutorialGroup {
         for (XmlAdaptedAssignment ass : assignments) {
             modelAssignments.add(ass.toModelType());
         }
-        AssignmentList assignmentList = new AssignmentList(modelAssignments);
+        UniqueAssignmentList uniqueAssignmentList = new UniqueAssignmentList(modelAssignments);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
@@ -76,7 +76,7 @@ public class XmlAdaptedTutorialGroup {
         }
 
         // TODO: Replace last argument with actual assignment syntax
-        return new TutorialGroup(id, name, studentList, assignmentList);
+        return new TutorialGroup(id, name, studentList, uniqueAssignmentList);
     }
 
 }

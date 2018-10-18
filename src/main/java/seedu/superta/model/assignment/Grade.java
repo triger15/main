@@ -7,11 +7,11 @@ import seedu.superta.model.student.StudentId;
  */
 public class Grade {
     private final String tgId;
-    private final String asId;
+    private final Title asId;
     private final StudentId stId;
     private final Double marks;
 
-    public Grade(String tgId, String asId, StudentId stId, Double marks) {
+    public Grade(String tgId, Title asId, StudentId stId, Double marks) {
         this.tgId = tgId;
         this.asId = asId;
         this.stId = stId;
@@ -22,7 +22,7 @@ public class Grade {
         return tgId;
     }
 
-    public String getAsId() {
+    public Title getAsId() {
         return asId;
     }
 
