@@ -15,6 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.assignment.Title;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.NameContainsKeywordsPredicate;
 import seedu.superta.model.student.Student;
@@ -109,7 +110,7 @@ public class ModelManagerTest {
         modelManager.addTutorialGroup(tg);
         Assignment assignment = getModelAssignment();
         modelManager.addAssignment(tg.getId(), assignment);
-        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().getAssignment(assignment.getName()).isPresent());
+        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().getAssignment(assignment.getTitle()).isPresent());
     }
 
     @Test
@@ -124,9 +125,9 @@ public class ModelManagerTest {
 
         double marks = 35.5;
 
-        Grade grade = new Grade(tg.getId(), assignment.getName(), student.getStudentId(), marks);
+        Grade grade = new Grade(tg.getId(), assignment.getTitle(), student.getStudentId(), marks);
         modelManager.grade(grade);
-        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().getAssignment(assignment.getName()).get()
+        assertTrue(modelManager.getTutorialGroup(tg.getId()).get().getAssignment(assignment.getTitle()).get()
                        .getGradebook().getGradeFor(student.getStudentId()).equals(marks));
     }
 
@@ -212,6 +213,6 @@ public class ModelManagerTest {
     }
 
     private Assignment getModelAssignment() {
-        return new Assignment("test_assignment", 40.0);
+        return new Assignment(new Title("test assignment"), 40.0);
     }
 }

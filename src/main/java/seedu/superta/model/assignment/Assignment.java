@@ -10,27 +10,27 @@ import seedu.superta.model.student.StudentId;
  * Guarantees: immutable.
  */
 public class Assignment {
-    private final String name;
+    private final Title title;
     private final Double maxMarks;
     private final GradeBook gradebook;
 
     /**
      * Constructs a {@code Assignment}.
      */
-    public Assignment(String name, Double maxMarks) {
-        this.name = name;
+    public Assignment(Title title, Double maxMarks) {
+        this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = new GradeBook();
     }
 
-    public Assignment(String name, Double maxMarks, GradeBook gradebook) {
-        this.name = name;
+    public Assignment(Title title, Double maxMarks, GradeBook gradebook) {
+        this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = gradebook;
     }
 
     public Assignment(Assignment toClone) {
-        this.name = toClone.name;
+        this.title = toClone.title;
         this.maxMarks = toClone.maxMarks;
         gradebook = new GradeBook();
         toClone.gradebook.stream()
@@ -38,8 +38,8 @@ public class Assignment {
     }
 
 
-    public String getName() {
-        return name;
+    public Title getTitle() {
+        return title;
     }
 
     public Double getMaxMarks() {
@@ -48,6 +48,19 @@ public class Assignment {
 
     public GradeBook getGradebook() {
         return gradebook;
+    }
+
+    /**
+     * Returns true if both assignments of the same title have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two assignments.
+     */
+    public boolean isSameAssignment(Assignment otherAssignment) {
+        if (otherAssignment == this) {
+            return true;
+        }
+
+        return otherAssignment != null
+            && otherAssignment.getTitle().equals(getTitle());
     }
 
     /**
@@ -69,7 +82,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "[Assignment]" + name
+        return "[Assignment]" + title
             + " [Max Marks: " + maxMarks + "]\n"
             + gradebook.stream()
                 .map(entry -> entry.getKey().toString() + ": " + entry.getValue())

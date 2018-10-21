@@ -6,7 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.AssignmentList;
+import seedu.superta.model.assignment.Title;
+import seedu.superta.model.assignment.UniqueAssignmentList;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.UniqueStudentList;
 
@@ -17,14 +18,14 @@ public class TutorialGroup {
     private final String id;
     private final String name;
     private final UniqueStudentList students;
-    private final AssignmentList assignments;
+    private final UniqueAssignmentList assignments;
 
     public TutorialGroup(String id, String name) {
         requireNonNull(id);
         this.id = id;
         this.name = name;
         this.students = new UniqueStudentList();
-        this.assignments = new AssignmentList();
+        this.assignments = new UniqueAssignmentList();
     }
 
     public TutorialGroup(TutorialGroup toClone) {
@@ -36,7 +37,7 @@ public class TutorialGroup {
 
     public TutorialGroup(String id, String name,
                          UniqueStudentList students,
-                         AssignmentList assignments) {
+                         UniqueAssignmentList assignments) {
         this.id = id;
         this.name = name;
         this.students = students;
@@ -71,14 +72,14 @@ public class TutorialGroup {
         return students;
     }
 
-    public AssignmentList getAssignments() {
+    public UniqueAssignmentList getAssignments() {
         return assignments;
     }
 
-    public Optional<Assignment> getAssignment(String name) {
+    public Optional<Assignment> getAssignment(Title title) {
         return assignments.asUnmodifiableObservableList()
             .stream()
-            .filter(as -> as.getName().equals(name))
+            .filter(as -> as.getTitle().equals(title))
             .findFirst();
     }
 

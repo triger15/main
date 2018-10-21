@@ -2,7 +2,7 @@ package seedu.superta.logic.parser;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MARKS;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.ParserUtil.arePrefixesPresent;
@@ -10,6 +10,7 @@ import static seedu.superta.logic.parser.ParserUtil.arePrefixesPresent;
 import seedu.superta.logic.commands.GradeAssignmentCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.assignment.Title;
 import seedu.superta.model.student.StudentId;
 
 /**
@@ -22,7 +23,7 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
         ArgumentMultimap argMap = ArgumentTokenizer.tokenize(
             args,
             PREFIX_GENERAL_TUTORIAL_GROUP_ID,
-            PREFIX_GENERAL_ASSIGNMENT_ID,
+            PREFIX_GENERAL_ASSIGNMENT_TITLE,
             PREFIX_GENERAL_STUDENT_ID,
             PREFIX_ASSIGNMENT_MARKS
         );
@@ -30,7 +31,7 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
         if (!arePrefixesPresent(
             argMap,
             PREFIX_GENERAL_TUTORIAL_GROUP_ID,
-            PREFIX_GENERAL_ASSIGNMENT_ID,
+            PREFIX_GENERAL_ASSIGNMENT_TITLE,
             PREFIX_GENERAL_STUDENT_ID,
             PREFIX_ASSIGNMENT_MARKS
         ) || !argMap.getPreamble().isEmpty()) {
@@ -41,8 +42,8 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
         String tgId = ParserUtil.parseTutorialGroupId(
             argMap.getValue(PREFIX_GENERAL_TUTORIAL_GROUP_ID).get()
         );
-        String asId = ParserUtil.parseString(
-            argMap.getValue(PREFIX_GENERAL_ASSIGNMENT_ID).get()
+        Title asId = ParserUtil.parseTitle(
+            argMap.getValue(PREFIX_GENERAL_ASSIGNMENT_TITLE).get()
         );
         StudentId stId = ParserUtil.parseStudentId(
             argMap.getValue(PREFIX_GENERAL_STUDENT_ID).get()
