@@ -1,6 +1,7 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -21,7 +22,7 @@ public class ViewStudentFeedbackCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves the feedback given to the student"
             + "indicated by Student ID and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " A0123456Z";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_ID + "A0123456Z";
 
     private final SameStudentIdPredicate predicate;
 

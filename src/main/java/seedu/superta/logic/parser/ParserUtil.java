@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import seedu.superta.commons.core.index.Index;
 import seedu.superta.commons.util.StringUtil;
 import seedu.superta.logic.parser.exceptions.ParseException;
+import seedu.superta.model.assignment.Title;
 import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
 import seedu.superta.model.student.Feedback;
@@ -119,6 +120,21 @@ public class ParserUtil {
 
     public static String parseTutorialGroupId(String tgId) {
         return tgId.trim();
+    }
+
+    /**
+     * Parses a {@code Title title} into a {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static Title parseTitle(String assignmentTitle) throws ParseException {
+        requireNonNull(assignmentTitle);
+        String trimmedTitle = assignmentTitle.trim();
+        if (!Title.isValidTitle(assignmentTitle)) {
+            throw new ParseException(Title.MESSAGE_TITLE_CONSTRAINTS);
+        }
+        return new Title(trimmedTitle);
     }
 
     public static Double parseDouble(String str) {

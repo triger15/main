@@ -1,7 +1,7 @@
 package seedu.superta.testutil;
 
 import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.AssignmentList;
+import seedu.superta.model.assignment.UniqueAssignmentList;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.UniqueStudentList;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -16,13 +16,13 @@ public class TutorialGroupBuilder {
     private String name;
     private String id;
     private UniqueStudentList students;
-    private AssignmentList assignments;
+    private UniqueAssignmentList assignments;
 
     public TutorialGroupBuilder() {
         name = DEFAULT_NAME;
         id = DEFAULT_ID;
         students = new UniqueStudentList();
-        assignments = new AssignmentList();
+        assignments = new UniqueAssignmentList();
     }
 
     /**

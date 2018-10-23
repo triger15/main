@@ -39,10 +39,13 @@ public class TutorialGroupMaster {
 
     public TutorialGroupMaster(HashMap<String, TutorialGroup> tutorialGroups) {
         this.tutorialGroups = tutorialGroups;
+        for (Map.Entry<String, TutorialGroup> entry : tutorialGroups.entrySet()) {
+            uids.add(entry.getKey());
+        }
     }
 
     public TutorialGroupMaster(TutorialGroupMaster toClone) {
-        tutorialGroups = (HashMap<String, TutorialGroup>) toClone.tutorialGroups.clone();
+        this((HashMap<String, TutorialGroup>) toClone.tutorialGroups.clone());
     }
 
     /**
