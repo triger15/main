@@ -18,7 +18,6 @@ public class SameStudentIdPredicateTest {
                 new Name("Tester Tester"),
                 new Phone("98765432"),
                 new Email("tester@tester.com"),
-                new Address("Testing Street 123"),
                 new StudentId("A0123456Z"),
                 new HashSet<>(),
                 new ArrayList<>())));
@@ -27,7 +26,6 @@ public class SameStudentIdPredicateTest {
                 new Name("Tester Tester"),
                 new Phone("98765432"),
                 new Email("tester@tester.com"),
-                new Address("Testing Street 123"),
                 new StudentId("A0123456A"),
                 new HashSet<>(),
                 new ArrayList<>())));

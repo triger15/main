@@ -11,7 +11,6 @@ import seedu.superta.commons.core.index.Index;
 import seedu.superta.commons.util.StringUtil;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.assignment.Title;
-import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Name;
@@ -67,21 +66,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_PHONE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**

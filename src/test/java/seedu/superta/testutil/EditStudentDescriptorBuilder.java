@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
 import seedu.superta.model.student.Name;
 import seedu.superta.model.student.Phone;
@@ -37,7 +36,6 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
-        descriptor.setAddress(student.getAddress());
         descriptor.setStudentId(student.getStudentId());
         descriptor.setTags(student.getTags());
     }
@@ -63,14 +61,6 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditStudentDescriptor} that we are building.
-     */
-    public EditStudentDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
         return this;
     }
 

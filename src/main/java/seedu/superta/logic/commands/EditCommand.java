@@ -1,7 +1,6 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,7 +19,6 @@ import seedu.superta.commons.util.CollectionUtil;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
-import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Name;
@@ -43,7 +41,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -99,14 +96,12 @@ public class EditCommand extends Command {
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
-        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
-        Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
+        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());;
         StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
         List<Feedback> updatedFeedback = studentToEdit.getFeedback(); // edit command does not allow editing feedback
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStudentId, updatedTags,
-                updatedFeedback);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedStudentId, updatedTags, updatedFeedback);
     }
 
     @Override
@@ -135,7 +130,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private StudentId studentId;
         private Set<Tag> tags;
 
@@ -149,7 +143,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setStudentId(toCopy.studentId);
             setTags(toCopy.tags);
         }
@@ -159,7 +152,7 @@ public class EditCommand extends Command {
          */
         @Override
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags,
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags,
                                                studentId);
         }
 
@@ -185,14 +178,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setStudentId(StudentId studentId) {
@@ -238,7 +223,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getStudentId().equals(e.getStudentId())
                     && getTags().equals(e.getTags());
         }

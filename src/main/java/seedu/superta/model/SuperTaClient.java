@@ -173,7 +173,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
                 .stream()
                 .collect(Collectors.toList());
         studentFeedback.add(feedback);
-        Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(), st.getAddress(),
+        Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(),
                 st.getStudentId(), st.getTags(), studentFeedback);
         updateStudent(st, editedStudent);
     }

@@ -3,7 +3,6 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.superta.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -114,13 +113,6 @@ public class FindCommandSystemTest extends SuperTaClientSystemTest {
 
         /* Case: find email of student in address book -> 1 persons found */
         command = FindCommand.COMMAND_WORD + " " + PREFIX_EMAIL + DANIEL.getEmail().value;
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find address of student in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS + DANIEL.getAddress().value;
-        expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

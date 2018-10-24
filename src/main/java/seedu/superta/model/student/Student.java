@@ -24,20 +24,18 @@ public class Student {
     private final StudentId studentId;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Feedback> feedback = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, StudentId studentId, Set<Tag> tags,
+    public Student(Name name, Phone phone, Email email, StudentId studentId, Set<Tag> tags,
                    List<Feedback> feedback) {
-        requireAllNonNull(name, phone, email, address, studentId, tags, feedback);
+        requireAllNonNull(name, phone, email, studentId, tags, feedback);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.studentId = studentId;
         this.tags.addAll(tags);
         this.feedback.addAll(feedback);
@@ -53,10 +51,6 @@ public class Student {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public StudentId getStudentId() {
@@ -111,7 +105,6 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getAddress().equals(getAddress())
                 && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getTags().equals(getTags());
     }
@@ -119,7 +112,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, studentId, tags, feedback);
+        return Objects.hash(name, phone, email, studentId, tags, feedback);
     }
 
     @Override
@@ -130,8 +123,6 @@ public class Student {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
                 .append(" Student ID: ")
                 .append(getStudentId())
                 .append(" Tags: ");

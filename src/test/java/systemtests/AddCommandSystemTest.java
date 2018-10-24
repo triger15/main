@@ -1,11 +1,8 @@
 package systemtests;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.superta.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.superta.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.superta.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.superta.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.superta.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.superta.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.superta.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -18,7 +15,6 @@ import static seedu.superta.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
 import static seedu.superta.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.superta.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.superta.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -39,7 +35,6 @@ import seedu.superta.logic.commands.AddCommand;
 import seedu.superta.logic.commands.RedoCommand;
 import seedu.superta.logic.commands.UndoCommand;
 import seedu.superta.model.Model;
-import seedu.superta.model.student.Address;
 import seedu.superta.model.student.Email;
 import seedu.superta.model.student.Name;
 import seedu.superta.model.student.Phone;
@@ -61,7 +56,7 @@ public class AddCommandSystemTest extends SuperTaClientSystemTest {
          */
         Student toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + STUDENT_ID_DESC_AMY + "   " + TAG_DESC_FRIEND
+                + EMAIL_DESC_AMY + "   " + "   " + STUDENT_ID_DESC_AMY + "   " + TAG_DESC_FRIEND
                 + " ";
         assertCommandSuccess(command, toAdd);
 
@@ -78,7 +73,7 @@ public class AddCommandSystemTest extends SuperTaClientSystemTest {
 
         /* Case: add a student with all fields same as another student in the address book except name -> added */
         toAdd = new StudentBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + STUDENT_ID_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
@@ -95,7 +90,7 @@ public class AddCommandSystemTest extends SuperTaClientSystemTest {
 
         /* Case: add a student with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
+        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + NAME_DESC_BOB
                 + STUDENT_ID_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
@@ -130,29 +125,20 @@ public class AddCommandSystemTest extends SuperTaClientSystemTest {
         command = StudentUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
 
-        /* Case: add a duplicate student except with different address -> rejected */
-        toAdd = new StudentBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = StudentUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
-
         /* Case: add a duplicate student except with different tags -> rejected */
         command = StudentUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_STUDENT);
 
         /* Case: missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + STUDENT_ID_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + STUDENT_ID_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + STUDENT_ID_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + STUDENT_ID_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + STUDENT_ID_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
-        /* Case: missing address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + STUDENT_ID_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + STUDENT_ID_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
@@ -160,27 +146,22 @@ public class AddCommandSystemTest extends SuperTaClientSystemTest {
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + STUDENT_ID_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
                 + STUDENT_ID_DESC_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
                 + STUDENT_ID_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC
-                + STUDENT_ID_DESC_AMY;
-        assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
-
         /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + STUDENT_ID_DESC_AMY
                 + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
