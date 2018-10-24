@@ -5,6 +5,7 @@ import seedu.superta.logic.commands.CommandResult;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.student.Student;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
  * API of the Logic component
@@ -21,6 +22,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Student> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of tutorial groups */
+    ObservableList<TutorialGroup> getTutorialGroupList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

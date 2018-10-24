@@ -3,10 +3,12 @@ package seedu.superta.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
@@ -60,7 +62,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         this.students.setStudents(students);
     }
 
-    public void setTutorialGroups(List<TutorialGroup> tutorialGroups) {
+    public void setTutorialGroups(Map<String, TutorialGroup> tutorialGroups) {
         this.tutorialGroupMaster.setTutorialGroups(tutorialGroups);
     }
 
@@ -71,7 +73,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
-        setTutorialGroups(newData.getTutorialGroupList());
+        setTutorialGroups(newData.getTutorialGroupMap());
     }
 
     //// student-level operations
@@ -218,6 +220,11 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableMap<String, TutorialGroup> getTutorialGroupMap() {
+        return tutorialGroupMaster.asUnmodifiableObservableMap();
     }
 
     @Override

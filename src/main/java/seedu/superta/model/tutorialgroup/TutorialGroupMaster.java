@@ -2,8 +2,6 @@ package seedu.superta.model.tutorialgroup;
 
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,9 @@ import java.util.Random;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
@@ -30,22 +30,17 @@ public class TutorialGroupMaster {
         "dusty"
     );
 
-    public final HashMap<String, TutorialGroup> tutorialGroups;
+    public final ObservableMap<String, TutorialGroup> tutorialGroups = FXCollections.observableHashMap();
     private Set<String> uids = new HashSet<>();
 
     public TutorialGroupMaster() {
-        tutorialGroups = new HashMap<>();
     }
 
-    public TutorialGroupMaster(HashMap<String, TutorialGroup> tutorialGroups) {
-        this.tutorialGroups = tutorialGroups;
+    public TutorialGroupMaster(Map<String, TutorialGroup> tutorialGroups) {
+        this.tutorialGroups.putAll(tutorialGroups);
         for (Map.Entry<String, TutorialGroup> entry : tutorialGroups.entrySet()) {
             uids.add(entry.getKey());
         }
-    }
-
-    public TutorialGroupMaster(TutorialGroupMaster toClone) {
-        this((HashMap<String, TutorialGroup>) toClone.tutorialGroups.clone());
     }
 
     /**
@@ -76,12 +71,12 @@ public class TutorialGroupMaster {
     /**
      * Used for backups.
      */
-    public void setTutorialGroups(List<TutorialGroup> tutorialGroups) {
+    public void setTutorialGroups(Map<String, TutorialGroup> tutorialGroups) {
         requireAllNonNull(tutorialGroups);
-        for (TutorialGroup tg : tutorialGroups) {
-            this.uids.add(tg.getId());
-            this.tutorialGroups.put(tg.getId(), new TutorialGroup(tg));
-        }
+        tutorialGroups.forEach((id, tutorialGroup) -> {
+            this.tutorialGroups.put(id, tutorialGroup);
+            this.uids.add(id);
+        });
     }
 
     /**
@@ -121,15 +116,24 @@ public class TutorialGroupMaster {
     /**
      * Returns an unmodifiable view of the current tutorial groups.
      */
-    public ObservableList<TutorialGroup> asUnmodifiableObservableList() {
-        List<TutorialGroup> list = new ArrayList<>();
-        for (Map.Entry<String, TutorialGroup> entry : tutorialGroups.entrySet()) {
-            list.add(entry.getValue());
-        }
-        ObservableList<TutorialGroup> result = FXCollections.unmodifiableObservableList(
-            FXCollections.observableList(list));
-        return result;
+    public ObservableMap<String, TutorialGroup> asUnmodifiableObservableMap() {
+        return FXCollections.unmodifiableObservableMap(tutorialGroups);
+    }
 
+    /**
+     * Returns an unmodifiable list view of the tutorial groups.
+     */
+    public ObservableList<TutorialGroup> asUnmodifiableObservableList() {
+        ObservableList<TutorialGroup> list = FXCollections.observableArrayList();
+        list.addAll(tutorialGroups.values());
+        tutorialGroups.addListener((MapChangeListener<? super String, ? super TutorialGroup>) change -> {
+            if (change.wasAdded()) {
+                list.add(change.getValueAdded());
+            } else if (change.wasRemoved()) {
+                list.remove(change.getValueRemoved());
+            }
+        });
+        return list;
     }
 
     /**
@@ -161,9 +165,9 @@ public class TutorialGroupMaster {
      * @param target the student to be removed.
      */
     public void removeStudentReferences(Student target) {
-        asUnmodifiableObservableList().stream().forEach(tg -> {
-            tg.removeStudent(target);
-            tg.getAssignments().asUnmodifiableObservableList().forEach(assignment -> assignment
+        tutorialGroups.forEach((id, tutorialGroup) -> {
+            tutorialGroup.removeStudent(target);
+            tutorialGroup.getAssignments().asUnmodifiableObservableList().forEach(assignment -> assignment
                 .removeStudentReferences(target));
         });
     }

@@ -30,6 +30,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedSuperTaClient versionedSuperTaClient;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<TutorialGroup> tutorialGroups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +43,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSuperTaClient = new VersionedSuperTaClient(addressBook);
         filteredStudents = new FilteredList<>(versionedSuperTaClient.getStudentList());
+
+        tutorialGroups = new FilteredList<>(versionedSuperTaClient.getTutorialGroupList());
     }
 
     public ModelManager() {
@@ -170,6 +173,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return FXCollections.unmodifiableObservableList(filteredStudents);
+    }
+
+    @Override
+    public ObservableList<TutorialGroup> getTutorialGroupList() {
+        return FXCollections.unmodifiableObservableList(tutorialGroups);
     }
 
     @Override
