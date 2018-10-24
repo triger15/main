@@ -19,6 +19,8 @@
             </padding>
             <Label fx:id="id" styleClass="tutorial_group_cell_id_label" text="\$id" />
             <Label fx:id="name" styleClass="tutorial_group_cell_name_label" text="\$name" />
+            <Label fx:id="numStudents" styleClass="tutorial_group_cell_name_label" text="\$numStudents" />
+            <Label fx:id="numAssignments" styleClass="tutorial_group_cell_name_label" text="\$numAssignments" />
         </VBox>
     </GridPane>
 </HBox>

@@ -19,12 +19,20 @@ public class TutorialGroupCard extends UiPart<Region> {
     @javafx.fxml.FXML
     private Label id;
 
+    @javafx.fxml.FXML
+    private Label numStudents;
+
+    @javafx.fxml.FXML
+    private Label numAssignments;
+
     public TutorialGroupCard(TutorialGroup tutorialGroup) {
         super(FXML);
         this.tutorialGroup = tutorialGroup;
 
         name.setText(String.format("Name: " + tutorialGroup.getName()));
         id.setText(String.format("ID: " + tutorialGroup.getId()));
+        numStudents.setText(tutorialGroup.getStudents().asUnmodifiableObservableList().size() + " students");
+        numAssignments.setText(tutorialGroup.getAssignments().asUnmodifiableObservableList().size() + " assignments");
     }
 
     @Override
