@@ -31,6 +31,16 @@ public class TutorialGroupListPanel extends UiPart<Region> {
         tutorialGroupListView.setCellFactory(listView -> new TutorialGroupListViewCell());
     }
 
+    private void setEventHandlerForSelectionChangeEvent() {
+        tutorialGroupListView.getSelectionModel().selectedItemProperty()
+            .addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    logger.fine("Selection in tutorial group list changed.");
+
+                }
+            });
+    }
+
     class TutorialGroupListViewCell extends ListCell<TutorialGroup> {
         @Override
         protected void updateItem(TutorialGroup tutorialGroup, boolean empty) {

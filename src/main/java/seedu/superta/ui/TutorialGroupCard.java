@@ -15,11 +15,15 @@ public class TutorialGroupCard extends UiPart<Region> {
     @javafx.fxml.FXML
     private Label name;
 
+    @javafx.fxml.FXML
+    private Label id;
+
     public TutorialGroupCard(TutorialGroup tutorialGroup) {
         super(FXML);
         this.tutorialGroup = tutorialGroup;
 
-        name.setText(tutorialGroup.getName());
+        name.setText(String.format("Name: " + tutorialGroup.getName()));
+        id.setText(String.format("ID: " + tutorialGroup.getId()));
     }
 
     @Override
