@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.Title;
 
 /**
  * Class for XML-Adapted Assignment
@@ -12,7 +11,7 @@ import seedu.superta.model.assignment.Title;
 public class XmlAdaptedAssignment implements XmlAdapted<Assignment> {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Assignment's %s field is missing!";
     @XmlElement(required = true)
-    private Title title;
+    private XmlAdaptedTitle title;
     @XmlElement(required = true)
     private Double maxMarks;
     @XmlElement
@@ -20,14 +19,14 @@ public class XmlAdaptedAssignment implements XmlAdapted<Assignment> {
 
     public XmlAdaptedAssignment() { }
 
-    public XmlAdaptedAssignment(Title title, Double maxMarks, XmlAdaptedGradeBook gradebook) {
+    public XmlAdaptedAssignment(XmlAdaptedTitle title, Double maxMarks, XmlAdaptedGradeBook gradebook) {
         this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = gradebook;
     }
 
     public XmlAdaptedAssignment(Assignment source) {
-        title = source.getTitle();
+        title = new XmlAdaptedTitle(source.getTitle());
         maxMarks = source.getMaxMarks();
         gradebook = new XmlAdaptedGradeBook(source.getGradebook());
     }
@@ -42,8 +41,8 @@ public class XmlAdaptedAssignment implements XmlAdapted<Assignment> {
         }
 
         if (gradebook == null) {
-            return new Assignment(title, maxMarks);
+            return new Assignment(title.toModelType(), maxMarks);
         }
-        return new Assignment(title, maxMarks, gradebook.toModelType());
+        return new Assignment(title.toModelType(), maxMarks, gradebook.toModelType());
     }
 }
