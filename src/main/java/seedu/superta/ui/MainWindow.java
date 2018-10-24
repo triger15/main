@@ -19,6 +19,7 @@ import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.ExitAppRequestEvent;
 import seedu.superta.commons.events.ui.ShowHelpRequestEvent;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
+import seedu.superta.commons.events.ui.ViewAllTutorialGroupsEvent;
 import seedu.superta.logic.Logic;
 import seedu.superta.model.UserPrefs;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -144,6 +145,12 @@ public class MainWindow extends UiPart<Stage> {
         viewPanel.getChildren().add(viewPanelContent.getRoot());
     }
 
+    void changeViewPanelToTutorialGroupListView() {
+        viewPanel.getChildren().remove(viewPanelContent.getRoot());
+        viewPanelContent = new TutorialGroupListPanel(logic.getTutorialGroupList());
+        viewPanel.getChildren().add(viewPanelContent.getRoot());
+    }
+
     void hide() {
         primaryStage.hide();
     }
@@ -212,7 +219,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @Subscribe
     private void handleTutorialGroupSelectionChangedEvent(TutorialGroupSelectedEvent event) {
-        System.out.println("Happy");
         changeViewPanelToTutorialGroupDetailView(event.getSelection());
+    }
+
+    @Subscribe
+    private void handleViewAllTutorialGroupsEvent(ViewAllTutorialGroupsEvent event) {
+        changeViewPanelToTutorialGroupListView();
     }
 }
