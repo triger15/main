@@ -14,7 +14,6 @@ import guitests.guihandles.HelpWindowHandle;
 import seedu.superta.logic.commands.DeleteCommand;
 import seedu.superta.logic.commands.HelpCommand;
 import seedu.superta.logic.commands.SelectCommand;
-import seedu.superta.ui.BrowserPanel;
 import seedu.superta.ui.StatusBarFooter;
 
 /**

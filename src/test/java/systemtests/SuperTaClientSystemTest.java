@@ -42,7 +42,6 @@ import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.model.Model;
 import seedu.superta.model.SuperTaClient;
 import seedu.superta.testutil.TypicalStudents;
-import seedu.superta.ui.BrowserPanel;
 import seedu.superta.ui.CommandBox;
 
 /**
