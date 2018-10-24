@@ -3,7 +3,7 @@ package seedu.superta.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.superta.logic.CommandHistory;
@@ -21,10 +21,10 @@ public class FeedbackCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a feedback to a student. "
         + "Parameters: "
-        + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID "
+        + PREFIX_STUDENT_ID + "STUDENT-ID "
         + PREFIX_FEEDBACK + "FEEDBACK\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GENERAL_STUDENT_ID + "A0123566T "
+        + PREFIX_STUDENT_ID + "A0123566T "
         + PREFIX_FEEDBACK + "Is generally attentive during class. However, needs to speak up more.";
 
     public static final String MESSAGE_SUCCESS = "New feedback created: %1$s";
