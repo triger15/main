@@ -26,16 +26,6 @@ public class TutorialGroupMasterTest {
     }
 
     @Test
-    public void constructorClone_success() {
-        TutorialGroupMaster clone = new TutorialGroupMaster();
-        TutorialGroup tg = getModelTutorialGroup();
-        clone.addTutorialGroup(tg);
-
-        TutorialGroupMaster tgMaster = new TutorialGroupMaster(clone);
-        assertTrue(tgMaster.contains(tg.getId()));
-    }
-
-    @Test
     public void duplicateTutorialGroupId_appendRandom() {
         master.addTutorialGroup(getModelTutorialGroup());
         master.addTutorialGroup(getModelTutorialGroup());

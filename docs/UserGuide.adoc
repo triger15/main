@@ -74,6 +74,11 @@ Examples:
 Shows a list of all students in the directory. +
 Format: `list`
 
+=== Listing all tutorial groups: `list-tutorial-groups`
+
+Shows a list of all the tutorial groups, and reflects it on the UI. +
+Format: `list-tutorial-groups`
+
 === Editing a student : `edit`
 
 Edits an existing student in the directory. +
@@ -167,17 +172,18 @@ Views the information of the student with the ID A0166733Y.
 === Creating a Tutorial Group: `create-tutorial-group`
 
 Creates a tutorial group with an identifier. If there is already a tutorial group with the same identifier, the identifier will have a random suffix appended to it. +
-Format: `create-tutorial-group n/[NAME] id/[TUTORIAL-GROUP-ID]`
+Format: `create-tutorial-group n/NAME id/TUTORIAL-GROUP-ID`
 
 Examples:
 
 * `create-tutorial-group n/CS1101S Studio 04A id/04a`
 Creates a tutorial group named `CS1101S Studio 04A` with the identifier `04a`.
+* If I run the command above twice, my second `TutorialGroup` will have a random suffix appended to its ID. For example, its ID might become `04a-dusty123`.The ID of the created tutorial group will be shown in the command result panel.
 
 === View Tutorial Group: `view-tutorial-group`
 
 Views a tutorial group's details. +
-Format: `view-tutorial-group id/[TUTORIAL_GROUP_ID]`
+Format: `view-tutorial-group id/TUTORIAL_GROUP_ID`
 
 Examples:
 * `view-tutorial-group id/04a`
@@ -186,7 +192,7 @@ Displays the `04a` tutorial group's infromation .
 === Add to Tutorial Group: `add-to-tutorial-group`
 
 Adds a student to a tutorial group. +
-Format: `add-to-tutorial-group tg/[TUTORIAL_GROUP_ID] st/STUDENT_ID`
+Format: `add-to-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID`
 
 Examples:
 
@@ -195,18 +201,20 @@ Adds the student with student IDs `A1231231Y` to the tutorial group with an ID o
 
 === Remove from Tutorial Group: `remove-from-tutorial-group`
 
+[TIP] Coming in v2.0
+
 Removes students from a tutorial group. +
-Format: `remove-from-tutorial-group tg/[TUTORIAL_GROUP_ID] [s/STUDENT_ID] ...`
+Format: `remove-from-tutorial-group tg/TUTORIAL_GROUP_ID [st/STUDENT_ID] ...`
 
 Examples:
 
-* `remove-from-tutorial-group tg/1 s/A1231231Y s/A2342342T`
+* `remove-from-tutorial-group tg/1 st/A1231231Y st/A2342342T`
 Removes the students with student IDs `A1231231Y` and `A2342342T` from the tutorial group with an ID of `1`.
 
 === Filter by Tutorial Group: `filter`
 
 Filters students by a specific tutorial group ID.
-Format: `filter tg/[TUTORIAL_GROUP_ID]`
+Format: `filter tg/TUTORIAL_GROUP_ID`
 
 Examples:
 * `filter tg/1`
@@ -214,8 +222,10 @@ Shows a list of all the students in the tutorial group with an ID of `1`.
 
 === Create Attendance: `create-attendance`
 
+[TIP] Coming in v2.0
+
 Creates an attendance for a specific tutorial group, identified by its ID.
-Format: `create-attendance tg/[TUTORIAL_GROUP_ID] n/[NAME] [s/STUDENT_ID] ...`
+Format: `create-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
 
 Examples:
 * `create-attendance tg/1 n/W4 Tutorial s/A1234567T s/A0123456Y`
@@ -224,7 +234,7 @@ Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `
 === Create Assignment: `create-assignment`
 
 Creates an assignment for a specific tutorial group, identified by its ID. In future commands, assignments are referenced to by its name.
-Format: `create-assignment tg/[TUTORIAL_GROUP_ID] n/[NAME] m/[MAX_MARKS]`
+Format: `create-assignment tg/TUTORIAL_GROUP_ID n/NAME m/MAX_MARKS`
 
 Examples:
 * `create-assignment tg/04a n/lab1 m/40`
@@ -233,7 +243,7 @@ Creates an assignment named `lab1` for the tutorial group with an ID of `04a`, w
 === Grade Assignment for Student: `grade`
 
 Enters a grade for a student for a specific assignment, identified by its ID.
-Format: `grade tg/[TUTORIAL_GROUP_ID] as/[ASSIGNMENT_ID] st/[STUDENT_ID] m/[MARKS]`
+Format: `grade tg/TUTORIAL_GROUP_ID as/ASSIGNMENT_ID st/STUDENT_ID m/MARKS`
 
 Examples:
 * `grade tg/04a as/lab1 st/A0166733Y m/40`
@@ -241,8 +251,10 @@ Creates a grade with marks `40` for the student with an ID of `A0166733Y` in the
 
 === Sort by assignment grade: `sort`
 
+[TIP] Coming in v2.0
+
 Sorts students in order of their grade for a particular assignment.
-Format: `sort tg/[TUTORIAL_GROUP_ID] a/[ASSIGNMENT_ID]`
+Format: `sort tg/TUTORIAL_GROUP_ID a/ASSIGNMENT_ID`
 
 Examples:
 * `sort tg/1 a/1`
@@ -251,7 +263,7 @@ Displays a list of students in tutorial group `1` by their grade on assignment `
 === Feedback to Student: `feedback`
 
 Adds feedback to a student with a specified Student ID.
-Format: `feedback st/[STUDENT_ID] f/[FEEDBACK]`
+Format: `feedback st/STUDENT_ID f/FEEDBACK`
 
 Examples:
 * `feedback st/A1234566T f/Is generally attentive during class. However, needs to speak up more.`
@@ -359,6 +371,7 @@ e.g. `create-assignment tg/04a n/lab1 m/40`
 e.g. `grade tg/04a as/lab1 st/A0166733Y m/30`
 // TODO: Feedback
 * *List* : `list`
+* *List Tutorial Groups* : `list-tutorial-groups`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`

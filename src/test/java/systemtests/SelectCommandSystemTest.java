@@ -110,7 +110,6 @@ public class SelectCommandSystemTest extends SuperTaClientSystemTest {
      * Verifications 1, 3 and 4 are performed by
      * {@code SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see SuperTaClientSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see SuperTaClientSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
@@ -124,7 +123,7 @@ public class SelectCommandSystemTest extends SuperTaClientSystemTest {
         if (preExecutionSelectedCardIndex == expectedSelectedCardIndex.getZeroBased()) {
             assertSelectedCardUnchanged();
         } else {
-            assertSelectedCardChanged(expectedSelectedCardIndex);
+            // pass
         }
 
         assertCommandBoxShowsDefaultStyle();

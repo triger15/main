@@ -175,6 +175,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<TutorialGroup> getTutorialGroupList() {
+            return null;
+        }
+
+        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }

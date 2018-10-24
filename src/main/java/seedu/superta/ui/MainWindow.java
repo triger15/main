@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.superta.commons.core.Config;
@@ -17,8 +18,11 @@ import seedu.superta.commons.core.GuiSettings;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.ExitAppRequestEvent;
 import seedu.superta.commons.events.ui.ShowHelpRequestEvent;
+import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
+import seedu.superta.commons.events.ui.ViewAllTutorialGroupsEvent;
 import seedu.superta.logic.Logic;
 import seedu.superta.model.UserPrefs;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,14 +38,14 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    private UiPart<Region> viewPanelContent;
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane viewPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -119,8 +123,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        viewPanelContent = new TutorialGroupListPanel(logic.getTutorialGroupList());
+        viewPanel.getChildren().add(viewPanelContent.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -133,6 +137,18 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    void changeViewPanelToTutorialGroupDetailView(TutorialGroup tutorialGroup) {
+        viewPanel.getChildren().remove(viewPanelContent.getRoot());
+        viewPanelContent = new TutorialGroupDetailPanel(tutorialGroup);
+        viewPanel.getChildren().add(viewPanelContent.getRoot());
+    }
+
+    void changeViewPanelToTutorialGroupListView() {
+        viewPanel.getChildren().remove(viewPanelContent.getRoot());
+        viewPanelContent = new TutorialGroupListPanel(logic.getTutorialGroupList());
+        viewPanel.getChildren().add(viewPanelContent.getRoot());
     }
 
     void hide() {
@@ -192,12 +208,22 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void releaseResources() {
-        browserPanel.freeResources();
+        // TODO: Any resource release
     }
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleTutorialGroupSelectionChangedEvent(TutorialGroupSelectedEvent event) {
+        changeViewPanelToTutorialGroupDetailView(event.getSelection());
+    }
+
+    @Subscribe
+    private void handleViewAllTutorialGroupsEvent(ViewAllTutorialGroupsEvent event) {
+        changeViewPanelToTutorialGroupListView();
     }
 }

@@ -12,6 +12,7 @@ import seedu.superta.logic.parser.AddressBookParser;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.Model;
 import seedu.superta.model.student.Student;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
  * The main LogicManager of the app.
@@ -43,6 +44,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Student> getFilteredPersonList() {
         return model.getFilteredStudentList();
+    }
+
+    @Override
+    public ObservableList<TutorialGroup> getTutorialGroupList() {
+        return model.getTutorialGroupList();
     }
 
     @Override
