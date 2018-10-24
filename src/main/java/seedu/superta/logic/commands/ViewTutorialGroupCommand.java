@@ -3,9 +3,12 @@ package seedu.superta.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 
+import seedu.superta.commons.core.EventsCenter;
+import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
  * Command that views a tutorial group's information.
@@ -34,7 +37,8 @@ public class ViewTutorialGroupCommand extends Command {
         if (!model.hasTutorialGroup(tutorialGroupId)) {
             throw new CommandException(MESSAGE_NO_SUCH_TUTORIAL_GROUP);
         }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getTutorialGroup(tutorialGroupId).get()));
+        TutorialGroup tutorialGroup = model.getTutorialGroup(tutorialGroupId).get();
+        EventsCenter.getInstance().post(new TutorialGroupSelectedEvent(tutorialGroup));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup));
     }
 }

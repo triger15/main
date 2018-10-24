@@ -158,7 +158,6 @@ public class DeleteCommandSystemTest extends SuperTaClientSystemTest {
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
      *
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
-     * @see SuperTaClientSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
@@ -166,7 +165,7 @@ public class DeleteCommandSystemTest extends SuperTaClientSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 
         if (expectedSelectedCardIndex != null) {
-            assertSelectedCardChanged(expectedSelectedCardIndex);
+            // pass
         } else {
             assertSelectedCardUnchanged();
         }
