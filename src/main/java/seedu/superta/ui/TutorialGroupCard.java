@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
+// @@author caephler
 /**
  * A UI component that displays information of a {@code TutorialGroup}
  */

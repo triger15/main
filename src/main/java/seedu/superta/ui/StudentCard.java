@@ -39,6 +39,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label studentId;
+    @FXML
     private Label feedback;
 
     public StudentCard(Student student, int displayedIndex) {
@@ -49,7 +51,11 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
-        //feedback.setText(student.getFeedback().value);
+        studentId.setText(student.getStudentId().studentId);
+        feedback.setText("");
+        student.getFeedback().stream().findFirst().ifPresent(feedback -> {
+            this.feedback.setText(String.format("Feedback: " + feedback.value));
+        });
         student.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

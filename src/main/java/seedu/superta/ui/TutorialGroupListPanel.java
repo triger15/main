@@ -7,6 +7,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.superta.commons.core.LogsCenter;
+import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 // @@author caephler
@@ -29,6 +30,7 @@ public class TutorialGroupListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<TutorialGroup> tutorialGroups) {
         tutorialGroupListView.setItems(tutorialGroups);
         tutorialGroupListView.setCellFactory(listView -> new TutorialGroupListViewCell());
+        setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
@@ -36,7 +38,7 @@ public class TutorialGroupListPanel extends UiPart<Region> {
             .addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     logger.fine("Selection in tutorial group list changed.");
-
+                    raise(new TutorialGroupSelectedEvent(newValue));
                 }
             });
     }
