@@ -11,8 +11,12 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
+// @@author caephler
+/**
+ * Command to list all tutorial groups.
+ */
 public class ListTutorialGroupsCommand extends Command {
-    public final static String COMMAND_WORD = "list-tutorial-groups";
+    public static final String COMMAND_WORD = "list-tutorial-groups";
 
     public static final String MESSAGE_SUCCESS = "Listed all tutorial groups. \n%1$s";
 

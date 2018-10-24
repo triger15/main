@@ -43,6 +43,9 @@ public class TutorialGroupListPanel extends UiPart<Region> {
             });
     }
 
+    /**
+     * ListCell for Tutorial Group.
+     */
     class TutorialGroupListViewCell extends ListCell<TutorialGroup> {
         @Override
         protected void updateItem(TutorialGroup tutorialGroup, boolean empty) {

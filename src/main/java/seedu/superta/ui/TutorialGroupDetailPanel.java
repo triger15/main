@@ -33,7 +33,7 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
         id.setText(tutorialGroup.getId());
         name.setText(tutorialGroup.getName());
         students.setItems(tutorialGroup.getStudents().asUnmodifiableObservableList());
-        students.setCellFactory(listView -> new ListCell<Student>(){
+        students.setCellFactory(listView -> new ListCell<Student>() {
             @Override
             protected void updateItem(Student student, boolean empty) {
                 super.updateItem(student, empty);
