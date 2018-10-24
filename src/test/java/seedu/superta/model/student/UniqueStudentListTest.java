@@ -3,7 +3,6 @@ package seedu.superta.model.student;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.superta.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.superta.testutil.TypicalStudents.ALICE;
 import static seedu.superta.testutil.TypicalStudents.BOB;
@@ -46,7 +45,7 @@ public class UniqueStudentListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueStudentList.contains(editedAlice));
     }
@@ -94,7 +93,7 @@ public class UniqueStudentListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueStudentList.add(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueStudentList.setStudent(ALICE, editedAlice);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();

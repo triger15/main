@@ -49,7 +49,6 @@ public class ViewStudentFeedbackCommandTest {
     public void execute_viewStudentFeedbackCommand_success() {
         Student expectedStudent = new StudentBuilder()
                 .withName("Alice Pauline")
-                .withAddress("123, Jurong West Ave 6, #08-111")
                 .withEmail("alice@example.com")
                 .withPhone("94351253")
                 .withStudentId("A0166733Y")
