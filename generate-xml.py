@@ -77,7 +77,7 @@ def populateTutorialGroups(root, student_ids):
     for student_id in my_students:
       student = ET.SubElement(tg, "studentIds")
       student.text = student_id
-    
+
     for i in range(random.randint(2, 5)):
       assignment = ET.SubElement(tg, "assignments")
       title = ET.SubElement(assignment, "title")

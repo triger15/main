@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.assignment.Title;
 
+/**
+ * Xml Adapted Title
+ */
 public class XmlAdaptedTitle implements XmlAdapted<Title> {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Title's %s field is missing!";
 
