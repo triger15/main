@@ -85,6 +85,9 @@ public class TutorialGroup {
 
     @Override
     public boolean equals(Object other) {
+        if (!(other instanceof TutorialGroup)) {
+            return false;
+        }
         return id.equals(((TutorialGroup) other).id);
     }
 

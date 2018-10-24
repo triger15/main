@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @@author caephler -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+    <GridPane VBox.vgrow="ALWAYS">
+        <VBox alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="15" />
+            </padding>
+            <Label fx:id="id" styleClass="label-bright" text="\$id" />
+            <Label fx:id="name" styleClass="label-header" text="\$name" />
+            <Label>Students</Label>
+            <ListView fx:id="students" />
+        </VBox>
+    </GridPane>
+</VBox>

@@ -42,7 +42,7 @@ public class XmlSerializableSuperTaClient {
     public XmlSerializableSuperTaClient(ReadOnlySuperTaClient src) {
         this();
         students.addAll(src.getStudentList().stream().map(XmlAdaptedStudent::new).collect(Collectors.toList()));
-        tutorialGroups.addAll(src.getTutorialGroupList().stream().map(XmlAdaptedTutorialGroup::new).collect
+        tutorialGroups.addAll(src.getTutorialGroupMap().values().stream().map(XmlAdaptedTutorialGroup::new).collect
             (Collectors.toList()));
     }
 

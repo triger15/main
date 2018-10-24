@@ -49,7 +49,6 @@ public class UpdateTutorialGroupCommand extends Command {
 
         TutorialGroup original = model.getTutorialGroup(id).get();
         model.updateTutorialGroup(createEditedTutorialGroup(original));
-
         model.commitSuperTaClient();
         return new CommandResult(MESSAGE_SUCCESS);
     }
