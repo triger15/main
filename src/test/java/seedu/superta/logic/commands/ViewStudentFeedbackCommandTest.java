@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
 
@@ -22,8 +23,9 @@ public class ViewStudentFeedbackCommandTest {
     private Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    private StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
-    private StudentId bob = new StudentId(VALID_STUDENT_ID_BOB);
+    private final StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
+    private final StudentId bob = new StudentId(VALID_STUDENT_ID_BOB);
+    private final String expectedMsg = String.format("Student ID: %s, Feedback:\n", "A0166733Y");
 
     @Test
     public void equals() {
@@ -60,16 +62,15 @@ public class ViewStudentFeedbackCommandTest {
         assertCommandSuccess(new ViewStudentFeedbackCommand(new StudentId("A0166733Y")),
                 model,
                 commandHistory,
-                String.format("%s\n %s\n", ViewStudentFeedbackCommand.MESSAGE_SUCCESS, expectedStudent.getFeedback()),
+                expectedMsg,
                 expectedModel);
     }
 
     @Test
     public void execute_viewStudentFeedbackCommand_failure() {
-        assertCommandSuccess(new ViewStudentFeedbackCommand(new StudentId("A0166733Y")),
+        assertCommandFailure(new ViewStudentFeedbackCommand(new StudentId("A0116733Y")),
                 model,
                 commandHistory,
-                ViewStudentFeedbackCommand.MESSAGE_FAILURE,
-                expectedModel);
+                ViewStudentFeedbackCommand.MESSAGE_FAILURE);
     }
 }

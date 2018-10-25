@@ -6,7 +6,7 @@ import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -151,7 +151,7 @@ public class SuperTaClientParserTest {
         final Feedback feedback = new Feedback("Some feedback.");
         final StudentId studentId = new StudentId(VALID_STUDENT_ID_AMY);
         FeedbackCommand command = (FeedbackCommand) parser.parseCommand(FeedbackCommand.COMMAND_WORD + " "
-                + PREFIX_GENERAL_STUDENT_ID + studentId + " " + PREFIX_FEEDBACK + feedback.value);
+                + PREFIX_STUDENT_ID + studentId + " " + PREFIX_FEEDBACK + feedback.value);
         assertEquals(new FeedbackCommand(studentId, feedback), command);
     }
 }
