@@ -3,7 +3,7 @@ package seedu.superta.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.superta.logic.commands.FeedbackCommand;
@@ -20,12 +20,12 @@ public class FeedbackCommandParser implements Parser<FeedbackCommand> {
         requireNonNull(args);
         ArgumentMultimap argMap = ArgumentTokenizer.tokenize(
             args,
-            PREFIX_GENERAL_STUDENT_ID,
+            PREFIX_STUDENT_ID,
             PREFIX_FEEDBACK
         );
         if (!arePrefixesPresent(
             argMap,
-            PREFIX_GENERAL_STUDENT_ID,
+            PREFIX_STUDENT_ID,
             PREFIX_FEEDBACK
         ) || !argMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
@@ -34,7 +34,7 @@ public class FeedbackCommandParser implements Parser<FeedbackCommand> {
         }
 
         StudentId stId = ParserUtil.parseStudentId(
-            argMap.getValue(PREFIX_GENERAL_STUDENT_ID).get()
+            argMap.getValue(PREFIX_STUDENT_ID).get()
         );
 
         Feedback feedback = ParserUtil.parseFeedback(

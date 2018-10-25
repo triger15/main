@@ -1,5 +1,6 @@
 package seedu.superta.model;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -80,6 +81,11 @@ public interface Model {
      * Adds feedback to a student.
      */
     void addFeedback(Feedback feedback, StudentId studentId);
+
+    /**
+     * View feedback for a student.
+     */
+    List<Feedback> viewFeedback(StudentId studentId);
 
     /**
      * Returns true if a tutorial group with the given id exists.

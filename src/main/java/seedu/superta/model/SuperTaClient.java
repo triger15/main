@@ -2,6 +2,7 @@ package seedu.superta.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -175,9 +176,25 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
                 .stream()
                 .collect(Collectors.toList());
         studentFeedback.add(feedback);
+        System.out.println(studentFeedback);
         Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(),
                 st.getStudentId(), st.getTags(), studentFeedback);
         updateStudent(st, editedStudent);
+    }
+
+    /**
+     * View feedback for a student.
+     */
+    public List<Feedback> viewFeedback(StudentId studentId) {
+        Optional<Student> ost = students.getStudentWithId(studentId);
+        if (!ost.isPresent()) {
+            throw new StudentNotFoundException();
+        }
+        Student st = ost.get();
+        List<Feedback> studentFeedback = st.getFeedback()
+                .stream()
+                .collect(Collectors.toList());
+        return studentFeedback;
     }
 
     /**

@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 import seedu.superta.logic.CommandHistory;
+import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
-import seedu.superta.model.student.SameStudentIdPredicate;
-import seedu.superta.model.student.Student;
+import seedu.superta.model.student.Feedback;
+import seedu.superta.model.student.StudentId;
+import seedu.superta.model.student.exceptions.StudentNotFoundException;
 
 /**
  * Lists the previous feedback given to the student identified.
@@ -20,38 +22,43 @@ public class ViewStudentFeedbackCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Student record displayed.\n";
     public static final String MESSAGE_FAILURE = "Student not found!\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves the feedback given to the student"
-            + "indicated by Student ID and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD\n"
+            + " indicated by Student ID and displays them as a list with index numbers.\n"
+            + "Parameters: "
+            + PREFIX_STUDENT_ID + "STUDENT-ID " + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_ID + "A0123456Z";
 
-    private final SameStudentIdPredicate predicate;
+    private final StudentId studentId;
 
-    public ViewStudentFeedbackCommand(SameStudentIdPredicate predicate) {
-        this.predicate = predicate;
+    public ViewStudentFeedbackCommand(StudentId studentId) {
+        requireNonNull(studentId);
+        this.studentId = studentId;
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
-        List<Student> students = model.getFilteredStudentList();
-
-        ListIterator<Student> iterator = students.listIterator();
-        Student other;
-        while (iterator.hasNext()) {
-            other = iterator.next();
-            if (predicate.test(other)) {
-                return new CommandResult(String.format("%s\n %s\n", MESSAGE_SUCCESS, other.getFeedback()));
+        StringBuilder allFeedback = new StringBuilder();
+        try {
+            List<Feedback> feedbackList = model.viewFeedback(studentId);
+            ListIterator<Feedback> iterator = feedbackList.listIterator();
+            while (iterator.hasNext()) {
+                String nextFeedback = iterator.next().toString().trim();
+                if (nextFeedback.length() > 0) {
+                    allFeedback.append(iterator.previousIndex() + " ");
+                    allFeedback.append(nextFeedback + "\n");
+                }
             }
+        } catch (StudentNotFoundException e) {
+            throw new CommandException(MESSAGE_FAILURE);
         }
-
-        return new CommandResult(MESSAGE_FAILURE);
+        return new CommandResult(allFeedback.toString());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof ViewStudentFeedbackCommand) // instanceof handles nulls
-                && predicate.equals(((ViewStudentFeedbackCommand) other).predicate); // state check
+                && studentId.equals(((ViewStudentFeedbackCommand) other).studentId); // state check
     }
 
 }
