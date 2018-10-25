@@ -2,6 +2,8 @@ package seedu.superta.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
 
@@ -11,8 +13,8 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
 import seedu.superta.model.ModelManager;
 import seedu.superta.model.UserPrefs;
-import seedu.superta.model.student.SameStudentIdPredicate;
 import seedu.superta.model.student.Student;
+import seedu.superta.model.student.StudentId;
 import seedu.superta.testutil.StudentBuilder;
 
 public class ViewStudentFeedbackCommandTest {
@@ -20,19 +22,20 @@ public class ViewStudentFeedbackCommandTest {
     private Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
+    private StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
+    private StudentId bob = new StudentId(VALID_STUDENT_ID_BOB);
+
     @Test
     public void equals() {
-        SameStudentIdPredicate firstPredicate = new SameStudentIdPredicate("A1234567Z");
-        SameStudentIdPredicate secondPredicate = new SameStudentIdPredicate("B1234567Y");
 
-        ViewStudentFeedbackCommand firstViewStudentFeedbackCommand = new ViewStudentFeedbackCommand(firstPredicate);
-        ViewStudentFeedbackCommand secondViewStudentFeedbackCommand = new ViewStudentFeedbackCommand(secondPredicate);
+        ViewStudentFeedbackCommand firstViewStudentFeedbackCommand = new ViewStudentFeedbackCommand(amy);
+        ViewStudentFeedbackCommand secondViewStudentFeedbackCommand = new ViewStudentFeedbackCommand(bob);
 
         // same object -> returns true
         assertTrue(firstViewStudentFeedbackCommand.equals(firstViewStudentFeedbackCommand));
 
         // same values -> returns true
-        ViewStudentFeedbackCommand firstViewStudentFeedbackCommandCopy = new ViewStudentFeedbackCommand(firstPredicate);
+        ViewStudentFeedbackCommand firstViewStudentFeedbackCommandCopy = new ViewStudentFeedbackCommand(amy);
         assertTrue(firstViewStudentFeedbackCommand.equals(firstViewStudentFeedbackCommandCopy));
 
         // different types -> returns false
@@ -53,8 +56,8 @@ public class ViewStudentFeedbackCommandTest {
                 .withPhone("94351253")
                 .withStudentId("A0166733Y")
                 .withTags("friends").build();
-
-        assertCommandSuccess(new ViewStudentFeedbackCommand(new SameStudentIdPredicate("A0166733Y")),
+        // TODO:FIX
+        assertCommandSuccess(new ViewStudentFeedbackCommand(new StudentId("A0166733Y")),
                 model,
                 commandHistory,
                 String.format("%s\n %s\n", ViewStudentFeedbackCommand.MESSAGE_SUCCESS, expectedStudent.getFeedback()),
@@ -63,7 +66,7 @@ public class ViewStudentFeedbackCommandTest {
 
     @Test
     public void execute_viewStudentFeedbackCommand_failure() {
-        assertCommandSuccess(new ViewStudentFeedbackCommand(new SameStudentIdPredicate("B0123456Z")),
+        assertCommandSuccess(new ViewStudentFeedbackCommand(new StudentId("A0166733Y")),
                 model,
                 commandHistory,
                 ViewStudentFeedbackCommand.MESSAGE_FAILURE,
