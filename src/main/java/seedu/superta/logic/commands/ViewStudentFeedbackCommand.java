@@ -37,7 +37,8 @@ public class ViewStudentFeedbackCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
-        StringBuilder allFeedback = new StringBuilder();
+        String studentInfo = String.format("Student ID: %s, Feedback:\n", studentId);
+        StringBuilder allFeedback = new StringBuilder(studentInfo);
         try {
             List<Feedback> feedbackList = model.viewFeedback(studentId);
             ListIterator<Feedback> iterator = feedbackList.listIterator();
