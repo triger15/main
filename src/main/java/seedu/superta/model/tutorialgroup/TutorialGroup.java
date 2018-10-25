@@ -20,6 +20,14 @@ public class TutorialGroup {
     private final UniqueStudentList students;
     private final UniqueAssignmentList assignments;
 
+    public TutorialGroup(String id) {
+        requireNonNull(id);
+        this.id = id;
+        this.name = "name";
+        this.students = new UniqueStudentList();
+        this.assignments = new UniqueAssignmentList();
+    }
+
     public TutorialGroup(String id, String name) {
         requireNonNull(id);
         this.id = id;

@@ -102,9 +102,7 @@ public class ParserUtil {
         return tgName.trim();
     }
 
-    public static String parseTutorialGroupId(String tgId) {
-        return tgId.trim();
-    }
+    public static String parseTutorialGroupId(String tgId) { return tgId.trim(); }
 
     /**
      * Parses a {@code Title title} into a {@code Title}.

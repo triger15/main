@@ -13,6 +13,7 @@ import seedu.superta.logic.commands.Command;
 import seedu.superta.logic.commands.CreateAssignmentCommand;
 import seedu.superta.logic.commands.CreateTutorialGroupCommand;
 import seedu.superta.logic.commands.DeleteCommand;
+import seedu.superta.logic.commands.DeleteTutorialGroupCommand;
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.ExitCommand;
 import seedu.superta.logic.commands.FeedbackCommand;
@@ -33,7 +34,7 @@ import seedu.superta.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class SuperTaClientParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -81,6 +82,9 @@ public class AddressBookParser {
 
         case UpdateTutorialGroupCommand.COMMAND_WORD:
             return new UpdateTutorialGroupCommandParser().parse(arguments);
+
+        case DeleteTutorialGroupCommand.COMMAND_WORD:
+            return new DeleteTutorialGroupCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
