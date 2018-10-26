@@ -2,11 +2,11 @@ package seedu.superta.model.assignment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.AppUtil.checkArgument;
+import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.superta.model.assignment.exceptions.GradeException;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
