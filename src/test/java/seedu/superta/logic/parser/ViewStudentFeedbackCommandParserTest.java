@@ -9,7 +9,7 @@ import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.superta.logic.commands.ViewStudentFeedbackCommand;
-import seedu.superta.model.student.SameStudentIdPredicate;
+import seedu.superta.model.student.StudentId;
 
 public class ViewStudentFeedbackCommandParserTest {
 
@@ -42,7 +42,7 @@ public class ViewStudentFeedbackCommandParserTest {
     public void parse_validArgs_returnsViewCommand() {
         // no leading and trailing whitespaces
         ViewStudentFeedbackCommand expectedViewStudentFeedbackCommand =
-                new ViewStudentFeedbackCommand(new SameStudentIdPredicate("A0123456Z"));
+                new ViewStudentFeedbackCommand(new StudentId("A0123456Z"));
 
         assertParseSuccess(parser, PREFIX_STUDENT_ID + "A0123456Z", expectedViewStudentFeedbackCommand);
     }

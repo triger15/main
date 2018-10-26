@@ -6,7 +6,7 @@ import static seedu.superta.model.student.StudentId.isValidStudentId;
 
 import seedu.superta.logic.commands.ViewStudentFeedbackCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
-import seedu.superta.model.student.SameStudentIdPredicate;
+import seedu.superta.model.student.StudentId;
 
 /**
  * Parses input arguments and creates a new ViewStudentFeedbackCommand object.
@@ -42,6 +42,6 @@ public class ViewStudentFeedbackCommandParser implements Parser<ViewStudentFeedb
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStudentFeedbackCommand.MESSAGE_USAGE));
         }
 
-        return new ViewStudentFeedbackCommand(new SameStudentIdPredicate(trimmedStudentId));
+        return new ViewStudentFeedbackCommand(new StudentId(trimmedStudentId));
     }
 }

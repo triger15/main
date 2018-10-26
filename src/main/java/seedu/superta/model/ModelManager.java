@@ -3,6 +3,7 @@ package seedu.superta.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -146,6 +147,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void addFeedback(Feedback feedback, StudentId studentId) {
         versionedSuperTaClient.addFeedback(feedback, studentId);
         indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public List<Feedback> viewFeedback(StudentId studentId) {
+        return versionedSuperTaClient.viewFeedback(studentId);
     }
 
     @Override

@@ -263,10 +263,10 @@ Displays a list of students in tutorial group `1` by their grade on assignment `
 === Feedback to Student: `feedback`
 
 Adds feedback to a student with a specified Student ID.
-Format: `feedback st/STUDENT_ID f/FEEDBACK`
+Format: `feedback id/STUDENT_ID f/FEEDBACK`
 
 Examples:
-* `feedback st/A1234566T f/Is generally attentive during class. However, needs to speak up more.`
+* `feedback id/A1234566T f/Is generally attentive during class. However, needs to speak up more.`
 Adds the given feedback `Is generally attentive during class. However, needs to speak up more.` to the student with Student ID `A1234566T`.
 
 
@@ -369,7 +369,10 @@ e.g. `add-to-tutorial-group tg/04a st/A0166733Y`
 e.g. `create-assignment tg/04a n/lab1 m/40`
 * *Grade Assignment*: `grade tg/[TUTORIAL_GROUP_ID] as/[ASSIGNMENT_NAME] st/[STUDENT_ID] m/[MARKS]`
 e.g. `grade tg/04a as/lab1 st/A0166733Y m/30`
-// TODO: Feedback
+* *Feedback*: `feedback id/[STUDENT_ID] f/[FEEDBACK]`
+e.g. `feedback id/A0166733Y f/Likes to sleep in class`
+* *View*: `view id/[STUDENT_ID]`
+e.g. `view id/A0166733Y`
 * *List* : `list`
 * *List Tutorial Groups* : `list-tutorial-groups`
 * *Help* : `help`
