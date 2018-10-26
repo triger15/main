@@ -11,7 +11,7 @@
     <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
     </padding>
-    <Label fx:id="name" styleClass="label-header" text="\$name" />
+    <Label fx:id="title" styleClass="label-header" text="\$name" />
     <Label fx:id="maxMarks" styleClass="label-bright" text="\$maxMarks" />
     <Separator orientation="HORIZONTAL" />
     <Label styleClass="label-bright">Summary</Label>

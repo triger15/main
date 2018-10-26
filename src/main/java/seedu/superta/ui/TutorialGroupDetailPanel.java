@@ -1,10 +1,14 @@
 package seedu.superta.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.superta.commons.core.LogsCenter;
+import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -15,6 +19,7 @@ import seedu.superta.model.tutorialgroup.TutorialGroup;
  */
 public class TutorialGroupDetailPanel extends UiPart<Region> {
     private static final String FXML = "TutorialGroupDetailPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(TutorialGroupDetailPanel.class.getSimpleName());
 
     @FXML
     private Label id;
@@ -68,6 +73,17 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
             }
         });
 
+        setEventHandlerForSelectionChangeEvent();
+    }
+
+    public void setEventHandlerForSelectionChangeEvent() {
+        assignments.getSelectionModel().selectedItemProperty()
+            .addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    logger.fine("Selection in assignment detailed view changed.");
+                    raise(new AssignmentSelectedEvent(tutorialGroup, newValue));
+                }
+            });
     }
 
     @Override

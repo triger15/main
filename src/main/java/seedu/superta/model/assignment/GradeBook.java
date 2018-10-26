@@ -53,6 +53,26 @@ public class GradeBook {
     }
 
     /**
+     * Returns the average for this grade book.
+     */
+    public double getAverage() {
+        double total = 0;
+        for (GradeEntry entry : internalMap.values()) {
+            total += entry.marks;
+        }
+        return total / internalMap.size();
+    }
+
+    /**
+     * Returns the median for this grade book.
+     */
+    public double getMedian() {
+        int mid = internalMap.size() / 2;
+        Object[] arr = internalMap.values().toArray();
+        return ((GradeEntry) arr[mid]).marks;
+    }
+
+    /**
      * Method to streamify this object. Also, orders it in lexicographical order of Student IDs.
      * @return a Stream of entries in lexicographical order.
      */

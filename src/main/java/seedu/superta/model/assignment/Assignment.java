@@ -90,6 +90,31 @@ public class Assignment {
     }
 
     /**
+     * Returns the average for this assignment.
+     */
+    public double getAverage() {
+        return gradebook.getAverage();
+    }
+
+    /**
+     * Returns the median for this assignment.
+     */
+    public double getMedian() {
+        return gradebook.getMedian();
+    }
+
+    /**
+     * Returns the projected difficulty for this assignment.
+     * Projected difficulty is currently average percentage scored.
+     */
+    public double getProjectedDifficulty() {
+        double average = gradebook.getAverage();
+        double averagePercent = average / maxMarks;
+
+        return averagePercent;
+    }
+
+    /**
      * Removes a students reference from the grade book, if student is inside.
      */
     public void removeStudentReferences(Student target) {
