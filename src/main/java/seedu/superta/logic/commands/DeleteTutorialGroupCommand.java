@@ -55,4 +55,5 @@ public class DeleteTutorialGroupCommand extends Command {
                 || (other instanceof DeleteTutorialGroupCommand // instanceof handles nulls
                 && toDelete.equals(((DeleteTutorialGroupCommand) other).toDelete)); // state check
     }
+
 }
