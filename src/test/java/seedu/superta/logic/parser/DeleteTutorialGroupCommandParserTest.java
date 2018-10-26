@@ -12,7 +12,7 @@ import seedu.superta.logic.commands.DeleteTutorialGroupCommand;
 
 public class DeleteTutorialGroupCommandParserTest {
 
-    public DeleteTutorialGroupCommandParser parser = new DeleteTutorialGroupCommandParser();
+    private DeleteTutorialGroupCommandParser parser = new DeleteTutorialGroupCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

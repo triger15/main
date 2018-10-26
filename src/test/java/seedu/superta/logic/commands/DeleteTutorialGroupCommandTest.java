@@ -15,10 +15,12 @@ import seedu.superta.model.UserPrefs;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 public class DeleteTutorialGroupCommandTest {
-    private Model model =  new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
+
     private static final String TG_ID_TO_DELETE = "T01";
     private static final String TG_NAME_TO_DELETE = "TutorialGroup01";
+
+    private Model model =  new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+    private CommandHistory commandHistory = new CommandHistory();
 
     /*
     TODO: Fix models not equal.
