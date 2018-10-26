@@ -21,6 +21,9 @@ public class AssignmentDetailPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(AssignmentDetailPanel.class.getSimpleName());
 
     @FXML
+    private Label tutorialGroupId;
+
+    @FXML
     private Label title;
 
     @FXML
@@ -46,11 +49,14 @@ public class AssignmentDetailPanel extends UiPart<Region> {
         this.tutorialGroup = tutorialGroup;
         this.assignment = assignment;
 
+        tutorialGroupId.setText("belongs to: " + tutorialGroup.getId());
         title.setText(assignment.getTitle().assignmentTitle);
         maxMarks.setText("Max marks: " + assignment.getMaxMarks());
-        average.setText("Average: " + assignment.getAverage());
-        median.setText("Median: " + assignment.getMedian());
-        projectedDifficulty.setText("Projected Difficulty: " + assignment.getProjectedDifficulty());
+        average.setText("Average: " + String.format("%.2f", assignment.getAverage()));
+        median.setText("Median: " + String.format("%.2f", assignment.getMedian()));
+        projectedDifficulty.setText("Projected Difficulty: "
+                                + String.format("%.2f", assignment.getProjectedDifficulty())
+                                + " / 10");
 
         grades.setItems(assignment.getGradebook().asUnmodifiableObservableList());
         grades.setCellFactory(listView -> new ListCell<>() {

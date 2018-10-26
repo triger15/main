@@ -129,7 +129,8 @@ public class TutorialGroupMaster {
         tutorialGroups.addListener((MapChangeListener<? super String, ? super TutorialGroup>) change -> {
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
-            } else if (change.wasRemoved()) {
+            }
+            if (change.wasRemoved()) {
                 list.remove(change.getValueRemoved());
             }
         });

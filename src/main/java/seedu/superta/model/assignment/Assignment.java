@@ -105,13 +105,13 @@ public class Assignment {
 
     /**
      * Returns the projected difficulty for this assignment.
-     * Projected difficulty is currently average percentage scored.
+     * Projected difficulty is currently 1 - average percentage scored.
      */
     public double getProjectedDifficulty() {
         double average = gradebook.getAverage();
         double averagePercent = average / maxMarks;
 
-        return averagePercent;
+        return (1 - averagePercent) * 10;
     }
 
     /**

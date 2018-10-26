@@ -90,7 +90,8 @@ public class GradeBook {
         internalMap.addListener((MapChangeListener<? super StudentId, ? super GradeEntry>) change -> {
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
-            } else if (change.wasRemoved()) {
+            }
+            if (change.wasRemoved()) {
                 list.remove(change.getValueRemoved());
             }
         });
