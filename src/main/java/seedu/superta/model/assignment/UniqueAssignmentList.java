@@ -121,6 +121,13 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * Returns the size of the internal list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
 
     @Override
     public Iterator<Assignment> iterator() {
