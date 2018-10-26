@@ -1,10 +1,13 @@
 package seedu.superta.model.assignment;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 
@@ -12,8 +15,7 @@ import seedu.superta.model.student.StudentId;
  * Model for a grade book.
  */
 public class GradeBook {
-
-    private final HashMap<StudentId, Double> internalHashmap = new HashMap<>();
+    private final ObservableMap<StudentId, Double> internalHashmap = FXCollections.observableHashMap();
 
     /**
      * Adds a grade to the internal hashmap
@@ -58,5 +60,21 @@ public class GradeBook {
     public Stream<Map.Entry<StudentId, Double>> stream() {
         return internalHashmap.entrySet().stream()
             .sorted(Comparator.comparing(o -> o.getKey().toString()));
+    }
+
+    /**
+     * Returns an unmodifiable view of this gradebook.
+     */
+    public ObservableList<Double> asUnmodifiableObservableList() {
+        ObservableList<Double> list = FXCollections.observableArrayList();
+        list.addAll(internalHashmap.values());
+        internalHashmap.addListener((MapChangeListener<? super StudentId, ? super Double>) change -> {
+            if (change.wasAdded()) {
+                list.add(change.getValueAdded());
+            } else if (change.wasRemoved()) {
+                list.remove(change.getValueRemoved());
+            }
+        });
+        return list;
     }
 }

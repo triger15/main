@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
@@ -25,6 +26,9 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
     private ListView<Student> students;
 
     @FXML
+    private ListView<Assignment> assignments;
+
+    @FXML
     private Region root;
 
     private TutorialGroup tutorialGroup;
@@ -36,7 +40,7 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
         id.setText(tutorialGroup.getId());
         name.setText(tutorialGroup.getName());
         students.setItems(tutorialGroup.getStudents().asUnmodifiableObservableList());
-        students.setCellFactory(listView -> new ListCell<Student>() {
+        students.setCellFactory(listView -> new ListCell<>() {
             @Override
             protected void updateItem(Student student, boolean empty) {
                 super.updateItem(student, empty);
@@ -49,6 +53,21 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
                 }
             }
         });
+        assignments.setItems(tutorialGroup.getAssignments().asUnmodifiableObservableList());
+        assignments.setCellFactory(listView -> new ListCell<>() {
+            @Override
+            protected void updateItem(Assignment assignment, boolean empty) {
+                super.updateItem(assignment, empty);
+
+                if (empty || assignment == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    setGraphic(new AssignmentCard(tutorialGroup, assignment).getRoot());
+                }
+            }
+        });
+
     }
 
     @Override
