@@ -13,7 +13,7 @@ import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
-// @@author caephler
+// @@author Caephler
 /**
  * TutorialGroupDetailPanel to display details of tutorial group.
  */

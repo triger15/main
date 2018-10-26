@@ -7,7 +7,7 @@ import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
-// @@author caephler
+// @@author Caephler
 /**
  * A UI component that displays information of a {@code TutorialGroup}
  */

@@ -10,7 +10,7 @@ import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
-// @@author caephler
+// @@author Caephler
 /**
  * Panel containing the list of tutorial groups.
  */
