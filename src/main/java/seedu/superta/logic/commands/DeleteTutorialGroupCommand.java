@@ -2,9 +2,6 @@ package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
@@ -40,8 +37,7 @@ public class DeleteTutorialGroupCommand extends Command {
 
         try {
             model.deleteTutorialGroup(toDelete);
-        }
-        catch(TutorialGroupNotFoundException e) {
+        } catch (TutorialGroupNotFoundException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
         model.commitSuperTaClient();
