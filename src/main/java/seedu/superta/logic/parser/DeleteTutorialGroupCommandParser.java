@@ -4,8 +4,6 @@ import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.ParserUtil.arePrefixesPresent;
 
-import java.util.List;
-
 import seedu.superta.logic.commands.DeleteTutorialGroupCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
 
@@ -15,8 +13,8 @@ import seedu.superta.logic.parser.exceptions.ParseException;
 public class DeleteTutorialGroupCommandParser implements Parser<DeleteTutorialGroupCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteTutorialGroupCommand
-     * and returns an DeleteTutorialGroupCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteCommand
+     * and returns an DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTutorialGroupCommand parse(String args) throws ParseException {
