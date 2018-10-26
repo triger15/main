@@ -24,6 +24,9 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
     @FXML
     private ListView<Student> students;
 
+    @FXML
+    private Region root;
+
     private TutorialGroup tutorialGroup;
 
     public TutorialGroupDetailPanel(TutorialGroup tutorialGroup) {
@@ -42,7 +45,7 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    setGraphic(new StudentCard(student, 1).getRoot());
+                    setGraphic(new StudentCard(student).getRoot());
                 }
             }
         });

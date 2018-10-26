@@ -43,6 +43,16 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
+        setLabels();
+    }
+
+    public StudentCard(Student student) {
+        super(FXML);
+        this.student = student;
+        setLabels();
+    }
+
+    public void setLabels() {
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
