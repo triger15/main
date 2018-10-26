@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.GradeEntry;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
@@ -44,7 +45,7 @@ public class AssignmentCard extends UiPart<Region> {
         );
 
         assignment.getGradebook().asUnmodifiableObservableList().addListener(
-            (ListChangeListener<? super Double>) change -> {
+            (ListChangeListener<? super GradeEntry>) change -> {
                 updateStudentCount();
             }
         );

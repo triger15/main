@@ -48,7 +48,7 @@ public class Assignment {
         this.maxMarks = toClone.maxMarks;
         gradebook = new GradeBook();
         toClone.gradebook.stream()
-            .forEach(e -> gradebook.addGrade(e.getKey(), e.getValue()));
+            .forEach(e -> gradebook.addGrade(e.studentId, e.marks));
     }
 
 
@@ -128,7 +128,7 @@ public class Assignment {
         return "[Assignment]" + title
             + " [Max Marks: " + maxMarks + "]\n"
             + gradebook.stream()
-                .map(entry -> entry.getKey().toString() + ": " + entry.getValue())
+                .map(GradeEntry::toString)
                 .collect(Collectors.joining("\n"));
     }
 }

@@ -1,10 +1,8 @@
 package seedu.superta.storage;
 
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.superta.model.student.StudentId;
+import seedu.superta.model.assignment.GradeEntry;
 
 /**
  * An XML Representation of a Grade in a gradebook.
@@ -19,14 +17,9 @@ public class XmlGrade {
 
     public XmlGrade() { }
 
-    public XmlGrade(String studentId, Double marks) {
-        this.studentId = studentId;
-        this.marks = marks;
-    }
-
-    public XmlGrade(Map.Entry<StudentId, Double> entry) {
-        studentId = entry.getKey().toString();
-        marks = entry.getValue();
+    public XmlGrade(GradeEntry entry) {
+        this.studentId = entry.studentId.studentId;
+        this.marks = entry.marks;
     }
 
     public String getStudentId() {

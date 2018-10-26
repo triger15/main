@@ -1,7 +1,6 @@
 package seedu.superta.model.assignment;
 
 import java.util.Comparator;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
@@ -15,7 +14,7 @@ import seedu.superta.model.student.StudentId;
  * Model for a grade book.
  */
 public class GradeBook {
-    private final ObservableMap<StudentId, Double> internalMap = FXCollections.observableHashMap();
+    private final ObservableMap<StudentId, GradeEntry> internalMap = FXCollections.observableHashMap();
 
     /**
      * Adds a grade to the internal hashmap
@@ -23,7 +22,7 @@ public class GradeBook {
      * @param grade the grade value
      */
     public void addGrade(StudentId stId, Double grade) {
-        internalMap.put(stId, grade);
+        internalMap.put(stId, new GradeEntry(stId, grade));
     }
 
     /**
@@ -32,7 +31,7 @@ public class GradeBook {
      * @return his grade for this assignment
      */
     public Double getGradeFor(StudentId stId) {
-        return internalMap.get(stId);
+        return internalMap.get(stId).marks;
     }
 
     /**
@@ -57,18 +56,18 @@ public class GradeBook {
      * Method to streamify this object. Also, orders it in lexicographical order of Student IDs.
      * @return a Stream of entries in lexicographical order.
      */
-    public Stream<Map.Entry<StudentId, Double>> stream() {
-        return internalMap.entrySet().stream()
-            .sorted(Comparator.comparing(o -> o.getKey().toString()));
+    public Stream<GradeEntry> stream() {
+        return internalMap.values().stream()
+            .sorted(Comparator.comparing(o -> o.marks));
     }
 
     /**
      * Returns an unmodifiable view of this gradebook.
      */
-    public ObservableList<Double> asUnmodifiableObservableList() {
-        ObservableList<Double> list = FXCollections.observableArrayList();
+    public ObservableList<GradeEntry> asUnmodifiableObservableList() {
+        ObservableList<GradeEntry> list = FXCollections.observableArrayList();
         list.addAll(internalMap.values());
-        internalMap.addListener((MapChangeListener<? super StudentId, ? super Double>) change -> {
+        internalMap.addListener((MapChangeListener<? super StudentId, ? super GradeEntry>) change -> {
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
             } else if (change.wasRemoved()) {
