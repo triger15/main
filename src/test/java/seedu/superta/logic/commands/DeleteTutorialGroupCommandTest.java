@@ -19,7 +19,7 @@ public class DeleteTutorialGroupCommandTest {
     private static final String TG_ID_TO_DELETE = "T01";
     private static final String TG_NAME_TO_DELETE = "TutorialGroup01";
 
-    private Model model =  new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     /*
