@@ -30,7 +30,7 @@ public class DeleteTutorialGroupCommand extends Command {
     private final TutorialGroup toDelete;
 
     public DeleteTutorialGroupCommand(String idToDelete) {
-        toDelete = new TutorialGroup(idToDelete);
+        toDelete = new TutorialGroup(idToDelete, "toDelete");
     }
 
     @Override

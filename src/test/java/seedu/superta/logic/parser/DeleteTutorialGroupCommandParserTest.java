@@ -1,18 +1,14 @@
 package seedu.superta.logic.parser;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.superta.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_NAME;
 import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import seedu.superta.logic.commands.DeleteTutorialGroupCommand;
-import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 public class DeleteTutorialGroupCommandParserTest {
 

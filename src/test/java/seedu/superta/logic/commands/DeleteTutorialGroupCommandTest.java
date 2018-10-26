@@ -3,7 +3,6 @@ package seedu.superta.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.superta.logic.commands.DeleteTutorialGroupCommand.MESSAGE_FAILURE;
 import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
 
