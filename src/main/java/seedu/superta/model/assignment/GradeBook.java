@@ -12,6 +12,7 @@ import seedu.superta.model.student.StudentId;
  * Model for a grade book.
  */
 public class GradeBook {
+
     private final HashMap<StudentId, Double> internalHashmap = new HashMap<>();
 
     /**
