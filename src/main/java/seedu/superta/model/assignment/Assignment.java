@@ -6,6 +6,7 @@ import static seedu.superta.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.superta.model.assignment.exceptions.GradeException;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -32,8 +33,7 @@ public class Assignment {
      * Constructs a {@code Assignment}.
      */
     public Assignment(Title title, Double maxMarks) {
-        requireNonNull(title);
-        requireNonNull(maxMarks);
+        requireAllNonNull(title, maxMarks);
         checkArgument(isValidMaxMarks(maxMarks), MESSAGE_MAXMARKS_CONSTRAINTS);
         this.title = title;
         this.maxMarks = maxMarks;
@@ -41,12 +41,15 @@ public class Assignment {
     }
 
     public Assignment(Title title, Double maxMarks, GradeBook gradebook) {
+        requireAllNonNull(title, maxMarks, gradebook);
+        checkArgument(isValidMaxMarks(maxMarks), MESSAGE_MAXMARKS_CONSTRAINTS);
         this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = gradebook;
     }
 
     public Assignment(Assignment toClone) {
+        requireNonNull(toClone);
         this.title = toClone.title;
         this.maxMarks = toClone.maxMarks;
         gradebook = new GradeBook();
@@ -94,8 +97,7 @@ public class Assignment {
      */
     public void grade(StudentId studentId, Double marks) {
         // TODO: Enforce marks < maxMarks, if not throw exception
-        requireNonNull(studentId);
-        requireNonNull(marks);
+        requireAllNonNull(studentId, marks);
 
         if (marks > maxMarks) {
             throw new GradeException(MESSAGE_MARKS_CONSTRAINTS);
