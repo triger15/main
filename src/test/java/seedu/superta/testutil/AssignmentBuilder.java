@@ -32,15 +32,15 @@ public class AssignmentBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Student} that we are building.
+     * Sets the {@code Title} of the {@code Assignment} that we are building.
      */
-    public AssignmentBuilder withTitle(String name) {
-        this.title = new Title(name);
+    public AssignmentBuilder withTitle(String title) {
+        this.title = new Title(title);
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
+     * Sets the {@code maxmarks} of the {@code Assignment} that we are building.
      */
     public AssignmentBuilder withMaxMarks(Double maxMarks) {
         this.maxMarks = maxMarks;
@@ -48,7 +48,7 @@ public class AssignmentBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Student} that we are building.
+     * Sets the {@code GradeBook} of the {@code Assignment} that we are building.
      */
     public AssignmentBuilder withGradeBook(GradeBook gradeBook) {
         this.gradebook = gradeBook;

@@ -21,16 +21,16 @@ public class TitleTest {
 
     @Test
     public void isValidTitle() {
-        // null name
+        // null title
         Assert.assertThrows(NullPointerException.class, () -> Title.isValidTitle(null));
 
-        // invalid name
+        // invalid title
         assertFalse(Title.isValidTitle("")); // empty string
         assertFalse(Title.isValidTitle(" ")); // spaces only
         assertFalse(Title.isValidTitle("^")); // only non-alphanumeric characters
         assertFalse(Title.isValidTitle("lab1*")); // contains non-alphanumeric characters
 
-        // valid name
+        // valid title
         assertTrue(Title.isValidTitle("tutorial")); // alphabets only
         assertTrue(Title.isValidTitle("12345")); // numbers only
         assertTrue(Title.isValidTitle("tutorial week 1")); // alphanumeric characters

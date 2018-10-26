@@ -63,7 +63,7 @@ public class AssignmentTest {
         // different type -> returns false
         assertFalse(TUT.equals(5));
 
-        // different student -> returns false
+        // different assignment -> returns false
         assertFalse(TUT.equals(LAB));
 
         // different title -> returns false
