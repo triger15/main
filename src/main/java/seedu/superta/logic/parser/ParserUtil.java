@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import seedu.superta.commons.core.index.Index;
 import seedu.superta.commons.util.StringUtil;
 import seedu.superta.logic.parser.exceptions.ParseException;
+import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.student.Email;
 import seedu.superta.model.student.Feedback;
@@ -121,8 +122,34 @@ public class ParserUtil {
         return new Title(trimmedTitle);
     }
 
-    public static Double parseDouble(String str) {
-        return Double.parseDouble(str.trim());
+    /**
+     * Parses a {@code String maxMarks} into a {@code Double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code maxMarks} is invalid.
+     */
+    public static Double parseMaxMarks(String maxMarks) throws ParseException {
+        requireNonNull(maxMarks);
+        Double trimmedMaxMarks = Double.parseDouble(maxMarks.trim());
+        if (trimmedMaxMarks <= 0) {
+            throw new ParseException(Assignment.MESSAGE_MAXMARKS_CONSTRAINTS);
+        }
+        return Double.parseDouble(maxMarks.trim());
+    }
+
+    /**
+     * Parses a {@code String marks} into a {@code Double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code maxMarks} is invalid.
+     */
+    public static Double parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        Double trimmedGrade = Double.parseDouble(grade.trim());
+        if (trimmedGrade < 0) {
+            throw new ParseException(Assignment.MESSAGE_GRADE_CONSTRAINTS);
+        }
+        return Double.parseDouble(grade.trim());
     }
 
     /**

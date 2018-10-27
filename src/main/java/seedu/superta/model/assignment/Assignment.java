@@ -1,13 +1,11 @@
 package seedu.superta.model.assignment;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.superta.commons.util.AppUtil.checkArgument;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import seedu.superta.model.assignment.exceptions.GradeException;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 
@@ -17,13 +15,11 @@ import seedu.superta.model.student.StudentId;
  */
 public class Assignment {
 
+    public static final String MESSAGE_GRADE_CONSTRAINTS =
+        "Grade should be above zero and within max marks.";
+
     public static final String MESSAGE_MAXMARKS_CONSTRAINTS =
-        "Max marks should only contain numbers, and it should not be blank";
-
-    public static final String MESSAGE_MARKS_CONSTRAINTS =
-        "Marks should be within max marks, and it should not be blank";
-
-    public static final String MAXMARKS_VALIDATION_REGEX = "[0-9]*[.]?[0-9]*";
+        "Max marks should be above zero.";
 
     private final Title title;
     private final Double maxMarks;
@@ -34,7 +30,6 @@ public class Assignment {
      */
     public Assignment(Title title, Double maxMarks) {
         requireAllNonNull(title, maxMarks);
-        checkArgument(isValidMaxMarks(maxMarks), MESSAGE_MAXMARKS_CONSTRAINTS);
         this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = new GradeBook();
@@ -42,7 +37,6 @@ public class Assignment {
 
     public Assignment(Title title, Double maxMarks, GradeBook gradebook) {
         requireAllNonNull(title, maxMarks, gradebook);
-        checkArgument(isValidMaxMarks(maxMarks), MESSAGE_MAXMARKS_CONSTRAINTS);
         this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = gradebook;
@@ -71,13 +65,6 @@ public class Assignment {
     }
 
     /**
-     * Returns true if a given string is a valid number.
-     */
-    public static boolean isValidMaxMarks(Double test) {
-        return test.toString().matches(MAXMARKS_VALIDATION_REGEX);
-    }
-
-    /**
      * Returns true if both assignments of the same title have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two assignments.
      */
@@ -98,10 +85,6 @@ public class Assignment {
     public void grade(StudentId studentId, Double marks) {
         // TODO: Enforce marks < maxMarks, if not throw exception
         requireAllNonNull(studentId, marks);
-
-        if (marks > maxMarks) {
-            throw new GradeException(MESSAGE_MARKS_CONSTRAINTS);
-        }
 
         gradebook.addGrade(studentId, marks);
     }

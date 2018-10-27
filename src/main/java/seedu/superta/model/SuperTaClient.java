@@ -1,6 +1,7 @@
 package seedu.superta.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Map;
@@ -9,9 +10,11 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.superta.model.assignment.exceptions.GradeException;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -134,8 +137,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
      * Adds an assignment to a tutorial group.
      */
     public void addAssignment(TutorialGroup tg, Assignment assignment) {
-        requireNonNull(assignment);
-        requireNonNull(tg);
+        requireAllNonNull(tg, assignment);
 
         tg.addAssignment(assignment);
     }
@@ -149,16 +151,22 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
             throw new TutorialGroupNotFoundException();
         }
         TutorialGroup tg = otg.get();
+
         Optional<Assignment> oas = tg.getAssignment(grade.getAsId());
         if (!oas.isPresent()) {
             throw new AssignmentNotFoundException();
         }
         Assignment as = oas.get();
+
         Optional<Student> ost = tg.getStudents().getStudentWithId(grade.getStId());
         if (!ost.isPresent()) {
             throw new StudentNotFoundException();
         }
         Student st = ost.get();
+
+        if (grade.getMarks() > as.getMaxMarks()) {
+            throw new GradeException();
+        }
         as.grade(st.getStudentId(), grade.getMarks());
     }
 

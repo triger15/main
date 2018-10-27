@@ -21,16 +21,6 @@ public class AssignmentTest {
     }
 
     @Test
-    public void isValidMaxMarks() {
-        // null max marks
-        Assert.assertThrows(NullPointerException.class, () -> Assignment.isValidMaxMarks(null));
-
-        // valid max marks
-        org.junit.Assert.assertTrue(Assignment.isValidMaxMarks(0.0)); // numbers only
-    }
-
-
-    @Test
     public void isSameAssignment() {
         // same object -> returns true
         assertTrue(TUT.isSameAssignment(TUT));
