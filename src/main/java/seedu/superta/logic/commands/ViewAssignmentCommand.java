@@ -68,4 +68,17 @@ public class ViewAssignmentCommand extends Command {
         EventsCenter.getInstance().post(new AssignmentSelectedEvent(tutorialGroup, assignment));
         return new CommandResult(details.toString());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ViewAssignmentCommand)) {
+            return false;
+        }
+        ViewAssignmentCommand command = (ViewAssignmentCommand) other;
+        return this.tutorialGroupId.equals(command.tutorialGroupId) &&
+            this.title.equals(command.title);
+    }
 }
