@@ -49,7 +49,7 @@ public class AssignmentDetailPanel extends UiPart<Region> {
         this.tutorialGroup = tutorialGroup;
         this.assignment = assignment;
 
-        tutorialGroupId.setText("belongs to: " + tutorialGroup.getId());
+        tutorialGroupId.setText("Tutorial Group ID: " + tutorialGroup.getId());
         title.setText(assignment.getTitle().assignmentTitle);
         maxMarks.setText("Max marks: " + assignment.getMaxMarks());
         average.setText("Average: " + String.format("%.2f", assignment.getAverage()));
