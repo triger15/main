@@ -42,7 +42,7 @@ public class SuperTaClientParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final SuperTaClientParser parser = new SuperTaClientParser();
 
     @Test
     public void parseCommand_add() throws Exception {

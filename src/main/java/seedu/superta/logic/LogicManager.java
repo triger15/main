@@ -8,7 +8,7 @@ import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.logic.commands.Command;
 import seedu.superta.logic.commands.CommandResult;
 import seedu.superta.logic.commands.exceptions.CommandException;
-import seedu.superta.logic.parser.AddressBookParser;
+import seedu.superta.logic.parser.SuperTaClientParser;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.Model;
 import seedu.superta.model.student.Student;
@@ -22,19 +22,19 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
+    private final SuperTaClientParser superTaClientParser;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
+        superTaClientParser = new SuperTaClientParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = superTaClientParser.parseCommand(commandText);
             return command.execute(model, history);
         } finally {
             history.add(commandText);

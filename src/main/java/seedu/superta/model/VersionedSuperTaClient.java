@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedSuperTaClient extends SuperTaClient {
 
-    private final List<ReadOnlySuperTaClient> addressBookStateList;
+    private final List<ReadOnlySuperTaClient> superTaClientStateList;
     private int currentStatePointer;
 
     public VersionedSuperTaClient(ReadOnlySuperTaClient initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new SuperTaClient(initialState));
+        superTaClientStateList = new ArrayList<>();
+        superTaClientStateList.add(new SuperTaClient(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,12 +25,12 @@ public class VersionedSuperTaClient extends SuperTaClient {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new SuperTaClient(this));
+        superTaClientStateList.add(new SuperTaClient(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        superTaClientStateList.subList(currentStatePointer + 1, superTaClientStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedSuperTaClient extends SuperTaClient {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(superTaClientStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,21 +52,21 @@ public class VersionedSuperTaClient extends SuperTaClient {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(superTaClientStateList.get(currentStatePointer));
     }
 
     /**
-     * Returns true if {@code undo()} has address book states to undo.
+     * Returns true if {@code undo()} has SuperTA client states to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if {@code redo()} has address book states to redo.
+     * Returns true if {@code redo()} has SuperTA client states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < superTaClientStateList.size() - 1;
     }
 
     @Override
@@ -81,12 +81,12 @@ public class VersionedSuperTaClient extends SuperTaClient {
             return false;
         }
 
-        VersionedSuperTaClient otherVersionedAddressBook = (VersionedSuperTaClient) other;
+        VersionedSuperTaClient otherVersionedSuperTaClient = (VersionedSuperTaClient) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedSuperTaClient)
+                && superTaClientStateList.equals(otherVersionedSuperTaClient.superTaClientStateList)
+                && currentStatePointer == otherVersionedSuperTaClient.currentStatePointer;
     }
 
     /**

@@ -91,7 +91,7 @@ public class DeleteCommandTest {
         // delete -> first student deleted
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered student list to show all persons
+        // undo -> reverts SuperTA client back to previous state and filtered student list to show all students
         expectedModel.undoSuperTaClient();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
