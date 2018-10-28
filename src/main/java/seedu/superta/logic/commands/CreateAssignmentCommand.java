@@ -26,6 +26,7 @@ public class CreateAssignmentCommand extends Command {
         + "m/40";
 
     public static final String MESSAGE_SUCCESS = "New assignment created: %1$s";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the database";
 
     private final Assignment toAdd;
     private final String tgId;

@@ -7,6 +7,7 @@ import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.superta.model.assignment.exceptions.GradeException;
 import seedu.superta.model.student.exceptions.StudentNotFoundException;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
@@ -49,6 +50,8 @@ public class GradeAssignmentCommand extends Command {
             throw new CommandException("No such tutorial group.");
         } catch (AssignmentNotFoundException e) {
             throw new CommandException("No such assignment.");
+        } catch (GradeException e) {
+            throw new CommandException("Grade should not be above maximum marks of assignment.");
         }
 
         model.commitSuperTaClient();

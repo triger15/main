@@ -37,7 +37,7 @@ public class CreateAssignmentCommandParser implements Parser<CreateAssignmentCom
             argumentMultimap.getValue(PREFIX_ASSIGNMENT_TITLE).get()
         );
 
-        Double maxMarks = ParserUtil.parseDouble(
+        Double maxMarks = ParserUtil.parseMaxMarks(
             argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_MARKS).get()
         );
 

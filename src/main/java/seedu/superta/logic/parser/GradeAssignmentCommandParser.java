@@ -48,7 +48,7 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
         StudentId stId = ParserUtil.parseStudentId(
             argMap.getValue(PREFIX_GENERAL_STUDENT_ID).get()
         );
-        Double marks = ParserUtil.parseDouble(
+        Double marks = ParserUtil.parseGrade(
             argMap.getValue(PREFIX_ASSIGNMENT_MARKS).get()
         );
 

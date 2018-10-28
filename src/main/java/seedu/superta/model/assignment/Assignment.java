@@ -1,5 +1,9 @@
 package seedu.superta.model.assignment;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import seedu.superta.model.student.Student;
@@ -10,6 +14,13 @@ import seedu.superta.model.student.StudentId;
  * Guarantees: immutable.
  */
 public class Assignment {
+
+    public static final String MESSAGE_GRADE_CONSTRAINTS =
+        "Grade should be above zero and within max marks.";
+
+    public static final String MESSAGE_MAXMARKS_CONSTRAINTS =
+        "Max marks should be above zero.";
+
     private final Title title;
     private final Double maxMarks;
     private final GradeBook gradebook;
@@ -18,18 +29,21 @@ public class Assignment {
      * Constructs a {@code Assignment}.
      */
     public Assignment(Title title, Double maxMarks) {
+        requireAllNonNull(title, maxMarks);
         this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = new GradeBook();
     }
 
     public Assignment(Title title, Double maxMarks, GradeBook gradebook) {
+        requireAllNonNull(title, maxMarks, gradebook);
         this.title = title;
         this.maxMarks = maxMarks;
         this.gradebook = gradebook;
     }
 
     public Assignment(Assignment toClone) {
+        requireNonNull(toClone);
         this.title = toClone.title;
         this.maxMarks = toClone.maxMarks;
         gradebook = new GradeBook();
@@ -70,6 +84,8 @@ public class Assignment {
      */
     public void grade(StudentId studentId, Double marks) {
         // TODO: Enforce marks < maxMarks, if not throw exception
+        requireAllNonNull(studentId, marks);
+
         gradebook.addGrade(studentId, marks);
     }
 
@@ -78,6 +94,33 @@ public class Assignment {
      */
     public void removeStudentReferences(Student target) {
         gradebook.removeStudentReference(target);
+    }
+
+
+    /**
+     * Returns true if both assignments have the same identity and data fields.
+     * This defines a stronger notion of equality between two assignments.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Assignment)) {
+            return false;
+        }
+
+        Assignment otherStudent = (Assignment) other;
+        return otherStudent.getTitle().equals(getTitle())
+            && otherStudent.getMaxMarks().equals(getMaxMarks())
+            && otherStudent.getGradebook().equals(getGradebook());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(title, maxMarks, gradebook);
     }
 
     @Override
