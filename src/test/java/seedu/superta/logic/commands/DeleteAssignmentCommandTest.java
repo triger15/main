@@ -15,6 +15,10 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
 import seedu.superta.model.ModelManager;
 import seedu.superta.model.UserPrefs;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
+import seedu.superta.testutil.AssignmentBuilder;
+import seedu.superta.testutil.TutorialGroupBuilder;
 
 public class DeleteAssignmentCommandTest {
 
@@ -23,11 +27,29 @@ public class DeleteAssignmentCommandTest {
 
     @Test
     public void execute_assignmentAndTutorialGroupFound_success() {
+        Assignment assignment = new AssignmentBuilder()
+                .withTitle(ASS_TO_DELETE)
+                .build();
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder()
+                .withId(TUTORIAL_GROUP)
+                .build();
+
         Model model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+        model.addTutorialGroup(tutorialGroup);
+        model.addAssignment(TUTORIAL_GROUP, assignment);
         CommandHistory commandHistory = new CommandHistory();
         DeleteAssignmentCommand command = new DeleteAssignmentCommand(ASS_TO_DELETE, TUTORIAL_GROUP);
 
+        Assignment assignmentCopy = new AssignmentBuilder()
+                .withTitle(ASS_TO_DELETE)
+                .build();
+        TutorialGroup tutorialGroupCopy = new TutorialGroupBuilder()
+                .withId(TUTORIAL_GROUP)
+                .build();
+
         Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+        expectedModel.addTutorialGroup(tutorialGroupCopy);
+        expectedModel.addAssignment(TUTORIAL_GROUP, assignmentCopy);
         expectedModel.deleteAssignment(TUTORIAL_GROUP, ASS_TO_DELETE);
         expectedModel.commitSuperTaClient();
 
@@ -38,7 +60,12 @@ public class DeleteAssignmentCommandTest {
 
     @Test
     public void execute_assignmentNotFound_throwsCommandException() {
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder()
+                .withId(TUTORIAL_GROUP)
+                .build();
+
         Model model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+        model.addTutorialGroup(tutorialGroup);
         CommandHistory commandHistory = new CommandHistory();
         DeleteAssignmentCommand command = new DeleteAssignmentCommand("Lab 2", TUTORIAL_GROUP);
 

@@ -78,20 +78,6 @@ public class TypicalSuperTaClient {
             ab.addStudent(student);
         }
 
-        Assignment assignment = new AssignmentBuilder().withTitle("Lab 1")
-                .withMaxMarks(100.00)
-                .withGradeBook(new GradeBook())
-                .build();
-
-        TutorialGroup tutorialGroup = new TutorialGroupBuilder().withId("G01")
-                .withName("CS1010 Group 1")
-                .addStudent(AMY)
-                .addStudent(BOB)
-                .addAssignment(assignment)
-                .build();
-
-        ab.addTutorialGroup(tutorialGroup);
-
         return ab;
     }
 
