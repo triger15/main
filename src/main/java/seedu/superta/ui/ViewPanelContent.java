@@ -5,6 +5,11 @@ import java.net.URL;
 import javafx.scene.layout.Region;
 import seedu.superta.model.Model;
 
+// @@author Caephler
+
+/**
+ * Abstract class for the bottom right panel.
+ */
 public abstract class ViewPanelContent extends UiPart<Region> {
     public ViewPanelContent(URL fxmlFileUrl) {
         super(fxmlFileUrl);

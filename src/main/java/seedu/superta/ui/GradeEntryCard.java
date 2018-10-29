@@ -5,6 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.superta.model.assignment.GradeEntry;
 
+// @@author Caephler
+
+/**
+ * UI Component for GradeEntry.
+ */
 public class GradeEntryCard extends UiPart<Region> {
     private static final String FXML = "GradeEntryCard.fxml";
 

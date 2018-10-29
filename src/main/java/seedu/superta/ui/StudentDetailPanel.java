@@ -48,6 +48,9 @@ public class StudentDetailPanel extends ViewPanelContent {
         render();
     }
 
+    /**
+     * Renders the UI views.
+     */
     private void render() {
         id.setText(student.getStudentId().studentId);
         name.setText(student.getName().fullName);

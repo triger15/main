@@ -37,12 +37,12 @@ public class ViewAssignmentCommandParserTest {
                 invalidCommandResult);
 
         // invalid title: special characters
-        assertParseFailure(parser, PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a " + PREFIX_GENERAL_ASSIGNMENT_TITLE +
-            "*lab1", invalidCommandResult);
+        assertParseFailure(parser, PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a " + PREFIX_GENERAL_ASSIGNMENT_TITLE
+            + "*lab1", invalidCommandResult);
 
         // too many arguments
-        assertParseFailure(parser, PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a " + PREFIX_GENERAL_ASSIGNMENT_TITLE +
-            "lab1 " + PREFIX_TUTORIAL_GROUP_ID + "04a", invalidCommandResult);
+        assertParseFailure(parser, PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a " + PREFIX_GENERAL_ASSIGNMENT_TITLE
+            + "lab1 " + PREFIX_TUTORIAL_GROUP_ID + "04a", invalidCommandResult);
     }
 
     @Test
@@ -53,8 +53,8 @@ public class ViewAssignmentCommandParserTest {
         ViewAssignmentCommand expectedCommand = new ViewAssignmentCommand(
             tutorialGroupId, assignmentTitle
         );
-        String userInput = " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tutorialGroupId + " " +
-            PREFIX_GENERAL_ASSIGNMENT_TITLE + assignmentTitle.assignmentTitle;
+        String userInput = " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tutorialGroupId + " "
+            + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignmentTitle.assignmentTitle;
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

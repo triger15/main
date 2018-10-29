@@ -56,6 +56,7 @@ public class DeleteTutorialGroupCommandTest {
 
         //same String object -> returns true
         DeleteTutorialGroupCommand firstCommandCopy = new DeleteTutorialGroupCommand(TG_ID_TO_DELETE);
+        System.out.println(firstCommand.equals(firstCommandCopy));
         assertTrue(firstCommand.equals(firstCommandCopy));
 
         // different types -> returns false

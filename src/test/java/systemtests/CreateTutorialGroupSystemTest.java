@@ -20,6 +20,8 @@ public class CreateTutorialGroupSystemTest extends SuperTaClientSystemTest {
 
         /* Case: Adding a tutorial group with leading spaces and trailing spaces should add the tutorial group. */
         TutorialGroupBuilder tgBuilder = new TutorialGroupBuilder();
+        tgBuilder.withId("04a");
+        tgBuilder.withName("CS1101S Studio 04A");
         TutorialGroup typicalTg = tgBuilder.build();
         String command = "  " + CreateTutorialGroupCommand.COMMAND_WORD + " n/CS1101S Studio 04A " + "id/04a    ";
 

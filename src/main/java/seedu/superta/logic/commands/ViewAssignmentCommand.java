@@ -15,6 +15,11 @@ import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
+// @@author Caephler
+
+/**
+ * Command to view assignment details.
+ */
 public class ViewAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "view-assignment";
     public static final String MESSAGE_SUCCESS = "Assignment Details: \n%s";
@@ -74,11 +79,13 @@ public class ViewAssignmentCommand extends Command {
         if (other == this) {
             return true;
         }
+
         if (!(other instanceof ViewAssignmentCommand)) {
             return false;
         }
+
         ViewAssignmentCommand command = (ViewAssignmentCommand) other;
-        return this.tutorialGroupId.equals(command.tutorialGroupId) &&
-            this.title.equals(command.title);
+        return this.tutorialGroupId.equals(command.tutorialGroupId)
+            && this.title.equals(command.title);
     }
 }

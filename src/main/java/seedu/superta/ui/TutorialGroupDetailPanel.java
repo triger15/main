@@ -43,6 +43,9 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
         setEventHandlerForSelectionChangeEvent();
     }
 
+    /**
+     * Renders the UI views.
+     */
     public void render() {
         id.setText(tutorialGroup.getId());
         name.setText(tutorialGroup.getName());

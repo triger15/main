@@ -53,6 +53,9 @@ public class AssignmentDetailPanel extends ViewPanelContent {
         render();
     }
 
+    /**
+     * Renders the UI view.
+     */
     private void render() {
         tutorialGroupId.setText("Tutorial Group ID: " + tutorialGroup.getId());
         title.setText(assignment.getTitle().assignmentTitle);

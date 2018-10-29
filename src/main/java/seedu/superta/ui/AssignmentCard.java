@@ -51,6 +51,9 @@ public class AssignmentCard extends UiPart<Region> {
         );
     }
 
+    /**
+     * Updates the student count in this assignment.
+     */
     public void updateStudentCount() {
         int total = tutorialGroup.getStudents().size();
         long graded = assignment.getGradebook().stream().count();

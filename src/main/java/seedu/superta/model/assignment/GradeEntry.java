@@ -29,8 +29,8 @@ public class GradeEntry {
             return false;
         }
         GradeEntry otherEntry = (GradeEntry) other;
-        return studentId.equals(otherEntry.studentId) &&
-            marks.equals(otherEntry.marks);
+        return studentId.equals(otherEntry.studentId)
+            && marks.equals(otherEntry.marks);
     }
 
     @Override

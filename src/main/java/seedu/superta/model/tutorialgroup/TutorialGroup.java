@@ -89,9 +89,9 @@ public class TutorialGroup {
             return false;
         }
         TutorialGroup otherTutorialGroup = (TutorialGroup) other;
-        return id.equals(otherTutorialGroup.id) &&
-            students.equals(otherTutorialGroup.students) &&
-            assignments.equals(otherTutorialGroup.assignments);
+        return id.equals(otherTutorialGroup.id)
+            && students.equals(otherTutorialGroup.students)
+            && assignments.equals(otherTutorialGroup.assignments);
     }
 
     @Override
