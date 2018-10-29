@@ -51,7 +51,7 @@ public class DeleteAssignmentCommandParserTest {
                 + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignment;
         assertParseSuccess(parser , arguments, expected);
 
-        arguments = " " + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignment + " " +
+        arguments = " " + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignment + " "
                 + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tg;
         assertParseSuccess(parser , arguments, expected);
     }
