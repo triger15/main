@@ -147,6 +147,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteAssignment(String tgId, String assignment) {
+
+        }
+
+        @Override
         public void grade(Grade grade) {
 
         }

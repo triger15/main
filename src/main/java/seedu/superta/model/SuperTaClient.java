@@ -143,6 +143,15 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     }
 
     /**
+     * Removes an assignment from a tutorial group.
+     */
+    public void deleteAssignment(TutorialGroup tg, Assignment assignment) {
+        requireAllNonNull(tg, assignment);
+
+        tg.removeAssignment(assignment);
+    }
+
+    /**
      * Performs an addition of a grade to an assignment gradebook, if possible.
      */
     public void grade(Grade grade) {
