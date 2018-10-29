@@ -3,8 +3,6 @@ package seedu.superta.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import seedu.superta.commons.core.EventsCenter;
-import seedu.superta.commons.events.ui.StateEvent;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
@@ -28,7 +26,7 @@ public class UndoCommand extends Command {
 
         model.undoSuperTaClient();
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
-        EventsCenter.getInstance().post(new StateEvent(model));
+        // EventsCenter.getInstance().post(new StateEvent(model));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
