@@ -1,14 +1,15 @@
 package seedu.superta.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
+import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -17,7 +18,7 @@ import seedu.superta.model.tutorialgroup.TutorialGroup;
 /**
  * TutorialGroupDetailPanel to display details of tutorial group.
  */
-public class TutorialGroupDetailPanel extends UiPart<Region> {
+public class TutorialGroupDetailPanel extends ViewPanelContent {
     private static final String FXML = "TutorialGroupDetailPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TutorialGroupDetailPanel.class.getSimpleName());
 
@@ -33,15 +34,16 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
     @FXML
     private ListView<Assignment> assignments;
 
-    @FXML
-    private Region root;
-
     private TutorialGroup tutorialGroup;
 
     public TutorialGroupDetailPanel(TutorialGroup tutorialGroup) {
         super(FXML);
         this.tutorialGroup = tutorialGroup;
+        render();
+        setEventHandlerForSelectionChangeEvent();
+    }
 
+    public void render() {
         id.setText(tutorialGroup.getId());
         name.setText(tutorialGroup.getName());
         students.setItems(tutorialGroup.getStudents().asUnmodifiableObservableList());
@@ -72,8 +74,6 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
                 }
             }
         });
-
-        setEventHandlerForSelectionChangeEvent();
     }
 
     public void setEventHandlerForSelectionChangeEvent() {
@@ -99,6 +99,17 @@ public class TutorialGroupDetailPanel extends UiPart<Region> {
     }
 
 
-
+    @Override
+    public void update(Model model) {
+        Optional<TutorialGroup> fromModel = model.getTutorialGroup(tutorialGroup.getId());
+        if (!fromModel.isPresent()) {
+            return;
+        }
+        if (fromModel.isPresent() && fromModel.get().equals(tutorialGroup)) {
+            return;
+        }
+        this.tutorialGroup = fromModel.get();
+        render();
+    }
 }
 

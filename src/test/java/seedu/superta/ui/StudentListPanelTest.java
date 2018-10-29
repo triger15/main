@@ -62,7 +62,7 @@ public class StudentListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
+     * Verifies that creating and deleting large number of persons in {@code StudentListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
@@ -77,7 +77,7 @@ public class StudentListPanelTest extends GuiUnitTest {
 
     /**
      * Returns a list of persons containing {@code personCount} persons that is used to populate the
-     * {@code PersonListPanel}.
+     * {@code StudentListPanel}.
      */
     private ObservableList<Student> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
@@ -112,14 +112,14 @@ public class StudentListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
-     * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
+     * Initializes {@code personListPanelHandle} with a {@code StudentListPanel} backed by {@code backingList}.
+     * Also shows the {@code Stage} that displays only {@code StudentListPanel}.
      */
     private void initUi(ObservableList<Student> backingList) {
-        PersonListPanel personListPanel = new PersonListPanel(backingList);
-        uiPartRule.setUiPart(personListPanel);
+        StudentListPanel studentListPanel = new StudentListPanel(backingList);
+        uiPartRule.setUiPart(studentListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        personListPanelHandle = new PersonListPanelHandle(getChildNode(studentListPanel.getRoot(),
+                                                                       PersonListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

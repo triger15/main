@@ -89,7 +89,7 @@
     -fx-border-color: transparent transparent transparent #212F40;
 }
 
-/* Borders of PersonListPanel & TutorialGroupPanel */
+/* Borders of StudentListPanel & TutorialGroupPanel */
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;

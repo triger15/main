@@ -5,16 +5,16 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
+import seedu.superta.model.Model;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 // @@author Caephler
 /**
  * Panel containing the list of tutorial groups.
  */
-public class TutorialGroupListPanel extends UiPart<Region> {
+public class TutorialGroupListPanel extends ViewPanelContent {
     private static final String FXML = "TutorialGroupListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TutorialGroupListPanel.class);
 
@@ -41,6 +41,11 @@ public class TutorialGroupListPanel extends UiPart<Region> {
                     raise(new TutorialGroupSelectedEvent(newValue));
                 }
             });
+    }
+
+    @Override
+    public void update(Model model) {
+
     }
 
     /**

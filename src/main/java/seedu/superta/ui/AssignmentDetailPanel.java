@@ -1,13 +1,14 @@
 package seedu.superta.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.superta.commons.core.LogsCenter;
+import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.GradeEntry;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -16,7 +17,7 @@ import seedu.superta.model.tutorialgroup.TutorialGroup;
 /**
  * UI Component to display assignment details.
  */
-public class AssignmentDetailPanel extends UiPart<Region> {
+public class AssignmentDetailPanel extends ViewPanelContent {
     private static final String FXML = "AssignmentDetailPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AssignmentDetailPanel.class.getSimpleName());
 
@@ -49,14 +50,18 @@ public class AssignmentDetailPanel extends UiPart<Region> {
         this.tutorialGroup = tutorialGroup;
         this.assignment = assignment;
 
+        render();
+    }
+
+    private void render() {
         tutorialGroupId.setText("Tutorial Group ID: " + tutorialGroup.getId());
         title.setText(assignment.getTitle().assignmentTitle);
         maxMarks.setText("Max marks: " + assignment.getMaxMarks());
         average.setText("Average: " + String.format("%.2f", assignment.getAverage()));
         median.setText("Median: " + String.format("%.2f", assignment.getMedian()));
         projectedDifficulty.setText("Projected Difficulty: "
-                                + String.format("%.2f", assignment.getProjectedDifficulty())
-                                + " / 10");
+                                        + String.format("%.2f", assignment.getProjectedDifficulty())
+                                        + " / 10");
 
         grades.setItems(assignment.getGradebook().asUnmodifiableObservableList());
         grades.setCellFactory(listView -> new ListCell<>() {
@@ -72,5 +77,22 @@ public class AssignmentDetailPanel extends UiPart<Region> {
                 }
             }
         });
+    }
+
+    @Override
+    public void update(Model model) {
+        Optional<TutorialGroup> optTutorialGroup = model.getTutorialGroup(tutorialGroup.getId());
+        if (optTutorialGroup.isPresent()) {
+            TutorialGroup tutorialGroup = optTutorialGroup.get();
+            Optional<Assignment> optAssignment = tutorialGroup.getAssignment(assignment.getTitle());
+            if (!optAssignment.isPresent()) {
+                return;
+            }
+            Assignment fromModel = optAssignment.get();
+            if (fromModel.equals(assignment)) {
+                this.assignment = fromModel;
+                render();
+            }
+        }
     }
 }

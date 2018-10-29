@@ -6,12 +6,10 @@ import seedu.superta.model.student.Student;
 /**
  * Represents a selection change in the Student List Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
-
-
+public class StudentPanelSelectionChangedEvent extends BaseEvent {
     private final Student newSelection;
 
-    public PersonPanelSelectionChangedEvent(Student newSelection) {
+    public StudentPanelSelectionChangedEvent(Student newSelection) {
         this.newSelection = newSelection;
     }
 

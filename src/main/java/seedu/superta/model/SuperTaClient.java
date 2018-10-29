@@ -178,15 +178,11 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         if (!ost.isPresent()) {
             throw new StudentNotFoundException();
         }
-        Student st = ost.get();
-        List<Feedback> studentFeedback = st.getFeedback()
-                .stream()
-                .collect(Collectors.toList());
-        studentFeedback.add(feedback);
-        System.out.println(studentFeedback);
-        Student editedStudent = new Student(st.getName(), st.getPhone(), st.getEmail(),
-                st.getStudentId(), st.getTags(), studentFeedback);
-        updateStudent(st, editedStudent);
+        Student student = ost.get();
+
+        Student updatedStudent = new Student(student);
+        updatedStudent.addFeedback(feedback);
+        students.setStudent(student, updatedStudent);
     }
 
     /**
