@@ -9,7 +9,7 @@ import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.superta.logic.commands.FeedbackCommand.MESSAGE_SUCCESS;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import org.junit.Before;
 import org.junit.Rule;

@@ -2,7 +2,7 @@ package seedu.superta.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.superta.storage.XmlAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.superta.testutil.TypicalStudents.BENSON;
+import static seedu.superta.testutil.TypicalSuperTaClient.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;

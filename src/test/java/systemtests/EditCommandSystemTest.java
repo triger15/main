@@ -26,9 +26,9 @@ import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.superta.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.superta.testutil.TypicalStudents.AMY;
-import static seedu.superta.testutil.TypicalStudents.BOB;
-import static seedu.superta.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static seedu.superta.testutil.TypicalSuperTaClient.AMY;
+import static seedu.superta.testutil.TypicalSuperTaClient.BOB;
+import static seedu.superta.testutil.TypicalSuperTaClient.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 

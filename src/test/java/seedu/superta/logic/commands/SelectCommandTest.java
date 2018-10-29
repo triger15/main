@@ -9,7 +9,7 @@ import static seedu.superta.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import org.junit.Rule;
 import org.junit.Test;

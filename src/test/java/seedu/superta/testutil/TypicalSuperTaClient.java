@@ -16,12 +16,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.superta.model.SuperTaClient;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.GradeBook;
 import seedu.superta.model.student.Student;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
- * A utility class containing a list of {@code Student} objects to be used in tests.
+ * A utility class containing a list of {@code Student} objects,
+ * a {@code TutorialGroup} with an {@code Assignment} to be used in tests.
  */
-public class TypicalStudents {
+public class TypicalSuperTaClient {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
         .withEmail("alice@example.com")
@@ -62,17 +66,32 @@ public class TypicalStudents {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalStudents() {
+    private TypicalSuperTaClient() {
     } // prevents instantiation
 
     /**
-     * Returns an {@code SuperTaClient} with all the typical persons.
+     * Returns an {@code SuperTaClient} with all the typical students.
      */
     public static SuperTaClient getTypicalSuperTaClient() {
         SuperTaClient ab = new SuperTaClient();
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }
+
+        Assignment assignment = new AssignmentBuilder().withTitle("Lab 1")
+                .withMaxMarks(100.00)
+                .withGradeBook(new GradeBook())
+                .build();
+
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().withId("G01")
+                .withName("CS1010 Group 1")
+                .addStudent(AMY)
+                .addStudent(BOB)
+                .addAssignment(assignment)
+                .build();
+
+        ab.addTutorialGroup(tutorialGroup);
+
         return ab;
     }
 

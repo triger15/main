@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.superta.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static seedu.superta.testutil.TypicalSuperTaClient.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 

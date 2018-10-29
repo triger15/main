@@ -1,7 +1,6 @@
 package seedu.superta.logic.commands;
 
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 
@@ -14,7 +13,6 @@ import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundExcepti
 /**
  * Command which deletes an existing assignment from a tutorial group from the SuperTA client.
  */
-
 public class DeleteAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-assignment";
