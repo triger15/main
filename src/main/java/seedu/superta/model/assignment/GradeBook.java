@@ -60,13 +60,16 @@ public class GradeBook {
         for (GradeEntry entry : internalMap.values()) {
             total += entry.marks;
         }
-        return total / internalMap.size();
+        return total / Math.max(1, internalMap.size());
     }
 
     /**
      * Returns the median for this grade book.
      */
     public double getMedian() {
+        if (internalMap.size() == 0) {
+            return 0;
+        }
         int mid = internalMap.size() / 2;
         Object[] arr = internalMap.values().toArray();
         return ((GradeEntry) arr[mid]).marks;

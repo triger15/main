@@ -46,6 +46,7 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
     public void render() {
         id.setText(tutorialGroup.getId());
         name.setText(tutorialGroup.getName());
+        students.getItems().clear();
         students.setItems(tutorialGroup.getStudents().asUnmodifiableObservableList());
         students.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -60,6 +61,7 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                 }
             }
         });
+        assignments.getItems().clear();
         assignments.setItems(tutorialGroup.getAssignments().asUnmodifiableObservableList());
         assignments.setCellFactory(listView -> new ListCell<>() {
             @Override
