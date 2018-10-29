@@ -350,6 +350,7 @@ There is no need to save manually.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
+// tag::summary[]
 == Command Summary
 
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TAG]...` +
@@ -381,3 +382,4 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+// end::summary[]

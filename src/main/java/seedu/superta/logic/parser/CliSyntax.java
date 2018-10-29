@@ -20,4 +20,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_ASSIGNMENT_MARKS = new Prefix("m/");
     public static final Prefix PREFIX_ASSIGNMENT_MAX_MARKS = new Prefix("m/");
     public static final Prefix PREFIX_FEEDBACK = new Prefix("f/");
+    public static final Prefix PREFIX_SESSION_NAME = new Prefix("n/");
 }

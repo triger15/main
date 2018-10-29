@@ -1,5 +1,7 @@
 package seedu.superta.model.attendance;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ public class Session {
      * @param name A valid session class name.
      */
     public Session(String name) {
+        requireNonNull(name);
         this.name = name;
         this.attendanceList = new HashSet<>();
     }

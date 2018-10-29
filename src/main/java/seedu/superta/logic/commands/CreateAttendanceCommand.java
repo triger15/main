@@ -2,8 +2,8 @@ package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
@@ -12,7 +12,7 @@ import seedu.superta.model.attendance.Session;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
- * Command that creates an attendance.
+ * Command that creates an attendance session.
  */
 public class CreateAttendanceCommand extends Command {
 
@@ -21,12 +21,10 @@ public class CreateAttendanceCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an attendance."
         + "Parameters: "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-        + "n/NAME "
-        + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID\n"
+        + PREFIX_SESSION_NAME + "NAME \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "1 "
-        + "n/W4 Tutorial "
-        + PREFIX_GENERAL_STUDENT_ID + "A0123456T" + " ";
+        + PREFIX_SESSION_NAME + "W4 Tutorial ";
 
     public static final String MESSAGE_SUCCESS = "New attendance created: %1$s";
     public static final String MESSAGE_DUPLICATE_ATTENDANCE = "";//"This assignment already exists in the database";
