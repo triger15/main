@@ -1,6 +1,5 @@
 package seedu.superta.logic.parser;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
@@ -12,7 +11,6 @@ import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.superta.logic.commands.DeleteAssignmentCommand;
-import seedu.superta.logic.parser.exceptions.ParseException;
 
 public class DeleteAssignmentCommandParserTest {
 
@@ -49,12 +47,12 @@ public class DeleteAssignmentCommandParserTest {
         String tg = "T01";
         DeleteAssignmentCommand expected = new DeleteAssignmentCommand(assignment, tg);
 
-        String arguments = " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tg + " " +
-                PREFIX_GENERAL_ASSIGNMENT_TITLE + assignment;
+        String arguments = " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tg + " "
+                + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignment;
         assertParseSuccess(parser , arguments, expected);
 
         arguments = " " + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignment + " " +
-                    PREFIX_GENERAL_TUTORIAL_GROUP_ID + tg;
+                + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tg;
         assertParseSuccess(parser , arguments, expected);
     }
 }

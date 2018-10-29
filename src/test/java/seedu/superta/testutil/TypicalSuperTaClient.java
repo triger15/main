@@ -16,10 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.superta.model.SuperTaClient;
-import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.GradeBook;
 import seedu.superta.model.student.Student;
-import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
  * A utility class containing a list of {@code Student} objects,
