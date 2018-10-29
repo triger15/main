@@ -108,6 +108,10 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         tg.addStudent(st);
     }
 
+    public void removeStudentFromTutorialGroup(TutorialGroup tg, Student st) {
+        tg.removeStudent(st);
+    }
+
     /**
      * Adds a tutorial group to the directory.
      */

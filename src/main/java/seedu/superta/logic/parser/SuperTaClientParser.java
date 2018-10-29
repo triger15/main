@@ -24,6 +24,7 @@ import seedu.superta.logic.commands.HistoryCommand;
 import seedu.superta.logic.commands.ListCommand;
 import seedu.superta.logic.commands.ListTutorialGroupsCommand;
 import seedu.superta.logic.commands.RedoCommand;
+import seedu.superta.logic.commands.RemoveStudentFromTutorialGroupCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.logic.commands.UndoCommand;
 import seedu.superta.logic.commands.UpdateTutorialGroupCommand;
@@ -100,6 +101,9 @@ public class SuperTaClientParser {
 
         case AddStudentToTutorialGroupCommand.COMMAND_WORD:
             return new AddStudentToTutorialGroupCommandParser().parse(arguments);
+
+        case RemoveStudentFromTutorialGroupCommand.COMMAND_WORD:
+            return new RemoveStudentFromTutorialGroupCommandParser().parse(arguments);
 
         case GradeAssignmentCommand.COMMAND_WORD:
             return new GradeAssignmentCommandParser().parse(arguments);

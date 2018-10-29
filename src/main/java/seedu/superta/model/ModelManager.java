@@ -16,6 +16,7 @@ import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -118,6 +119,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void removeStudentFromTutorialGroup(String tutorialGroupId, StudentId studentId) {
+        Optional<TutorialGroup> tutorialGroupOptional = versionedSuperTaClient.getTutorialGroup(tutorialGroupId);
+        Optional<Student> studentOptional = versionedSuperTaClient.getStudentWithId(studentId);
+        if (!tutorialGroupOptional.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        if (!studentOptional.isPresent()) {
+            throw new StudentNotFoundException();
+        }
+        TutorialGroup tutorialGroup = tutorialGroupOptional.get();
+        Student student = studentOptional.get();
+        versionedSuperTaClient.removeStudentFromTutorialGroup(tutorialGroup, student);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
     public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
         if (!versionedSuperTaClient.hasTutorialGroup(tutorialGroup.getId())) {
             throw new TutorialGroupNotFoundException();
@@ -133,6 +150,11 @@ public class ModelManager extends ComponentManager implements Model {
             throw new TutorialGroupNotFoundException();
         }
         TutorialGroup t = tg.get();
+
+        Optional<Assignment> assignmentOptional = t.getAssignment(assignment.getTitle());
+        if (assignmentOptional.isPresent()) {
+            throw new DuplicateAssignmentException();
+        }
         versionedSuperTaClient.addAssignment(t, assignment);
         indicateSuperTaClientChanged();
     }

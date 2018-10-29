@@ -6,6 +6,7 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
@@ -26,7 +27,7 @@ public class CreateAssignmentCommand extends Command {
         + "m/40";
 
     public static final String MESSAGE_SUCCESS = "New assignment created: %1$s";
-    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the database";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the database.";
 
     private final Assignment toAdd;
     private final String tgId;
@@ -46,6 +47,8 @@ public class CreateAssignmentCommand extends Command {
             model.addAssignment(tgId, toAdd);
         } catch (TutorialGroupNotFoundException e) {
             throw new CommandException("No such tutorial group.");
+        } catch (DuplicateAssignmentException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
         model.commitSuperTaClient();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
