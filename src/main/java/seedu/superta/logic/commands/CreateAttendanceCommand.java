@@ -54,4 +54,22 @@ public class CreateAttendanceCommand extends Command {
         model.commitSuperTaClient();
         return new CommandResult(String.format(MESSAGE_SUCCESS, session.getSessionName()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CreateAttendanceCommand)) {
+            return false;
+        }
+
+        // state check
+        CreateAttendanceCommand e = (CreateAttendanceCommand) other;
+        return tgId.equals(e.tgId)
+                && session.equals(e.session);
+    }
 }
