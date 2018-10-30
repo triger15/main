@@ -17,6 +17,8 @@ import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
+import seedu.superta.model.assignment.Title;
+import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -157,6 +159,23 @@ public class ModelManager extends ComponentManager implements Model {
         }
         versionedSuperTaClient.addAssignment(t, assignment);
         indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public void deleteAssignment(String tgId, String assignment) {
+        Optional<TutorialGroup> tg = versionedSuperTaClient.getTutorialGroup(tgId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup t = tg.get();
+
+        Optional<Assignment> ass = t.getAssignment(new Title(assignment));
+        if (!ass.isPresent()) {
+            throw new AssignmentNotFoundException();
+        }
+        Assignment a = ass.get();
+
+        versionedSuperTaClient.deleteAssignment(t, a);
     }
 
     @Override

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.superta.testutil.EventsUtil.postNow;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.superta.testutil.TypicalStudents.getTypicalStudents;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalStudents;
 import static seedu.superta.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import static seedu.superta.ui.testutil.GuiTestAssert.assertCardEquals;
 

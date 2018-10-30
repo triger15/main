@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.commons.util.XmlUtil;
 import seedu.superta.model.SuperTaClient;
-import seedu.superta.testutil.TypicalStudents;
+import seedu.superta.testutil.TypicalSuperTaClient;
 
 public class XmlSerializableSuperTaClientTest {
 
@@ -29,7 +29,7 @@ public class XmlSerializableSuperTaClientTest {
         XmlSerializableSuperTaClient dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableSuperTaClient.class);
         SuperTaClient superTaClientFromFile = dataFromFile.toModelType();
-        SuperTaClient typicalPersonsSuperTaClient = TypicalStudents.getTypicalSuperTaClient();
+        SuperTaClient typicalPersonsSuperTaClient = TypicalSuperTaClient.getTypicalSuperTaClient();
         assertEquals(superTaClientFromFile, typicalPersonsSuperTaClient);
     }
 

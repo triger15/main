@@ -8,7 +8,7 @@ import static seedu.superta.testutil.TestUtil.getLastIndex;
 import static seedu.superta.testutil.TestUtil.getMidIndex;
 import static seedu.superta.testutil.TestUtil.getPerson;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.superta.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static seedu.superta.testutil.TypicalSuperTaClient.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 

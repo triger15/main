@@ -19,13 +19,13 @@ import static seedu.superta.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.superta.testutil.TypicalStudents.ALICE;
-import static seedu.superta.testutil.TypicalStudents.AMY;
-import static seedu.superta.testutil.TypicalStudents.BOB;
-import static seedu.superta.testutil.TypicalStudents.CARL;
-import static seedu.superta.testutil.TypicalStudents.HOON;
-import static seedu.superta.testutil.TypicalStudents.IDA;
-import static seedu.superta.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static seedu.superta.testutil.TypicalSuperTaClient.ALICE;
+import static seedu.superta.testutil.TypicalSuperTaClient.AMY;
+import static seedu.superta.testutil.TypicalSuperTaClient.BOB;
+import static seedu.superta.testutil.TypicalSuperTaClient.CARL;
+import static seedu.superta.testutil.TypicalSuperTaClient.HOON;
+import static seedu.superta.testutil.TypicalSuperTaClient.IDA;
+import static seedu.superta.testutil.TypicalSuperTaClient.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 

@@ -6,10 +6,10 @@ import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.superta.testutil.TypicalStudents.BENSON;
-import static seedu.superta.testutil.TypicalStudents.CARL;
-import static seedu.superta.testutil.TypicalStudents.DANIEL;
-import static seedu.superta.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER;
+import static seedu.superta.testutil.TypicalSuperTaClient.BENSON;
+import static seedu.superta.testutil.TypicalSuperTaClient.CARL;
+import static seedu.superta.testutil.TypicalSuperTaClient.DANIEL;
+import static seedu.superta.testutil.TypicalSuperTaClient.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.List;

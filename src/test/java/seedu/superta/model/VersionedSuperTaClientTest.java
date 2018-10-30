@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.superta.testutil.TypicalStudents.AMY;
-import static seedu.superta.testutil.TypicalStudents.BOB;
-import static seedu.superta.testutil.TypicalStudents.CARL;
+import static seedu.superta.testutil.TypicalSuperTaClient.AMY;
+import static seedu.superta.testutil.TypicalSuperTaClient.BOB;
+import static seedu.superta.testutil.TypicalSuperTaClient.CARL;
 
 import java.util.Arrays;
 import java.util.Collections;

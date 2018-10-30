@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.superta.testutil.TypicalStudents.ALICE;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.ALICE;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import java.util.Arrays;
 import java.util.Collection;

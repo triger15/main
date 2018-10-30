@@ -6,8 +6,8 @@ import static seedu.superta.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.superta.testutil.TypicalStudents.ALICE;
-import static seedu.superta.testutil.TypicalStudents.BOB;
+import static seedu.superta.testutil.TypicalSuperTaClient.ALICE;
+import static seedu.superta.testutil.TypicalSuperTaClient.BOB;
 
 import org.junit.Rule;
 import org.junit.Test;
