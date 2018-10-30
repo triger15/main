@@ -2,10 +2,10 @@ package seedu.superta.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.superta.testutil.TypicalStudents.ALICE;
-import static seedu.superta.testutil.TypicalStudents.HOON;
-import static seedu.superta.testutil.TypicalStudents.IDA;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.ALICE;
+import static seedu.superta.testutil.TypicalSuperTaClient.HOON;
+import static seedu.superta.testutil.TypicalSuperTaClient.IDA;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import java.io.IOException;
 import java.nio.file.Path;

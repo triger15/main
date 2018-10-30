@@ -3,7 +3,7 @@ package seedu.superta.logic.commands;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.superta.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import org.junit.Before;
 import org.junit.Test;

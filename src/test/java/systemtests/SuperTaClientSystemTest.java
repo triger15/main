@@ -34,7 +34,7 @@ import seedu.superta.logic.commands.ListCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.model.Model;
 import seedu.superta.model.SuperTaClient;
-import seedu.superta.testutil.TypicalStudents;
+import seedu.superta.testutil.TypicalSuperTaClient;
 import seedu.superta.ui.CommandBox;
 
 /**
@@ -77,7 +77,7 @@ public abstract class SuperTaClientSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected SuperTaClient getInitialData() {
-        return TypicalStudents.getTypicalSuperTaClient();
+        return TypicalSuperTaClient.getTypicalSuperTaClient();
     }
 
     /**
