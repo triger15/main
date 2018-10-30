@@ -142,6 +142,18 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UniqueAssignmentList)) {
+            return false;
+        }
+
+        return internalList.equals(((UniqueAssignmentList) other).internalList);
+    }
+    @Override
     public int hashCode() {
         return internalList.hashCode();
     }
