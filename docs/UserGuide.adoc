@@ -220,16 +220,25 @@ Examples:
 * `filter tg/1`
 Shows a list of all the students in the tutorial group with an ID of `1`.
 
+// tag::attendance[]
 === Create Attendance: `create-attendance`
 
-[TIP] Coming in v2.0
-
-Creates an attendance for a specific tutorial group, identified by its ID.
-Format: `create-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
+Creates an attendance listing for a specific tutorial group, identified by its ID.
+Format: `create-attendance tg/TUTORIAL_GROUP_ID n/NAME`
 
 Examples:
-* `create-attendance tg/1 n/W4 Tutorial s/A1234567T s/A0123456Y`
-Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `1`, marking the students with IDs `A1234567T` and `A0123456Y` as present.
+* `create-attendance tg/1 n/W4 Tutorial`
+Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `1`.
+
+=== Mark Attendance: `mark-attendance`
+
+Marks attendance for students from a specific tutorial group and session name, identified by its ID and name.
+Format: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
+
+Examples:
+* `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
+Marks students with IDs `A1234567T` and `A0123456Y` as present in tutorial session named `W4 Tutorial` for the tutorial group with an ID of `1`.
+// end::attendance[]
 
 === Create Assignment: `create-assignment`
 
@@ -370,6 +379,10 @@ e.g. `add-to-tutorial-group tg/04a st/A0166733Y`
 e.g. `create-assignment tg/04a n/lab1 m/40`
 * *Grade Assignment*: `grade tg/[TUTORIAL_GROUP_ID] as/[ASSIGNMENT_NAME] st/[STUDENT_ID] m/[MARKS]`
 e.g. `grade tg/04a as/lab1 st/A0166733Y m/30`
+* *Create Attendance*: `create-attendance tg/[TUTORIAL_GROUP_ID] n/[NAME]`
+e.g. `create-attendance tg/1 n/W4 Tutorial`
+* *Mark Attendance*: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
+e.g. `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
 * *Feedback*: `feedback id/[STUDENT_ID] f/[FEEDBACK]`
 e.g. `feedback id/A0166733Y f/Likes to sleep in class`
 * *View*: `view id/[STUDENT_ID]`

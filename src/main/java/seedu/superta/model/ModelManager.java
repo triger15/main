@@ -16,6 +16,7 @@ import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -140,6 +141,17 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void grade(Grade grade) {
         versionedSuperTaClient.grade(grade);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public void createAttendance(String tgId, Session session) {
+        Optional<TutorialGroup> tg = versionedSuperTaClient.getTutorialGroup(tgId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup t = tg.get();
+        versionedSuperTaClient.createAttendance(t, session);
         indicateSuperTaClientChanged();
     }
 

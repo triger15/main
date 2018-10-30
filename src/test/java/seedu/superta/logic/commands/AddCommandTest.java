@@ -24,6 +24,7 @@ import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -148,6 +149,11 @@ public class AddCommandTest {
 
         @Override
         public void grade(Grade grade) {
+
+        }
+
+        @Override
+        public void createAttendance(String tgId, Session session) {
 
         }
 

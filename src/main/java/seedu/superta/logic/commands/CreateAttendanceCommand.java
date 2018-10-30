@@ -9,6 +9,7 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.attendance.Session;
+import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
@@ -27,7 +28,8 @@ public class CreateAttendanceCommand extends Command {
         + PREFIX_SESSION_NAME + "W4 Tutorial ";
 
     public static final String MESSAGE_SUCCESS = "New attendance created: %1$s";
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "";//"This assignment already exists in the database";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE =
+            "This attendance session already exists in the tutorial group.";
 
     private final String tgId;
     private final Session session;
@@ -43,11 +45,13 @@ public class CreateAttendanceCommand extends Command {
         requireNonNull(model);
 
         try {
-            //model.addAssignment(tgId, toAdd);
+            model.createAttendance(tgId, session);
         } catch (TutorialGroupNotFoundException e) {
             throw new CommandException("No such tutorial group.");
+        } catch (DuplicateSessionException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
         }
         model.commitSuperTaClient();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, "aaa"));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, session.getSessionName()));
     }
 }

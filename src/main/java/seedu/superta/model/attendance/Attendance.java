@@ -21,12 +21,11 @@ public class Attendance {
         this.presence = presence;
     }
 
-    /**
-     * Enumerations for attendance. Allows future extensibility.
-     */
-    public enum Presence {
-        PRESENT,
-        ABSENT,
-        EXCUSED
+    public StudentId getStudentId() {
+        return stId;
+    }
+
+    public Presence getPresence() {
+        return presence;
     }
 }
