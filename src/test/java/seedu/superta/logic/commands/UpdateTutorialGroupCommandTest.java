@@ -2,7 +2,7 @@ package seedu.superta.logic.commands;
 
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import org.junit.After;
 import org.junit.Before;

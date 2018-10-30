@@ -24,8 +24,8 @@ import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.superta.testutil.TypicalStudents.AMY;
-import static seedu.superta.testutil.TypicalStudents.BOB;
+import static seedu.superta.testutil.TypicalSuperTaClient.AMY;
+import static seedu.superta.testutil.TypicalSuperTaClient.BOB;
 
 import org.junit.Test;
 

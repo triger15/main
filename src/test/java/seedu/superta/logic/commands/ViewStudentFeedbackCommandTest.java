@@ -6,7 +6,7 @@ import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import org.junit.Test;
 

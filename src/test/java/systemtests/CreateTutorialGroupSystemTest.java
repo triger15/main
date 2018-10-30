@@ -7,7 +7,7 @@ import seedu.superta.model.Model;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 import seedu.superta.testutil.TutorialGroupBuilder;
-import seedu.superta.testutil.TypicalStudents;
+import seedu.superta.testutil.TypicalSuperTaClient;
 
 public class CreateTutorialGroupSystemTest extends SuperTaClientSystemTest {
 
@@ -15,8 +15,8 @@ public class CreateTutorialGroupSystemTest extends SuperTaClientSystemTest {
     public void createTutorialGroup() {
         Model model = getModel();
 
-        Student firstStudent = TypicalStudents.ALICE;
-        Student secondStudent = TypicalStudents.BOB;
+        Student firstStudent = TypicalSuperTaClient.ALICE;
+        Student secondStudent = TypicalSuperTaClient.BOB;
 
         /* Case: Adding a tutorial group with leading spaces and trailing spaces should add the tutorial group. */
         TutorialGroupBuilder tgBuilder = new TutorialGroupBuilder();

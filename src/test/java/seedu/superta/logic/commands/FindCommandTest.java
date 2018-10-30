@@ -5,11 +5,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.superta.testutil.TypicalStudents.CARL;
-import static seedu.superta.testutil.TypicalStudents.DANIEL;
-import static seedu.superta.testutil.TypicalStudents.ELLE;
-import static seedu.superta.testutil.TypicalStudents.FIONA;
-import static seedu.superta.testutil.TypicalStudents.getTypicalSuperTaClient;
+import static seedu.superta.testutil.TypicalSuperTaClient.CARL;
+import static seedu.superta.testutil.TypicalSuperTaClient.DANIEL;
+import static seedu.superta.testutil.TypicalSuperTaClient.ELLE;
+import static seedu.superta.testutil.TypicalSuperTaClient.FIONA;
+import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
 import java.util.Arrays;
 import java.util.Collections;

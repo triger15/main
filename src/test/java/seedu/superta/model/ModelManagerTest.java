@@ -3,8 +3,8 @@ package seedu.superta.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.superta.testutil.TypicalStudents.ALICE;
-import static seedu.superta.testutil.TypicalStudents.BENSON;
+import static seedu.superta.testutil.TypicalSuperTaClient.ALICE;
+import static seedu.superta.testutil.TypicalSuperTaClient.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;

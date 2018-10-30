@@ -75,6 +75,11 @@ public interface Model {
     void addAssignment(String tgId, Assignment assignment);
 
     /**
+     * Deletes the assignment in the tutorial group.
+     */
+    void deleteAssignment(String tgId, String assignment);
+
+    /**
      * Grades a student on an assignment.
      */
     void grade(Grade grade);
