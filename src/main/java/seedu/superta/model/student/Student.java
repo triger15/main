@@ -80,6 +80,13 @@ public class Student {
     }
 
     /**
+     * Returns true if both persons have the same student id.
+     */
+    public boolean hasSameId(StudentId stId) {
+        return studentId.equals(stId);
+    }
+
+    /**
      * Returns an immutable list of feedback, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */

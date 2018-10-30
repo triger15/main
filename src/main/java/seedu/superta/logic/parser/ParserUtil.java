@@ -206,6 +206,18 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code Collection<String> studentIds} into a {@code Set<StudentId>}.
+     */
+    public static Set<StudentId> parseStudentIds(Collection<String> studentIds) throws ParseException {
+        requireNonNull(studentIds);
+        final Set<StudentId> studentIdSet = new HashSet<>();
+        for (String stId : studentIds) {
+            studentIdSet.add(parseStudentId(stId));
+        }
+        return studentIdSet;
+    }
+
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }

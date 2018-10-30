@@ -2,6 +2,7 @@ package seedu.superta.model;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -82,6 +83,11 @@ public interface Model {
      * Creates the given attendance session to the tutorial group.
      */
     void createAttendance(String tgId, Session session);
+
+    /**
+     * Marks the given students for an attendance session.
+     */
+    void markAttendance(String tgId, Session session, Set<StudentId> stIdSet);
 
     /**
      * Adds feedback to a student.

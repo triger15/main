@@ -24,6 +24,7 @@ import seedu.superta.logic.commands.HelpCommand;
 import seedu.superta.logic.commands.HistoryCommand;
 import seedu.superta.logic.commands.ListCommand;
 import seedu.superta.logic.commands.ListTutorialGroupsCommand;
+import seedu.superta.logic.commands.MarkAttendanceCommand;
 import seedu.superta.logic.commands.RedoCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.logic.commands.UndoCommand;
@@ -101,6 +102,9 @@ public class SuperTaClientParser {
 
         case CreateAttendanceCommand.COMMAND_WORD:
             return new CreateAttendanceCommandParser().parse(arguments);
+
+        case MarkAttendanceCommand.COMMAND_WORD:
+            return new MarkAttendanceCommandParser().parse(arguments);
 
         case AddStudentToTutorialGroupCommand.COMMAND_WORD:
             return new AddStudentToTutorialGroupCommandParser().parse(arguments);

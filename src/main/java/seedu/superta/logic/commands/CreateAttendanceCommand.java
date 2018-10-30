@@ -20,7 +20,7 @@ public class CreateAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "create-attendance";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an attendance."
-        + "Parameters: "
+        + " Parameters: "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
         + PREFIX_SESSION_NAME + "NAME \n"
         + "Example: " + COMMAND_WORD + " "

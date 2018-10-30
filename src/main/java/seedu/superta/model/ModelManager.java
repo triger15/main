@@ -5,6 +5,7 @@ import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -152,6 +153,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
         TutorialGroup t = tg.get();
         versionedSuperTaClient.createAttendance(t, session);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public void markAttendance(String tgId, Session session, Set<StudentId> stIdSet) {
+        versionedSuperTaClient.markAttendance(tgId, session, stIdSet);
         indicateSuperTaClientChanged();
     }
 

@@ -5,6 +5,6 @@ package seedu.superta.model.attendance.exceptions;
  */
 public class SessionNotFoundException extends RuntimeException {
     public SessionNotFoundException() {
-        super("Attendance session not found");
+        super("Attendance session not found.");
     }
 }
