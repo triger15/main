@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
+import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.student.Student;
@@ -60,10 +61,19 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    setGraphic(new StudentCard(student).getRoot());
+                    StudentCard card = new StudentCard(student);
+                    card.removeAvatar();
+                    setGraphic(card.getRoot());
                 }
             }
         });
+        students.getSelectionModel().selectedItemProperty()
+                .addListener(((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        logger.fine("Selected new student.");
+                        raise(new StudentPanelSelectionChangedEvent(newValue));
+                    }
+                }));
         assignments.getItems().clear();
         assignments.setItems(tutorialGroup.getAssignments().asUnmodifiableObservableList());
         assignments.setCellFactory(listView -> new ListCell<>() {

@@ -2,6 +2,7 @@ package seedu.superta.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -38,7 +39,10 @@ public class StudentCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label studentId;
-
+    @FXML
+    private ImageView avatar;
+    @FXML
+    private HBox avatarParent;
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
@@ -58,6 +62,10 @@ public class StudentCard extends UiPart<Region> {
         email.setText(student.getEmail().value);
         studentId.setText(student.getStudentId().studentId);
         student.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    public void removeAvatar() {
+        avatarParent.getChildren().remove(avatar);
     }
 
     @Override
