@@ -19,7 +19,7 @@ import seedu.superta.model.student.exceptions.StudentNotFoundException;
 public class FeedbackCommand extends Command {
     public static final String COMMAND_WORD = "feedback";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a feedback to a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a feedback to a student.\n"
         + "Parameters: "
         + PREFIX_STUDENT_ID + "STUDENT-ID "
         + PREFIX_FEEDBACK + "FEEDBACK\n"
