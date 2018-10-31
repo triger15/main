@@ -5,19 +5,19 @@ https://travis-ci.org/CS2103-AY1819S1-T16-2/main[image:https://travis-ci.org/CS2
 https://ci.appveyor.com/project/Caephler/main[image:https://ci.appveyor.com/api/projects/status/nf0mimtyhamj6l8e?svg=true[Build status]]
 https://coveralls.io/github/CS2103-AY1819S1-T16-2/main?branch=master[image:https://coveralls.io/repos/github/CS2103-AY1819S1-T16-2/main/badge.svg?branch=master[Coverage Status]]
 
-ifndef::env-github[]
+ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
 
 Welcome to SuperTA, the one-stop station to help YOU become the ultimate teaching assistant (TA). Say no more to attendance sheets, Excel spreadsheets and feedback forms!
 
-ifndef::env-github[]
+ifdef::env-github[]
 image::docs/images/Ui2.png[width="600"]
 endif::[]
 
 SuperTA is a desktop management application made for TAs to keep track on students progress and attendance. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 
-ifndef::env-github[]
+ifdef::env-github[]
 image::docs/images/Ui3.png[width="600"]
 endif::[]
 
@@ -28,7 +28,7 @@ With just a few simple commands, you can
 * record and view feedback for each student
 * and many more.
 
-ifndef::env-github[]
+ifdef::env-github[]
 image::docs/images/Ui4.png[width="600"]
 endif::[]
 
