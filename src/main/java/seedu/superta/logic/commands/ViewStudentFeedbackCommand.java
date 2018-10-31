@@ -55,6 +55,9 @@ public class ViewStudentFeedbackCommand extends Command {
         } catch (StudentNotFoundException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
+        Student student = model.getSuperTaClient().getStudentList().stream().filter(stud -> stud.getStudentId().equals(studentId))
+                .findFirst().get();
+        EventsCenter.getInstance().post(new StudentPanelSelectionChangedEvent(student));
         return new CommandResult(allFeedback.toString());
     }
 
