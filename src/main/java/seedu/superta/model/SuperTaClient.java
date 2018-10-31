@@ -226,7 +226,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         Session sess = opSession.get();
 
         UniqueStudentList students = tg.getStudents();
-        boolean studentsMatch = stIdSet.stream().allMatch(studentId -> students.contains(studentId));
+        boolean studentsMatch = stIdSet.stream().allMatch(studentId -> students.containsId(studentId));
         if (!studentsMatch) {
             throw new StudentNotFoundException();
         }

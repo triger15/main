@@ -39,7 +39,7 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Returns true if the list contains a student with equivalent student id as the given argument.
      */
-    public boolean contains(StudentId toCheck) {
+    public boolean containsId(StudentId toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(s -> s.hasSameId(toCheck));
     }
