@@ -10,18 +10,22 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.superta.commons.core.Config;
 import seedu.superta.commons.core.GuiSettings;
 import seedu.superta.commons.core.LogsCenter;
+import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
 import seedu.superta.commons.events.ui.ExitAppRequestEvent;
 import seedu.superta.commons.events.ui.ShowHelpRequestEvent;
+import seedu.superta.commons.events.ui.StateEvent;
+import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
 import seedu.superta.commons.events.ui.ViewAllTutorialGroupsEvent;
 import seedu.superta.logic.Logic;
 import seedu.superta.model.UserPrefs;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
@@ -38,8 +42,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private UiPart<Region> viewPanelContent;
-    private PersonListPanel personListPanel;
+    private ViewPanelContent viewPanelContent;
+    private StudentListPanel studentListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -126,8 +130,8 @@ public class MainWindow extends UiPart<Stage> {
         viewPanelContent = new TutorialGroupListPanel(logic.getTutorialGroupList());
         viewPanel.getChildren().add(viewPanelContent.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -140,15 +144,29 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void changeViewPanelToTutorialGroupDetailView(TutorialGroup tutorialGroup) {
-        viewPanel.getChildren().remove(viewPanelContent.getRoot());
-        viewPanelContent = new TutorialGroupDetailPanel(tutorialGroup);
-        viewPanel.getChildren().add(viewPanelContent.getRoot());
+        setViewPanelContent(new TutorialGroupDetailPanel(tutorialGroup));
     }
 
     void changeViewPanelToTutorialGroupListView() {
-        viewPanel.getChildren().remove(viewPanelContent.getRoot());
-        viewPanelContent = new TutorialGroupListPanel(logic.getTutorialGroupList());
+        setViewPanelContent(new TutorialGroupListPanel(logic.getTutorialGroupList()));
+    }
+
+    void changeViewPanelToAssignmentDetailView(TutorialGroup tutorialGroup, Assignment assignment) {
+        setViewPanelContent(new AssignmentDetailPanel(tutorialGroup, assignment));
+    }
+
+    void changeViewPanelToStudentDetailView(Student student) {
+        setViewPanelContent(new StudentDetailPanel(student));
+    }
+
+    void setViewPanelContent(ViewPanelContent component) {
+        removeViewPanelContent();
+        viewPanelContent = component;
         viewPanel.getChildren().add(viewPanelContent.getRoot());
+    }
+
+    void removeViewPanelContent() {
+        viewPanel.getChildren().remove(viewPanelContent.getRoot());
     }
 
     void hide() {
@@ -203,8 +221,8 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
     }
 
     void releaseResources() {
@@ -212,9 +230,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
+    private void handleStateEvent(StateEvent event) {
+        if (viewPanelContent != null) {
+            viewPanelContent.update(event.getModel());
+        }
+    }
+
+    @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleStudentSelectionChangedEvent(StudentPanelSelectionChangedEvent event) {
+        changeViewPanelToStudentDetailView(event.getNewSelection());
     }
 
     @Subscribe
@@ -225,5 +255,10 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleViewAllTutorialGroupsEvent(ViewAllTutorialGroupsEvent event) {
         changeViewPanelToTutorialGroupListView();
+    }
+
+    @Subscribe
+    private void handleAssignmentSelectedEvent(AssignmentSelectedEvent event) {
+        changeViewPanelToAssignmentDetailView(event.tutorialGroup, event.assignment);
     }
 }

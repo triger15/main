@@ -9,7 +9,7 @@ import javafx.scene.control.ListView;
 import seedu.superta.model.student.Student;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code StudentCard}.
+ * Provides a handle for {@code StudentListPanel} containing the list of {@code StudentCard}.
  */
 public class PersonListPanelHandle extends NodeHandle<ListView<Student>> {
     public static final String PERSON_LIST_VIEW_ID = "#personListView";

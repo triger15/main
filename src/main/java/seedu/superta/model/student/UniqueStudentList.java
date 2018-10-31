@@ -118,6 +118,13 @@ public class UniqueStudentList implements Iterable<Student> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * Returns the size of the internal list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
     @Override
     public Iterator<Student> iterator() {
         return internalList.iterator();

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @@author Caephler -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+    <Label fx:id="tutorialGroupId" styleClass="label-bright" text="\$tutorialGroupId" />
+    <Label fx:id="title" styleClass="label-header" text="\$name" />
+    <Label fx:id="maxMarks" styleClass="label-bright" text="\$maxMarks" />
+    <Separator orientation="HORIZONTAL">
+        <padding>
+            <Insets top="5" bottom="5" />
+        </padding>
+    </Separator>
+    <Label styleClass="label-subheader">Summary</Label>
+    <Label fx:id="average" styleClass="label-bright" />
+    <Label fx:id="median" styleClass="label-bright" />
+    <Label fx:id="projectedDifficulty" styleClass="label-bright" />
+    <Separator orientation="HORIZONTAL">
+        <padding>
+            <Insets top="5" bottom="5" />
+        </padding>
+    </Separator>
+    <Label styleClass="label-subheader">Grade Book</Label>
+    <ListView fx:id="grades" VBox.vgrow="ALWAYS" />
+</VBox>
+

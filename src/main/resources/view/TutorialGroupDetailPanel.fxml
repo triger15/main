@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- @@author caephler -->
+<!-- @@author Caephler -->
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-    <GridPane VBox.vgrow="ALWAYS">
-        <VBox alignment="CENTER_LEFT">
-            <padding>
-                <Insets top="5" right="5" bottom="5" left="15" />
-            </padding>
-            <Label fx:id="id" styleClass="label-bright" text="\$id" />
-            <Label fx:id="name" styleClass="label-header" text="\$name" />
-            <Label>Students</Label>
-            <ListView fx:id="students" />
-        </VBox>
-    </GridPane>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+    <Label fx:id="id" styleClass="label-bright" text="\$id" />
+    <Label fx:id="name" styleClass="label-header" text="\$name" />
+    <Separator orientation="HORIZONTAL" />
+    <Label styleClass="label-bright">Students</Label>
+    <HBox alignment="CENTER" prefHeight="150" minHeight="150">
+        <ListView fx:id="students" orientation="HORIZONTAL" HBox.hgrow="ALWAYS"/>
+    </HBox>
+    <Label styleClass="label-bright">Assignments</Label>
+    <ListView fx:id="assignments" VBox.vgrow="ALWAYS" />
 </VBox>
+
