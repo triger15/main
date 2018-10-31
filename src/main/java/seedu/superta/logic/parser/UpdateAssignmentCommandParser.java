@@ -1,12 +1,15 @@
 package seedu.superta.logic.parser;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.superta.logic.commands.UpdateAssignmentCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.Title;
 
 /**
  * Parses input arguments for UpdateAssignmentCommand.
@@ -22,18 +25,30 @@ public class UpdateAssignmentCommandParser implements Parser<UpdateAssignmentCom
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(
                 args,
                 PREFIX_GENERAL_TUTORIAL_GROUP_ID,
-                PREFIX_GENERAL_ASSIGNMENT_TITLE);
+                PREFIX_GENERAL_ASSIGNMENT_TITLE,
+                PREFIX_ASSIGNMENT_MAX_MARKS);
         if (!arePrefixesPresent(argumentMultimap,
                 PREFIX_GENERAL_TUTORIAL_GROUP_ID,
-                PREFIX_GENERAL_ASSIGNMENT_TITLE
+                PREFIX_GENERAL_ASSIGNMENT_TITLE,
+                PREFIX_ASSIGNMENT_MAX_MARKS
         ) || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateAssignmentCommand.MESSAGE_USAGE));
         }
 
-        String tgId = argumentMultimap.getValue(PREFIX_GENERAL_TUTORIAL_GROUP_ID).get();
-        String assignmentTitle = argumentMultimap.getValue(PREFIX_GENERAL_ASSIGNMENT_TITLE).get();
+        String tgId = ParserUtil.parseTutorialGroupId(
+                argumentMultimap.getValue(PREFIX_GENERAL_TUTORIAL_GROUP_ID).get()
+        );
 
-        return new UpdateAssignmentCommand(tgId, assignmentTitle);
+        Title assignmentTitle = ParserUtil.parseTitle(
+                argumentMultimap.getValue(PREFIX_GENERAL_ASSIGNMENT_TITLE).get()
+        );
+
+        Double maxMarks = ParserUtil.parseMaxMarks(
+                argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_MARKS).get()
+        );
+
+        Assignment assignment = new Assignment(assignmentTitle, maxMarks);
+        return new UpdateAssignmentCommand(tgId, assignment);
     }
 }
