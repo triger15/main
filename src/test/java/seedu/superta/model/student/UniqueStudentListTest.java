@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.superta.testutil.TypicalSuperTaClient.ALICE;
+import static seedu.superta.testutil.TypicalSuperTaClient.BENSON;
 import static seedu.superta.testutil.TypicalSuperTaClient.BOB;
 
 import java.util.Arrays;
@@ -180,5 +181,15 @@ public class UniqueStudentListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         uniqueStudentList.asUnmodifiableObservableList().remove(0);
+    }
+
+    @Test
+    public void removeById_success() {
+        // no students -> false
+        assertFalse(uniqueStudentList.removeById(BENSON));
+        uniqueStudentList.add(BENSON);
+
+        // with student -> true
+        assertTrue(uniqueStudentList.removeById(BENSON));
     }
 }
