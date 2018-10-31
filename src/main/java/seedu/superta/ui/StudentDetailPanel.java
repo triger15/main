@@ -67,7 +67,7 @@ public class StudentDetailPanel extends ViewPanelContent {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    setGraphic(new Label(feedback.value));
+                    setGraphic(new FeedbackCard(feedback).getRoot());
                 }
             }
         });
@@ -88,7 +88,7 @@ public class StudentDetailPanel extends ViewPanelContent {
     @Override
     public void update(Model model) {
         Optional<Student> updateTarget = model.getSuperTaClient().getStudentList()
-            .stream().filter(student -> student.isSameStudent(this.student))
+            .stream().filter(student -> student.isSameId(this.student))
             .findFirst();
         if (updateTarget.isPresent()) {
             Student fromModel = updateTarget.get();
