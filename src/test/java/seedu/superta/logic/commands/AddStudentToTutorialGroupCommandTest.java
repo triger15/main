@@ -21,7 +21,6 @@ import seedu.superta.testutil.TutorialGroupBuilder;
 
 public class AddStudentToTutorialGroupCommandTest {
 
-
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
@@ -69,7 +68,8 @@ public class AddStudentToTutorialGroupCommandTest {
         AddStudentToTutorialGroupCommand addStudentToTutorialGroupCommand = new AddStudentToTutorialGroupCommand(
             typicalTutorialGroupId, studentToAdd.getStudentId());
 
-        assertCommandFailure(addStudentToTutorialGroupCommand, model, commandHistory, "No such tutorial group.");
+        assertCommandFailure(addStudentToTutorialGroupCommand, model, commandHistory,
+            "No such tutorial group.");
     }
 
     @Test
@@ -80,7 +80,8 @@ public class AddStudentToTutorialGroupCommandTest {
         AddStudentToTutorialGroupCommand addStudentToTutorialGroupCommand = new AddStudentToTutorialGroupCommand(
             validTutorialGroup.getId(), new StudentId("A0123456T"));
 
-        assertCommandFailure(addStudentToTutorialGroupCommand, model, commandHistory, "No such student.");
+        assertCommandFailure(addStudentToTutorialGroupCommand, model, commandHistory,
+            "No such student.");
     }
 
     @Test
