@@ -5,6 +5,7 @@ import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,7 +20,7 @@ import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
-
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -183,6 +184,23 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void grade(Grade grade) {
         versionedSuperTaClient.grade(grade);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public void createAttendance(String tgId, Session session) {
+        Optional<TutorialGroup> tg = versionedSuperTaClient.getTutorialGroup(tgId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup t = tg.get();
+        versionedSuperTaClient.createAttendance(t, session);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public void markAttendance(String tgId, Session session, Set<StudentId> stIdSet) {
+        versionedSuperTaClient.markAttendance(tgId, session, stIdSet);
         indicateSuperTaClientChanged();
     }
 

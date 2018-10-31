@@ -2,6 +2,8 @@ package seedu.superta.testutil;
 
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.UniqueAssignmentList;
+import seedu.superta.model.attendance.Session;
+import seedu.superta.model.attendance.UniqueSessionList;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.UniqueStudentList;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -17,12 +19,14 @@ public class TutorialGroupBuilder {
     private String id;
     private UniqueStudentList students;
     private UniqueAssignmentList assignments;
+    private UniqueSessionList sessions;
 
     public TutorialGroupBuilder() {
         name = DEFAULT_NAME;
         id = DEFAULT_ID;
         students = new UniqueStudentList();
         assignments = new UniqueAssignmentList();
+        sessions = new UniqueSessionList();
     }
 
     /**
@@ -34,6 +38,7 @@ public class TutorialGroupBuilder {
         id = source.getId();
         students = source.getStudents().clone();
         assignments = source.getAssignments().clone();
+        sessions = source.getSessions().clone();
     }
 
     /**
@@ -84,7 +89,23 @@ public class TutorialGroupBuilder {
         return this;
     }
 
+    /**
+     * Adds a {@code Session} to this {@code TutorialGroup} we are building.
+     */
+    public TutorialGroupBuilder createAttendanceSession(Session session) {
+        sessions.add(session);
+        return this;
+    }
+
+    /**
+     * Removes a {@code Session} from this {@code TutorialGroup} we are building.
+     */
+    public TutorialGroupBuilder removeAttendanceSession(Session session) {
+        sessions.remove(session);
+        return this;
+    }
+
     public TutorialGroup build() {
-        return new TutorialGroup(id, name, students, assignments);
+        return new TutorialGroup(id, name, students, assignments, sessions);
     }
 }

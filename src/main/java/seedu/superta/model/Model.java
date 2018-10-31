@@ -2,11 +2,13 @@ package seedu.superta.model;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -86,6 +88,16 @@ public interface Model {
      * Grades a student on an assignment.
      */
     void grade(Grade grade);
+
+    /**
+     * Creates the given attendance session to the tutorial group.
+     */
+    void createAttendance(String tgId, Session session);
+
+    /**
+     * Marks the given students for an attendance session.
+     */
+    void markAttendance(String tgId, Session session, Set<StudentId> stIdSet);
 
     /**
      * Adds feedback to a student.

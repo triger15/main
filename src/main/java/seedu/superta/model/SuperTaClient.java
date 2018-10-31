@@ -6,6 +6,7 @@ import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -15,6 +16,11 @@ import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.GradeException;
+import seedu.superta.model.attendance.Attendance;
+import seedu.superta.model.attendance.Presence;
+import seedu.superta.model.attendance.Session;
+import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
+import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -181,6 +187,52 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
             throw new GradeException();
         }
         as.grade(st.getStudentId(), grade.getMarks());
+    }
+
+    /**
+     * Creates an attendance session to a tutorial group.
+     */
+    public void createAttendance(TutorialGroup tg, Session session) throws DuplicateSessionException {
+        requireAllNonNull(tg, session);
+
+        tg.createAttendanceSession(session);
+    }
+
+    /**
+     * Removes an attendance session to a tutorial group.
+     * Not implemented.
+     */
+    public void removeAttendance(TutorialGroup tg, Session session) {
+        requireAllNonNull(tg, session);
+
+        tg.removeAttendanceSession(session);
+    }
+
+    /**
+     * Marks attendance of students in a session.
+     */
+    public void markAttendance(String tgId, Session session, Set<StudentId> stIdSet) {
+        requireAllNonNull(tgId, session, stIdSet);
+        Optional<TutorialGroup> otg = getTutorialGroup(tgId);
+        if (!otg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup tg = otg.get();
+
+        Optional<Session> opSession = tg.getSession(session);
+        if (!opSession.isPresent()) {
+            throw new SessionNotFoundException();
+        }
+        Session sess = opSession.get();
+
+        UniqueStudentList students = tg.getStudents();
+        boolean studentsMatch = stIdSet.stream().allMatch(studentId -> students.containsId(studentId));
+        if (!studentsMatch) {
+            throw new StudentNotFoundException();
+        }
+
+        Presence present = Presence.PRESENT;
+        stIdSet.stream().map(stdId -> new Attendance(stdId, present)).forEach(att -> sess.addToSession(att));
     }
 
     /**

@@ -232,17 +232,26 @@ Examples:
 * `filter tg/1`
 Shows a list of all the students in the tutorial group with an ID of `1`.
 
+// tag::attendance[]
 === Create Attendance: `create-attendance`
 
-[TIP] Coming in v2.0
+Creates an attendance listing for a specific tutorial group, identified by its ID.
+Format: `create-attendance tg/TUTORIAL_GROUP_ID n/NAME`
 
-Creates an attendance for a specific tutorial group, identified by its ID.
-Format: `create-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
+Examples:
+* `create-attendance tg/1 n/W4 Tutorial`
+Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `1`.
+
+=== Mark Attendance: `mark-attendance`
+
+Marks attendance for students from a specific tutorial group and session name, identified by its ID and name.
+Format: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
 
 Examples:
 
-* `create-attendance tg/1 n/W4 Tutorial s/A1234567T s/A0123456Y`
-Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `1`, marking the students with IDs `A1234567T` and `A0123456Y` as present.
+* `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
+Marks students with IDs `A1234567T` and `A0123456Y` as present in tutorial session named `W4 Tutorial` for the tutorial group with an ID of `1`.
+// end::attendance[]
 
 === Creating an Assignment: `create-assignment`
 
@@ -320,7 +329,6 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
-
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
@@ -376,6 +384,7 @@ There is no need to save manually.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
+// tag::summary[]
 == Command Summary
 
 * *Help* : `help`
@@ -405,9 +414,14 @@ e.g. `create-assignment tg/04a n/lab1 m/40`
 e.g. `delete-assignment as/lab1 tg/04a`
 * *Grade Assignment*: `grade tg/[TUTORIAL_GROUP_ID] as/[ASSIGNMENT_NAME] st/[STUDENT_ID] m/[MARKS]`
 e.g. `grade tg/04a as/lab1 st/A0166733Y m/30`
+* *Create Attendance*: `create-attendance tg/[TUTORIAL_GROUP_ID] n/[NAME]`
+e.g. `create-attendance tg/1 n/W4 Tutorial`
+* *Mark Attendance*: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
+e.g. `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
 * *Feedback*: `feedback id/[STUDENT_ID] f/[FEEDBACK]`
 e.g. `feedback id/A0166733Y f/Likes to sleep in class`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *Clear* : `clear`
+// end::summary[]
