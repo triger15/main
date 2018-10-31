@@ -1,7 +1,6 @@
 package seedu.superta.model.assignment;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.superta.testutil.TypicalSuperTaClient.ALICE;
 import static seedu.superta.testutil.TypicalSuperTaClient.BENSON;
@@ -12,7 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class GradeBookTest {
-    GradeBook gradeBook = new GradeBook();
+    private GradeBook gradeBook = new GradeBook();
 
     @Test
     public void isStudentIn_success() {

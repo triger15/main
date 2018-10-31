@@ -9,18 +9,18 @@ import seedu.superta.model.student.Feedback;
 
 public class XmlAdaptedFeedbackTest {
     @Test
-    public void feedback_equals_itself_success() {
+    public void feedbackEqualsItself_success() {
         XmlAdaptedFeedback feedback = new XmlAdaptedFeedback(new Feedback("Hello"));
         assertEquals(feedback, feedback);
     }
 
     @Test
-    public void feedback_not_equals_success() {
+    public void feedbackNotEquals_success() {
         Feedback source = new Feedback("Hello");
-        Feedback source_two = new Feedback("Not hello");
+        Feedback sourceTwo = new Feedback("Not hello");
         XmlAdaptedFeedback feedback = new XmlAdaptedFeedback(source);
-        XmlAdaptedFeedback feedback_two = new XmlAdaptedFeedback(source_two);
-        assertNotEquals(feedback, feedback_two);
+        XmlAdaptedFeedback feedbackTwo = new XmlAdaptedFeedback(sourceTwo);
+        assertNotEquals(feedback, feedbackTwo);
     }
 
     @Test

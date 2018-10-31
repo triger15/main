@@ -2,15 +2,11 @@ package seedu.superta.storage;
 
 import static seedu.superta.testutil.TypicalSuperTaClient.BENSON;
 
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.GradeBook;
 import seedu.superta.model.assignment.GradeEntry;
 import seedu.superta.model.student.StudentId;

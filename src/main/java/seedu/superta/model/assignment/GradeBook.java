@@ -108,4 +108,15 @@ public class GradeBook {
         });
         return list;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof GradeBook)) {
+            return false;
+        }
+        return internalMap.equals(((GradeBook) other).internalMap);
+    }
 }
