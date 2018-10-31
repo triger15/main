@@ -41,4 +41,9 @@ public class Attendance {
         return otherAttendance != null
                 && otherAttendance.getStudentId().equals(getStudentId());
     }
+
+    @Override
+    public String toString() {
+        return stId + " " + presence;
+    }
 }

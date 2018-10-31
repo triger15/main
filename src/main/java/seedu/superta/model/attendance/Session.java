@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
@@ -51,10 +52,17 @@ public class Session {
         return name;
     }
 
+    /**
+     * Returns the backing set as an unmodifiable {@code ObservableSet}.
+     */
     public ObservableSet<Attendance> asUnmodifiableObservableSet() {
         return FXCollections.unmodifiableObservableSet(internalSet);
     }
 
+    /**
+     * Adds the given attendance to the current attendance session.
+     * @param attendance A valid attendance.
+     */
     public void addToSession(Attendance attendance) {
         requireNonNull(attendance);
         if (contains(attendance)) {
@@ -93,5 +101,11 @@ public class Session {
         Session otherSession = (Session) other;
         return otherSession.getSessionName().equals(getSessionName())
                 && otherSession.internalSet.equals(internalSet);
+    }
+
+    @Override
+    public String toString() {
+        return "[Session] " + name + ": "
+            + internalSet.stream().map(att -> att.toString()).collect(Collectors.joining(", "));
     }
 }

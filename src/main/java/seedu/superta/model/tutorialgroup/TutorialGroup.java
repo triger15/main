@@ -128,6 +128,9 @@ public class TutorialGroup {
                 .collect(Collectors.joining(", "))
             + "\n"
             + "Assignments: \n"
-            + assignments;
+            + assignments
+            + "\n"
+            + "Attendance Sessions: \n"
+            + attendanceSessions;
     }
 }
