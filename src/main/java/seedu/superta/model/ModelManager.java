@@ -163,6 +163,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateAssignment(String tgId, Assignment assignment) {
+        Optional<TutorialGroup> tg = versionedSuperTaClient.getTutorialGroup(tgId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup t = tg.get();
+
+        Optional<Assignment> assignmentTitle = t.getAssignment(assignment.getTitle());
+        if (!assignmentTitle.isPresent()) {
+            throw new AssignmentNotFoundException();
+        }
+
+        Assignment a = assignmentTitle.get();
+        versionedSuperTaClient.updateAssignment(t, a);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
     public void deleteAssignment(String tgId, String assignment) {
         Optional<TutorialGroup> tg = versionedSuperTaClient.getTutorialGroup(tgId);
         if (!tg.isPresent()) {

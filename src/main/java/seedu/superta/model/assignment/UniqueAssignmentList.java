@@ -67,6 +67,17 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         internalList.set(index, editedAssignment);
     }
 
+    /**
+     * Method to update an assignment.
+     * @param toChange the assignment to change
+     */
+    public void update(Assignment toChange) {
+        requireNonNull(toChange);
+        if (!internalList.remove(toChange)) {
+            throw new AssignmentNotFoundException();
+        }
+        internalList.add(toChange);
+    }
 
     /**
      * Method to remove an assignment from the list.
@@ -97,9 +108,9 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         internalList.setAll(assignments);
     }
 
-    public Optional<Assignment> getAssignmentWithTitle(Title title) {
+    public Assignment getAssignmentWithTitle(Title title) {
         return internalList.stream().filter(assignments -> assignments.getTitle().equals(title))
-            .findFirst();
+            .findFirst().get();
     }
 
     /**

@@ -56,6 +56,14 @@ public class TutorialGroup {
         assignments.add(assignment);
     }
 
+    /**
+     * @param assignment represents assignment to be changed.
+     */
+    public void updateAssignment(Assignment assignment) {
+        Assignment originalAssignment = assignments.getAssignmentWithTitle(assignment.getTitle());
+        assignments.setAssignment(originalAssignment, assignment);
+    }
+
     public void removeAssignment(Assignment assignment) {
         assignments.remove(assignment);
     }

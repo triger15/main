@@ -85,7 +85,7 @@ public interface Model {
     /**
      * Update an assignment in the tutorial group.
      */
-    void updateAssignment(String tgId, String assignment);
+    void updateAssignment(String tgId, Assignment assignment);
 
     /**
      * Grades a student on an assignment.

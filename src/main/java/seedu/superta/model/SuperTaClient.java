@@ -147,6 +147,15 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     }
 
     /**
+     * Updates an assignment in a tutorial group.
+     */
+    public void updateAssignment(TutorialGroup tg, Assignment assignment) {
+        requireAllNonNull(tg, assignment);
+
+        tg.updateAssignment(assignment);
+    }
+
+    /**
      * Removes an assignment from a tutorial group.
      */
     public void deleteAssignment(TutorialGroup tg, Assignment assignment) {
