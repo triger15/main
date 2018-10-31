@@ -15,11 +15,11 @@ public class CreateAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "create-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an assignment."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an assignment.\n"
         + "Parameters: "
         + "tg/TUTORIAL-GROUP-ID "
         + "n/NAME "
-        + "m/MAXMARKS "
+        + "m/MAXMARKS\n"
         + "Example: " + COMMAND_WORD + " "
         + "tg/04a "
         + "n/Take Home Lab 1 "

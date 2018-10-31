@@ -15,10 +15,10 @@ public class CreateTutorialGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a tutorial group."
         + "Parameters: "
-        + "n/NAME"
-        + "id/IDENTIFIER"
+        + "n/NAME "
+        + "id/IDENTIFIER\n"
         + "Example: " + COMMAND_WORD + " "
-        + "n/CS1101S Studio 04A"
+        + "n/CS1101S Studio 04A "
         + "id/04a";
 
     public static final String MESSAGE_SUCCESS = "New tutorial group created: %1$s";

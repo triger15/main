@@ -79,6 +79,19 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
+    /**
+     * Remove student by their Student ID reference.
+     */
+    public boolean removeById(Student toRemove) {
+        requireNonNull(toRemove);
+        Optional<Student> result = internalList.stream()
+                .filter(student -> student.isSameId(toRemove)).findFirst();
+        if (!result.isPresent()) {
+            return false;
+        }
+        return internalList.remove(result.get());
+    }
+
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

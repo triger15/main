@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.superta.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -41,6 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_STUDENT_ID + "ID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "

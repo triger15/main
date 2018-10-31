@@ -17,10 +17,10 @@ import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundExcepti
 public class AddStudentToTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "add-to-tutorial-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a tutorial group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a tutorial group.\n"
         + "Parameters: "
         + "tg/TUTORIAL-GROUP-ID "
-        + "st/STUDENT-ID"
+        + "st/STUDENT-ID\n"
         + "Example: " + COMMAND_WORD + " "
         + "tg/04a "
         + "st/A0166733Y";

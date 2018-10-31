@@ -16,10 +16,9 @@ public class DeleteTutorialGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tutorial group."
             + "Parameters: "
-            + "id/IDENTIFIER"
+            + "id/IDENTIFIER\n"
             + "Example: " + COMMAND_WORD + " "
-            + "id/04a" + " "
-            + "id/02b";
+            + "id/04a";
 
     public static final String MESSAGE_SUCCESS = "Tutorial group deleted: %s";
     public static final String MESSAGE_FAILURE = "No such tutorial group.";

@@ -6,10 +6,13 @@ import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import java.util.List;
 import java.util.ListIterator;
 
+import seedu.superta.commons.core.EventsCenter;
+import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.student.Feedback;
+import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.exceptions.StudentNotFoundException;
 

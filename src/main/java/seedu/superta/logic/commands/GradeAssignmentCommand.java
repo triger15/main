@@ -17,12 +17,12 @@ import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundExcepti
 public class GradeAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "grade";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Grades an assignment."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Grades an assignment.\n"
         + "Parameters: "
         + "tg/TUTORIAL-GROUP-ID "
         + "as/ASSIGNMENT-NAME "
         + "st/STUDENT-ID "
-        + "m/MARKS "
+        + "m/MARKS\n"
         + "Example: " + COMMAND_WORD + " "
         + "tg/04a "
         + "as/lab1 "
