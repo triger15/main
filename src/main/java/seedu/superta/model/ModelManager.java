@@ -134,6 +134,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
         TutorialGroup tutorialGroup = tutorialGroupOptional.get();
         Student student = studentOptional.get();
+        if (!tutorialGroup.getStudents().contains(student)) {
+            throw new StudentNotFoundException();
+        }
         versionedSuperTaClient.removeStudentFromTutorialGroup(tutorialGroup, student);
         indicateSuperTaClientChanged();
     }

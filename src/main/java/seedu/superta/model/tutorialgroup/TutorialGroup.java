@@ -57,7 +57,7 @@ public class TutorialGroup {
     }
 
     public void removeStudent(Student student) {
-        students.remove(student);
+        students.removeById(student);
     }
 
     public void addAssignment(Assignment assignment) {
@@ -117,6 +117,7 @@ public class TutorialGroup {
         }
         TutorialGroup otherTutorialGroup = (TutorialGroup) other;
         return id.equals(otherTutorialGroup.id)
+            && name.equals(otherTutorialGroup.name)
             && students.equals(otherTutorialGroup.students)
             && assignments.equals(otherTutorialGroup.assignments);
     }

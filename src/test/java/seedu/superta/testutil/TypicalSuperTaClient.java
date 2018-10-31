@@ -42,7 +42,7 @@ public class TypicalSuperTaClient {
         .withEmail("werner@example.com").withStudentId("A1403293Y").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
         .withEmail("lydia@example.com").withStudentId("A1820123Y")
-                    .withFeedback("A little dumb.").build();
+                    .withFeedback("A little dumb.", "Is attentive during class.").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
         .withEmail("anna@example.com").withStudentId("A1309482Y").build();
 

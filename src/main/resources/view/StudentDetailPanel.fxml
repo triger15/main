@@ -6,13 +6,26 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
     </padding>
     <FlowPane fx:id="tags" />
-    <Label fx:id="name" styleClass="label-header" text="\$name" />
-    <Label fx:id="id" styleClass="label-subheader" text="\$id" />
+    <HBox alignment="CENTER_LEFT">
+        <ImageView>
+            <Image url="@/images/student.png" requestedWidth="64" requestedHeight="64" />
+        </ImageView>
+        <VBox>
+            <padding>
+                <Insets left="15" />
+            </padding>
+            <Label fx:id="name" styleClass="label-header" text="\$name" />
+            <Label fx:id="id" styleClass="label-subheader" text="\$id" />
+        </VBox>
+    </HBox>
     <Separator orientation="HORIZONTAL">
         <padding>
             <Insets top="5" bottom="5" />

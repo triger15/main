@@ -90,6 +90,13 @@ public class Student {
     }
 
     /**
+     * Returns true if both students have the same ID.
+     */
+    public boolean isSameId(Student otherStudent) {
+        return studentId.equals(otherStudent.studentId);
+    }
+  
+    /**
      * Returns true if both persons have the same student id.
      */
     public boolean hasSameId(StudentId stId) {

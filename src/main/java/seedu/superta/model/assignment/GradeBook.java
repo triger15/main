@@ -1,6 +1,8 @@
 package seedu.superta.model.assignment;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
@@ -71,8 +73,14 @@ public class GradeBook {
             return 0;
         }
         int mid = internalMap.size() / 2;
-        Object[] arr = internalMap.values().toArray();
-        return ((GradeEntry) arr[mid]).marks;
+        List<GradeEntry> entries = new ArrayList<>(internalMap.values());
+        entries.sort(new Comparator<GradeEntry>() {
+            @Override
+            public int compare(GradeEntry o1, GradeEntry o2) {
+                return ((Double) (o1.marks - o2.marks)).intValue();
+            }
+        });
+        return entries.get(mid).marks;
     }
 
     /**
@@ -99,5 +107,16 @@ public class GradeBook {
             }
         });
         return list;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof GradeBook)) {
+            return false;
+        }
+        return internalMap.equals(((GradeBook) other).internalMap);
     }
 }
