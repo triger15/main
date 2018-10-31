@@ -95,6 +95,13 @@ public class Student {
     public boolean isSameId(Student otherStudent) {
         return studentId.equals(otherStudent.studentId);
     }
+  
+    /**
+     * Returns true if both persons have the same student id.
+     */
+    public boolean hasSameId(StudentId stId) {
+        return studentId.equals(stId);
+    }
 
     /**
      * Returns an immutable list of feedback, which throws {@code UnsupportedOperationException}

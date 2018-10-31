@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -24,6 +25,7 @@ import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -158,6 +160,16 @@ public class AddCommandTest {
 
         @Override
         public void grade(Grade grade) {
+
+        }
+
+        @Override
+        public void createAttendance(String tgId, Session session) {
+
+        }
+
+        @Override
+        public void markAttendance(String tgId, Session session, Set<StudentId> stIdSet) {
 
         }
 

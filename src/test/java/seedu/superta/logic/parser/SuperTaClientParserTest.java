@@ -6,11 +6,16 @@ import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.Rule;
@@ -19,6 +24,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.superta.logic.commands.AddCommand;
 import seedu.superta.logic.commands.ClearCommand;
+import seedu.superta.logic.commands.CreateAttendanceCommand;
 import seedu.superta.logic.commands.DeleteCommand;
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.ExitCommand;
@@ -27,10 +33,12 @@ import seedu.superta.logic.commands.FindCommand;
 import seedu.superta.logic.commands.HelpCommand;
 import seedu.superta.logic.commands.HistoryCommand;
 import seedu.superta.logic.commands.ListCommand;
+import seedu.superta.logic.commands.MarkAttendanceCommand;
 import seedu.superta.logic.commands.RedoCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.logic.commands.UndoCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -153,5 +161,29 @@ public class SuperTaClientParserTest {
         FeedbackCommand command = (FeedbackCommand) parser.parseCommand(FeedbackCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENT_ID + studentId + " " + PREFIX_FEEDBACK + feedback.value);
         assertEquals(new FeedbackCommand(studentId, feedback), command);
+    }
+
+    @Test
+    public void parseCommand_createAttendance() throws Exception {
+        final Session session = new Session("Week 4 tutorial");
+        final String tgId = "01A";
+        CreateAttendanceCommand command = (CreateAttendanceCommand) parser.parseCommand(
+                CreateAttendanceCommand.COMMAND_WORD + " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tgId + " "
+                + PREFIX_SESSION_NAME + session.getSessionName());
+        assertEquals(new CreateAttendanceCommand(tgId, session), command);
+    }
+
+    @Test
+    public void parseCommand_markAttendance() throws Exception {
+        final String tgId = "01A";
+        final Session session = new Session("Week 4 tutorial");
+        final StudentId studentId = new StudentId(VALID_STUDENT_ID_AMY);
+        final Set<StudentId> stIdSet = new HashSet<>();
+        stIdSet.add(studentId);
+
+        MarkAttendanceCommand command = (MarkAttendanceCommand) parser.parseCommand(
+                MarkAttendanceCommand.COMMAND_WORD + " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tgId + " "
+                        + PREFIX_SESSION_NAME + session.getSessionName() + " " + PREFIX_GENERAL_STUDENT_ID + studentId);
+        assertEquals(new MarkAttendanceCommand(tgId, session, stIdSet), command);
     }
 }
