@@ -121,6 +121,13 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * Returns the size of the internal list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
 
     @Override
     public Iterator<Assignment> iterator() {
@@ -134,6 +141,18 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
             .collect(Collectors.joining("\n"));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UniqueAssignmentList)) {
+            return false;
+        }
+
+        return internalList.equals(((UniqueAssignmentList) other).internalList);
+    }
     @Override
     public int hashCode() {
         return internalList.hashCode();

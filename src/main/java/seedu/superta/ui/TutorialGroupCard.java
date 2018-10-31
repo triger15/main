@@ -1,10 +1,13 @@
 package seedu.superta.ui;
 
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
-// @@author caephler
+// @@author Caephler
 /**
  * A UI component that displays information of a {@code TutorialGroup}
  */
@@ -31,8 +34,26 @@ public class TutorialGroupCard extends UiPart<Region> {
 
         name.setText(String.format("Name: " + tutorialGroup.getName()));
         id.setText(String.format("ID: " + tutorialGroup.getId()));
-        numStudents.setText(tutorialGroup.getStudents().asUnmodifiableObservableList().size() + " students");
-        numAssignments.setText(tutorialGroup.getAssignments().asUnmodifiableObservableList().size() + " assignments");
+        tutorialGroup.getStudents().asUnmodifiableObservableList().addListener(
+            (ListChangeListener<? super Student>) change -> {
+                updateStudentsSize();
+            }
+        );
+        tutorialGroup.getAssignments().asUnmodifiableObservableList().addListener(
+            (ListChangeListener<? super Assignment>) change -> {
+                updateAssignmentsSize();
+            }
+        );
+        updateStudentsSize();
+        updateAssignmentsSize();
+    }
+
+    private void updateStudentsSize() {
+        numStudents.setText(tutorialGroup.getStudents().size() + " students");
+    }
+
+    private void updateAssignmentsSize() {
+        numAssignments.setText(tutorialGroup.getAssignments().size() + " assignments");
     }
 
     @Override

@@ -19,6 +19,11 @@ public class Feedback {
         value = feedback;
     }
 
+    public Feedback(Feedback feedback) {
+        requireNonNull(feedback);
+        value = feedback.value;
+    }
+
     @Override
     public String toString() {
         return value;

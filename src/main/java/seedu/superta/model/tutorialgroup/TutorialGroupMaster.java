@@ -74,7 +74,7 @@ public class TutorialGroupMaster {
     public void setTutorialGroups(Map<String, TutorialGroup> tutorialGroups) {
         requireAllNonNull(tutorialGroups);
         tutorialGroups.forEach((id, tutorialGroup) -> {
-            this.tutorialGroups.put(id, tutorialGroup);
+            this.tutorialGroups.put(id, new TutorialGroup(tutorialGroup));
             this.uids.add(id);
         });
     }
@@ -129,7 +129,8 @@ public class TutorialGroupMaster {
         tutorialGroups.addListener((MapChangeListener<? super String, ? super TutorialGroup>) change -> {
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
-            } else if (change.wasRemoved()) {
+            }
+            if (change.wasRemoved()) {
                 list.remove(change.getValueRemoved());
             }
         });

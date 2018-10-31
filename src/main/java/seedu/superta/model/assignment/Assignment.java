@@ -48,7 +48,7 @@ public class Assignment {
         this.maxMarks = toClone.maxMarks;
         gradebook = new GradeBook();
         toClone.gradebook.stream()
-            .forEach(e -> gradebook.addGrade(e.getKey(), e.getValue()));
+            .forEach(e -> gradebook.addGrade(e.studentId, e.marks));
     }
 
 
@@ -90,6 +90,31 @@ public class Assignment {
     }
 
     /**
+     * Returns the average for this assignment.
+     */
+    public double getAverage() {
+        return gradebook.getAverage();
+    }
+
+    /**
+     * Returns the median for this assignment.
+     */
+    public double getMedian() {
+        return gradebook.getMedian();
+    }
+
+    /**
+     * Returns the projected difficulty for this assignment.
+     * Projected difficulty is currently 1 - average percentage scored.
+     */
+    public double getProjectedDifficulty() {
+        double average = gradebook.getAverage();
+        double averagePercent = average / maxMarks;
+
+        return (1 - averagePercent) * 10;
+    }
+
+    /**
      * Removes a students reference from the grade book, if student is inside.
      */
     public void removeStudentReferences(Student target) {
@@ -128,7 +153,7 @@ public class Assignment {
         return "[Assignment]" + title
             + " [Max Marks: " + maxMarks + "]\n"
             + gradebook.stream()
-                .map(entry -> entry.getKey().toString() + ": " + entry.getValue())
+                .map(GradeEntry::toString)
                 .collect(Collectors.joining("\n"));
     }
 }

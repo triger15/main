@@ -177,6 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
         Assignment a = ass.get();
 
         versionedSuperTaClient.deleteAssignment(t, a);
+        indicateSuperTaClientChanged();
     }
 
     @Override
