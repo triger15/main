@@ -2,13 +2,14 @@ package seedu.superta.model.student;
 
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.superta.model.tag.Tag;
 
 /**
@@ -25,7 +26,7 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final List<Feedback> feedback = new ArrayList<>();
+    private final ObservableList<Feedback> feedback = FXCollections.observableArrayList();
 
     /**
      * Every field must be present and not null.
@@ -39,6 +40,15 @@ public class Student {
         this.studentId = studentId;
         this.tags.addAll(tags);
         this.feedback.addAll(feedback);
+    }
+
+    public Student(Student other) {
+        name = other.name;
+        phone = other.phone;
+        email = other.email;
+        studentId = other.studentId;
+        tags.addAll(other.tags);
+        feedback.addAll(other.feedback);
     }
 
     public Name getName() {
@@ -90,8 +100,12 @@ public class Student {
      * Returns an immutable list of feedback, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public List<Feedback> getFeedback() {
-        return Collections.unmodifiableList(feedback);
+    public ObservableList<Feedback> getFeedback() {
+        return FXCollections.unmodifiableObservableList(feedback);
+    }
+
+    public void addFeedback(Feedback feedback) {
+        this.feedback.add(feedback);
     }
 
     /**
@@ -113,7 +127,8 @@ public class Student {
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getStudentId().equals(getStudentId())
-                && otherStudent.getTags().equals(getTags());
+                && otherStudent.getTags().equals(getTags())
+                && otherStudent.getFeedback().equals(getFeedback());
     }
 
     @Override

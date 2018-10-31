@@ -115,7 +115,10 @@ public class TutorialGroup {
         if (!(other instanceof TutorialGroup)) {
             return false;
         }
-        return id.equals(((TutorialGroup) other).id);
+        TutorialGroup otherTutorialGroup = (TutorialGroup) other;
+        return id.equals(otherTutorialGroup.id)
+            && students.equals(otherTutorialGroup.students)
+            && assignments.equals(otherTutorialGroup.assignments);
     }
 
     @Override

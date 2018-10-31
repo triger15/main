@@ -139,6 +139,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeStudentFromTutorialGroup(String tgId, StudentId studentId) {
+
+        }
+
+        @Override
         public void deleteTutorialGroup(TutorialGroup tutorialGroup) {
 
         }

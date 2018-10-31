@@ -19,7 +19,6 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 
 import seedu.superta.logic.CommandHistory;
-
 import seedu.superta.model.Model;
 import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.assignment.Assignment;
@@ -100,6 +99,11 @@ public class CreateAssignmentCommandTest {
 
         @Override
         public void addStudentToTutorialGroup(String tgId, StudentId studentId) {
+
+        }
+
+        @Override
+        public void removeStudentFromTutorialGroup(String tgId, StudentId studentId) {
 
         }
 

@@ -11,7 +11,7 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
-// @@author caephler
+// @@author Caephler
 /**
  * Command to list all tutorial groups.
  */

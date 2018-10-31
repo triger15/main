@@ -12,20 +12,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.JumpToListRequestEvent;
-import seedu.superta.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.superta.model.student.Student;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class StudentListPanel extends UiPart<Region> {
+    private static final String FXML = "StudentListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
 
     @FXML
     private ListView<Student> personListView;
 
-    public PersonListPanel(ObservableList<Student> studentList) {
+    public StudentListPanel(ObservableList<Student> studentList) {
         super(FXML);
         setConnections(studentList);
         registerAsAnEventHandler(this);
@@ -42,7 +42,7 @@ public class PersonListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in student list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new StudentPanelSelectionChangedEvent(newValue));
                     }
                 });
     }

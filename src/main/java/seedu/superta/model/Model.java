@@ -64,6 +64,11 @@ public interface Model {
     void addStudentToTutorialGroup(String tgId, StudentId studentId);
 
     /**
+     * Removes the student from the tutorial group.
+     */
+    void removeStudentFromTutorialGroup(String tgId, StudentId studentId);
+
+    /**
      * Deletes the given tutorial group.
      * The tutorial group must exist in the client.
      */

@@ -1,10 +1,12 @@
 package seedu.superta.model.assignment;
 
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 
@@ -12,8 +14,7 @@ import seedu.superta.model.student.StudentId;
  * Model for a grade book.
  */
 public class GradeBook {
-
-    private final HashMap<StudentId, Double> internalHashmap = new HashMap<>();
+    private final ObservableMap<StudentId, GradeEntry> internalMap = FXCollections.observableHashMap();
 
     /**
      * Adds a grade to the internal hashmap
@@ -21,7 +22,7 @@ public class GradeBook {
      * @param grade the grade value
      */
     public void addGrade(StudentId stId, Double grade) {
-        internalHashmap.put(stId, grade);
+        internalMap.put(stId, new GradeEntry(stId, grade));
     }
 
     /**
@@ -30,7 +31,7 @@ public class GradeBook {
      * @return his grade for this assignment
      */
     public Double getGradeFor(StudentId stId) {
-        return internalHashmap.get(stId);
+        return internalMap.get(stId).marks;
     }
 
     /**
@@ -38,7 +39,7 @@ public class GradeBook {
      * @param student the student who we want to check.
      */
     public boolean isStudentIn(Student student) {
-        return internalHashmap.containsKey(student.getStudentId());
+        return internalMap.containsKey(student.getStudentId());
     }
 
     /**
@@ -47,16 +48,56 @@ public class GradeBook {
      */
     public void removeStudentReference(Student student) {
         if (isStudentIn(student)) {
-            internalHashmap.remove(student.getStudentId());
+            internalMap.remove(student.getStudentId());
         }
+    }
+
+    /**
+     * Returns the average for this grade book.
+     */
+    public double getAverage() {
+        double total = 0;
+        for (GradeEntry entry : internalMap.values()) {
+            total += entry.marks;
+        }
+        return total / Math.max(1, internalMap.size());
+    }
+
+    /**
+     * Returns the median for this grade book.
+     */
+    public double getMedian() {
+        if (internalMap.size() == 0) {
+            return 0;
+        }
+        int mid = internalMap.size() / 2;
+        Object[] arr = internalMap.values().toArray();
+        return ((GradeEntry) arr[mid]).marks;
     }
 
     /**
      * Method to streamify this object. Also, orders it in lexicographical order of Student IDs.
      * @return a Stream of entries in lexicographical order.
      */
-    public Stream<Map.Entry<StudentId, Double>> stream() {
-        return internalHashmap.entrySet().stream()
-            .sorted(Comparator.comparing(o -> o.getKey().toString()));
+    public Stream<GradeEntry> stream() {
+        return internalMap.values().stream()
+            .sorted(Comparator.comparing(o -> o.marks));
+    }
+
+    /**
+     * Returns an unmodifiable view of this gradebook.
+     */
+    public ObservableList<GradeEntry> asUnmodifiableObservableList() {
+        ObservableList<GradeEntry> list = FXCollections.observableArrayList();
+        list.addAll(internalMap.values());
+        internalMap.addListener((MapChangeListener<? super StudentId, ? super GradeEntry>) change -> {
+            if (change.wasAdded()) {
+                list.add(change.getValueAdded());
+            }
+            if (change.wasRemoved()) {
+                list.remove(change.getValueRemoved());
+            }
+        });
+        return list;
     }
 }
