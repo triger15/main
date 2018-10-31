@@ -60,7 +60,7 @@ public class UpdateTutorialGroupCommand extends Command {
         requireNonNull(toEdit);
 
         String updatedName = descriptor.getName().orElse(toEdit.getName());
-        return new TutorialGroup(id, updatedName);
+        return new TutorialGroup(id, updatedName, toEdit.getStudents(), toEdit.getAssignments());
     }
 
     @Override
