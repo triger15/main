@@ -71,7 +71,7 @@ public class AssignmentTest {
     }
 
     @Test
-    public void assignment_clone_success() {
+    public void assignmentClone_success() {
         Assignment original = new Assignment(new Title("Lab 1"), 10.0);
         assertEquals(original, new Assignment(original));
     }

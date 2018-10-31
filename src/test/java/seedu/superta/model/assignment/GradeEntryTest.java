@@ -11,20 +11,20 @@ import org.junit.Test;
 public class GradeEntryTest {
 
     @Test
-    public void equals_itself_success() {
+    public void equalsItself_success() {
         GradeEntry entry = new GradeEntry(BENSON.getStudentId(), 10.0);
         assertEquals(entry, entry);
     }
 
     @Test
-    public void equals_other_with_same_params_success() {
+    public void equalsOtherWithSameParams_success() {
         GradeEntry entry = new GradeEntry(BENSON.getStudentId(), 10.0);
         GradeEntry entry2 = new GradeEntry(BENSON.getStudentId(), 10.0);
         assertEquals(entry, entry2);
     }
 
     @Test
-    public void does_not_equal_unequal_success() {
+    public void doesNotEqualUnequal_success() {
         GradeEntry entry = new GradeEntry(BENSON.getStudentId(), 10.0);
         GradeEntry entry2 = new GradeEntry(ALICE.getStudentId(), 10.0);
         assertNotEquals(entry, entry2);
