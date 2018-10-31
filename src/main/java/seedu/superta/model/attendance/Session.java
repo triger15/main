@@ -3,8 +3,11 @@ package seedu.superta.model.attendance;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
 import java.util.Set;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
+import seedu.superta.model.attendance.exceptions.DuplicateAttendanceException;
 
 /**
  * Represents a Session class in the client.
@@ -12,7 +15,7 @@ import java.util.Set;
  */
 public class Session {
     private final String name;
-    private final Set<Attendance> attendanceList;
+    private final ObservableSet<Attendance> internalSet = FXCollections.observableSet();
 
     /**
      * Constructs an {@code Session}.
@@ -22,7 +25,6 @@ public class Session {
     public Session(String name) {
         requireNonNull(name);
         this.name = name;
-        this.attendanceList = new HashSet<>();
     }
 
     /**
@@ -34,15 +36,31 @@ public class Session {
     public Session(String name, Set<Attendance> attendanceList) {
         requireAllNonNull(name, attendanceList);
         this.name = name;
-        this.attendanceList = attendanceList;
+        internalSet.addAll(attendanceList);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent attendance as the given argument.
+     */
+    public boolean contains(Attendance toCheck) {
+        requireNonNull(toCheck);
+        return internalSet.stream().anyMatch(toCheck::isSameAttendance);
     }
 
     public String getSessionName() {
         return name;
     }
 
-    public Set<Attendance> getAttendanceList() {
-        return attendanceList;
+    public ObservableSet<Attendance> asUnmodifiableObservableSet() {
+        return FXCollections.unmodifiableObservableSet(internalSet);
+    }
+
+    public void addToSession(Attendance attendance) {
+        requireNonNull(attendance);
+        if (contains(attendance)) {
+            throw new DuplicateAttendanceException();
+        }
+        internalSet.add(attendance);
     }
 
     /**
@@ -74,6 +92,6 @@ public class Session {
 
         Session otherSession = (Session) other;
         return otherSession.getSessionName().equals(getSessionName())
-                && otherSession.getAttendanceList().equals(getAttendanceList());
+                && otherSession.internalSet.equals(internalSet);
     }
 }

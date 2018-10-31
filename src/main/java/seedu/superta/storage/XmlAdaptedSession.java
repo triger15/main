@@ -20,7 +20,7 @@ public class XmlAdaptedSession implements XmlAdapted<Session> {
     private String sessionName;
 
     @XmlElement
-    private Set<XmlAdaptedAttendance> attendanceList = new HashSet<>();
+    private Set<XmlAdaptedAttendance> attendance = new HashSet<>();
 
     /**
      * Constructs an XmlAdaptedSession.
@@ -42,7 +42,7 @@ public class XmlAdaptedSession implements XmlAdapted<Session> {
      */
     public XmlAdaptedSession(Session source) {
         sessionName = source.getSessionName();
-        attendanceList = source.getAttendanceList().stream()
+        attendance = source.asUnmodifiableObservableSet().stream()
                 .map(XmlAdaptedAttendance::new)
                 .collect(Collectors.toSet());
     }
@@ -54,8 +54,8 @@ public class XmlAdaptedSession implements XmlAdapted<Session> {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
         }
 
-        for (XmlAdaptedAttendance attendance : attendanceList) {
-            attendances.add(attendance.toModelType());
+        for (XmlAdaptedAttendance xmlAtt : attendance) {
+            attendances.add(xmlAtt.toModelType());
         }
         final Set<Attendance> modelAttendances = new HashSet<>(attendances);
 

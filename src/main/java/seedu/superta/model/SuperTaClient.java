@@ -16,6 +16,8 @@ import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.GradeException;
+import seedu.superta.model.attendance.Attendance;
+import seedu.superta.model.attendance.Presence;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
 import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
@@ -219,12 +221,14 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         }
         Session sess = opSession.get();
 
-        boolean studentsMatch = stIdSet.stream().allMatch(studentId -> tg.getStudents().contains(studentId));
+        UniqueStudentList students = tg.getStudents();
+        boolean studentsMatch = stIdSet.stream().allMatch(studentId -> students.contains(studentId));
         if (!studentsMatch) {
             throw new StudentNotFoundException();
         }
 
-
+        Presence present = Presence.PRESENT;
+        stIdSet.stream().map(stdId -> new Attendance(stdId, present)).forEach(att -> sess.addToSession(att));
     }
 
     /**

@@ -33,7 +33,7 @@ public class XmlAdaptedTutorialGroup {
     @XmlElement
     private List<XmlAdaptedAssignment> assignments = new ArrayList<>();
     @XmlElement
-    private List<XmlAdaptedSession> attendanceSessions = new ArrayList<>();
+    private List<XmlAdaptedSession> sessions = new ArrayList<>();
 
     public XmlAdaptedTutorialGroup() {}
 
@@ -55,7 +55,7 @@ public class XmlAdaptedTutorialGroup {
         source.getSessions().asUnmodifiableObservableList()
             .stream()
             .map(XmlAdaptedSession::new)
-            .forEach(attendanceSessions::add);
+            .forEach(sessions::add);
     }
 
     /**
@@ -77,7 +77,7 @@ public class XmlAdaptedTutorialGroup {
         UniqueAssignmentList uniqueAssignmentList = new UniqueAssignmentList(modelAssignments);
 
         final List<Session> modelSessions = new ArrayList<>();
-        for (XmlAdaptedSession ses : attendanceSessions) {
+        for (XmlAdaptedSession ses : sessions) {
             modelSessions.add(ses.toModelType());
         }
         UniqueSessionList uniqueSessionList = new UniqueSessionList(modelSessions);

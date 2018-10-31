@@ -28,4 +28,17 @@ public class Attendance {
     public Presence getPresence() {
         return presence;
     }
+
+    /**
+     * Returns true if both attendance belong to the same student id.
+     * This defines a weaker notion of equality between two attendance.
+     */
+    public boolean isSameAttendance(Attendance otherAttendance) {
+        if (otherAttendance == this) {
+            return true;
+        }
+
+        return otherAttendance != null
+                && otherAttendance.getStudentId().equals(getStudentId());
+    }
 }
