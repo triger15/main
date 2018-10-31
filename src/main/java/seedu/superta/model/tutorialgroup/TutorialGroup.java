@@ -10,7 +10,6 @@ import seedu.superta.model.assignment.Title;
 import seedu.superta.model.assignment.UniqueAssignmentList;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.UniqueStudentList;
-import seedu.superta.model.student.exceptions.StudentNotFoundException;
 
 /**
  * Model for Tutorial Group.
