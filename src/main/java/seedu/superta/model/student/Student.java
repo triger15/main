@@ -95,7 +95,7 @@ public class Student {
     public boolean isSameId(Student otherStudent) {
         return studentId.equals(otherStudent.studentId);
     }
-  
+
     /**
      * Returns true if both persons have the same student id.
      */
