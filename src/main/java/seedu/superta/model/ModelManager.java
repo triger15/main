@@ -16,9 +16,10 @@ import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
-import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
+
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
