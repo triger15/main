@@ -3,12 +3,14 @@ package seedu.superta.model.attendance;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import seedu.superta.model.attendance.exceptions.DuplicateAttendanceException;
+import seedu.superta.model.student.Student;
 
 /**
  * Represents a Session class in the client.
@@ -82,6 +84,19 @@ public class Session {
 
         return otherSession != null
                 && otherSession.getSessionName().equals(getSessionName());
+    }
+
+    /**
+     * Remove student references.
+     */
+    public boolean removeStudent(Student target) {
+        Optional<Attendance> optional = internalSet.stream()
+                .filter(attendance -> attendance.getStudentId().equals(target.getStudentId())).findAny();
+        if (optional.isPresent()) {
+            return internalSet.remove(optional.get());
+        } else {
+            return false;
+        }
     }
 
     /**

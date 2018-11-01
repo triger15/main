@@ -139,9 +139,6 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
         if (!fromModel.isPresent()) {
             return;
         }
-        if (fromModel.isPresent() && fromModel.get().equals(tutorialGroup)) {
-            return;
-        }
         this.tutorialGroup = fromModel.get();
         render();
     }

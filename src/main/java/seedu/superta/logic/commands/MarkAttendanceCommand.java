@@ -12,6 +12,7 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.attendance.Session;
+import seedu.superta.model.attendance.exceptions.DuplicateAttendanceException;
 import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.exceptions.StudentNotFoundException;
@@ -62,6 +63,8 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException(e.getMessage());
         } catch (StudentNotFoundException e) {
             throw new CommandException("Student not found in tutorial group.");
+        } catch (DuplicateAttendanceException e) {
+            // Nothing to do here. We allow duplicate marking.
         }
         model.commitSuperTaClient();
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentIdSet));

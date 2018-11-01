@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
 import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
@@ -73,7 +75,6 @@ public class UniqueSessionList implements Iterable<Session> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
-
     @Override
     public Iterator<Session> iterator() {
         return internalList.iterator();
@@ -84,6 +85,18 @@ public class UniqueSessionList implements Iterable<Session> {
         return internalList.stream()
             .map(Session::toString)
             .collect(Collectors.joining("\n"));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof UniqueSessionList)) {
+            return false;
+        }
+
+        return internalList.equals(((UniqueSessionList) other).internalList);
     }
 
     @Override
