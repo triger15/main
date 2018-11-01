@@ -42,12 +42,26 @@
         </padding>
         <ListView fx:id="students" orientation="HORIZONTAL" HBox.hgrow="ALWAYS"/>
     </HBox>
-    <Label styleClass="label-bright">
-        <padding>
-            <Insets bottom="5" />
-        </padding>
-        Assignments
-    </Label>
-    <ListView fx:id="assignments" VBox.vgrow="ALWAYS" />
+    <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+        <VBox>
+            <Label styleClass="label-bright">
+                <padding>
+                    <Insets bottom="5" />
+                </padding>
+                Assignments
+            </Label>
+            <ListView fx:id="assignments" VBox.vgrow="ALWAYS" />
+        </VBox>
+        <VBox>
+            <Label styleClass="label-bright">
+                <padding>
+                    <Insets bottom="5" />
+                </padding>
+                Sessions
+            </Label>
+            <ListView fx:id="sessions" VBox.vgrow="ALWAYS" />
+        </VBox>
+    </HBox>
+
 </VBox>
 

@@ -12,6 +12,7 @@ import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
 import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
@@ -34,6 +35,9 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
 
     @FXML
     private ListView<Assignment> assignments;
+
+    @FXML
+    private ListView<Session> sessions;
 
     private TutorialGroup tutorialGroup;
 
@@ -86,6 +90,21 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                     setText(null);
                 } else {
                     setGraphic(new AssignmentCard(tutorialGroup, assignment).getRoot());
+                }
+            }
+        });
+        sessions.getItems().clear();
+        sessions.setItems(tutorialGroup.getSessions().asUnmodifiableObservableList());
+        sessions.setCellFactory(listView -> new ListCell<>() {
+            @Override
+            protected void updateItem(Session session, boolean empty) {
+                super.updateItem(session, empty);
+
+                if (empty || session == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    setGraphic(new SessionCard(session, tutorialGroup).getRoot());
                 }
             }
         });
