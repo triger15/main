@@ -103,7 +103,7 @@ Edits the name of the 2nd student to be `Betsy Crower` and clears all existing t
 
 Finds and lists all students in the SuperTA client whose information matched with the entered keywords. +
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENTID]`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
