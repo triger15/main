@@ -8,6 +8,11 @@ import seedu.superta.model.attendance.Attendance;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
+// @@author Caephler
+
+/**
+ * Card for displaying sessions.
+ */
 public class SessionCard extends UiPart<Region> {
     public static final String FXML = "SessionCard.fxml";
 
@@ -31,11 +36,11 @@ public class SessionCard extends UiPart<Region> {
 
     private void setListeners() {
         session.asUnmodifiableObservableSet().addListener(
-                (SetChangeListener<? super Attendance>) change -> {
-                    if (change.wasAdded() || change.wasRemoved()) {
-                        updateAttendanceCount();
-                    }
+            (SetChangeListener<? super Attendance>) change -> {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    updateAttendanceCount();
                 }
+            }
         );
     }
 

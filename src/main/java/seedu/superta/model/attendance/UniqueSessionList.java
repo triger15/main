@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
 import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
