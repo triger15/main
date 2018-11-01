@@ -14,21 +14,24 @@ import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
- * Update existing assignment maximum marks in the SuperTA client.
+ * Update existing assignment details in the SuperTA client.
  */
 public class UpdateAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "update-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update assignment maximum marks. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update assignment details. "
             + "Parameters: "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "ASSIGNMENT-TITLE"
-            + PREFIX_ASSIGNMENT_MAX_MARKS + "ASSIGNMENT-NEW-MAX-MARKS\n"
+            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "OLD-ASSIGNMENT-TITLE"
+            + PREFIX_ASSIGNMENT_MAX_MARKS + "OLD-ASSIGNMENT-MAX-MARKS"
+            + "[" + PREFIX_GENERAL_ASSIGNMENT_TITLE + "NEW-ASSIGNMENT-TITLE] "
+            + "[" + PREFIX_ASSIGNMENT_MAX_MARKS + "NEW-ASSIGNMENT-MAX-MARKS] "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
             + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 1"
-            + PREFIX_ASSIGNMENT_MAX_MARKS + "50";
+            + PREFIX_ASSIGNMENT_MAX_MARKS + "40"
+            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 2";
 
     public static final String MESSAGE_SUCCESS = "Updated tutorial $s assignment maximum marks to: $s";
     public static final String MESSAGE_FAILURE_NO_TUTORIAL_GROUP = "Tutorial group does not exist.";
