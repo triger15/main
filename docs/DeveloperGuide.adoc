@@ -703,23 +703,6 @@ Teaching Assistant. An individual, usually an SoC undergraduate, who is responsi
 Professor. An individual who teaches SoC modules.
 
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
