@@ -108,6 +108,9 @@ public class Assignment {
      * Projected difficulty is currently 1 - average percentage scored.
      */
     public double getProjectedDifficulty() {
+        if (gradebook.asUnmodifiableObservableList().size() == 0) {
+            return 0.0;
+        }
         double average = gradebook.getAverage();
         double averagePercent = average / maxMarks;
 

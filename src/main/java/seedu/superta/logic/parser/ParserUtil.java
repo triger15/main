@@ -12,6 +12,7 @@ import seedu.superta.commons.util.StringUtil;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Email;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Name;
@@ -163,6 +164,17 @@ public class ParserUtil {
         return new Feedback(feedback.trim());
     }
 
+    /**
+     * Parses a {@code String sessionName} into a {@code Session}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sessionName} is invalid.
+     */
+    public static Session parseSession(String sessionName) {
+        requireNonNull(sessionName);
+        return new Session(sessionName.trim());
+    }
+
     public static String parseString(String str) {
         return str.trim();
     }
@@ -192,6 +204,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> studentIds} into a {@code Set<StudentId>}.
+     */
+    public static Set<StudentId> parseStudentIds(Collection<String> studentIds) throws ParseException {
+        requireNonNull(studentIds);
+        final Set<StudentId> studentIdSet = new HashSet<>();
+        for (String stId : studentIds) {
+            studentIdSet.add(parseStudentId(stId));
+        }
+        return studentIdSet;
     }
 
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
