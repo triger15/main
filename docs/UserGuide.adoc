@@ -101,23 +101,29 @@ Edits the name of the 2nd student to be `Betsy Crower` and clears all existing t
 
 === Locating students by name: `find`
 
-Finds students whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds and lists all students in the SuperTA client whose information matched with the entered keywords. +
+
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words or numbers will be matched e.g. `Han` will not match `Hans`, `9123` will not match `91234567`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `find n/John p/91234567` will return `John` and anybody with phone number `91234567`
+* If there are more than one exact same parameter in the command, only the latest parameter will be taken.  E.g. `find n/John n/Alice` will only return search result of `Alice`, not `John`.
 ****
 
 Examples:
 
-* `find John` +
+* `find n/John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any student having names `Betsy`, `Tim`, or `John`
+* `find p/91234567` +
+Returns student with phone number `91234567`
+* `find n/John id/A0123456T` +
+Returns `john` and `John Doe` and student with student id `A0123456T`
+* `find n/Alice n/Hans` +
+Returns `Hans` only
 
 === Deleting a student : `delete`
 
