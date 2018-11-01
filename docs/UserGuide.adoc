@@ -199,7 +199,7 @@ Format: `view-tutorial-group id/TUTORIAL_GROUP_ID`
 Examples:
 
 * `view-tutorial-group id/04a`
-Displays the `04a` tutorial group's infromation .
+Displays the `04a` tutorial group's information .
 
 === Add to Tutorial Group: `add-to-tutorial-group`
 
@@ -213,13 +213,8 @@ Adds the student with student IDs `A1231231Y` to the tutorial group with an ID o
 
 === Remove from Tutorial Group: `remove-from-tutorial-group`
 
-[NOTE]
-====
-Coming in v2.0
-====
-
 Removes students from a tutorial group. +
-Format: `remove-from-tutorial-group tg/TUTORIAL_GROUP_ID [st/STUDENT_ID] ...`
+Format: `remove-from-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID [st/STUDENT_ID]...`
 
 Examples:
 

@@ -56,8 +56,15 @@ public class TutorialGroup {
         students.add(student);
     }
 
+    /**
+     * Removes a student from the tutorial group.
+     */
     public void removeStudent(Student student) {
         students.removeById(student);
+        assignments.asUnmodifiableObservableList().stream()
+                .forEach(assignment -> assignment.removeStudentReferences(student));
+        attendanceSessions.asUnmodifiableObservableList().stream()
+                .forEach(session -> session.removeStudent(student));
     }
 
     public void addAssignment(Assignment assignment) {
@@ -119,7 +126,8 @@ public class TutorialGroup {
         return id.equals(otherTutorialGroup.id)
             && name.equals(otherTutorialGroup.name)
             && students.equals(otherTutorialGroup.students)
-            && assignments.equals(otherTutorialGroup.assignments);
+            && assignments.equals(otherTutorialGroup.assignments)
+            && attendanceSessions.equals(otherTutorialGroup.attendanceSessions);
     }
 
     @Override

@@ -73,7 +73,6 @@ public class UniqueSessionList implements Iterable<Session> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
-
     @Override
     public Iterator<Session> iterator() {
         return internalList.iterator();
@@ -84,6 +83,18 @@ public class UniqueSessionList implements Iterable<Session> {
         return internalList.stream()
             .map(Session::toString)
             .collect(Collectors.joining("\n"));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof UniqueSessionList)) {
+            return false;
+        }
+
+        return internalList.equals(((UniqueSessionList) other).internalList);
     }
 
     @Override
