@@ -169,6 +169,7 @@ Examples:
 * `view id/A0166733Y` +
 Views the information of the student with the ID A0166733Y.
 
+// tag::createtutorialgroup[]
 === Creating a Tutorial Group: `create-tutorial-group`
 
 Creates a tutorial group with an identifier. If there is already a tutorial group with the same identifier, the identifier will have a random suffix appended to it. +
@@ -179,7 +180,8 @@ Examples:
 * `create-tutorial-group n/CS1101S Studio 04A id/04a`
 Creates a tutorial group named `CS1101S Studio 04A` with the identifier `04a`.
 * If I run the command above twice, my second `TutorialGroup` will have a random suffix appended to its ID. For example, its ID might become `04a-dusty123`.The ID of the created tutorial group will be shown in the command result panel.
-
+// end::createtutorialgroup[]
+// tag::deletetutorialgroup[]
 === Deleting a Tutorial Group: `delete-tutorial-group`
 
 Deletes an existing tutorial group with an identifier. +
@@ -189,7 +191,8 @@ Examples:
 
 * `delete-tutorial-group id/04a`
 Deletes a tutorial group with the identifier `04a`.
-
+// end::deletetutorialgroup[]
+// tag::viewtutorialgroup[]
 === View Tutorial Group: `view-tutorial-group`
 
 Views a tutorial group's details. +
@@ -199,7 +202,8 @@ Examples:
 
 * `view-tutorial-group id/04a`
 Displays the `04a` tutorial group's infromation .
-
+// end::viewtutorialgroup[]
+// tag::addtotutorialgroup[]
 === Add to Tutorial Group: `add-to-tutorial-group`
 
 Adds a student to a tutorial group. +
@@ -209,7 +213,7 @@ Examples:
 
 * `add-to-tutorial-group tg/04a st/A1231231Y`
 Adds the student with student IDs `A1231231Y` to the tutorial group with an ID of `04a`.
-
+// end::addtotutorialgroup[]
 === Remove from Tutorial Group: `remove-from-tutorial-group`
 
 [TIP] Coming in v2.0
@@ -244,6 +248,7 @@ Examples:
 * `create-attendance tg/1 n/W4 Tutorial s/A1234567T s/A0123456Y`
 Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `1`, marking the students with IDs `A1234567T` and `A0123456Y` as present.
 
+// tag::createassignment[]
 === Creating an Assignment: `create-assignment`
 
 Creates an assignment for a specific tutorial group, identified by its ID. In future commands, assignments are referenced to by its name.
@@ -253,7 +258,7 @@ Examples:
 
 * `create-assignment tg/04a n/lab1 m/40`
 Creates an assignment named `lab1` for the tutorial group with an ID of `04a`, with the maximum marks for this assignment as `40`.
-
+// end::createassignment[]
 === Deleting an Assignment: `delete-assignment`
 
 Deletes an existing assignment for a specific tutorial group. +
@@ -263,7 +268,8 @@ Examples:
 
 * `delete-assignment as/lab1 tg/04a`
 Deletes an assignment named 'lab1' from the tutorial group with an ID of '04a'.
-
+// end::createassignment[]
+// tag::grade[]
 === Grade Assignment for Student: `grade`
 
 Enters a grade for a student for a specific assignment, identified by its ID.
@@ -273,7 +279,7 @@ Examples:
 
 * `grade tg/04a as/lab1 st/A0166733Y m/40`
 Creates a grade with marks `40` for the student with an ID of `A0166733Y` in the tutorial group `04a` for the assignment with ID `lab1`.
-
+// end::grade[]
 === Feedback to Student: `feedback`
 
 Adds feedback to a student with a specified Student ID.

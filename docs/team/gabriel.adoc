@@ -41,12 +41,21 @@ SuperTA is a desktop application to handle student records for Teaching Assistan
 
 == Contributions to the User Guide
 
-
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=createtutorialgroup]
+
+include::../UserGuide.adoc[tag=deletetutorialgroup]
+
+include::../UserGuide.adoc[tag=viewtutorliagroup]
+
+include::../UserGuide.adoc[tag=addtotutorialgroup]
+
+include::../UserGuide.adoc[tag=createassignment]
+
+include::../UserGuide.adoc[tag=grade]
 
 == Contributions to the Developer Guide
 
@@ -54,6 +63,5 @@ include::../UserGuide.adoc[tag=undoredo]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=tutorialgroup]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]

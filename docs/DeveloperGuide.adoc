@@ -242,7 +242,9 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
+// tag::tutorialgroup[]
 include::TutorialGroupDesign.adoc[]
+// end::tutorialgroup[]
 
 [[Design-Commons]]
 === Common classes
