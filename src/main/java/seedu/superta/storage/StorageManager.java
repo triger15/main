@@ -82,7 +82,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(SuperTaClientChangedEvent event) {
+    public void handleSuperTaClientChangedEvent(SuperTaClientChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveSuperTaClient(event.data);
