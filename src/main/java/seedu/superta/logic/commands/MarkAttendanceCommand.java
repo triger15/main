@@ -37,7 +37,7 @@ public class MarkAttendanceCommand extends Command {
         + PREFIX_GENERAL_STUDENT_ID + "A1234567T "
         + PREFIX_GENERAL_STUDENT_ID + "A0123456Y ";
 
-    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s";
+    public static final String MESSAGE_SUCCESS = "Attendance marked as present: %1$s";
     //public static final String MESSAGE_DUPLICATE_ATTENDANCE =
     //        "This attendance session already exists in the tutorial group.";
 

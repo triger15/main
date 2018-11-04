@@ -84,7 +84,7 @@ public class FeedbackCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different student -> returns false
         assertFalse(standardCommand.equals(new FeedbackCommand(bob, amyFeedback)));
-        // different remark -> returns false
+        // different feedback -> returns false
         assertFalse(standardCommand.equals(new FeedbackCommand(amy, bobFeedback)));
     }
 }

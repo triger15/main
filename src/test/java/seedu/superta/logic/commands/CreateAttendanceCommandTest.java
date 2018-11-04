@@ -104,7 +104,7 @@ public class CreateAttendanceCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different tutorial group -> returns false
         assertFalse(standardCommand.equals(new CreateAttendanceCommand("02a", typicalSession)));
-        // different remark -> returns false
+        // different session name -> returns false
         assertFalse(standardCommand.equals(new CreateAttendanceCommand(typicalTg.getId(),
                 new Session("W4 Lab"))));
     }
