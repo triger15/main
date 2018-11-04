@@ -69,4 +69,9 @@ public class SessionTest {
         // different attendance list -> returns false
         assertFalse(LAB1.equals(LAB1_ATTENDED));
     }
+
+    @Test
+    public void contains() {
+        assertTrue(LAB1_ATTENDED.contains(attendance));
+    }
 }
