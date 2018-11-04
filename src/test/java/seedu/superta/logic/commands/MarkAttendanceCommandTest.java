@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.superta.logic.commands.MarkAttendanceCommand.MESSAGE_INVALID_STUDENTS;
+import static seedu.superta.logic.commands.MarkAttendanceCommand.MESSAGE_INVALID_TUTORIAL_GROUP;
 import static seedu.superta.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
@@ -20,7 +22,6 @@ import seedu.superta.model.Model;
 import seedu.superta.model.ModelManager;
 import seedu.superta.model.UserPrefs;
 import seedu.superta.model.attendance.Session;
-import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 import seedu.superta.testutil.TutorialGroupBuilder;
@@ -93,7 +94,7 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("invalid_tg",
                 typicalSession, idSet);
 
-        assertCommandFailure(markAttendanceCommand, model, commandHistory, "No such tutorial group.");
+        assertCommandFailure(markAttendanceCommand, model, commandHistory, MESSAGE_INVALID_TUTORIAL_GROUP);
     }
 
     @Test
@@ -109,7 +110,7 @@ public class MarkAttendanceCommandTest {
         invalidSet.add(new StudentId("A0123456N"));
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(typicalTg.getId(), typicalSession,
                 invalidSet);
-        assertCommandFailure(markAttendanceCommand, model, commandHistory, "Student not found in tutorial group.");
+        assertCommandFailure(markAttendanceCommand, model, commandHistory, MESSAGE_INVALID_STUDENTS);
     }
 
     @Test
