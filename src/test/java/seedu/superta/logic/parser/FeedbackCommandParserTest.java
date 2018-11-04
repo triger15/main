@@ -19,7 +19,7 @@ public class FeedbackCommandParserTest {
     private final String nonEmptyFeedback = "Some feedback.";
 
     @Test
-    public void parse_studentIdSpecified_success() {
+    public void parse_allFieldsPresent_success() {
         // have feedback
         StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
         String userInput = "    " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_AMY + " " + PREFIX_FEEDBACK + nonEmptyFeedback;
