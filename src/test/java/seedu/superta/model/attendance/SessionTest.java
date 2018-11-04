@@ -15,9 +15,9 @@ import seedu.superta.testutil.Assert;
 
 // @@author triger15
 public class SessionTest {
-    private final Session LAB1 = new Session("Lab 1");
-    private Session LAB1_ATTENDED;
-    private final Session TUT1 = new Session("Tut 1");
+    private final Session Lab1 = new Session("Lab 1");
+    private Session Lab1_attended;
+    private final Session Tut1 = new Session("Tut 1");
     private Set<Attendance> attSet;
     private final Attendance attendance = new Attendance(new StudentId(VALID_STUDENT_ID_AMY), Presence.PRESENT);
 
@@ -25,7 +25,7 @@ public class SessionTest {
     public void setUp() {
         attSet = new HashSet<>();
         attSet.add(attendance);
-        LAB1_ATTENDED = new Session("Lab 1", attSet);
+        Lab1_attended = new Session("Lab 1", attSet);
     }
 
     @Test
@@ -36,42 +36,42 @@ public class SessionTest {
     @Test
     public void isSameAssignment() {
         // same object -> returns true
-        assertTrue(LAB1.isSameSession(LAB1));
+        assertTrue(Lab1.isSameSession(Lab1));
 
         // null -> returns false
-        assertFalse(LAB1.isSameSession(null));
+        assertFalse(Lab1.isSameSession(null));
 
         // same name, different attendance list -> returns true
-        assertTrue(LAB1.isSameSession(LAB1_ATTENDED));
+        assertTrue(Lab1.isSameSession(Lab1_attended));
 
         // different session -> returns false
-        assertFalse(LAB1.isSameSession(TUT1));
+        assertFalse(Lab1.isSameSession(Tut1));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Session sessionCopy = new Session(LAB1.getSessionName());
-        assertTrue(LAB1.equals(sessionCopy));
+        Session sessionCopy = new Session(Lab1.getSessionName());
+        assertTrue(Lab1.equals(sessionCopy));
 
         // same object -> returns true
-        assertTrue(LAB1.equals(LAB1));
+        assertTrue(Lab1.equals(Lab1));
 
         // null -> returns false
-        assertFalse(LAB1.equals(null));
+        assertFalse(Lab1.equals(null));
 
         // different type -> returns false
-        assertFalse(LAB1.equals(5));
+        assertFalse(Lab1.equals(5));
 
         // different name -> returns false
-        assertFalse(LAB1.equals(TUT1));
+        assertFalse(Lab1.equals(Tut1));
 
         // different attendance list -> returns false
-        assertFalse(LAB1.equals(LAB1_ATTENDED));
+        assertFalse(Lab1.equals(Lab1_attended));
     }
 
     @Test
     public void contains() {
-        assertTrue(LAB1_ATTENDED.contains(attendance));
+        assertTrue(Lab1_attended.contains(attendance));
     }
 }

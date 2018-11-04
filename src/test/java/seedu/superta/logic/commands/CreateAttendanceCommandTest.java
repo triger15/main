@@ -26,13 +26,13 @@ import seedu.superta.ui.testutil.EventsCollectorRule;
 // @@author triger15
 public class CreateAttendanceCommandTest {
 
-    private final String typicalSessionName = "W4 Tutorial";
-    private final TutorialGroup typicalTg = new TutorialGroupBuilder().build();
-
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private final String typicalSessionName = "W4 Tutorial";
+    private final TutorialGroup typicalTg = new TutorialGroupBuilder().build();
 
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();

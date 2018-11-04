@@ -30,15 +30,15 @@ import seedu.superta.ui.testutil.EventsCollectorRule;
 // @@author triger15
 public class MarkAttendanceCommandTest {
 
-    private final Session typicalSession = new Session("W4 Tutorial");
-    private final StudentId ALICE = new StudentId("A0166733Y");
-    private final TutorialGroup typicalTg = new TutorialGroupBuilder().build();
-    private Set<StudentId> idSet;
-
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private final Session typicalSession = new Session("W4 Tutorial");
+    private final StudentId Alice = new StudentId("A0166733Y");
+    private final TutorialGroup typicalTg = new TutorialGroupBuilder().build();
+    private Set<StudentId> idSet;
 
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
@@ -47,10 +47,10 @@ public class MarkAttendanceCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
         model.addTutorialGroup(typicalTg);
-        model.addStudentToTutorialGroup(typicalTg.getId(), ALICE);
+        model.addStudentToTutorialGroup(typicalTg.getId(), Alice);
         model.createAttendance(typicalTg.getId(), typicalSession);
         idSet = new HashSet<>();
-        idSet.add(ALICE);
+        idSet.add(Alice);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class MarkAttendanceCommandTest {
 
         Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
         expectedModel.addTutorialGroup(new TutorialGroupBuilder().build());
-        expectedModel.addStudentToTutorialGroup(typicalTg.getId(), ALICE);
+        expectedModel.addStudentToTutorialGroup(typicalTg.getId(), Alice);
         expectedModel.createAttendance(typicalTg.getId(), typicalSession);
         expectedModel.markAttendance(typicalTg.getId(), typicalSession, idSet);
         expectedModel.commitSuperTaClient();
