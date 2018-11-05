@@ -33,10 +33,10 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all students in the directory
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 id/A0123456Y` : adds a student named `John Doe` to the student directory.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+* `list` : lists all students in the directory
+* `add n/John Doe p/98765432 e/johnd@example.com id/A0123456Y` : adds a student named `John Doe` to the student directory.
+* `delete 3` : shows the 3rd contact in the current list that was deleted
+* `exit` : exits the app
 
 .  Refer to <<Features>> for details of each command.
 
