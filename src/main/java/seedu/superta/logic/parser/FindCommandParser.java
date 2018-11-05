@@ -8,6 +8,7 @@ import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import seedu.superta.logic.commands.FindCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
@@ -43,26 +44,21 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent()
-            && !argMultimap.getValue(PREFIX_PHONE).isPresent()
-            && !argMultimap.getValue(PREFIX_EMAIL).isPresent()
-            && !argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
-            );
-        }
-
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            nameField.add(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName);
+            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+            nameField.addAll(Arrays.asList(nameKeywords));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            phoneField.add(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value);
+            String[] phoneKeywords = argMultimap.getValue(PREFIX_PHONE).get().split("\\s+");
+            phoneField.addAll(Arrays.asList(phoneKeywords));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            emailField.add(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value);
+            String[] emailKeywords = argMultimap.getValue(PREFIX_EMAIL).get().split("\\s+");
+            emailField.addAll(Arrays.asList(emailKeywords));
         }
         if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            studentidField.add(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get()).studentId);
+            String[] studentIdKeywords = argMultimap.getValue(PREFIX_STUDENT_ID).get().split("\\s+");
+            studentidField.addAll(Arrays.asList(studentIdKeywords));
         }
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameField)
