@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.superta.commons.core.ComponentManager;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
+import seedu.superta.commons.events.ui.StateEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.Title;
@@ -71,12 +72,19 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateSuperTaClientChanged() {
         raise(new SuperTaClientChangedEvent(versionedSuperTaClient));
+        raise(new StateEvent(versionedSuperTaClient));
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
         return versionedSuperTaClient.hasStudent(student);
+    }
+
+    @Override
+    public boolean hasStudentWithIdentity(Student student) {
+        requireNonNull(student);
+        return versionedSuperTaClient.hasStudentWithIdentity(student);
     }
 
     @Override

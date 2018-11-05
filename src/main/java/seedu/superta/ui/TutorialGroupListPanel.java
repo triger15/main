@@ -7,7 +7,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
-import seedu.superta.model.Model;
+import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 // @@author Caephler
@@ -21,31 +21,32 @@ public class TutorialGroupListPanel extends ViewPanelContent {
     @javafx.fxml.FXML
     private ListView<TutorialGroup> tutorialGroupListView;
 
+    private ObservableList<TutorialGroup> tutorialGroups;
+
     public TutorialGroupListPanel(ObservableList<TutorialGroup> tutorialGroups) {
         super(FXML);
-        setConnections(tutorialGroups);
+        this.tutorialGroups = tutorialGroups;
+        setConnections();
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<TutorialGroup> tutorialGroups) {
+    private void setConnections() {
         tutorialGroupListView.setItems(tutorialGroups);
         tutorialGroupListView.setCellFactory(listView -> new TutorialGroupListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        tutorialGroupListView.getSelectionModel().selectedItemProperty()
-            .addListener((observable, oldValue, newValue) -> {
-                if (newValue != null) {
-                    logger.fine("Selection in tutorial group list changed.");
-                    raise(new TutorialGroupSelectedEvent(newValue));
-                }
-            });
+        tutorialGroupListView.setOnMouseClicked(event -> {
+            raise(new TutorialGroupSelectedEvent(tutorialGroupListView.getSelectionModel().getSelectedItem()));
+        });
     }
 
     @Override
-    public void update(Model model) {
-
+    public void update(ReadOnlySuperTaClient model) {
+        tutorialGroups = model.getTutorialGroupList();
+        setConnections();
+        setEventHandlerForSelectionChangeEvent();
     }
 
     /**

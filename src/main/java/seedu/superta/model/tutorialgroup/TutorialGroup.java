@@ -67,6 +67,14 @@ public class TutorialGroup {
                 .forEach(session -> session.removeStudent(student));
     }
 
+    /**
+     * Updates a student with the updated value.
+     */
+    public void updateStudent(Student target, Student edited) {
+        students.removeById(target);
+        students.add(edited);
+    }
+
     public void addAssignment(Assignment assignment) {
         assignments.add(assignment);
     }
@@ -101,9 +109,9 @@ public class TutorialGroup {
 
     public Optional<Assignment> getAssignment(Title title) {
         return assignments.asUnmodifiableObservableList()
-            .stream()
-            .filter(as -> as.getTitle().equals(title))
-            .findFirst();
+                .stream()
+                .filter(as -> as.getTitle().equals(title))
+                .findFirst();
     }
 
     public UniqueSessionList getSessions() {
