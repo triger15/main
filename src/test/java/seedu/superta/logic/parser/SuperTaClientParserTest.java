@@ -37,6 +37,7 @@ import seedu.superta.logic.commands.MarkAttendanceCommand;
 import seedu.superta.logic.commands.RedoCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.logic.commands.UndoCommand;
+import seedu.superta.logic.commands.ViewStudentFeedbackCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
@@ -185,5 +186,14 @@ public class SuperTaClientParserTest {
                 MarkAttendanceCommand.COMMAND_WORD + " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tgId + " "
                         + PREFIX_SESSION_NAME + session.getSessionName() + " " + PREFIX_GENERAL_STUDENT_ID + studentId);
         assertEquals(new MarkAttendanceCommand(tgId, session, stIdSet), command);
+    }
+
+    @Test
+    public void parseCommand_viewFeedback() throws Exception {
+        final StudentId studentId = new StudentId(VALID_STUDENT_ID_AMY);
+
+        ViewStudentFeedbackCommand command = (ViewStudentFeedbackCommand) parser.parseCommand(
+                ViewStudentFeedbackCommand.COMMAND_WORD + " " + PREFIX_STUDENT_ID + studentId);
+        assertEquals(new ViewStudentFeedbackCommand(studentId), command);
     }
 }
