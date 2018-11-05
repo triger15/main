@@ -3,24 +3,28 @@
   [
     {
       "githubId": "caephler",
-      "authorNames": ["caephler"]
+      "displayName": "Gabriel Tan",
+      "authorNames": ["caephler", "Caephler", "Gabriel", "plehr"]
     },
     {
       "githubId": "keithtan",
-      "authorNames": ["keithtan"]
+      "displayName": "Keith Tan",
+      "authorNames": ["keithtan", "Keith Tan", "KEITHTAN\\keithtan"]
     },
     {
       "githubId": "triger15",
       "displayName": "Ong Yu-He",
-      "authorNames": ["Ong Yu-He", "triger15"]
+      "authorNames": ["Ong Yu-He", "triger15", "Yuhe"]
     },
     {
       "githubId": "darieca",
+      "displayName": "Darieca Lim",
       "authorNames": ["darieca"]
     },
     {
       "githubId": "wenshei",
-      "authorNames": ["wenshei"]
+      "displayName": "Ong Wen Shei",
+      "authorNames": ["wenshei", "WenShei"]
     }
   ]
 }
