@@ -82,6 +82,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasStudentWithIdentity(Student student) {
+        requireNonNull(student);
+        return versionedSuperTaClient.hasStudentWithIdentity(student);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         versionedSuperTaClient.removeStudent(target);
         indicateSuperTaClientChanged();

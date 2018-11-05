@@ -88,11 +88,19 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same ID as {@code student} exists in the address book.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
         return students.getStudentWithId(student.getStudentId()).isPresent();
+    }
+
+    /**
+     * Returns true if a student has the same identity.
+     */
+    public boolean hasStudentWithIdentity(Student student) {
+        requireNonNull(student);
+        return students.contains(student);
     }
 
     /**

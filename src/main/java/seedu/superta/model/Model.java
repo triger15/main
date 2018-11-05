@@ -33,6 +33,11 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if there is a student with a similar identity.
+     */
+    boolean hasStudentWithIdentity(Student student);
+
+    /**
      * Deletes the given student.
      * The student must exist in the SuperTA client.
      */

@@ -29,7 +29,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Student validStudent = new StudentBuilder().build();
+        Student validStudent = new StudentBuilder().withStudentId("A0192832X").build();
 
         Model expectedModel = new ModelManager(model.getSuperTaClient(), new UserPrefs());
         expectedModel.addStudent(validStudent);

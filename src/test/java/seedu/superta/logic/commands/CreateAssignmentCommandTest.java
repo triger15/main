@@ -83,6 +83,11 @@ public class CreateAssignmentCommandTest {
         }
 
         @Override
+        public boolean hasStudentWithIdentity(Student student) {
+            return false;
+        }
+
+        @Override
         public void deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
