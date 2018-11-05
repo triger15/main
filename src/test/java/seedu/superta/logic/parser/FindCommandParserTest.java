@@ -36,6 +36,20 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
+    /*@Test
+    public void parse_allPredicatesSpecified_success() throws ParseException {
+        String userInput = NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY + STUDENT_ID_DESC_AMY;
+
+        Predicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy Bee"))
+            .or(new PhoneContainsKeywordsPredicate(Collections.singletonList("22222222")))
+            .or(new EmailContainsKeywordsPredicate(Collections.singletonList("amy@example.com")))
+            .or(new StudentidContainsKeywordsPredicate(Collections.singletonList("A0123456Y")));
+
+        FindCommand expectedCommand = new FindCommand(predicate);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }*/
+
     @Test
     public void parse_validArgs_returnsFindCommand() throws Exception {
         // no leading and trailing whitespaces

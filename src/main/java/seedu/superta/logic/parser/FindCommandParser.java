@@ -9,6 +9,7 @@ import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.superta.logic.commands.FindCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
@@ -34,10 +35,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                                                                   PREFIX_PHONE,
                                                                   PREFIX_EMAIL,
                                                                   PREFIX_STUDENT_ID);
-        ArrayList<String> nameField = new ArrayList<>();
-        ArrayList<String> phoneField = new ArrayList<>();
-        ArrayList<String> emailField = new ArrayList<>();
-        ArrayList<String> studentidField = new ArrayList<>();
+        List<String> nameField = new ArrayList<>();
+        List<String> phoneField = new ArrayList<>();
+        List<String> emailField = new ArrayList<>();
+        List<String> studentidField = new ArrayList<>();
 
         if (args.isEmpty()) {
             throw new ParseException(
@@ -56,19 +57,19 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            nameField.addAll(Arrays.asList(nameKeywords));
+            nameField = Arrays.asList(nameKeywords);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String[] phoneKeywords = argMultimap.getValue(PREFIX_PHONE).get().split("\\s+");
-            phoneField.addAll(Arrays.asList(phoneKeywords));
+            phoneField = Arrays.asList(phoneKeywords);
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             String[] emailKeywords = argMultimap.getValue(PREFIX_EMAIL).get().split("\\s+");
-            emailField.addAll(Arrays.asList(emailKeywords));
+            emailField = Arrays.asList(emailKeywords);
         }
         if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
             String[] studentIdKeywords = argMultimap.getValue(PREFIX_STUDENT_ID).get().split("\\s+");
-            studentidField.addAll(Arrays.asList(studentIdKeywords));
+            studentidField = Arrays.asList(studentIdKeywords);
         }
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameField)
