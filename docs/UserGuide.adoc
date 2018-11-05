@@ -35,7 +35,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * `list` : lists all students in the directory
 * `add n/John Doe p/98765432 e/johnd@example.com id/A0123456Y` : adds a student named `John Doe` to the student directory.
-* `delete 3` : deletes the 3rd contact shown in the current list
+* `delete 3` : shows the 3rd contact in the current list that was deleted
 * `exit` : exits the app
 
 .  Refer to <<Features>> for details of each command.
