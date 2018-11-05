@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
-import seedu.superta.model.Model;
 import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.GradeEntry;

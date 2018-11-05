@@ -74,6 +74,8 @@ public class TutorialGroupMaster {
      */
     public void setTutorialGroups(Map<String, TutorialGroup> tutorialGroups) {
         requireAllNonNull(tutorialGroups);
+        this.tutorialGroups.clear();
+        this.uids.clear();
         tutorialGroups.forEach((id, tutorialGroup) -> {
             this.tutorialGroups.put(id, new TutorialGroup(tutorialGroup));
             this.uids.add(id);

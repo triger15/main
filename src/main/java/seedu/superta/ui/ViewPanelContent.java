@@ -3,7 +3,6 @@ package seedu.superta.ui;
 import java.net.URL;
 
 import javafx.scene.layout.Region;
-import seedu.superta.model.Model;
 import seedu.superta.model.ReadOnlySuperTaClient;
 
 // @@author Caephler

@@ -1,7 +1,6 @@
 package seedu.superta.commons.events.ui;
 
 import seedu.superta.commons.events.BaseEvent;
-import seedu.superta.model.Model;
 import seedu.superta.model.ReadOnlySuperTaClient;
 
 /**

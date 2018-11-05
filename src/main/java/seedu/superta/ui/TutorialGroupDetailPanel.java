@@ -48,6 +48,10 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
         setEventHandlerForSelectionChangeEvent();
     }
 
+    public void renderDeleted() {
+        name.setText("[Deleted] " + tutorialGroup.getName());
+    }
+
     /**
      * Renders the UI views.
      */
@@ -134,6 +138,7 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
     public void update(ReadOnlySuperTaClient model) {
         Optional<TutorialGroup> fromModel = model.getTutorialGroup(tutorialGroup.getId());
         if (!fromModel.isPresent()) {
+            renderDeleted();
             return;
         }
         this.tutorialGroup = fromModel.get();
