@@ -196,14 +196,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseStudentId_validValueWithoutWhitespace_returnsName() throws Exception {
-        StudentId expectedStID = new StudentId(VALID_STUDENT_ID_2);
-        assertEquals(expectedStID, ParserUtil.parseStudentId(VALID_STUDENT_ID_2));
+        StudentId expectedStId = new StudentId(VALID_STUDENT_ID_2);
+        assertEquals(expectedStId, ParserUtil.parseStudentId(VALID_STUDENT_ID_2));
     }
 
     @Test
     public void parseStudentId_validValueWithoutWhitespaceLowerCase_returnsName() throws Exception {
-        StudentId expectedStID = new StudentId(VALID_STUDENT_ID_2);
-        assertEquals(expectedStID, ParserUtil.parseStudentId(VALID_STUDENT_ID_1));
+        StudentId expectedStId = new StudentId(VALID_STUDENT_ID_2);
+        assertEquals(expectedStId, ParserUtil.parseStudentId(VALID_STUDENT_ID_1));
     }
 
     @Test
