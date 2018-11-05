@@ -101,7 +101,7 @@ Edits the phone number and email address of the 1st student to be `91234567` and
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-=== Locating students by name: `find`
+=== Locating students by keywords: `find`
 
 Finds and lists all students in the SuperTA client whose information matched with the entered keywords. +
 
@@ -109,8 +109,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words or numbers will be matched e.g. `Han` will not match `Hans`, `9123` will not match `91234567`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `find n/John p/91234567` will return `John` and anybody with phone number `91234567`
 * If there are more than one exact same parameter in the command, only the latest parameter will be taken.  E.g. `find n/John n/Alice` will only return search result of `Alice`, not `John`.
