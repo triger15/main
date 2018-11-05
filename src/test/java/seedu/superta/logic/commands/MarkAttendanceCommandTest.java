@@ -36,7 +36,7 @@ public class MarkAttendanceCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final Session typicalSession = new Session("W4 Tutorial");
-    private final StudentId Alice = new StudentId("A0166733Y");
+    private final StudentId alice = new StudentId("A0166733Y");
     private final TutorialGroup typicalTg = new TutorialGroupBuilder().build();
     private Set<StudentId> idSet;
 
@@ -47,10 +47,10 @@ public class MarkAttendanceCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
         model.addTutorialGroup(typicalTg);
-        model.addStudentToTutorialGroup(typicalTg.getId(), Alice);
+        model.addStudentToTutorialGroup(typicalTg.getId(), alice);
         model.createAttendance(typicalTg.getId(), typicalSession);
         idSet = new HashSet<>();
-        idSet.add(Alice);
+        idSet.add(alice);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class MarkAttendanceCommandTest {
 
         Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
         expectedModel.addTutorialGroup(new TutorialGroupBuilder().build());
-        expectedModel.addStudentToTutorialGroup(typicalTg.getId(), Alice);
+        expectedModel.addStudentToTutorialGroup(typicalTg.getId(), alice);
         expectedModel.createAttendance(typicalTg.getId(), typicalSession);
         expectedModel.markAttendance(typicalTg.getId(), typicalSession, idSet);
         expectedModel.commitSuperTaClient();

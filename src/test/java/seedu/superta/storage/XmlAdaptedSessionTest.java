@@ -10,14 +10,14 @@ import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.attendance.Session;
 
 public class XmlAdaptedSessionTest {
-    private final String valid_session_name = "Lab 1";
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private final String validSessionName = "Lab 1";
+
     @Test
     public void toModelType_success() throws IllegalValueException {
-        Session source = new Session(valid_session_name);
+        Session source = new Session(validSessionName);
         XmlAdaptedSession xmlSession = new XmlAdaptedSession(source);
         assertTrue(xmlSession.toModelType().equals(source));
     }

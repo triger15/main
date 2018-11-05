@@ -3,6 +3,7 @@ package seedu.superta.model.attendance;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,9 +16,9 @@ import seedu.superta.testutil.Assert;
 
 // @@author triger15
 public class SessionTest {
-    private final Session Lab1 = new Session("Lab 1");
-    private Session Lab1_attended;
-    private final Session Tut1 = new Session("Tut 1");
+    private final Session lab1 = new Session("Lab 1");
+    private Session lab1Attended;
+    private final Session tut1 = new Session("Tut 1");
     private Set<Attendance> attSet;
     private final Attendance attendance = new Attendance(new StudentId(VALID_STUDENT_ID_AMY), Presence.PRESENT);
 
@@ -25,7 +26,7 @@ public class SessionTest {
     public void setUp() {
         attSet = new HashSet<>();
         attSet.add(attendance);
-        Lab1_attended = new Session("Lab 1", attSet);
+        lab1Attended = new Session("Lab 1", attSet);
     }
 
     @Test
@@ -36,42 +37,49 @@ public class SessionTest {
     @Test
     public void isSameAssignment() {
         // same object -> returns true
-        assertTrue(Lab1.isSameSession(Lab1));
+        assertTrue(lab1.isSameSession(lab1));
 
         // null -> returns false
-        assertFalse(Lab1.isSameSession(null));
+        assertFalse(lab1.isSameSession(null));
 
         // same name, different attendance list -> returns true
-        assertTrue(Lab1.isSameSession(Lab1_attended));
+        assertTrue(lab1.isSameSession(lab1Attended));
 
         // different session -> returns false
-        assertFalse(Lab1.isSameSession(Tut1));
+        assertFalse(lab1.isSameSession(tut1));
+    }
+
+    @Test
+    public void addToSession_success() {
+        Attendance bobAtt = new Attendance(new StudentId(VALID_STUDENT_ID_BOB), Presence.PRESENT);
+        boolean result = tut1.addToSession(bobAtt);
+        assertTrue(result);
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Session sessionCopy = new Session(Lab1.getSessionName());
-        assertTrue(Lab1.equals(sessionCopy));
+        Session sessionCopy = new Session(lab1.getSessionName());
+        assertTrue(lab1.equals(sessionCopy));
 
         // same object -> returns true
-        assertTrue(Lab1.equals(Lab1));
+        assertTrue(lab1.equals(lab1));
 
         // null -> returns false
-        assertFalse(Lab1.equals(null));
+        assertFalse(lab1.equals(null));
 
         // different type -> returns false
-        assertFalse(Lab1.equals(5));
+        assertFalse(lab1.equals(5));
 
         // different name -> returns false
-        assertFalse(Lab1.equals(Tut1));
+        assertFalse(lab1.equals(tut1));
 
         // different attendance list -> returns false
-        assertFalse(Lab1.equals(Lab1_attended));
+        assertFalse(lab1.equals(lab1Attended));
     }
 
     @Test
     public void contains() {
-        assertTrue(Lab1_attended.contains(attendance));
+        assertTrue(lab1Attended.contains(attendance));
     }
 }
