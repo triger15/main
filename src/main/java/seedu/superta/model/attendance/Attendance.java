@@ -1,7 +1,10 @@
 package seedu.superta.model.attendance;
 
+import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.superta.model.student.StudentId;
 
+// @@author triger15
 /**
  * Represents an attendance for a particular student.
  *
@@ -17,6 +20,7 @@ public class Attendance {
      * @param presence A valid presence.
      */
     public Attendance(StudentId stId, Presence presence) {
+        requireAllNonNull(stId, presence);
         this.stId = stId;
         this.presence = presence;
     }
@@ -40,6 +44,25 @@ public class Attendance {
 
         return otherAttendance != null
                 && otherAttendance.getStudentId().equals(getStudentId());
+    }
+
+    /**
+     * Returns true if both attendance have the same identity and presence.
+     * This defines a stronger notion of equality between two attendance.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Attendance)) {
+            return false;
+        }
+
+        Attendance otherAttendance = (Attendance) other;
+        return otherAttendance.getStudentId().equals(getStudentId())
+                && otherAttendance.getPresence().equals(getPresence());
     }
 
     @Override

@@ -10,6 +10,7 @@ import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.attendance.Attendance;
 import seedu.superta.model.attendance.Session;
 
+// @@author triger15
 /**
  * Class for XML-Adapted Session
  */

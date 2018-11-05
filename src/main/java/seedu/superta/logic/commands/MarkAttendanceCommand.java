@@ -18,6 +18,7 @@ import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.exceptions.StudentNotFoundException;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
+// @@author triger15
 /**
  * Command that marks students' attendance.
  */
@@ -36,7 +37,9 @@ public class MarkAttendanceCommand extends Command {
         + PREFIX_GENERAL_STUDENT_ID + "A1234567T "
         + PREFIX_GENERAL_STUDENT_ID + "A0123456Y ";
 
-    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s";
+    public static final String MESSAGE_SUCCESS = "Attendance marked as present: %1$s";
+    public static final String MESSAGE_INVALID_TUTORIAL_GROUP = "No such tutorial group.";
+    public static final String MESSAGE_INVALID_STUDENTS = "Students not found in tutorial group.";
     //public static final String MESSAGE_DUPLICATE_ATTENDANCE =
     //        "This attendance session already exists in the tutorial group.";
 
@@ -58,11 +61,11 @@ public class MarkAttendanceCommand extends Command {
         try {
             model.markAttendance(tgId, sessionName, studentIdSet);
         } catch (TutorialGroupNotFoundException e) {
-            throw new CommandException("No such tutorial group.");
+            throw new CommandException(MESSAGE_INVALID_TUTORIAL_GROUP);
         } catch (SessionNotFoundException e) {
             throw new CommandException(e.getMessage());
         } catch (StudentNotFoundException e) {
-            throw new CommandException("Student not found in tutorial group.");
+            throw new CommandException(MESSAGE_INVALID_STUDENTS);
         } catch (DuplicateAttendanceException e) {
             // Nothing to do here. We allow duplicate marking.
         }

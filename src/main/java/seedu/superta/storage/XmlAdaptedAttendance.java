@@ -7,6 +7,7 @@ import seedu.superta.model.attendance.Attendance;
 import seedu.superta.model.attendance.Presence;
 import seedu.superta.model.student.StudentId;
 
+// @@author triger15
 /**
  * An XML Representation of an Attendance in an attendance session.
  */

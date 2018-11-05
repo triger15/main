@@ -8,6 +8,7 @@ import seedu.superta.logic.commands.CreateAttendanceCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.attendance.Session;
 
+// @@author triger15
 /**
  * Parser for the create-attendance command.
  */
