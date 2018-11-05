@@ -65,12 +65,12 @@ public class Session {
      * Adds the given attendance to the current attendance session.
      * @param attendance A valid attendance.
      */
-    public void addToSession(Attendance attendance) {
+    public boolean addToSession(Attendance attendance) {
         requireNonNull(attendance);
         if (contains(attendance)) {
             throw new DuplicateAttendanceException();
         }
-        internalSet.add(attendance);
+        return internalSet.add(attendance);
     }
 
     /**
