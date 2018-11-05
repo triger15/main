@@ -92,7 +92,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return students.contains(student);
+        return students.getStudentWithId(student.getStudentId()).isPresent();
     }
 
     /**
