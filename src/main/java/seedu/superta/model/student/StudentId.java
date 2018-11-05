@@ -16,10 +16,11 @@ public class StudentId {
     /**
      * Constructs a {@code Matriculation Number}.
      *
-     * @param studentId A valid matriculation number.
+     * @param studentIdHolder A valid matriculation number.
      */
-    public StudentId(String studentId) {
-        requireNonNull(studentId);
+    public StudentId(String studentIdHolder) {
+        requireNonNull(studentIdHolder);
+        String studentId = studentIdHolder.toUpperCase();
         checkArgument(isValidStudentId(studentId), MESSAGE_STUDENT_ID_CONSTRAINTS);
         this.studentId = studentId;
     }

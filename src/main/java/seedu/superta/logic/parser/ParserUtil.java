@@ -93,8 +93,8 @@ public class ParserUtil {
      */
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
-        String trimmedStudentId = studentId.trim();
-        if (!StudentId.isValidStudentId(studentId)) {
+        String trimmedStudentId = studentId.trim().toUpperCase();
+        if (!StudentId.isValidStudentId(trimmedStudentId)) {
             throw new ParseException(StudentId.MESSAGE_STUDENT_ID_CONSTRAINTS);
         }
         return new StudentId(trimmedStudentId);
@@ -117,7 +117,7 @@ public class ParserUtil {
     public static Title parseTitle(String assignmentTitle) throws ParseException {
         requireNonNull(assignmentTitle);
         String trimmedTitle = assignmentTitle.trim();
-        if (!Title.isValidTitle(assignmentTitle)) {
+        if (!Title.isValidTitle(trimmedTitle)) {
             throw new ParseException(Title.MESSAGE_TITLE_CONSTRAINTS);
         }
         return new Title(trimmedTitle);
