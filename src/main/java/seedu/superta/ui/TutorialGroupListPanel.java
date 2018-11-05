@@ -7,7 +7,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
-import seedu.superta.model.Model;
+import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 // @@author Caephler
@@ -44,8 +44,8 @@ public class TutorialGroupListPanel extends ViewPanelContent {
     }
 
     @Override
-    public void update(Model model) {
-
+    public void update(ReadOnlySuperTaClient model) {
+        // empty because the list view already handles it
     }
 
     /**

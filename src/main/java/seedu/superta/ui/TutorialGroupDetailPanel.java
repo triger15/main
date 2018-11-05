@@ -10,7 +10,7 @@ import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
 import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
-import seedu.superta.model.Model;
+import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Student;
@@ -54,7 +54,6 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
     public void render() {
         id.setText(tutorialGroup.getId());
         name.setText(tutorialGroup.getName());
-        students.getItems().clear();
         students.setItems(tutorialGroup.getStudents().asUnmodifiableObservableList());
         students.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -78,7 +77,6 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                         raise(new StudentPanelSelectionChangedEvent(newValue));
                     }
                 }));
-        assignments.getItems().clear();
         assignments.setItems(tutorialGroup.getAssignments().asUnmodifiableObservableList());
         assignments.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -93,7 +91,6 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                 }
             }
         });
-        sessions.getItems().clear();
         sessions.setItems(tutorialGroup.getSessions().asUnmodifiableObservableList());
         sessions.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -134,7 +131,7 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
 
 
     @Override
-    public void update(Model model) {
+    public void update(ReadOnlySuperTaClient model) {
         Optional<TutorialGroup> fromModel = model.getTutorialGroup(tutorialGroup.getId());
         if (!fromModel.isPresent()) {
             return;

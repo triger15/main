@@ -283,6 +283,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         requireNonNull(editedStudent);
 
         students.setStudent(target, editedStudent);
+        tutorialGroupMaster.updateStudent(target, editedStudent);
     }
 
     /**

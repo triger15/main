@@ -4,6 +4,7 @@ import java.net.URL;
 
 import javafx.scene.layout.Region;
 import seedu.superta.model.Model;
+import seedu.superta.model.ReadOnlySuperTaClient;
 
 // @@author Caephler
 
@@ -29,8 +30,7 @@ public abstract class ViewPanelContent extends UiPart<Region> {
 
     /**
      * This method should re-render the component.
-     * This is used because undo/redo operations do not
-     * reflect accurately on this component.
+     * This is used to update the component when there is a state change.
      */
-    public abstract void update(Model model);
+    public abstract void update(ReadOnlySuperTaClient model);
 }

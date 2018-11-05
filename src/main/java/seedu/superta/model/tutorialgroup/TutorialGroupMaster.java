@@ -16,6 +16,7 @@ import javafx.collections.ObservableMap;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
+// @@author Caephler
 /**
  * Model for Tutorial Group Master.
  */
@@ -136,6 +137,17 @@ public class TutorialGroupMaster {
             }
         });
         return list;
+    }
+
+    /**
+     * Updates a student in all the tutorial groups.
+     * @param target The target to be edited.
+     * @param edited The updated model.
+     */
+    public void updateStudent(Student target, Student edited) {
+        tutorialGroups.forEach((key, tutorialGroup) -> {
+            tutorialGroup.updateStudent(target, edited);
+        });
     }
 
     /**

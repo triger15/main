@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.model.Model;
+import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 
@@ -86,8 +87,8 @@ public class StudentDetailPanel extends ViewPanelContent {
     }
 
     @Override
-    public void update(Model model) {
-        Optional<Student> updateTarget = model.getSuperTaClient().getStudentList()
+    public void update(ReadOnlySuperTaClient model) {
+        Optional<Student> updateTarget = model.getStudentList()
             .stream().filter(student -> student.isSameId(this.student))
             .findFirst();
         if (updateTarget.isPresent()) {
