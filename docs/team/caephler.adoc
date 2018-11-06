@@ -1,0 +1,67 @@
+
+= Gabriel - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 4
+
+---
+
+== Overview
+
+SuperTA is a desktop application to handle student records for Teaching Assistants and Professors in the School of Computing. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+
+== Summary of contributions
+
+* *Major enhancement*: added *Tutorial Group and Assignment* commands.
+** What it does: The creation of commands to manipulate Tutorial Groups and Assignments, including the creation and viewing of these things.
+** Justification: This feature is essential in providing value to our target audience. It allows them to create Tutorial Groups and Assignments, so they can keep track of student performance.
+** Highlights: This enhancement affects other commands interacting with these data structures.
+
+* *Major enhancement*: improved *User Interface (UI)*
+** What it does: The user interface was very barebones at the start and was not visually appealing. The improvement to the UI makes for a better experience for the user on the whole.
+
+* *Minor enhancement*: added a script to generate XML files for use as a seed.
+
+* *Code contributed*:
+
+* *Other contributions*:
+
+** Project management:
+*** Team Lead
+*** Managed Project release from `v1.1` on GitHub
+*** In charge of merging Pull Requests on GitHub
+** Enhancements:
+*** Added initial commands for `TutorialGroup` and `Assignment` (https://github.com/CS2103-AY1819S1-T16-2/main/pull/19[#14])
+*** Implemented `update-tutorial-group` command (https://github.com/CS2103-AY1819S1-T16-2/main/pull/62[#62])
+*** Major UI Changes (https://github.com/CS2103-AY1819S1-T16-2/main/pull/73[#73]) (https://github.com/CS2103-AY1819S1-T16-2/main/pull/92[#92])
+*** Improve Test Coverage (https://github.com/CS2103-AY1819S1-T16-2/main/pull/41[#41]) (https://github.com/CS2103-AY1819S1-T16-2/main/pull/66[#66]) (https://github.com/CS2103-AY1819S1-T16-2/main/pull/101[#101])
+*** Added documentation for features implemented.
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=createtutorialgroup]
+
+include::../UserGuide.adoc[tag=deletetutorialgroup]
+
+include::../UserGuide.adoc[tag=viewtutorliagroup]
+
+include::../UserGuide.adoc[tag=addtotutorialgroup]
+
+include::../UserGuide.adoc[tag=createassignment]
+
+include::../UserGuide.adoc[tag=grade]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=tutorialgroup]
+
