@@ -12,6 +12,7 @@ import seedu.superta.model.assignment.GradeBook;
 import seedu.superta.model.assignment.GradeEntry;
 import seedu.superta.model.student.StudentId;
 
+// @@author Caephler
 /**
  * Class for XML-Adapted GradeBook
  */
