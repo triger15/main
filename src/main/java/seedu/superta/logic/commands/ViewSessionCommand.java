@@ -59,4 +59,16 @@ public class ViewSessionCommand extends Command {
         EventsCenter.getInstance().post(new ViewSessionEvent(session, tutorialGroup));
         return new CommandResult(String.format(MESSAGE_SUCCESS, session));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ViewSessionCommand)) {
+            return false;
+        }
+        ViewSessionCommand otherCommand = (ViewSessionCommand) other;
+        return tutorialGroupId.equals(otherCommand.tutorialGroupId) && sessionName.equals(otherCommand.sessionName);
+    }
 }
