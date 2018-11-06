@@ -335,13 +335,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
-
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -737,15 +730,61 @@ _{ more test cases ... }_
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+// tag::teststutorialgroup[]
+=== Creating a Tutorial Group
 
-=== Saving data
+. Creating a tutorial group
 
-. Dealing with missing/corrupted data files
+.. Prerequisites: List all tutorial groups using the `list-tutorial-groups` command.
+.. Test case: `create-tutorial-group id/04a n/Test` +
+   Expected: A new tutorial group with the id `04a` and the name `Test` is created, and the list view is updated.
+.. Test case: Duplicate ID - `create-tutorial-group id/04a n/Test` +
+   In this test case, the `id` argument has to be an `id` that already exists in the memory. For example, you can run the above test case with the exact same arguments again.
+   Expected: A new tutorial group with a different ID is created. The new ID has a random suffix appended to it. For example, if you run `create-tutorial-group id/04a n/Test` twice, the second tutorial group will have an ID that looks like `04a-stormy492`.
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+=== Deleting a Tutorial Group
 
-_{ more test cases ... }_
+. Deleting a tutorial group
+
+.. Prerequisites: Have a tutorial group with an ID of `04a` in the memory.
+.. Test case: `delete-tutorial-group id/04a` +
+   Expected: The tutorial group is deleted.
+.. Test case: Tutorial Group detailed view shows `[Deleted]` if user is currently viewing tutorial group details. +
+   How to test:
+   * Run `view-tutorial-group id/04a` first to see the detailed tutorial group view.
+   * Run `delete-tutorial-group id/04a` +
+   Expected: The UI shows `[Deleted]` next to the tutorial group name.
+
+=== Grading a Student
+
+. Creating an assignment
+
+.. Prerequisites: Have one tutorial group with an ID of `04a`.
+.. Test case: `create-assignment tg/04a n/lab1 m/40.0`
+   Expected: An assignment should be made. If you are on the detailed tutorial group screen, the UI should update accordingly.
+.. Test case: `create-assignment tg/05a n/lab1 m/40.0`
+   Expected: An error message should be displayed, saying that there is no such tutorial group.
+.. Test case: `create-assignment tg/04a n/lab1 m/test`
+   Expected: An error message should be displayed, saying that maximum marks should be a valid floating point number.
+.. Test case: `create-assignment tg/04a n/lab1 m/-1`
+   Expected: An error message should be displayed, saying that the maximum marks should be more than 0.
+
+. Grading a student
+
+.. Prerequisites: Have one tutorial group with an ID of `04a`, and an assignment that belongs to it with the name `lab1` with a maximum mark of `40.0`. Also, a student with a student ID of `A0166733Y` should be added to the tutorial group.
+.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/35.0`
+   Expected: The student gets graded `35.0` out of `40.0` marks. If you are in the detailed tutorial group or assignment screen, the UI should be updated accordingly.
+.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/40.1`
+   Expected: An error message should be shown in the status message, because `40.1` is greater than the maximum marks of `lab1`.
+.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/-1`
+   Expected: An error message will be shown, since negative marks are invalid.
+.. Test case: `grade tg/05a st/A0166733Y as/lab1 m/30`
+   Expected: An error message showing that there is no such tutorial group should be shown.
+.. Test case: `grade tg/04a st/A0123456T as/lab1 m/30`
+   Expected: An error message showing that there is no such student in this tutorial group should be shown. You can also try this when there is a student in the main directory with this ID, but this student is not added to the tutorial group.
+.. Test case: `grade tg/04a st/A0166733Y as/lab2 m/30`
+   Expected: An error message showing that there is no such assignment should be shown.
+// end::teststutorialgroup[]

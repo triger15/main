@@ -4,7 +4,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: SuperTA
 
 ---
 
@@ -15,28 +15,29 @@ SuperTA is a desktop application to handle student records for Teaching Assistan
 == Summary of contributions
 
 * *Major enhancement*: added *Tutorial Group and Assignment* commands.
-** What it does: The creation of commands to manipulate Tutorial Groups and Assignments, including the creation and viewing of these things.
-** Justification: This feature is essential in providing value to our target audience. It allows them to create Tutorial Groups and Assignments, so they can keep track of student performance.
+** What it does: The creation of commands to manipulate Tutorial Groups and Assignments, including the creation and viewing of these data structures.
+** Justification: This feature is essential in achieiving core functionality. It allows teaching assistants to create Tutorial Groups and Assignments, which is key to keeping track of student performance.
 ** Highlights: This enhancement affects other commands interacting with these data structures.
 
 * *Major enhancement*: improved *User Interface (UI)*
-** What it does: The user interface was very barebones at the start and was not visually appealing. The improvement to the UI makes for a better experience for the user on the whole.
+** What it does: The user interface was very barebones at the start and was not visually appealing. The improvement to the UI makes for a better experience for the user on the whole. The UI was also further improved to display details of tutorial groups, assignments, attendance sessions, as well as students.
 
-* *Minor enhancement*: added a script to generate XML files for use as a seed.
+* *Minor enhancement*: Added various view commands such as `view-session` and `list-tutorial-groups` which will trigger UI actions.
 
-* *Code contributed*:
+* *Code contributed*: [RepoSense collated code](https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=caephler)
 
 * *Other contributions*:
 
 ** Project management:
 *** Team Lead
-*** Managed Project release from `v1.1` on GitHub
-*** In charge of merging Pull Requests on GitHub
+*** Managed Project release from `v1.1` through `v1.4` on GitHub
+*** In charge of merging most Pull Requests on GitHub
 ** Enhancements:
-*** Added initial commands for `TutorialGroup` and `Assignment` (https://github.com/CS2103-AY1819S1-T16-2/main/pull/19[#14])
-*** Implemented `update-tutorial-group` command (https://github.com/CS2103-AY1819S1-T16-2/main/pull/62[#62])
-*** Major UI Changes (https://github.com/CS2103-AY1819S1-T16-2/main/pull/73[#73]) (https://github.com/CS2103-AY1819S1-T16-2/main/pull/92[#92])
-*** Improve Test Coverage (https://github.com/CS2103-AY1819S1-T16-2/main/pull/41[#41]) (https://github.com/CS2103-AY1819S1-T16-2/main/pull/66[#66]) (https://github.com/CS2103-AY1819S1-T16-2/main/pull/101[#101])
+*** Added initial commands for `TutorialGroup` and `Assignment`, such as `create-tutorial-group`, `create-assignment`, `grade`, and `view-tutorial-group` (Pull Request https://github.com/CS2103-AY1819S1-T16-2/main/pull/19[#19])
+*** Implemented `update-tutorial-group` command (Pull Request https://github.com/CS2103-AY1819S1-T16-2/main/pull/62[#62])
+*** Major UI Changes (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/73[#73], https://github.com/CS2103-AY1819S1-T16-2/main/pull/92[#92], https://github.com/CS2103-AY1819S1-T16-2/main/pull/135[#135])
+*** Improve Test Coverage (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/41[#41], https://github.com/CS2103-AY1819S1-T16-2/main/pull/66[#66], https://github.com/CS2103-AY1819S1-T16-2/main/pull/101[#101])
+*** Bug fixes (in various PRs)
 *** Added documentation for features implemented.
 
 == Contributions to the User Guide
@@ -45,17 +46,25 @@ SuperTA is a desktop application to handle student records for Teaching Assistan
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=listutorialgroups]
+
 include::../UserGuide.adoc[tag=createtutorialgroup]
+
+include::../UserGuide.adoc[tag=updatetutorialgroup]
 
 include::../UserGuide.adoc[tag=deletetutorialgroup]
 
-include::../UserGuide.adoc[tag=viewtutorliagroup]
+include::../UserGuide.adoc[tag=viewtutorialgroup]
 
 include::../UserGuide.adoc[tag=addtotutorialgroup]
 
 include::../UserGuide.adoc[tag=createassignment]
 
 include::../UserGuide.adoc[tag=grade]
+
+include::../UserGuide.adoc[tag=viewassignment]
+
+include::../UserGuide.adoc[tag=viewsession]
 
 == Contributions to the Developer Guide
 
@@ -65,3 +74,5 @@ include::../UserGuide.adoc[tag=grade]
 
 include::../DeveloperGuide.adoc[tag=tutorialgroup]
 
+=== Manual Testing
+include::../DeveloperGuide.adoc[tag=teststutorialgroup]
