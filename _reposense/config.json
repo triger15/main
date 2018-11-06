@@ -26,5 +26,9 @@
       "displayName": "Ong Wen Shei",
       "authorNames": ["wenshei", "WenShei"]
     }
+  ],
+  "ignoreCommitList": [
+    "207f16434ff5a2893334dc967fd3806ca3d2eda6",
+    "a353b6568e2ef421ab856fa503a6286170be72ca"
   ]
 }
