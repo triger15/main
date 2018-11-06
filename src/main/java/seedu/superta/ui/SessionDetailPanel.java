@@ -2,6 +2,7 @@ package seedu.superta.ui;
 
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -10,6 +11,8 @@ import javafx.scene.control.ListView;
 import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.attendance.Attendance;
 import seedu.superta.model.attendance.Session;
+import seedu.superta.model.student.Student;
+import seedu.superta.model.student.UniqueStudentList;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
 /**
@@ -30,6 +33,9 @@ public class SessionDetailPanel extends ViewPanelContent {
     @FXML
     private ListView<Attendance> attendanceListView;
 
+    @FXML
+    private ListView<Student> absentListView;
+
     private Session session;
     private TutorialGroup tutorialGroup;
 
@@ -47,6 +53,12 @@ public class SessionDetailPanel extends ViewPanelContent {
         tutorialGroupId.setText("Tutorial Group: " + tutorialGroup.getId());
         name.setText(session.getSessionName());
         updateAttendanceCount();
+        ObservableList<Attendance> attended = session.asUnmodifiableObservableList();
+        UniqueStudentList notAttended = tutorialGroup.getStudents().clone();
+        for (Attendance attendance : attended) {
+            notAttended.removeStudentWithId(attendance.getStudentId());
+        }
+
         attendanceListView.setItems(session.asUnmodifiableObservableList());
         attendanceListView.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -58,6 +70,23 @@ public class SessionDetailPanel extends ViewPanelContent {
                     setText(null);
                 } else {
                     Label label = new Label(attendance.getStudentId().studentId);
+                    label.setPadding(new Insets(5, 5, 5, 15));
+                    setGraphic(label);
+                }
+            }
+        });
+
+        absentListView.setItems(notAttended.asUnmodifiableObservableList());
+        absentListView.setCellFactory(listView -> new ListCell<>() {
+            @Override
+            public void updateItem(Student student, boolean empty) {
+                super.updateItem(student, empty);
+
+                if (empty || student == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    Label label = new Label(student.getStudentId().studentId);
                     label.setPadding(new Insets(5, 5, 5, 15));
                     setGraphic(label);
                 }

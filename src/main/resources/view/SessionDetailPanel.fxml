@@ -31,6 +31,17 @@
             <Insets top="5" bottom="5" />
         </padding>
     </Separator>
-    <Label styleClass="label-subheader" text="Attended" />
-    <ListView fx:id="attendanceListView" orientation="VERTICAL" VBox.vgrow="ALWAYS"/>
+    <HBox VBox.vgrow="ALWAYS">
+        <VBox minWidth="200" HBox.hgrow="SOMETIMES">
+            <HBox.margin>
+                <Insets right="30" />
+            </HBox.margin>
+            <Label styleClass="label-subheader" text="Attended" />
+            <ListView fx:id="attendanceListView" orientation="VERTICAL" VBox.vgrow="ALWAYS"/>
+        </VBox>
+        <VBox prefWidth="300" minWidth="200">
+            <Label styleClass="label-subheader" text="Absent" />
+            <ListView fx:id="absentListView" orientation="VERTICAL" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </HBox>
 </VBox>
