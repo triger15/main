@@ -3,6 +3,7 @@ package seedu.superta.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -102,7 +103,7 @@ public class StudentDetailPanel extends ViewPanelContent {
             this.student = fromModel;
             render();
         } else {
-            renderDeleted();
+            Platform.runLater(() -> renderDeleted());
         }
     }
 }

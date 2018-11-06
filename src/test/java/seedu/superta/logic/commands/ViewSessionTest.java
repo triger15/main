@@ -7,7 +7,6 @@ import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClien
 import org.junit.Test;
 
 import seedu.superta.logic.CommandHistory;
-import seedu.superta.logic.commands.ViewSessionCommand;
 import seedu.superta.model.Model;
 import seedu.superta.model.ModelManager;
 import seedu.superta.model.UserPrefs;

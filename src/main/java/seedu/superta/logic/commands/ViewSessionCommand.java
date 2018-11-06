@@ -23,7 +23,8 @@ import seedu.superta.model.tutorialgroup.TutorialGroup;
 public class ViewSessionCommand extends Command {
     public static final String COMMAND_WORD = "view-session";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information about a specific attendance session. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Views information about a specific attendance session. \n"
             + "Parameters: "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL_GROUP_ID "
             + PREFIX_SESSION_NAME + "SESSION_NAME \n"

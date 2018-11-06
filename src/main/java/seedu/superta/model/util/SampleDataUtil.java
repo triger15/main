@@ -1,6 +1,5 @@
 package seedu.superta.model.util;
 
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;

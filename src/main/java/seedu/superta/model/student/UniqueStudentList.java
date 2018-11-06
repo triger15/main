@@ -87,6 +87,9 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
+    /**
+     * Removes a student with the specified ID.
+     */
     public boolean removeStudentWithId(StudentId toRemove) {
         boolean isPresent = internalList.stream().anyMatch(student -> student.getStudentId().equals(toRemove));
         if (!isPresent) {
