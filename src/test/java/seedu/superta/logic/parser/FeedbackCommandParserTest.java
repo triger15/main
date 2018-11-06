@@ -30,11 +30,19 @@ public class FeedbackCommandParserTest {
     @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FeedbackCommand.MESSAGE_USAGE);
-        // student id missing
+
+        // student id + prefix missing
         assertParseFailure(parser, " f/" + nonEmptyFeedback, expectedMessage);
-        // feedback missing
+        // feedback + prefix missing
         assertParseFailure(parser, " id/" + VALID_STUDENT_ID_AMY, expectedMessage);
         // all prefixes missing
         assertParseFailure(parser, "", expectedMessage);
+
+        // student id prefix present, actual student id missing
+        assertParseFailure(parser, " id/ f/" + nonEmptyFeedback, expectedMessage);
+        // feedback prefix present, actual feedback missing
+        assertParseFailure(parser, " id/" + VALID_STUDENT_ID_AMY + " f/", expectedMessage);
+        // student id and feedback prefix present, actual student id and feedback missing
+        assertParseFailure(parser, " id/ f/", expectedMessage);
     }
 }
