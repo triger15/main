@@ -35,7 +35,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * `list` : lists all students in the directory
 * `add n/John Doe p/98765432 e/johnd@example.com id/A0123456Y` : adds a student named `John Doe` to the student directory.
-* `delete 3` : shows the 3rd contact in the current list that was deleted
+* `delete 3` : shows the 3rd student in the current list that was deleted
 * `exit` : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -214,7 +214,7 @@ Displays the `04a` tutorial group's information .
 
 === Add to Tutorial Group: `add-to-tutorial-group`
 
-Adds a student to a tutorial group. +
+Adds a student to a tutorial group. Note that this command only takes in 1 student at a time. +
 Format: `add-to-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID`
 
 Examples:
@@ -245,7 +245,7 @@ Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `
 
 === Mark Attendance: `mark-attendance`
 
-Marks attendance for students from a specific tutorial group and session name, identified by its ID and name. +
+Marks attendance for students from a specific tutorial group and session name, identified by its ID and name. Marking a student's attendance a second time will not change the student's attendance. +
 Format: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
 
 Examples:
@@ -253,6 +253,18 @@ Examples:
 * `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
 Marks students with IDs `A1234567T` and `A0123456Y` as present in tutorial session named `W4 Tutorial` for the tutorial group with an ID of `1`.
 // end::attendance[]
+
+// tag::viewsession[]
+=== View Attendance Session: `view-session`
+
+Views the session details for a particular session in a tutorial group. +
+Format: `view-attendance tg/TUTORIAL_GROUP_ID n/SESSION_NAME`
+
+Examples:
+
+* `view-attendance tg/04a n/W1Tutorial`
+Views the details of the session `W1Tutorial` belonging to the tutorial group `04a`.
+// end::viewsession[]
 
 === Creating an Assignment: `create-assignment`
 
@@ -369,7 +381,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all students from the client. +
+Clears all data from the client. This includes all students, tutorial groups, assignments, etc. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -443,10 +455,12 @@ e.g. `delete-tutorial-group id/04a`
 e.g. `add-to-tutorial-group tg/04a st/A0166733Y`
 * *Remove Student from Tutorial Group*: `remove-from-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID` +
 e.g. `remove-from-tutorial-group tg/04a st/A0166733Y`
-* *Create Attendance*: `create-attendance tg/[TUTORIAL_GROUP_ID] n/[NAME]` +
+* *Create Attendance*: `create-attendance tg/TUTORIAL_GROUP_ID n/NAME` +
 e.g. `create-attendance tg/1 n/W4 Tutorial`
 * *Mark Attendance*: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...` +
 e.g. `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
+* *View Attendance*: `view-session tg/TUTORIAL_GRUOP_ID n/SESSION_NAME` +
+e.g. `view-session tg/1 n/W4 Tutorial`
 * *Create Assignment*: `create-assignment tg/TUTORIAL_GROUP_ID n/ASSIGNMENT_NAME m/MAX_MARKS` +
 e.g. `create-assignment tg/04a n/lab1 m/40`
 * *Delete Assignment*: `delete-assignment as/ASSIGNMENT_TITLE tg/TUTORIAL_GROUP_ID` +
@@ -455,7 +469,7 @@ e.g. `delete-assignment as/lab1 tg/04a`
 e.g. `grade tg/04a as/lab1 st/A0166733Y m/30`
 * *View Assignment Details*: `view-assignment tg/TUTORIAL_GROUP_ID as/ASSIGNMENT_NAME` +
 e.g. `view-assignment tg/04a as/lab1`
-* *Feedback*: `feedback id/[STUDENT_ID] f/[FEEDBACK]` +
+* *Feedback*: `feedback id/STUDENT_ID f/FEEDBACK` +
 e.g. `feedback id/A0166733Y f/Likes to sleep in class`
 * *History* : `history`
 * *Undo* : `undo`

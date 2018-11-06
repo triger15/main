@@ -1,16 +1,10 @@
 package systemtests;
 
-import static seedu.superta.ui.testutil.GuiTestAssert.assertListMatching;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.junit.Test;
-
 import seedu.superta.model.SuperTaClient;
-import seedu.superta.model.student.Student;
-import seedu.superta.model.util.SampleDataUtil;
 import seedu.superta.testutil.TestUtil;
 
 public class SampleDataTest extends SuperTaClientSystemTest {
@@ -41,11 +35,5 @@ public class SampleDataTest extends SuperTaClientSystemTest {
         } catch (IOException ioe) {
             throw new AssertionError(ioe);
         }
-    }
-
-    @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() {
-        Student[] expectedList = SampleDataUtil.getSampleStudents();
-        assertListMatching(getPersonListPanel(), expectedList);
     }
 }

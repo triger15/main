@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
 import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
+import seedu.superta.commons.events.ui.ViewSessionEvent;
 import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.attendance.Session;
@@ -108,6 +109,9 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                     setGraphic(new SessionCard(session, tutorialGroup).getRoot());
                 }
             }
+        });
+        sessions.setOnMouseClicked(event -> {
+            raise(new ViewSessionEvent(sessions.getSelectionModel().getSelectedItem(), tutorialGroup));
         });
     }
 

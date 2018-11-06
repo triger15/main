@@ -9,6 +9,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+// @@author Caephler
+
 public class TutorialGroupMasterTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

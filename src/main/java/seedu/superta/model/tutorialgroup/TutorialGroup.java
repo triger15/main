@@ -125,6 +125,16 @@ public class TutorialGroup {
                 .findFirst();
     }
 
+    /**
+     * Gets the attendance session by name reference, if it exists.
+     */
+    public Optional<Session> getSessionByName(String name) {
+        return attendanceSessions.asUnmodifiableObservableList()
+                .stream()
+                .filter(session -> session.getSessionName().equals(name))
+                .findFirst();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof TutorialGroup)) {

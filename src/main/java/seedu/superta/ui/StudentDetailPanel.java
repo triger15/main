@@ -3,6 +3,7 @@ package seedu.superta.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -54,8 +55,8 @@ public class StudentDetailPanel extends ViewPanelContent {
     private void render() {
         id.setText(student.getStudentId().studentId);
         name.setText(student.getName().fullName);
-        email.setText(student.getEmail().value);
-        phoneNumber.setText(student.getPhone().value);
+        email.setText("Email: " + student.getEmail().value);
+        phoneNumber.setText("Phone: " + student.getPhone().value);
         tags.getChildren().clear();
         student.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         feedback.setItems(student.getFeedback());
@@ -71,6 +72,13 @@ public class StudentDetailPanel extends ViewPanelContent {
                 }
             }
         });
+    }
+
+    /**
+     * Renders if the model student is deleted.
+     */
+    private void renderDeleted() {
+        name.setText("[Deleted] " + student.getName().fullName);
     }
 
     @Override
@@ -92,10 +100,10 @@ public class StudentDetailPanel extends ViewPanelContent {
             .findFirst();
         if (updateTarget.isPresent()) {
             Student fromModel = updateTarget.get();
-            if (!fromModel.equals(student)) {
-                this.student = fromModel;
-                render();
-            }
+            this.student = fromModel;
+            render();
+        } else {
+            Platform.runLater(() -> renderDeleted());
         }
     }
 }

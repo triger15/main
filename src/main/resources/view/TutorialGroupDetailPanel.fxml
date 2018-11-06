@@ -22,7 +22,7 @@
             <padding>
                 <Insets left="15" />
             </padding>
-            <Label fx:id="id" styleClass="label-bright" text="\$id" />
+            <Label fx:id="id" styleClass="label-text-small" text="\$id" />
             <Label fx:id="name" styleClass="label-header" text="\$name" />
         </VBox>
     </HBox>
@@ -31,7 +31,7 @@
             <Insets top="15" bottom="15" />
         </padding>
     </Separator>
-    <Label styleClass="label-bright">
+    <Label styleClass="label-text-medium">
         <padding>
             <Insets bottom="5" />
         </padding>
@@ -48,7 +48,7 @@
             <HBox.margin>
                 <Insets right="30" />
             </HBox.margin>
-            <Label styleClass="label-bright">
+            <Label styleClass="label-text-medium">
                 <padding>
                     <Insets bottom="5" />
                 </padding>
@@ -57,7 +57,7 @@
             <ListView fx:id="assignments" VBox.vgrow="ALWAYS" />
         </VBox>
         <VBox prefWidth="300">
-            <Label styleClass="label-bright">
+            <Label styleClass="label-text-medium">
                 <padding>
                     <Insets bottom="5" />
                 </padding>
