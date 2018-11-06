@@ -1,0 +1,54 @@
+= Ong Wen Shei - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: SuperTA
+
+---
+
+== Overview
+
+SuperTA is a desktop app for Teaching Assistants and Professors of NUS School of Computing to manage their tutorials and students. It is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to delete an existing Assignment in an existing tutorial group.*
+** What it does: allows the user to delete the specified assignment from the specified tutorial group.
+** Justification: This feature improves the product significantly because a user can make mistakes when adding assignments, such as creating the assignment in the wrong tutorial group.
+** Highlights: This enhancement affects multiple components, such as Logic and Model, and requires in-depth understanding of these components.
+
+* *Minor enhancement*: added a delete-tutorial-group command which allows the user to delete an existing tutorial group. (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/84[#84])
+
+* *Code contributed*: [https://github.com/CS2103-AY1819S1-T16-2/main/blob/master/src/main/java/seedu/superta/logic/commands/DeleteAssignmentCommand.java[Functional code]] [https://github.com/CS2103-AY1819S1-T16-2/main/blob/master/src/test/java/seedu/superta/logic/commands/DeleteAssignmentCommandTest.java[Test code]]
+
+* *Other contributions*:
+
+** Project Management:
+*** Managed Issue tracker on GitHub
+** Documentation:
+*** Modified old diagrams in the Developer Guide to correspond with SuperTA: https://github.com/CS2103-AY1819S1-T16-2/main/pull/100[#100]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T16-2/main/pull/97[#97]
+
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=deleteassignment]
+
+include::../UserGuide.adoc[tag=deletetutorialgroup]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+//include::../DeveloperGuide.adoc[tag=undoredo]

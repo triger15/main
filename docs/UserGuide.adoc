@@ -191,7 +191,7 @@ Creates a tutorial group named `CS1101S Studio 04A` with the identifier `04a`. +
   `create-tutorial-group n/CS2103T id/04b` +
   Creates a tutorial group named CS2103T with the identifier 04b and a second tutorial group with the same name and identifier 04b-dusty123.
 
-
+// tag::deletetutorialgroup[]
 === Deleting a Tutorial Group: `delete-tutorial-group`
 
 Deletes an existing tutorial group with an identifier. +
@@ -201,6 +201,8 @@ Examples:
 
 * `delete-tutorial-group id/04a` +
 Deletes a tutorial group with the identifier `04a`.
+
+// end::deletetutorialgroup[]
 
 === View Tutorial Group: `view-tutorial-group`
 
@@ -280,6 +282,7 @@ Examples:
 * `create-assignment tg/04a n/lab1 m/40` +
 Creates an assignment named `lab1` for the tutorial group with an ID of `04a`, with the maximum marks for this assignment as `40`.
 
+// tag::deleteassignment[]
 === Deleting an Assignment: `delete-assignment`
 
 Deletes an existing assignment for a specific tutorial group. +
@@ -289,6 +292,7 @@ Examples:
 
 * `delete-assignment as/lab1 tg/04a` +
 Deletes an assignment named 'lab1' from the tutorial group with an ID of '04a'.
+// end::deleteassignment[]
 
 === Grade Assignment for Student: `grade`
 
