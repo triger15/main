@@ -254,6 +254,18 @@ Examples:
 Marks students with IDs `A1234567T` and `A0123456Y` as present in tutorial session named `W4 Tutorial` for the tutorial group with an ID of `1`.
 // end::attendance[]
 
+// tag::viewsession[]
+=== View Attendance Session: `view-session`
+
+Views the session details for a particular session in a tutorial group. +
+Format: `view-attendance tg/TUTORIAL_GROUP_ID n/SESSION_NAME`
+
+Examples:
+
+* `view-attendance tg/04a n/W1Tutorial`
+Views the details of the session `W1Tutorial` belonging to the tutorial group `04a`.
+// end::viewsession[]
+
 === Creating an Assignment: `create-assignment`
 
 Creates an assignment for a specific tutorial group. +
