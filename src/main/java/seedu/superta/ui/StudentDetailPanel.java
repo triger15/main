@@ -54,8 +54,8 @@ public class StudentDetailPanel extends ViewPanelContent {
     private void render() {
         id.setText(student.getStudentId().studentId);
         name.setText(student.getName().fullName);
-        email.setText(student.getEmail().value);
-        phoneNumber.setText(student.getPhone().value);
+        email.setText("Email: " + student.getEmail().value);
+        phoneNumber.setText("Phone: " + student.getPhone().value);
         tags.getChildren().clear();
         student.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         feedback.setItems(student.getFeedback());

@@ -100,4 +100,4 @@ def populateTutorialGroups(root, student_ids):
 student_ids = populateStudents(result)
 populateTutorialGroups(result, student_ids)
 
-ET.ElementTree(result).write("./data/addressbook.xml", pretty_print=True)
+ET.ElementTree(result).write("./data/super.xml", pretty_print=True)

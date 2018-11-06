@@ -26,13 +26,13 @@
             <Label fx:id="id" styleClass="label-subheader" text="\$id" />
         </VBox>
     </HBox>
+    <Label fx:id="email" styleClass="label-bright" text="\$email" />
+    <Label fx:id="phoneNumber" styleClass="label-bright" text="\$phone" />
     <Separator orientation="HORIZONTAL">
         <padding>
             <Insets top="5" bottom="5" />
         </padding>
     </Separator>
-    <Label fx:id="email" styleClass="label-bright" text="\$email" />
-    <Label fx:id="phoneNumber" styleClass="label-bright" text="\$phone" />
-    <Label styleClass="label-header" text="Feedback" />
+    <Label styleClass="label-text-medium" text="Feedback" />
     <ListView fx:id="feedback" VBox.vgrow="ALWAYS" />
 </VBox>

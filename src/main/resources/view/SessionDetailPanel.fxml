@@ -21,7 +21,7 @@
             <padding>
                 <Insets left="15" />
             </padding>
-            <Label fx:id="tutorialGroupId" styleClass="label-bright" text="\$tutorialGroupId" />
+            <Label fx:id="tutorialGroupId" styleClass="label-text-small" text="\$tutorialGroupId" />
             <Label fx:id="name" styleClass="label-header" text="\$name" />
             <Label fx:id="attendance" styleClass="label-subheader" text="\$attendance" />
         </VBox>
@@ -36,11 +36,11 @@
             <HBox.margin>
                 <Insets right="30" />
             </HBox.margin>
-            <Label styleClass="label-subheader" text="Attended" />
+            <Label styleClass="label-text-medium" text="Attended" />
             <ListView fx:id="attendanceListView" orientation="VERTICAL" VBox.vgrow="ALWAYS"/>
         </VBox>
         <VBox prefWidth="300" minWidth="200">
-            <Label styleClass="label-subheader" text="Absent" />
+            <Label styleClass="label-text-medium" text="Absent" />
             <ListView fx:id="absentListView" orientation="VERTICAL" VBox.vgrow="ALWAYS"/>
         </VBox>
     </HBox>
