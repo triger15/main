@@ -100,6 +100,20 @@ public class CommandTestUtil {
     }
 
     /**
+     * Executes the given {@code command} which doesn't modify the model, and confirms that <br>
+     *     - the result message matches {@code expectedMessage} <br>
+     */
+    public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
+                                            String expectedMessage) {
+        try {
+            CommandResult result = command.execute(actualModel, actualCommandHistory);
+            assertEquals(expectedMessage, result.feedbackToUser);
+        } catch (CommandException exception) {
+            throw new AssertionError("Execution of command should not fail.", exception);
+        }
+    }
+
+    /**
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>

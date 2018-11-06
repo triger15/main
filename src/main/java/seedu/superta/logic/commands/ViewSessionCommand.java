@@ -3,6 +3,7 @@ package seedu.superta.logic.commands;
 // @@author Caephler
 
 import static java.util.Objects.requireNonNull;
+import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 
@@ -38,6 +39,7 @@ public class ViewSessionCommand extends Command {
     private final String sessionName;
 
     public ViewSessionCommand(String tutorialGroupId, String sessionName) {
+        requireAllNonNull(tutorialGroupId, sessionName);
         this.tutorialGroupId = tutorialGroupId;
         this.sessionName = sessionName;
     }
