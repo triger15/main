@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import seedu.superta.model.attendance.exceptions.DuplicateAttendanceException;
 import seedu.superta.model.student.Student;
 
@@ -59,6 +61,24 @@ public class Session {
      */
     public ObservableSet<Attendance> asUnmodifiableObservableSet() {
         return FXCollections.unmodifiableObservableSet(internalSet);
+    }
+
+    /**
+     * Returns an unmodifiable observable list representation of the attendance set.
+     */
+    public ObservableList<Attendance> asUnmodifiableObservableList() {
+        ObservableList<Attendance> list = FXCollections.observableList(internalSet.stream().collect(
+                Collectors.toList()
+        ));
+        internalSet.addListener((SetChangeListener<? super Attendance>) change -> {
+            if (change.wasAdded()) {
+                list.add(change.getElementAdded());
+            }
+            if (change.wasRemoved()) {
+                list.remove(change.getElementRemoved());
+            }
+        });
+        return list;
     }
 
     /**

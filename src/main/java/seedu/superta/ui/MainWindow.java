@@ -22,9 +22,11 @@ import seedu.superta.commons.events.ui.StateEvent;
 import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
 import seedu.superta.commons.events.ui.ViewAllTutorialGroupsEvent;
+import seedu.superta.commons.events.ui.ViewSessionEvent;
 import seedu.superta.logic.Logic;
 import seedu.superta.model.UserPrefs;
 import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
@@ -159,6 +161,10 @@ public class MainWindow extends UiPart<Stage> {
         setViewPanelContent(new StudentDetailPanel(student));
     }
 
+    void changeViewPanelToSessionView(Session session, TutorialGroup tutorialGroup) {
+        setViewPanelContent(new SessionDetailPanel(session, tutorialGroup));
+    }
+
     void setViewPanelContent(ViewPanelContent component) {
         removeViewPanelContent();
         viewPanelContent = component;
@@ -255,6 +261,11 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleViewAllTutorialGroupsEvent(ViewAllTutorialGroupsEvent event) {
         changeViewPanelToTutorialGroupListView();
+    }
+
+    @Subscribe
+    private void handleSessionViewEvent(ViewSessionEvent event) {
+        changeViewPanelToSessionView(event.getSession(), event.getTutorialGroup());
     }
 
     @Subscribe
