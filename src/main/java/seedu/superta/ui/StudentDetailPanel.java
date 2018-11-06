@@ -73,6 +73,13 @@ public class StudentDetailPanel extends ViewPanelContent {
         });
     }
 
+    /**
+     * Renders if the model student is deleted.
+     */
+    private void renderDeleted() {
+        name.setText("[Deleted] " + student.getName().fullName);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -92,10 +99,10 @@ public class StudentDetailPanel extends ViewPanelContent {
             .findFirst();
         if (updateTarget.isPresent()) {
             Student fromModel = updateTarget.get();
-            if (!fromModel.equals(student)) {
-                this.student = fromModel;
-                render();
-            }
+            this.student = fromModel;
+            render();
+        } else {
+            renderDeleted();
         }
     }
 }
