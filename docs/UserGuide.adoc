@@ -381,7 +381,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all students from the client. +
+Clears all data from the client. This includes all students, tutorial groups, assignments, etc. +
 Format: `clear`
 
 === Exiting the program : `exit`
