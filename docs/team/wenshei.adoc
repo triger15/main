@@ -27,6 +27,7 @@ SuperTA is a desktop app for Teaching Assistants and Professors of NUS School of
 ** Project Management:
 *** Managed Issue tracker on GitHub
 ** Documentation:
+*** Added team's ideas into relevant appendixes: https://github.com/CS2103-AY210819S1-T16-2/main/pull/4[#4]
 *** Modified old diagrams in the Developer Guide to correspond with SuperTA: https://github.com/CS2103-AY1819S1-T16-2/main/pull/100[#100]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T16-2/main/pull/97[#97]
