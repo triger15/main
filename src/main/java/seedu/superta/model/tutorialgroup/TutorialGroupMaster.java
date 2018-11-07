@@ -130,7 +130,6 @@ public class TutorialGroupMaster {
         ObservableList<TutorialGroup> list = FXCollections.observableArrayList();
         list.addAll(tutorialGroups.values());
         tutorialGroups.addListener((MapChangeListener<? super String, ? super TutorialGroup>) change -> {
-            System.out.println(change.getKey());
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
             }

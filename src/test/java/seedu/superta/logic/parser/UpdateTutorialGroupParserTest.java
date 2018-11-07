@@ -34,7 +34,6 @@ public class UpdateTutorialGroupParserTest {
     public void parse_allFieldsSpecified_success() {
         String userInput = " " + PREFIX_TUTORIAL_GROUP_ID + typicalId + " "
             + PREFIX_TUTORIAL_GROUP_NAME + typicalName;
-        System.out.println(userInput);
         UpdateTutorialGroupCommand.UpdateTutorialGroupDescriptor descriptor = new UpdateTutorialGroupCommand
             .UpdateTutorialGroupDescriptor();
         descriptor.setName(typicalName);
