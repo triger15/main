@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.superta.logic.commands.MarkAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static seedu.superta.logic.commands.MarkAttendanceCommand.MESSAGE_INVALID_STUDENTS;
 import static seedu.superta.logic.commands.MarkAttendanceCommand.MESSAGE_INVALID_TUTORIAL_GROUP;
 import static seedu.superta.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
@@ -37,6 +38,7 @@ public class MarkAttendanceCommandTest {
 
     private final Session typicalSession = new Session("W4 Tutorial");
     private final StudentId alice = new StudentId("A0166733Y");
+    private final StudentId benson = new StudentId("A1234567Y");
     private final TutorialGroup typicalTg = new TutorialGroupBuilder().build();
     private Set<StudentId> idSet;
 
@@ -82,7 +84,6 @@ public class MarkAttendanceCommandTest {
         expectedModel.addTutorialGroup(new TutorialGroupBuilder().build());
         expectedModel.addStudentToTutorialGroup(typicalTg.getId(), alice);
         expectedModel.createAttendance(typicalTg.getId(), typicalSession);
-        expectedModel.markAttendance(typicalTg.getId(), typicalSession, idSet);
         expectedModel.commitSuperTaClient();
 
         assertCommandSuccess(attendanceCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -111,6 +112,21 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(typicalTg.getId(), typicalSession,
                 invalidSet);
         assertCommandFailure(markAttendanceCommand, model, commandHistory, MESSAGE_INVALID_STUDENTS);
+    }
+
+    @Test
+    public void execute_markAttendanceDuplicateMarking_unsuccessful() {
+        MarkAttendanceCommand attendanceCommand = new MarkAttendanceCommand(typicalTg.getId(),
+            typicalSession, idSet);
+
+        Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+        expectedModel.addTutorialGroup(new TutorialGroupBuilder().build());
+        expectedModel.addStudentToTutorialGroup(typicalTg.getId(), alice);
+        expectedModel.createAttendance(typicalTg.getId(), typicalSession);
+        expectedModel.markAttendance(typicalTg.getId(), typicalSession, idSet);
+        expectedModel.commitSuperTaClient();
+
+        assertCommandFailure(attendanceCommand, model, commandHistory, MESSAGE_DUPLICATE_ATTENDANCE);
     }
 
     @Test

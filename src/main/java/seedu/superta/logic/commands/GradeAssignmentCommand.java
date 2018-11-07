@@ -1,13 +1,13 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
-import seedu.superta.logic.CommandHistory;
-import seedu.superta.logic.commands.exceptions.CommandException;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
+
+import seedu.superta.logic.CommandHistory;
+import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;

@@ -1,11 +1,11 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_NAME;
 
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_NAME;
 import seedu.superta.model.Model;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
