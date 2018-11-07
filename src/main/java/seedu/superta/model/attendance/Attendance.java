@@ -25,6 +25,14 @@ public class Attendance {
         this.presence = presence;
     }
 
+    /**
+     * A constructor for cloning.
+     */
+    public Attendance(Attendance toClone) {
+        this.stId = toClone.stId;
+        this.presence = toClone.presence;
+    }
+
     public StudentId getStudentId() {
         return stId;
     }

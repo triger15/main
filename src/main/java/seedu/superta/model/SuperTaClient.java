@@ -219,9 +219,9 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     /**
      * Marks attendance of students in a session.
      */
-    public void markAttendance(String tgId, Session session, Set<StudentId> stIdSet) {
-        requireAllNonNull(tgId, session, stIdSet);
-        Optional<TutorialGroup> otg = getTutorialGroup(tgId);
+    public void markAttendance(String tutorialGroupId, Session session, Set<StudentId> stIdSet) {
+        requireAllNonNull(tutorialGroupId, session, stIdSet);
+        Optional<TutorialGroup> otg = getTutorialGroup(tutorialGroupId);
         if (!otg.isPresent()) {
             throw new TutorialGroupNotFoundException();
         }
