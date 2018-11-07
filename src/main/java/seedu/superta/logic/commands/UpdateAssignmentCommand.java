@@ -1,16 +1,22 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 
+import java.util.Optional;
+
+import seedu.superta.commons.util.CollectionUtil;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
+import seedu.superta.model.assignment.Title;
+import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.superta.model.assignment.exceptions.DuplicateAssignmentNameException;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 /**
@@ -20,46 +26,75 @@ public class UpdateAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "update-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update assignment details. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update a tutorial's "
+            + "assignment title or maximum marks.\n"
             + "Parameters: "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "OLD-ASSIGNMENT-TITLE"
-            + PREFIX_ASSIGNMENT_MAX_MARKS + "OLD-ASSIGNMENT-MAX-MARKS"
-            + "[" + PREFIX_GENERAL_ASSIGNMENT_TITLE + "NEW-ASSIGNMENT-TITLE] "
-            + "[" + PREFIX_ASSIGNMENT_MAX_MARKS + "NEW-ASSIGNMENT-MAX-MARKS] "
+            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "OLD-ASSIGNMENT-TITLE "
+            + PREFIX_ASSIGNMENT_MAX_MARKS + "OLD-ASSIGNMENT-MAX-MARKS \n"
+            + "[" + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + "NEW-ASSIGNMENT-TITLE] "
+            + "[" + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + "NEW-ASSIGNMENT-MAX-MARKS] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
             + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 1"
-            + PREFIX_ASSIGNMENT_MAX_MARKS + "40"
-            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 2";
+            + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + "40"
+            + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + "Lab 2";
 
-    public static final String MESSAGE_SUCCESS = "Updated tutorial $s assignment maximum marks to: $s";
+    public static final String MESSAGE_SUCCESS = "Tutorial %1$s - Old Assignment details: %2$s. "
+            + "New Assignment details: %3$s";
     public static final String MESSAGE_FAILURE_NO_TUTORIAL_GROUP = "Tutorial group does not exist.";
     public static final String MESSAGE_FAILURE_NO_ASSIGNMENT = "Assignment does not exist.";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT_NAME = "This assignment name already exists in the database.";
 
     private final String tutorialGroupId;
-    private final Assignment toChange;
+    private final Assignment assignmentToChange;
+    private final UpdateAssignmentDescriptor updateAssignmentDescriptor;
 
-    public UpdateAssignmentCommand(String tutorialGroupId, Assignment assignment) {
-        requireAllNonNull(tutorialGroupId, assignment);
+    public UpdateAssignmentCommand(String tutorialGroupId, Assignment assignmentToChange,
+                                   UpdateAssignmentDescriptor updateAssignmentDescriptor) {
+        requireNonNull(tutorialGroupId);
+        requireNonNull(assignmentToChange);
+        requireNonNull(updateAssignmentDescriptor);
+
         this.tutorialGroupId = tutorialGroupId;
-        this.toChange = assignment;
+        this.assignmentToChange = assignmentToChange;
+        this.updateAssignmentDescriptor = updateAssignmentDescriptor;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        Assignment assignmentChanged = createChangedAssignment(assignmentToChange, updateAssignmentDescriptor);
+
         try {
-            model.updateAssignment(tutorialGroupId, toChange);
+            model.updateAssignment(tutorialGroupId, assignmentToChange, assignmentChanged);
         } catch (TutorialGroupNotFoundException e) {
             throw new CommandException(MESSAGE_FAILURE_NO_TUTORIAL_GROUP);
-        } catch (DuplicateAssignmentException e) {
+        } catch (AssignmentNotFoundException e) {
             throw new CommandException(MESSAGE_FAILURE_NO_ASSIGNMENT);
+        } catch (DuplicateAssignmentNameException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT_NAME);
         }
 
         model.commitSuperTaClient();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroupId, toChange));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroupId,
+                assignmentToChange, assignmentChanged));
+    }
+
+    /**
+     * Creates and returns an {@code assignmentChanged} with the details of {@code assignmentToChange}
+     * edited with {@code updateAssignmentDescriptor}.
+     */
+    private static Assignment createChangedAssignment(Assignment assignmentToChange,
+                                                     UpdateAssignmentDescriptor updateAssignmentDescriptor) {
+        assert assignmentToChange != null;
+
+        Title updatedAssignmentTitle = updateAssignmentDescriptor.getAssignmentTitle()
+                .orElse(assignmentToChange.getTitle());
+        Double updatedMaxMarks = updateAssignmentDescriptor.getMaxMarks().orElse(assignmentToChange.getMaxMarks());
+
+        return new Assignment(updatedAssignmentTitle, updatedMaxMarks, assignmentToChange.getGradebook());
     }
 
     @Override
@@ -77,6 +112,69 @@ public class UpdateAssignmentCommand extends Command {
         // state check
         UpdateAssignmentCommand e = (UpdateAssignmentCommand) other;
         return tutorialGroupId.equals(e.tutorialGroupId)
-                && toChange.equals(e.toChange);
+                && assignmentToChange.equals(e.assignmentToChange)
+                && updateAssignmentDescriptor.equals(e.updateAssignmentDescriptor);
+    }
+
+    /**
+     * Stores the details to edit the assignment with. Each non-empty field value will replace the
+     * corresponding field value of the assignment.
+     */
+    public static class UpdateAssignmentDescriptor implements Descriptor {
+        private Title assignmentTitle;
+        private Double maxMarks;
+
+        public UpdateAssignmentDescriptor() {}
+
+        /**
+         * Copy constructor.
+         */
+        public UpdateAssignmentDescriptor(UpdateAssignmentDescriptor toCopy) {
+            setAssignmentTitle(toCopy.assignmentTitle);
+            setMaxMarks(toCopy.maxMarks);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        @Override
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(assignmentTitle, maxMarks);
+        }
+
+        public void setAssignmentTitle(Title assignmentTitle) {
+            this.assignmentTitle = assignmentTitle;
+        }
+
+        public Optional<Title> getAssignmentTitle() {
+            return Optional.ofNullable(assignmentTitle);
+        }
+
+        public void setMaxMarks(Double maxMarks) {
+            this.maxMarks = maxMarks;
+        }
+
+        public Optional<Double> getMaxMarks() {
+            return Optional.ofNullable(maxMarks);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof UpdateAssignmentDescriptor)) {
+                return false;
+            }
+
+            // state check
+            UpdateAssignmentDescriptor e = (UpdateAssignmentDescriptor) other;
+
+            return getAssignmentTitle().equals(e.getAssignmentTitle())
+                    && getMaxMarks().equals(e.getMaxMarks());
+        }
     }
 }
