@@ -29,7 +29,7 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendance of students."
         + " Parameters: "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-        + PREFIX_SESSION_NAME + "NAME "
+        + PREFIX_SESSION_NAME + "SESSION-NAME "
         + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "1 "
@@ -40,8 +40,8 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Attendance marked as present: %1$s";
     public static final String MESSAGE_INVALID_TUTORIAL_GROUP = "No such tutorial group.";
     public static final String MESSAGE_INVALID_STUDENTS = "Students not found in tutorial group.";
-    //public static final String MESSAGE_DUPLICATE_ATTENDANCE =
-    //        "This attendance session already exists in the tutorial group.";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE =
+            "This student's attendance is already marked.";
 
     private final String tgId;
     private final Session sessionName;
@@ -67,7 +67,7 @@ public class MarkAttendanceCommand extends Command {
         } catch (StudentNotFoundException e) {
             throw new CommandException(MESSAGE_INVALID_STUDENTS);
         } catch (DuplicateAttendanceException e) {
-            // Nothing to do here. We allow duplicate marking.
+            throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
         }
         model.commitSuperTaClient();
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentIdSet));
