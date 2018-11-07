@@ -1,0 +1,61 @@
+= Keith Tan - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: SuperTA
+
+---
+
+== Overview
+
+The *purpose* of this portfolio is to document my *role* in the project and the *contributions* I made in the CS2103T project.
+
+*SuperTA* is a desktop application for *Teaching Assistants* and *Professors* of NUS School of Computing to manage their tutorials and students. It is *optimized for those who prefer to work with a Command Line Interface (CLI)* while still having the benefits of a Graphical User Interface (GUI). It is written in Java, and has about 10 kLoC.
+
+My role in this project is to *oversee the documentation* in this project. I ensure that the User Guide and Developer Guide is *updated regularly* whenever changes are made to the application.
+
+
+== Summary of contributions
+
+* *Minor enhancement*: added a remove student from tutorial group command that allows the user to delete a student from a tutorial group.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Added milestones and labels on GitHub
+*** Added issues and enhancement suggestions as needed on GitHub
+** Enhancements to existing features:
+*** Created additional classes for enhancement to existing features (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for existing features to increase coverage from 78% to 80% (Pull requests https://github.com[#36], https://github.com[#38])
+** Documentation:
+*** Added introduction and user stories to Developer Guide
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=undoredo]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
