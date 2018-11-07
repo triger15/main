@@ -16,8 +16,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_GENERAL_TUTORIAL_GROUP_ID = new Prefix("tg/");
     public static final Prefix PREFIX_GENERAL_STUDENT_ID = new Prefix("st/");
     public static final Prefix PREFIX_GENERAL_ASSIGNMENT_TITLE = new Prefix("as/");
+    public static final Prefix PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE = new Prefix("new_as/");
     public static final Prefix PREFIX_ASSIGNMENT_TITLE = new Prefix("n/");
     public static final Prefix PREFIX_ASSIGNMENT_MARKS = new Prefix("m/");
     public static final Prefix PREFIX_ASSIGNMENT_MAX_MARKS = new Prefix("m/");
+    public static final Prefix PREFIX_ASSIGNMENT_NEW_MAX_MARKS = new Prefix("new_m/");
     public static final Prefix PREFIX_FEEDBACK = new Prefix("f/");
 }
