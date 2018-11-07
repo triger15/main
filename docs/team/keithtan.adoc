@@ -13,14 +13,12 @@ The *purpose* of this portfolio is to document my *role* in the project and the 
 
 *SuperTA* is a desktop application for *Teaching Assistants* and *Professors* of NUS School of Computing to manage their tutorials and students. It is *optimized for those who prefer to work with a Command Line Interface (CLI)* while still having the benefits of a Graphical User Interface (GUI). It is written in Java, and has about 10 kLoC.
 
-My role in this project is to *oversee the documentation* in this project. I ensure that the User Guide and Developer Guide is *updated regularly* whenever changes are made to the application.
-
 
 == Summary of contributions
 
 * *Minor enhancement*: added a remove student from tutorial group command that allows the user to delete a student from a tutorial group.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*:  [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=keithtan=]
 
 * *Other contributions*:
 
