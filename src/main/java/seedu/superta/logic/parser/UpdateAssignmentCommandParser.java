@@ -1,18 +1,22 @@
 package seedu.superta.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.superta.logic.commands.UpdateAssignmentCommand;
+import seedu.superta.logic.commands.UpdateAssignmentCommand.UpdateAssignmentDescriptor;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
 
 /**
- * Parses input arguments for UpdateAssignmentCommand.
+ * Parses input arguments and creates an UpdateAssignmentCommand object.
  */
 public class UpdateAssignmentCommandParser implements Parser<UpdateAssignmentCommand> {
 
@@ -22,11 +26,15 @@ public class UpdateAssignmentCommandParser implements Parser<UpdateAssignmentCom
      * @throws ParseException if the user input does not conform to the expected format
      */
     public UpdateAssignmentCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(
                 args,
                 PREFIX_GENERAL_TUTORIAL_GROUP_ID,
                 PREFIX_GENERAL_ASSIGNMENT_TITLE,
-                PREFIX_ASSIGNMENT_MAX_MARKS);
+                PREFIX_ASSIGNMENT_MAX_MARKS,
+                PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE,
+                PREFIX_ASSIGNMENT_NEW_MAX_MARKS);
+
         if (!arePrefixesPresent(argumentMultimap,
                 PREFIX_GENERAL_TUTORIAL_GROUP_ID,
                 PREFIX_GENERAL_ASSIGNMENT_TITLE,
@@ -48,7 +56,17 @@ public class UpdateAssignmentCommandParser implements Parser<UpdateAssignmentCom
                 argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_MARKS).get()
         );
 
+        UpdateAssignmentDescriptor updateAssignmentDescriptor = new UpdateAssignmentDescriptor();
+        if (argumentMultimap.getValue(PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE).isPresent()) {
+            updateAssignmentDescriptor.setAssignmentTitle(ParserUtil.parseTitle(
+                    argumentMultimap.getValue(PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE).get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_ASSIGNMENT_NEW_MAX_MARKS).isPresent()) {
+            updateAssignmentDescriptor.setMaxMarks(Double.parseDouble(
+                    argumentMultimap.getValue(PREFIX_ASSIGNMENT_NEW_MAX_MARKS).get()));
+        }
+
         Assignment assignment = new Assignment(assignmentTitle, maxMarks);
-        return new UpdateAssignmentCommand(tgId, assignment);
+        return new UpdateAssignmentCommand(tgId, assignment, updateAssignmentDescriptor);
     }
 }
