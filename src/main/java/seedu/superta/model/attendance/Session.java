@@ -3,6 +3,7 @@ package seedu.superta.model.attendance;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -144,8 +145,12 @@ public class Session {
         }
 
         Session otherSession = (Session) other;
+        boolean isSetEqual = otherSession.internalSet.size() == internalSet.size();
+        for (Attendance attendance: internalSet) {
+            isSetEqual = isSetEqual && otherSession.contains(attendance);
+        }
         return otherSession.getSessionName().equals(getSessionName())
-                && otherSession.internalSet.equals(internalSet);
+                && isSetEqual;
     }
 
     @Override
