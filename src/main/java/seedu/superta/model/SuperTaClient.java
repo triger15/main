@@ -149,10 +149,10 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     /**
      * Updates an assignment in a tutorial group.
      */
-    public void updateAssignment(TutorialGroup tg, Assignment assignment) {
-        requireAllNonNull(tg, assignment);
+    public void updateAssignment(TutorialGroup tg, Assignment assignmentToChange, Assignment assignmentChanged) {
+        requireAllNonNull(tg, assignmentToChange, assignmentChanged);
 
-        tg.updateAssignment(assignment);
+        tg.updateAssignment(assignmentToChange, assignmentChanged);
     }
 
     /**
