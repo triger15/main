@@ -14,13 +14,13 @@ SuperTA is a desktop application to handle student records for Teaching Assistan
 
 == Summary of contributions
 
-* *Major enhancement*: added *Tutorial Group and Assignment* commands.
+* *Major enhancement*: added *Tutorial Group and Assignment* commands. (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/19[#19], https://github.com/CS2103-AY1819S1-T16-2/main/pull/62[#62]
 ** What it does: The creation of commands to manipulate Tutorial Groups and Assignments, including the creation and viewing of these data structures.
-** Justification: This feature is essential in achieiving core functionality. It allows teaching assistants to create Tutorial Groups and Assignments, which is key to keeping track of student performance.
+** Justification: This feature is essential in achieving core functionality. It allows teaching assistants to create Tutorial Groups and Assignments, which is key to keeping track of student performance.
 ** Highlights: This enhancement affects other commands interacting with these data structures.
 
-* *Major enhancement*: improved *User Interface (UI)*
-** What it does: The user interface was very barebones at the start and was not visually appealing. The improvement to the UI makes for a better experience for the user on the whole. The UI was also further improved to display details of tutorial groups, assignments, attendance sessions, as well as students.
+* *Major enhancement*: improved *User Interface (UI)* (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/73[#73], https://github.com/CS2103-AY1819S1-T16-2/main/pull/92[#92], https://github.com/CS2103-AY1819S1-T16-2/main/pull/135[#135])
+** What it does: The user interface was very bare-bones at the start and was not visually appealing. The improvement to the UI makes for a better experience for the user on the whole. The UI was also further improved to display details of tutorial groups, assignments, attendance sessions, as well as students. A few UI event triggers have also been implemented.
 
 * *Minor enhancement*: Added various view commands such as `view-session` and `list-tutorial-groups` which will trigger UI actions.
 
@@ -33,11 +33,9 @@ SuperTA is a desktop application to handle student records for Teaching Assistan
 *** Managed Project release from `v1.1` through `v1.4` on GitHub
 *** In charge of merging most Pull Requests on GitHub
 ** Enhancements:
-*** Added initial commands for `TutorialGroup` and `Assignment`, such as `create-tutorial-group`, `create-assignment`, `grade`, and `view-tutorial-group` (Pull Request https://github.com/CS2103-AY1819S1-T16-2/main/pull/19[#19])
-*** Implemented `update-tutorial-group` command (Pull Request https://github.com/CS2103-AY1819S1-T16-2/main/pull/62[#62])
-*** Major UI Changes (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/73[#73], https://github.com/CS2103-AY1819S1-T16-2/main/pull/92[#92], https://github.com/CS2103-AY1819S1-T16-2/main/pull/135[#135])
 *** Improve Test Coverage (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/41[#41], https://github.com/CS2103-AY1819S1-T16-2/main/pull/66[#66], https://github.com/CS2103-AY1819S1-T16-2/main/pull/101[#101])
-*** Bug fixes (in various PRs)
+*** Bug fixes (in various PRs).
+*** Reviewed many team members' pull requests.
 *** Added documentation for features implemented.
 
 == Contributions to the User Guide
