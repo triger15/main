@@ -2,6 +2,8 @@ package seedu.superta.model.tutorialgroup;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -57,11 +59,11 @@ public class TutorialGroup {
     }
 
     /**
-     * @param assignment represents assignment to be changed.
+     * @param assignmentToChange represents assignment to be changed.
+     * @param assignmentChanged represents assignment to be changed to.
      */
-    public void updateAssignment(Assignment assignment) {
-        Assignment originalAssignment = assignments.getAssignmentWithTitle(assignment.getTitle());
-        assignments.setAssignment(originalAssignment, assignment);
+    public void updateAssignment(Assignment assignmentToChange, Assignment assignmentChanged) {
+        assignments.setAssignment(assignmentToChange, assignmentChanged);
     }
 
     public void removeAssignment(Assignment assignment) {
@@ -89,6 +91,13 @@ public class TutorialGroup {
             .stream()
             .filter(as -> as.getTitle().equals(title))
             .findFirst();
+    }
+
+    public List<Assignment> getAssignmentList(Title title) {
+        return assignments.asUnmodifiableObservableList()
+                .stream()
+                .filter(as -> as.getTitle().equals(title))
+                .collect(Collectors.toList());
     }
 
     @Override
