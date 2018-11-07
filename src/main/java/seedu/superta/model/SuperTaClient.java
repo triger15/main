@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
@@ -19,6 +18,7 @@ import seedu.superta.model.assignment.exceptions.GradeException;
 import seedu.superta.model.attendance.Attendance;
 import seedu.superta.model.attendance.Presence;
 import seedu.superta.model.attendance.Session;
+import seedu.superta.model.attendance.exceptions.DuplicateAttendanceException;
 import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
 import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
 import seedu.superta.model.student.Feedback;
@@ -240,7 +240,13 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         }
 
         Presence present = Presence.PRESENT;
-        stIdSet.stream().map(stdId -> new Attendance(stdId, present)).forEach(att -> sess.addToSession(att));
+        List<Attendance> attendanceList = stIdSet.stream().map(stdId -> new Attendance(stdId, present))
+                .collect(Collectors.toList());
+        boolean hasDuplicateAttendance = attendanceList.stream().anyMatch(attendance -> sess.contains(attendance));
+        if (hasDuplicateAttendance) {
+            throw new DuplicateAttendanceException();
+        }
+        attendanceList.stream().forEach(sess::addToSession);
     }
 
     /**
