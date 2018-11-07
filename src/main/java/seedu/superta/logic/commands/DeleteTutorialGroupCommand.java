@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 import seedu.superta.model.Model;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
@@ -16,9 +17,9 @@ public class DeleteTutorialGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tutorial group."
             + "Parameters: "
-            + "id/IDENTIFIER\n"
+            + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + "id/04a";
+            + PREFIX_TUTORIAL_GROUP_ID + "04a";
 
     public static final String MESSAGE_SUCCESS = "Tutorial group deleted: %s";
     public static final String MESSAGE_FAILURE = "No such tutorial group.";

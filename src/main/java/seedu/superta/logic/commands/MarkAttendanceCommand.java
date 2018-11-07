@@ -29,7 +29,7 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendance of students."
         + " Parameters: "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-        + PREFIX_SESSION_NAME + "NAME "
+        + PREFIX_SESSION_NAME + "SESSION-NAME "
         + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "1 "

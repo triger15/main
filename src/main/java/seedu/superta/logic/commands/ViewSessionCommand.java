@@ -26,8 +26,8 @@ public class ViewSessionCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views information about a specific attendance session. \n"
             + "Parameters: "
-            + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL_GROUP_ID "
-            + PREFIX_SESSION_NAME + "SESSION_NAME \n"
+            + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
+            + PREFIX_SESSION_NAME + "SESSION-NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
             + PREFIX_SESSION_NAME + "W1Tutorial";

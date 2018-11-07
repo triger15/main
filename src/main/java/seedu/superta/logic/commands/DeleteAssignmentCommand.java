@@ -19,8 +19,8 @@ public class DeleteAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an assignment from a tutorial group."
             + "Parameters: "
-            + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "IDENTIFIER "
-            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "IDENTIFIER\n"
+            + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
+            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "ASSIGNMENT-TITLE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
             + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 1";

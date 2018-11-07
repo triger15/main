@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MARKS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
@@ -19,15 +23,15 @@ public class GradeAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Grades an assignment.\n"
         + "Parameters: "
-        + "tg/TUTORIAL-GROUP-ID "
-        + "as/ASSIGNMENT-NAME "
-        + "st/STUDENT-ID "
-        + "m/MARKS\n"
+        + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
+        + PREFIX_GENERAL_ASSIGNMENT_TITLE + "ASSIGNMENT-TITLE "
+        + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID "
+        + PREFIX_ASSIGNMENT_MARKS + "MARKS\n"
         + "Example: " + COMMAND_WORD + " "
-        + "tg/04a "
-        + "as/lab1 "
-        + "st/A0166733Y"
-        + "m/40";
+        + PREFIX_TUTORIAL_GROUP_ID + "04a "
+        + PREFIX_GENERAL_ASSIGNMENT_TITLE + "lab1 "
+        + PREFIX_GENERAL_STUDENT_ID + "A0166733Y"
+        + PREFIX_ASSIGNMENT_MARKS + "40";
 
     public static final String MESSAGE_SUCCESS = "Student graded!";
 
