@@ -152,7 +152,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateAssignment(String tgId, Assignment assignment) {
+        public void updateAssignment(String tgId, Assignment assignmentToChange, Assignment assignmentChanged) {
 
         }
 
