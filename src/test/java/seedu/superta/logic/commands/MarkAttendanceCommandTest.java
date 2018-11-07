@@ -83,7 +83,8 @@ public class MarkAttendanceCommandTest {
         Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
         expectedModel.addTutorialGroup(new TutorialGroupBuilder().build());
         expectedModel.addStudentToTutorialGroup(typicalTg.getId(), alice);
-        expectedModel.createAttendance(typicalTg.getId(), typicalSession);
+        expectedModel.createAttendance(typicalTg.getId(), new Session(typicalSession));
+        expectedModel.markAttendance(typicalTg.getId(), typicalSession, idSet);
         expectedModel.commitSuperTaClient();
 
         assertCommandSuccess(attendanceCommand, model, commandHistory, expectedMessage, expectedModel);

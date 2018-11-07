@@ -62,7 +62,9 @@ public class UniqueSessionList implements Iterable<Session> {
      */
     public UniqueSessionList clone() {
         UniqueSessionList other = new UniqueSessionList();
-        other.internalList.addAll(this.internalList);
+        for (Session session : internalList) {
+            other.internalList.add(new Session(session));
+        }
         return other;
     }
 
