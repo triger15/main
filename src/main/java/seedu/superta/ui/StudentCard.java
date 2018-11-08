@@ -1,6 +1,7 @@
 package seedu.superta.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -38,7 +39,8 @@ public class StudentCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label studentId;
-
+    @FXML
+    private HBox avatarParent;
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
@@ -58,6 +60,14 @@ public class StudentCard extends UiPart<Region> {
         email.setText(student.getEmail().value);
         studentId.setText(student.getStudentId().studentId);
         student.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Removes the avatar from this card view.
+     */
+    public void removeAvatar() {
+        avatarParent.paddingProperty().setValue(Insets.EMPTY);
+        avatarParent.getChildren().clear();
     }
 
     @Override

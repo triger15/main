@@ -37,6 +37,14 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns true if the list contains a student with equivalent student id as the given argument.
+     */
+    public boolean containsId(StudentId toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(s -> s.hasSameId(toCheck));
+    }
+
+    /**
      * Adds a student to the list.
      * The student must not already exist in the list.
      */
@@ -77,6 +85,30 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!internalList.remove(toRemove)) {
             throw new StudentNotFoundException();
         }
+    }
+
+    /**
+     * Removes a student with the specified ID.
+     */
+    public boolean removeStudentWithId(StudentId toRemove) {
+        boolean isPresent = internalList.stream().anyMatch(student -> student.getStudentId().equals(toRemove));
+        if (!isPresent) {
+            return false;
+        }
+        return internalList.removeIf(student -> student.getStudentId().equals(toRemove));
+    }
+
+    /**
+     * Remove student by their Student ID reference.
+     */
+    public boolean removeById(Student toRemove) {
+        requireNonNull(toRemove);
+        Optional<Student> result = internalList.stream()
+                .filter(student -> student.isSameId(toRemove)).findFirst();
+        if (!result.isPresent()) {
+            return false;
+        }
+        return internalList.remove(result.get());
     }
 
     public void setStudents(UniqueStudentList replacement) {

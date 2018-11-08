@@ -2,6 +2,8 @@ package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
@@ -17,13 +19,13 @@ import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundExcepti
 public class AddStudentToTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "add-to-tutorial-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a tutorial group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a tutorial group.\n"
         + "Parameters: "
-        + "tg/TUTORIAL-GROUP-ID "
-        + "st/STUDENT-ID"
+        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
+        + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID\n"
         + "Example: " + COMMAND_WORD + " "
-        + "tg/04a "
-        + "st/A0166733Y";
+        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
+        + PREFIX_GENERAL_STUDENT_ID + "A0166733Y";
 
     public static final String MESSAGE_SUCCESS = "Added a student to tutorial group.";
 

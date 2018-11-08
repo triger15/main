@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -256,6 +257,11 @@ public class SuperTaClientTest {
         @Override
         public ObservableList<TutorialGroup> getTutorialGroupList() {
             return null;
+        }
+
+        @Override
+        public Optional<TutorialGroup> getTutorialGroup(String id) {
+            return Optional.empty();
         }
     }
 

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.superta.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -41,6 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_STUDENT_ID + "STUDENT-ID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -48,6 +50,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_ID_CLASH = "There is another student who has this Student ID in the database.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the database.";
 
     private final Index index;
@@ -77,8 +80,17 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudentWithIdentity(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // check if it is trying to change ID to another student's.
+        if (!studentToEdit.isSameId(editedStudent)) {
+            boolean isInvalidOp = model.getSuperTaClient().getStudentList().stream()
+                    .anyMatch(modelStudent -> modelStudent.isSameId(editedStudent));
+            if (isInvalidOp) {
+                throw new CommandException(MESSAGE_ID_CLASH);
+            }
         }
 
         model.updateStudent(studentToEdit, editedStudent);

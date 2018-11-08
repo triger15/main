@@ -1,6 +1,8 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_NAME;
 
 import java.util.Optional;
 
@@ -18,11 +20,11 @@ public class UpdateTutorialGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates a tutorial group. "
         + "Parameters: "
-        + "id/TUTORIAL_GROUP_ID "
-        + "n/NAME "
+        + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
+        + PREFIX_TUTORIAL_GROUP_NAME + "TUTORIAL-GROUP-NAME "
         + "Example: " + COMMAND_WORD + " "
-        + "id/04a "
-        + "n/CS2100 Tutorial Group 04A";
+        + PREFIX_TUTORIAL_GROUP_ID + "04a "
+        + PREFIX_TUTORIAL_GROUP_NAME + "CS2100 Tutorial Group 04A";
 
     public static final String MESSAGE_SUCCESS = "Tutorial group updated.";
     public static final String MESSAGE_NO_SUCH_TUTORIAL_GROUP = "No tutorial group with the ID $1s exists.";
@@ -60,7 +62,8 @@ public class UpdateTutorialGroupCommand extends Command {
         requireNonNull(toEdit);
 
         String updatedName = descriptor.getName().orElse(toEdit.getName());
-        return new TutorialGroup(id, updatedName);
+        return new TutorialGroup(id, updatedName, toEdit.getStudents(), toEdit.getAssignments(),
+                                 toEdit.getSessions());
     }
 
     @Override

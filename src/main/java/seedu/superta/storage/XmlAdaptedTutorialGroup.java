@@ -10,11 +10,14 @@ import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.SuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.UniqueAssignmentList;
+import seedu.superta.model.attendance.Session;
+import seedu.superta.model.attendance.UniqueSessionList;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.UniqueStudentList;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
+// @@author Caephler
 /**
  * Class for XML-Adapted Tutorial Group
  */
@@ -30,6 +33,8 @@ public class XmlAdaptedTutorialGroup {
     private List<String> studentIds = new ArrayList<>();
     @XmlElement
     private List<XmlAdaptedAssignment> assignments = new ArrayList<>();
+    @XmlElement
+    private List<XmlAdaptedSession> sessions = new ArrayList<>();
 
     public XmlAdaptedTutorialGroup() {}
 
@@ -48,6 +53,10 @@ public class XmlAdaptedTutorialGroup {
             .stream()
             .map(XmlAdaptedAssignment::new)
             .forEach(assignments::add);
+        source.getSessions().asUnmodifiableObservableList()
+            .stream()
+            .map(XmlAdaptedSession::new)
+            .forEach(sessions::add);
     }
 
     /**
@@ -68,6 +77,12 @@ public class XmlAdaptedTutorialGroup {
         }
         UniqueAssignmentList uniqueAssignmentList = new UniqueAssignmentList(modelAssignments);
 
+        final List<Session> modelSessions = new ArrayList<>();
+        for (XmlAdaptedSession ses : sessions) {
+            modelSessions.add(ses.toModelType());
+        }
+        UniqueSessionList uniqueSessionList = new UniqueSessionList(modelSessions);
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
         }
@@ -76,7 +91,7 @@ public class XmlAdaptedTutorialGroup {
         }
 
         // TODO: Replace last argument with actual assignment syntax
-        return new TutorialGroup(id, name, studentList, uniqueAssignmentList);
+        return new TutorialGroup(id, name, studentList, uniqueAssignmentList, uniqueSessionList);
     }
 
 }

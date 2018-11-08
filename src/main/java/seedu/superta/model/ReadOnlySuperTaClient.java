@@ -1,5 +1,7 @@
 package seedu.superta.model;
 
+import java.util.Optional;
+
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.superta.model.student.Student;
@@ -25,4 +27,11 @@ public interface ReadOnlySuperTaClient {
      * Returns an unmodifiable list view of the tutorial group.
      */
     ObservableList<TutorialGroup> getTutorialGroupList();
+
+    /**
+     * Returns a tutorial group.
+     */
+    Optional<TutorialGroup> getTutorialGroup(String id);
+
+
 }

@@ -1,20 +1,20 @@
 package seedu.superta.commons.events.ui;
 
 import seedu.superta.commons.events.BaseEvent;
-import seedu.superta.model.Model;
+import seedu.superta.model.ReadOnlySuperTaClient;
 
 /**
- * StateEvent means Undo or Redo event.
+ * StateEvent refers to any event which can possibly alter the underlying model.
  * To update UI correctly.
  */
 public class StateEvent extends BaseEvent {
-    private Model model;
+    private ReadOnlySuperTaClient model;
 
-    public StateEvent(Model model) {
+    public StateEvent(ReadOnlySuperTaClient model) {
         this.model = model;
     }
 
-    public Model getModel() {
+    public ReadOnlySuperTaClient getModel() {
         return this.model;
     }
 

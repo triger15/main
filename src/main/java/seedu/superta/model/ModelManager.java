@@ -5,6 +5,7 @@ import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,13 +15,16 @@ import javafx.collections.transformation.FilteredList;
 import seedu.superta.commons.core.ComponentManager;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.model.SuperTaClientChangedEvent;
+import seedu.superta.commons.events.ui.StateEvent;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
-
 import seedu.superta.model.assignment.exceptions.DuplicateAssignmentNameException;
+
+import seedu.superta.model.attendance.Session;
+
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -71,12 +75,19 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateSuperTaClientChanged() {
         raise(new SuperTaClientChangedEvent(versionedSuperTaClient));
+        raise(new StateEvent(versionedSuperTaClient));
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
         return versionedSuperTaClient.hasStudent(student);
+    }
+
+    @Override
+    public boolean hasStudentWithIdentity(Student student) {
+        requireNonNull(student);
+        return versionedSuperTaClient.hasStudentWithIdentity(student);
     }
 
     @Override
@@ -134,6 +145,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
         TutorialGroup tutorialGroup = tutorialGroupOptional.get();
         Student student = studentOptional.get();
+        if (!tutorialGroup.getStudents().contains(student)) {
+            throw new StudentNotFoundException();
+        }
         versionedSuperTaClient.removeStudentFromTutorialGroup(tutorialGroup, student);
         indicateSuperTaClientChanged();
     }
@@ -176,7 +190,7 @@ public class ModelManager extends ComponentManager implements Model {
             throw new AssignmentNotFoundException();
         }
 
-        if (!assignmentList.isEmpty() && (assignmentList.size()> 1)) {
+        if (assignmentList.size() > 1) {
             throw new DuplicateAssignmentNameException();
         }
 
@@ -207,6 +221,23 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void grade(Grade grade) {
         versionedSuperTaClient.grade(grade);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public void createAttendance(String tgId, Session session) {
+        Optional<TutorialGroup> tg = versionedSuperTaClient.getTutorialGroup(tgId);
+        if (!tg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup t = tg.get();
+        versionedSuperTaClient.createAttendance(t, session);
+        indicateSuperTaClientChanged();
+    }
+
+    @Override
+    public void markAttendance(String tgId, Session session, Set<StudentId> stIdSet) {
+        versionedSuperTaClient.markAttendance(tgId, session, stIdSet);
         indicateSuperTaClientChanged();
     }
 

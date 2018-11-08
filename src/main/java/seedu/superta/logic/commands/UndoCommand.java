@@ -26,7 +26,6 @@ public class UndoCommand extends Command {
 
         model.undoSuperTaClient();
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
-        // EventsCenter.getInstance().post(new StateEvent(model));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

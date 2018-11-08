@@ -6,15 +6,21 @@ import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.GradeException;
+import seedu.superta.model.attendance.Attendance;
+import seedu.superta.model.attendance.Presence;
+import seedu.superta.model.attendance.Session;
+import seedu.superta.model.attendance.exceptions.DuplicateAttendanceException;
+import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
+import seedu.superta.model.attendance.exceptions.SessionNotFoundException;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
@@ -82,9 +88,17 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same ID as {@code student} exists in the address book.
      */
     public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return students.getStudentWithId(student.getStudentId()).isPresent();
+    }
+
+    /**
+     * Returns true if a student has the same identity.
+     */
+    public boolean hasStudentWithIdentity(Student student) {
         requireNonNull(student);
         return students.contains(student);
     }
@@ -193,6 +207,58 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
     }
 
     /**
+     * Creates an attendance session to a tutorial group.
+     */
+    public void createAttendance(TutorialGroup tg, Session session) throws DuplicateSessionException {
+        requireAllNonNull(tg, session);
+
+        tg.createAttendanceSession(session);
+    }
+
+    /**
+     * Removes an attendance session to a tutorial group.
+     * Not implemented.
+     */
+    public void removeAttendance(TutorialGroup tg, Session session) {
+        requireAllNonNull(tg, session);
+
+        tg.removeAttendanceSession(session);
+    }
+
+    /**
+     * Marks attendance of students in a session.
+     */
+    public void markAttendance(String tutorialGroupId, Session session, Set<StudentId> stIdSet) {
+        requireAllNonNull(tutorialGroupId, session, stIdSet);
+        Optional<TutorialGroup> otg = getTutorialGroup(tutorialGroupId);
+        if (!otg.isPresent()) {
+            throw new TutorialGroupNotFoundException();
+        }
+        TutorialGroup tg = otg.get();
+
+        Optional<Session> opSession = tg.getSession(session);
+        if (!opSession.isPresent()) {
+            throw new SessionNotFoundException();
+        }
+        Session sess = opSession.get();
+
+        UniqueStudentList students = tg.getStudents();
+        boolean studentsMatch = stIdSet.stream().allMatch(studentId -> students.containsId(studentId));
+        if (!studentsMatch) {
+            throw new StudentNotFoundException();
+        }
+
+        Presence present = Presence.PRESENT;
+        List<Attendance> attendanceList = stIdSet.stream().map(stdId -> new Attendance(stdId, present))
+                .collect(Collectors.toList());
+        boolean hasDuplicateAttendance = attendanceList.stream().anyMatch(attendance -> sess.contains(attendance));
+        if (hasDuplicateAttendance) {
+            throw new DuplicateAttendanceException();
+        }
+        attendanceList.stream().forEach(sess::addToSession);
+    }
+
+    /**
      * Adds feedback to a student.
      */
     public void addFeedback(Feedback feedback, StudentId studentId) {
@@ -240,6 +306,7 @@ public class SuperTaClient implements ReadOnlySuperTaClient {
         requireNonNull(editedStudent);
 
         students.setStudent(target, editedStudent);
+        tutorialGroupMaster.updateStudent(target, editedStudent);
     }
 
     /**

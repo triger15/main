@@ -13,13 +13,14 @@ import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.student.exceptions.StudentNotFoundException;
 
+// @@author triger15
 /**
  * Command that adds feedback for a student.
  */
 public class FeedbackCommand extends Command {
     public static final String COMMAND_WORD = "feedback";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a feedback to a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a feedback to a student.\n"
         + "Parameters: "
         + PREFIX_STUDENT_ID + "STUDENT-ID "
         + PREFIX_FEEDBACK + "FEEDBACK\n"
@@ -28,6 +29,7 @@ public class FeedbackCommand extends Command {
         + PREFIX_FEEDBACK + "Is generally attentive during class. However, needs to speak up more.";
 
     public static final String MESSAGE_SUCCESS = "New feedback created: %1$s";
+    public static final String MESSAGE_INVALID_STUDENT = "No such student.";
 
     private final StudentId studentId;
     private final Feedback feedback;
@@ -49,7 +51,7 @@ public class FeedbackCommand extends Command {
         try {
             model.addFeedback(feedback, studentId);
         } catch (StudentNotFoundException e) {
-            throw new CommandException("No such student.");
+            throw new CommandException(MESSAGE_INVALID_STUDENT);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitSuperTaClient();

@@ -1,6 +1,9 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_TITLE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
@@ -16,15 +19,15 @@ public class CreateAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "create-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an assignment."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an assignment.\n"
         + "Parameters: "
-        + "tg/TUTORIAL-GROUP-ID "
-        + "n/NAME "
-        + "m/MAXMARKS "
+        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
+        + PREFIX_ASSIGNMENT_TITLE + "ASSIGNMENT-TITLE "
+        + PREFIX_ASSIGNMENT_MAX_MARKS + "MAXMARKS\n"
         + "Example: " + COMMAND_WORD + " "
-        + "tg/04a "
-        + "n/Take Home Lab 1 "
-        + "m/40";
+        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
+        + PREFIX_ASSIGNMENT_TITLE + "Take Home Lab 1 "
+        + PREFIX_ASSIGNMENT_MAX_MARKS + "40";
 
     public static final String MESSAGE_SUCCESS = "New assignment created: %1$s";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the database.";

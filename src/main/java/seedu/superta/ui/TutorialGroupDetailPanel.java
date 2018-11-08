@@ -9,8 +9,11 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
 import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
-import seedu.superta.model.Model;
+import seedu.superta.commons.events.ui.StudentPanelSelectionChangedEvent;
+import seedu.superta.commons.events.ui.ViewSessionEvent;
+import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 
@@ -34,6 +37,9 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
     @FXML
     private ListView<Assignment> assignments;
 
+    @FXML
+    private ListView<Session> sessions;
+
     private TutorialGroup tutorialGroup;
 
     public TutorialGroupDetailPanel(TutorialGroup tutorialGroup) {
@@ -43,13 +49,16 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
         setEventHandlerForSelectionChangeEvent();
     }
 
+    public void renderDeleted() {
+        name.setText("[Deleted] " + tutorialGroup.getName());
+    }
+
     /**
      * Renders the UI views.
      */
     public void render() {
         id.setText(tutorialGroup.getId());
         name.setText(tutorialGroup.getName());
-        students.getItems().clear();
         students.setItems(tutorialGroup.getStudents().asUnmodifiableObservableList());
         students.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -60,11 +69,19 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    setGraphic(new StudentCard(student).getRoot());
+                    StudentCard card = new StudentCard(student);
+                    card.removeAvatar();
+                    setGraphic(card.getRoot());
                 }
             }
         });
-        assignments.getItems().clear();
+        students.getSelectionModel().selectedItemProperty()
+                .addListener(((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        logger.fine("Selected new student.");
+                        raise(new StudentPanelSelectionChangedEvent(newValue));
+                    }
+                }));
         assignments.setItems(tutorialGroup.getAssignments().asUnmodifiableObservableList());
         assignments.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -78,6 +95,23 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
                     setGraphic(new AssignmentCard(tutorialGroup, assignment).getRoot());
                 }
             }
+        });
+        sessions.setItems(tutorialGroup.getSessions().asUnmodifiableObservableList());
+        sessions.setCellFactory(listView -> new ListCell<>() {
+            @Override
+            protected void updateItem(Session session, boolean empty) {
+                super.updateItem(session, empty);
+
+                if (empty || session == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    setGraphic(new SessionCard(session, tutorialGroup).getRoot());
+                }
+            }
+        });
+        sessions.setOnMouseClicked(event -> {
+            raise(new ViewSessionEvent(sessions.getSelectionModel().getSelectedItem(), tutorialGroup));
         });
     }
 
@@ -105,12 +139,10 @@ public class TutorialGroupDetailPanel extends ViewPanelContent {
 
 
     @Override
-    public void update(Model model) {
+    public void update(ReadOnlySuperTaClient model) {
         Optional<TutorialGroup> fromModel = model.getTutorialGroup(tutorialGroup.getId());
         if (!fromModel.isPresent()) {
-            return;
-        }
-        if (fromModel.isPresent() && fromModel.get().equals(tutorialGroup)) {
+            renderDeleted();
             return;
         }
         this.tutorialGroup = fromModel.get();
