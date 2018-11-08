@@ -647,7 +647,30 @@ _{More to be added}_
 (For all use cases, the *System* is the `SuperTA Client` and the *Actor* is `TA`.)
 
 [discrete]
-=== UC01 - Add Tutorial Group
+=== UC01 - Delete student
+
+*MSS:*
+
+1. User requests to list students
+2. SuperTA shows a list of students
+3. User requests to delete a specific student in the list
+4. SuperTA deletes the student
+
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
+* Use case ends.
+* 2a. The given index is invalid.
+** 2a1. SuperTA shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== UC02 - Add Tutorial Group
 
 *MSS:*
 
@@ -665,6 +688,7 @@ Use case ends.
 ** 1a2. User re-enter student details.
 +
 Use case resumes at step 2.
+
 
 _{More to be added}_
 
