@@ -20,7 +20,7 @@ SuperTA is a desktop app for Teaching Assistants and Professors of NUS School of
 
 * *Minor enhancement*: added a delete-tutorial-group command which allows the user to delete an existing tutorial group. (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/84[#84])
 
-* *Code contributed*: [https://github.com/CS2103-AY1819S1-T16-2/main/blob/master/src/main/java/seedu/superta/logic/commands/DeleteAssignmentCommand.java[Functional code]] [https://github.com/CS2103-AY1819S1-T16-2/main/blob/master/src/test/java/seedu/superta/logic/commands/DeleteAssignmentCommandTest.java[Test code]]
+* *Code contributed*: [RepoSense collated code](https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=wenshei)
 
 * *Other contributions*:
 
