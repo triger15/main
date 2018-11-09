@@ -1,22 +1,16 @@
 package seedu.superta.logic.parser;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.superta.logic.commands.CommandTestUtil.VALID_MAXMARKS_LAB;
-import static seedu.superta.logic.commands.CommandTestUtil.VALID_TITLE_LAB;
-import static seedu.superta.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.Test;
 
 import seedu.superta.logic.commands.UpdateAssignmentCommand;
-import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.Title;
 
 public class UpdateAssignmentCommandParserTest {
 
