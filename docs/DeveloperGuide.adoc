@@ -179,7 +179,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/superta/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -647,7 +647,30 @@ _{More to be added}_
 (For all use cases, the *System* is the `SuperTA Client` and the *Actor* is `TA`.)
 
 [discrete]
-=== UC01 - Add Tutorial Group
+=== UC01 - Delete student
+
+*MSS:*
+
+1. User requests to list students
+2. SuperTA shows a list of students
+3. User requests to delete a specific student in the list
+4. SuperTA deletes the student
+
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
+* Use case ends.
+* 2a. The given index is invalid.
+** 2a1. SuperTA shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== UC02 - Add Tutorial Group
 
 *MSS:*
 
@@ -665,6 +688,7 @@ Use case ends.
 ** 1a2. User re-enter student details.
 +
 Use case resumes at step 2.
+
 
 _{More to be added}_
 
@@ -749,42 +773,88 @@ _{ more test cases ... }_
 
 . Deleting a tutorial group
 
-.. Prerequisites: Have a tutorial group with an ID of `04a` in the memory.
+.. Prerequisites: Have a tutorial group with an ID of `04a` in the memory. +
+   View the tutorial group using the `view-tutorial-group id/04a` command.
 .. Test case: `delete-tutorial-group id/04a` +
-   Expected: The tutorial group is deleted.
-.. Test case: Tutorial Group detailed view shows `[Deleted]` if user is currently viewing tutorial group details. +
-   How to test:
-   * Run `view-tutorial-group id/04a` first to see the detailed tutorial group view.
-   * Run `delete-tutorial-group id/04a` +
-   Expected: The UI shows `[Deleted]` next to the tutorial group name.
+   Expected: The tutorial group is deleted. The UI shows `[Deleted]` next to the tutorial group name.
+// end::teststutorialgroup[]
 
-=== Grading a Student
+// tag::testsattendance[]
+=== Creating an attendance session
+
+. Creating an attendance session
+
+.. Prerequisites: Have one tutorial group with an ID of `04a`. +
+   View the tutorial group using the `view-tutorial-group id/04a` command.
+.. Test case: `create-attendance tg/04a n/W4 Tutorial` +
+   Expected: An attendance session should be created. If you are on the detailed tutorial group screen, the UI should update accordingly.
+.. Test case: `create-attendance tg/05a n/W4 Tutorial` +
+   Expected: An error message should be displayed, saying that there is no such tutorial group.
+
+=== Marking an attendance
+
+. Marking an attendance
+
+.. Prerequisites: Have one tutorial group with an ID of `04a`, an attendance session with name of `W4 Tutorial` and a student with a student ID of `A0166733Y` in the tutorial group. +
+   View the session in the tutorial group using the `view-session tg/04a n/W4 Tutorial` command.
+.. Test case: `mark-attendance tg/04a n/W4 Tutorial st/A0166733Y` +
+   Expected: The student should now be in the 'Attended' column.
+.. Test case: Duplicate ID - `mark-attendance tg/04a n/W4 Tutorial st/A0166733Y` +
+   Expected: An error message should be displayed, saying that the student's attendance is already marked.
+.. Test case: `mark-attendance tg/05a n/W4 Tutorial st/A0166733Y` +
+   Expected: An error message should be displayed, saying that there is no such tutorial group.
+.. Test case: `mark-attendance tg/04a n/W4 Lab st/A0166733Y` +
+   Expected: An error message should be displayed, saying that the session does not exist.
+.. Test case: `mark-attendance tg/04a n/W4 Tutorial st/A123456T` +
+   Expected: An error message should be displayed, saying that the student is not in the tutorial group.
+// end::testsattendance[]
+
+// tag::testsassignment[]
+=== Creating an assignment
 
 . Creating an assignment
 
-.. Prerequisites: Have one tutorial group with an ID of `04a`.
-.. Test case: `create-assignment tg/04a n/lab1 m/40.0`
-   Expected: An assignment should be made. If you are on the detailed tutorial group screen, the UI should update accordingly.
-.. Test case: `create-assignment tg/05a n/lab1 m/40.0`
+.. Prerequisites: Have one tutorial group with an ID of `04a`. +
+   View the tutorial group using the `view-tutorial-group id/04a` command.
+.. Test case: `create-assignment tg/04a n/lab1 m/40.0` +
+   Expected: An assignment should be created on the screen.
+.. Test case: `create-assignment tg/05a n/lab1 m/40.0` +
    Expected: An error message should be displayed, saying that there is no such tutorial group.
-.. Test case: `create-assignment tg/04a n/lab1 m/test`
+.. Test case: `create-assignment tg/04a n/lab1 m/test` +
    Expected: An error message should be displayed, saying that maximum marks should be a valid floating point number.
-.. Test case: `create-assignment tg/04a n/lab1 m/-1`
+.. Test case: `create-assignment tg/04a n/lab1 m/-1` +
    Expected: An error message should be displayed, saying that the maximum marks should be more than 0.
+
+=== Grading a student
 
 . Grading a student
 
-.. Prerequisites: Have one tutorial group with an ID of `04a`, and an assignment that belongs to it with the name `lab1` with a maximum mark of `40.0`. Also, a student with a student ID of `A0166733Y` should be added to the tutorial group.
-.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/35.0`
+.. Prerequisites: Have one tutorial group with an ID of `04a`, and an assignment that belongs to it with the name `lab1` with a maximum mark of `40.0`. Also, a student with a student ID of `A0166733Y` should be added to the tutorial group. +
+   View the assignment in the tutorial group using the `view-assignment tg/04a as/lab1` command.
+.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/35.0` +
    Expected: The student gets graded `35.0` out of `40.0` marks. If you are in the detailed tutorial group or assignment screen, the UI should be updated accordingly.
-.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/40.1`
+.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/40.1` +
    Expected: An error message should be shown in the status message, because `40.1` is greater than the maximum marks of `lab1`.
-.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/-1`
+.. Test case: `grade tg/04a st/A0166733Y as/lab1 m/-1` +
    Expected: An error message will be shown, since negative marks are invalid.
-.. Test case: `grade tg/05a st/A0166733Y as/lab1 m/30`
-   Expected: An error message showing that there is no such tutorial group should be shown.
-.. Test case: `grade tg/04a st/A0123456T as/lab1 m/30`
-   Expected: An error message showing that there is no such student in this tutorial group should be shown. You can also try this when there is a student in the main directory with this ID, but this student is not added to the tutorial group.
-.. Test case: `grade tg/04a st/A0166733Y as/lab2 m/30`
-   Expected: An error message showing that there is no such assignment should be shown.
-// end::teststutorialgroup[]
+.. Test case: `grade tg/05a st/A0166733Y as/lab1 m/30` +
+   Expected: An error message showing that there is no such tutorial group.
+.. Test case: `grade tg/04a st/A0123456T as/lab1 m/30` +
+   Expected: An error message showing that there is no such student in this tutorial group. You can also try this when there is a student in the main directory with this ID, but this student is not added to the tutorial group.
+.. Test case: `grade tg/04a st/A0166733Y as/lab2 m/30` +
+   Expected: An error message showing that there is no such assignment.
+// end::testsassignment[]
+
+// tag::testsfeedback[]
+=== Giving feedback to a student
+
+. Giving feedback to a student
+
+.. Prerequisites: Have a student with student id of `A0166733Y` +
+   View the student using the `view id/A0166733Y` command.
+.. Test case: `feedback id/A0166733Y f/Is generally attentive during class.` +
+   Expected: The student gets a feedback on the student profile.
+.. Test case: `feedback id/A0123456T f/Is generally attentive during class.` +
+   Expected: An error message showing that there is no such student.
+
+// end::testsfeedback[]
