@@ -45,7 +45,7 @@ public class UpdateAssignmentCommand extends Command {
             + "New Assignment details: %3$s";
     public static final String MESSAGE_FAILURE_NO_TUTORIAL_GROUP = "Tutorial group does not exist.";
     public static final String MESSAGE_FAILURE_NO_ASSIGNMENT = "Assignment does not exist.";
-    public static final String MESSAGE_DUPLICATE_ASSIGNMENT_NAME = "This assignment name already exists in the database.";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT_NAME = "Assignment name already exists in the database.";
 
     private final String tutorialGroupId;
     private final Assignment assignmentToChange;
