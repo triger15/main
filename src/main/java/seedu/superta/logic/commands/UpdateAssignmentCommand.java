@@ -14,6 +14,8 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.assignment.GradeBook;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.DuplicateAssignmentNameException;
@@ -117,12 +119,13 @@ public class UpdateAssignmentCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the assignment with. Each non-empty field value will replace the
+     * Stores the details to update the assignment with. Each non-empty field value will replace the
      * corresponding field value of the assignment.
      */
     public static class UpdateAssignmentDescriptor implements Descriptor {
         private Title assignmentTitle;
         private Double maxMarks;
+        private GradeBook gradeBook;
 
         public UpdateAssignmentDescriptor() {}
 
@@ -132,6 +135,7 @@ public class UpdateAssignmentCommand extends Command {
         public UpdateAssignmentDescriptor(UpdateAssignmentDescriptor toCopy) {
             setAssignmentTitle(toCopy.assignmentTitle);
             setMaxMarks(toCopy.maxMarks);
+            setGradeBook(toCopy.gradeBook);
         }
 
         /**
@@ -156,6 +160,14 @@ public class UpdateAssignmentCommand extends Command {
 
         public Optional<Double> getMaxMarks() {
             return Optional.ofNullable(maxMarks);
+        }
+
+        public void setGradeBook(GradeBook gradeBook) {
+            this.gradeBook = gradeBook;
+        }
+
+        public Optional<GradeBook> getGradeBook() {
+            return Optional.ofNullable(gradeBook);
         }
 
         @Override
