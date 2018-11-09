@@ -5,7 +5,11 @@ import static org.junit.Assert.assertTrue;
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
@@ -37,15 +41,23 @@ import seedu.superta.logic.commands.MarkAttendanceCommand;
 import seedu.superta.logic.commands.RedoCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.logic.commands.UndoCommand;
+import seedu.superta.logic.commands.UpdateAssignmentCommand;
+import seedu.superta.logic.commands.UpdateAssignmentCommand.UpdateAssignmentDescriptor;
 import seedu.superta.logic.commands.ViewStudentFeedbackCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
+import seedu.superta.model.assignment.Assignment;
+import seedu.superta.model.assignment.Title;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
+import seedu.superta.model.tutorialgroup.TutorialGroup;
+import seedu.superta.testutil.AssignmentBuilder;
 import seedu.superta.testutil.EditStudentDescriptorBuilder;
 import seedu.superta.testutil.StudentBuilder;
 import seedu.superta.testutil.StudentUtil;
+import seedu.superta.testutil.TutorialGroupBuilder;
+import seedu.superta.testutil.UpdateAssignmentDescriptorBuilder;
 
 public class SuperTaClientParserTest {
     @Rule
@@ -164,18 +176,23 @@ public class SuperTaClientParserTest {
         assertEquals(new FeedbackCommand(studentId, feedback), command);
     }
 
-    /*@Test
+    @Test
     public void parseCommand_updateAssignment() throws Exception {
-        TODO:to fix updateAssignment parser test
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
+        Assignment assignmentToChange = new AssignmentBuilder().build();
+        Assignment assignmentChanged = new Assignment(new Title("Lab Worksheet"), 90.0,
+                assignmentToChange.getGradebook());
+        UpdateAssignmentDescriptor descriptor = new UpdateAssignmentDescriptorBuilder(assignmentChanged).build();
         UpdateAssignmentCommand command = (UpdateAssignmentCommand) parser.parseCommand(
                 UpdateAssignmentCommand.COMMAND_WORD + " "
-                + PREFIX_GENERAL_TUTORIAL_GROUP_ID + VALID_TUTORIAL_GROUP_ID + " "
-                + PREFIX_ASSIGNMENT_TITLE + VALID_TITLE_LAB + " "
-                + PREFIX_ASSIGNMENT_MAX_MARKS + " "
-                + PREFIX_ASSIGNMENT_NEW_TITLE);
+                        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tutorialGroup.getId() + " "
+                        + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignmentToChange.getTitle() + " "
+                        + PREFIX_ASSIGNMENT_MAX_MARKS + assignmentToChange.getMaxMarks() + " "
+                        + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + assignmentChanged.getTitle() + " "
+                        + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + assignmentChanged.getMaxMarks());
 
-        Assignment assignment = new Assignment(new Title( VALID_TITLE_LAB), VALID_MAXMARKS_LAB);
-        assertEquals(new UpdateAssignmentCommand(VALID_TUTORIAL_GROUP_ID, assignment), command);*/
+        assertEquals(new UpdateAssignmentCommand(tutorialGroup.getId(), assignmentToChange, descriptor), command);
+    }
 
     @Test
     public void parseCommand_createAttendance() throws Exception {
