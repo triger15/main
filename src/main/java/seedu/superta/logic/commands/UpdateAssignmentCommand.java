@@ -27,8 +27,8 @@ public class UpdateAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "update-assignment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update a tutorial's "
-            + "assignment title or maximum marks.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": "
+            + "Updates an existing assignment details (ie. assignment title, maximum marks).\n"
             + "Parameters: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
             + PREFIX_GENERAL_ASSIGNMENT_TITLE + "OLD-ASSIGNMENT-TITLE "
@@ -37,11 +37,12 @@ public class UpdateAssignmentCommand extends Command {
             + "[" + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + "NEW-ASSIGNMENT-MAX-MARKS] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
-            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 1"
-            + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + "40"
-            + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + "Lab 2";
+            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 1 "
+            + PREFIX_ASSIGNMENT_MAX_MARKS + "40.0 "
+            + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + "Lab 2 "
+            + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + "50.0";
 
-    public static final String MESSAGE_SUCCESS = "Tutorial %1$s - Old Assignment details: %2$s. "
+    public static final String MESSAGE_SUCCESS = "Tutorial %1$s - Old Assignment details: %2$s "
             + "New Assignment details: %3$s";
     public static final String MESSAGE_FAILURE_NO_TUTORIAL_GROUP = "Tutorial group does not exist.";
     public static final String MESSAGE_FAILURE_NO_ASSIGNMENT = "Assignment does not exist.";
