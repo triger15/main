@@ -14,7 +14,6 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.Grade;
 import seedu.superta.model.assignment.GradeBook;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
@@ -30,7 +29,7 @@ public class UpdateAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update a tutorial's "
             + "assignment title or maximum marks.\n"
-            + "Parameters: "
+            + "Parameters: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
             + PREFIX_GENERAL_ASSIGNMENT_TITLE + "OLD-ASSIGNMENT-TITLE "
             + PREFIX_ASSIGNMENT_MAX_MARKS + "OLD-ASSIGNMENT-MAX-MARKS \n"
