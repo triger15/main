@@ -71,7 +71,8 @@ public class UpdateAssignmentCommandParserTest {
     public void parse_validArg_returnUpdateAssignmentCommand() {
         Assignment assignment = new Assignment(new Title (VALID_TITLE_LAB), VALID_MAXMARKS_LAB);
         String tutorialGroup = VALID_TUTORIAL_GROUP_ID;
-        UpdateAssignmentCommand expectedUpdateAssignmentCommand = new UpdateAssignmentCommand(tutorialGroup, assignment);
+        UpdateAssignmentCommand expectedUpdateAssignmentCommand =
+        new UpdateAssignmentCommand(tutorialGroup, assignment);
 
         String arguments = " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + VALID_TITLE_LAB + " "
                 + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignment;
