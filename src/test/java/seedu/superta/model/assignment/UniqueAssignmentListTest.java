@@ -14,7 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
-
+import seedu.superta.model.assignment.exceptions.DuplicateAssignmentNameException;
 
 
 public class UniqueAssignmentListTest {
@@ -75,7 +75,7 @@ public class UniqueAssignmentListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueAssignmentList.add(TUT);
         uniqueAssignmentList.add(LAB);
-        thrown.expect(DuplicateAssignmentException.class);
+        thrown.expect(DuplicateAssignmentNameException.class);
         uniqueAssignmentList.setAssignment(TUT, LAB);
     }
 

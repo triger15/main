@@ -153,7 +153,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "[Assignment]" + title
+        return "[Assignment: " + title + "]"
             + " [Max Marks: " + maxMarks + "]\n"
             + gradebook.stream()
                 .map(GradeEntry::toString)

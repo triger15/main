@@ -5,13 +5,13 @@ import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.superta.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.superta.model.assignment.exceptions.DuplicateAssignmentException;
+import seedu.superta.model.assignment.exceptions.DuplicateAssignmentNameException;
 
 /**
  * Class for storing the assignments in a list.
@@ -54,19 +54,20 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      */
     public void setAssignment(Assignment target, Assignment editedAssignment) {
         requireAllNonNull(target, editedAssignment);
+        Assignment editedAssignmentWithGradeBook =
+                new Assignment(editedAssignment.getTitle(), editedAssignment.getMaxMarks(), target.getGradebook());
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new AssignmentNotFoundException();
         }
 
-        if (!target.isSameAssignment(editedAssignment) && contains(editedAssignment)) {
-            throw new DuplicateAssignmentException();
+        if (!target.isSameAssignment(editedAssignmentWithGradeBook) && contains(editedAssignmentWithGradeBook)) {
+            throw new DuplicateAssignmentNameException();
         }
 
-        internalList.set(index, editedAssignment);
+        internalList.set(index, editedAssignmentWithGradeBook);
     }
-
 
     /**
      * Method to remove an assignment from the list.
@@ -97,9 +98,9 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         internalList.setAll(assignments);
     }
 
-    public Optional<Assignment> getAssignmentWithTitle(Title title) {
+    public Assignment getAssignmentWithTitle(Title title) {
         return internalList.stream().filter(assignments -> assignments.getTitle().equals(title))
-            .findFirst();
+            .findFirst().get();
     }
 
     /**

@@ -90,6 +90,14 @@ public interface Model {
     void deleteAssignment(String tgId, String assignment);
 
     /**
+     * Replaces the given assignment {@code assignmentToChange} with {@code assignmentChanged}.
+     * {@code assignmentToChange} must exist in the SuperTA client.
+     * The assignment identity of {@code assignmentChanged} must not be the same as another existing assignment in the
+     * tutorial group.
+     */
+    void updateAssignment(String tgId, Assignment assignmentToChange, Assignment assignmentChanged);
+
+    /**
      * Grades a student on an assignment.
      */
     void grade(Grade grade);
