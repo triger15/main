@@ -344,15 +344,15 @@ and changes made to the `Model` are done through `Model#deleteAssignment()`.
 
 The `delete-assignment` command is executed in the following way:
 
-. `LogicManager` calls `parseCommand()` of `AddressBookParser`, with the user input as the argument.
-. `AddressBookParser` invokes `parse()` of `DeleteAssignmentCommandParser`.
+. `LogicManager` calls `parseCommand()` of `SuperTaClientParser`, with the user input as the argument.
+. `SuperTaClientParser` invokes `parse()` of `DeleteAssignmentCommandParser`.
 . If arguments are valid, `parse` extracts `fromTutorialGroup` and `assToDelete` strings to instantiate a `DeleteAssignmentCommand`.
 . The `DeleteAssignmentCommand` is returned to `LogicManager`, which calls `execute()` on it.
 . `DeleteAssignment` calls `Model#deleteAssignment()` using `fromTutorialGroup` and `assToDelete`.
 
-The following is the sequence diagram of the `delete-assignment` command:
+The following is a sequence diagram of the `delete-assignment` command:
 
-//image::DeleteAssignmentSequenceDiagram.png[width="800"]
+image::DeleteAssignmentSdForLogic.png[width="800"]
 
 === Design Considerations
 
@@ -364,15 +364,6 @@ The following is the sequence diagram of the `delete-assignment` command:
 * *Alternative 2:* Wrap the tutorial group ID and assignment title in `TutorialGroup` and `Assignment` objects and store them as fields in `DeleteAssignmentCommand`.
 ** Pros: Easy to compare between actual `TutorialGroup` and `Assignment` using `equals()`.
 ** Cons: Dependent on the overridden `equals()` method  in the `TutorialGroup` and `Assignment` classes to work as intended.
-
-===== Aspect: 2
-
-* *Alternative 1(current choice):*
-** Pros:
-** Cons:
-* *Alternative 2:*
-** Pros:
-** Cons:
 
 // end::deleteassignment[]
 
