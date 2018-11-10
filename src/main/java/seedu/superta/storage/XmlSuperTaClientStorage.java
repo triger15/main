@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -26,6 +27,21 @@ public class XmlSuperTaClientStorage implements SuperTaClientStorage {
 
     public XmlSuperTaClientStorage(Path filePath) {
         this.filePath = filePath;
+    }
+
+    /**
+     * Reads the client data from a stream.
+     * @throws DataConversionException if stream is not in the correct format.
+     */
+    public static Optional<ReadOnlySuperTaClient> readClientFromStream(InputStream stream)
+            throws DataConversionException {
+        XmlSerializableSuperTaClient xmlClient = XmlFileStorage.loadDataFromStream(stream);
+        try {
+            return Optional.of(xmlClient.toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in the input stream.");
+            throw new DataConversionException(ive);
+        }
     }
 
     public Path getSuperTaClientFilePath() {

@@ -1,6 +1,7 @@
 package seedu.superta.storage;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.file.Path;
 
 import javax.xml.bind.JAXBException;
@@ -13,7 +14,7 @@ import seedu.superta.commons.util.XmlUtil;
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given client data to the specified file.
      */
     public static void saveDataToFile(Path file, XmlSerializableSuperTaClient addressBook)
             throws FileNotFoundException {
@@ -25,7 +26,18 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns the client data in the stream or empty client data.
+     */
+    public static XmlSerializableSuperTaClient loadDataFromStream(InputStream stream) throws DataConversionException {
+        try {
+            return XmlUtil.getDataFromStream(stream, XmlSerializableSuperTaClient.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
+    /**
+     * Returns client data in the file or an empty client data.
      */
     public static XmlSerializableSuperTaClient loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {
