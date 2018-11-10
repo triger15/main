@@ -14,7 +14,7 @@ public class ViewTutorialGroupCommandParserTest {
     private ViewTutorialGroupCommandParser parser = new ViewTutorialGroupCommandParser();
 
     @Test
-    public void parse_validArg_success(){
+    public void parse_validArg_success() {
         String userInput = " " + PREFIX_TUTORIAL_GROUP_ID + "01a";
         ViewTutorialGroupCommand expectedCommand = new ViewTutorialGroupCommand("01a");
 

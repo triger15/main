@@ -17,7 +17,7 @@ public class RemoveStudentFromTutorialGroupCommandParserTest {
     private RemoveStudentFromTutorialGroupCommandParser parser = new RemoveStudentFromTutorialGroupCommandParser();
 
     @Test
-    public void parse_validArg_success(){
+    public void parse_validArg_success() {
         String userInput = " " + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "01a " + PREFIX_GENERAL_STUDENT_ID + "A0123456T";
         RemoveStudentFromTutorialGroupCommand expectedCommand = new RemoveStudentFromTutorialGroupCommand(
                 "01a",
