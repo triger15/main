@@ -358,7 +358,7 @@ The following is a sequence diagram of the `delete-assignment` command:
 
 image::DeleteAssignmentSdForLogic.png[width="800"]
 
-=== Design Considerations
+==== Design Considerations
 
 ===== Aspect: Implementation of `DeleteAssignmentCommand`
 
