@@ -249,6 +249,8 @@ Examples:
 * `add-to-tutorial-group tg/04a st/A1231231Y` +
 Adds the student with student ID `A1231231Y` to the tutorial group with an ID of `04a`.
 // end::addtotutorialgroup[]
+
+// tag::removefromtutorialgroup[]
 === Remove from Tutorial Group: `remove-from-tutorial-group`
 
 Removes a student from a tutorial group. +
@@ -258,6 +260,7 @@ Examples:
 
 * `remove-from-tutorial-group tg/1 st/A1231231Y` +
 Removes the student with student ID `A1231231Y` from the tutorial group with an ID of `1`.
+// end::removefromtutorialgroup[]
 
 // tag::attendance[]
 === Create Attendance: `create-attendance`
