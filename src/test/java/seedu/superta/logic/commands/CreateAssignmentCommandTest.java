@@ -123,6 +123,11 @@ public class CreateAssignmentCommandTest {
         }
 
         @Override
+        public void updateAssignment(String tgId, Assignment assignmentToChange, Assignment assignmentChanged) {
+
+        }
+
+        @Override
         public void deleteAssignment(String tgId, String assignment) {
 
         }

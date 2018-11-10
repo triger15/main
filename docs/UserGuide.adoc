@@ -125,6 +125,8 @@ Examples:
 Returns `john` and `John Doe`
 * `find p/91234567` +
 Returns student with phone number `91234567`
+* `find e/Johndoe@hotmail.com` +
+Returns student with email `Johndoe@hotmail.com`
 * `find n/John id/A0123456T` +
 Returns `john` and `John Doe` and student with student id `A0123456T`
 * `find n/Alice n/Hans` +
@@ -223,6 +225,7 @@ Examples:
 * `delete-tutorial-group id/04a` +
 Deletes a tutorial group with the ID `04a`.
 // end::deletetutorialgroup[]
+
 // tag::viewtutorialgroup[]
 === View Tutorial Group: `view-tutorial-group`
 
@@ -234,6 +237,7 @@ Examples:
 * `view-tutorial-group id/04a` +
 Displays the `04a` tutorial group's information .
 // end::viewtutorialgroup[]
+
 // tag::addtotutorialgroup[]
 === Add to Tutorial Group: `add-to-tutorial-group`
 
@@ -305,6 +309,32 @@ Examples:
 * `create-assignment tg/04a n/lab1 m/40` +
 Creates an assignment named `lab1` for the tutorial group with an ID of `04a`, with the maximum marks for this assignment as `40`.
 // end::createassignment[]
+
+// tag::updateassignment[]
+=== Update an Assignment: `update-assignment`
+
+Updates an existing assignment details. +
+
+Assignment details such as assignment title and maximum marks can be changed with this command. +
+
+Format: `update-assignment tg/TUTORIAL-GROUP-ID as/OLD-ASSIGNMENT-TITLE m/OLD-ASSIGNMENT-MAX-MARKS
+         [new_as/NEW-ASSIGNMENT-TITLE] [new_m/NEW-ASSIGNMENT-MAX-MARKS]`
+
+****
+* This command does not adjust the student grades in the assignment. Therefore, do note that it is possible for existing student grades to be higher than the updated maximum marks.
+* This command will not work if the updated assignment title has already existed in the assignment list.
+****
+
+Examples:
+
+* `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2` +
+Updates an assignment named `lab1` to `lab2` for the tutorial group with an ID of `04a`.
+* `update-assignment tg/04a as/lab1 m/40.0 new_m/50` +
+Updates `lab1` assignment maximum marks from `40.0` to `50.0` marks for the tutorial group with an ID of `04a`.
+* `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2 new_m/50` +
+Updates an assignment named `lab1` and maximum marks of `40.0`, to assignment named `lab2` and maximum marks of `50.0` for the tutorial group with an ID of `04a`.
+// end::updateassignment[]
+
 === Deleting an Assignment: `delete-assignment`
 
 Deletes an existing assignment for a specific tutorial group. +
@@ -342,6 +372,7 @@ Examples:
 * `view-assignment tg/04a as/lab1` +
 Views the assignment details for the `lab1` assignment in the `04a` tutorial group.
 // end::viewassignment[]
+
 === Feedback to Student: `feedback`
 
 Adds feedback to a student with a specified Student ID. +
