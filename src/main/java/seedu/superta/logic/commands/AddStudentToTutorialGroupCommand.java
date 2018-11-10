@@ -56,4 +56,22 @@ public class AddStudentToTutorialGroupCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
 
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddStudentToTutorialGroupCommand)) {
+            return false;
+        }
+
+        //state check
+        AddStudentToTutorialGroupCommand e = (AddStudentToTutorialGroupCommand) other;
+        return tgId.equals(e.tgId)
+                && studentId.equals(e.studentId);
+    }
 }
