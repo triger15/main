@@ -43,7 +43,7 @@ Responsibilities: Testing
 
 === Wenshei Ong
 image::wenshei.png[width="150", align="left"]
-{empty}[http://github.com/wenshei[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/wenshei[github]] [<<wenshei#, portfolio>>]
 
 Responsibilities: Deliverables/Deadlines, Scheduling and Tracking
 
