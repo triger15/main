@@ -57,6 +57,8 @@ include::../UserGuide.adoc[tag=removefromtutorialgroup]
 
 include::../DeveloperGuide.adoc[tag=introduction]
 
+include::../DeveloperGuide.adoc[tag=userstories]
+
 === Instructions for Manual Testing
 include::../DeveloperGuide.adoc[tag=testsattendance]
 
