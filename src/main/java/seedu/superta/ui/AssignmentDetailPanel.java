@@ -92,7 +92,7 @@ public class AssignmentDetailPanel extends ViewPanelContent {
                 return;
             }
             Assignment fromModel = optAssignment.get();
-            if (fromModel.equals(assignment)) {
+            if (fromModel.isSameAssignment(this.assignment)) {
                 this.assignment = fromModel;
                 render();
             }

@@ -32,6 +32,14 @@ public class Session {
         this.name = name;
     }
 
+    public Session(Session toClone) {
+        requireNonNull(toClone);
+        this.name = toClone.name;
+        toClone.internalSet.stream().map(Attendance::new).forEach(attendance -> {
+            internalSet.add(attendance);
+        });
+    }
+
     /**
      * Constructs an {@code Session}.
      *
@@ -41,7 +49,9 @@ public class Session {
     public Session(String name, Set<Attendance> attendanceList) {
         requireAllNonNull(name, attendanceList);
         this.name = name;
-        internalSet.addAll(attendanceList);
+        for (Attendance attendance: attendanceList) {
+            internalSet.add(new Attendance(attendance));
+        }
     }
 
     /**
@@ -134,8 +144,12 @@ public class Session {
         }
 
         Session otherSession = (Session) other;
+        boolean isSetEqual = otherSession.internalSet.size() == internalSet.size();
+        for (Attendance attendance: internalSet) {
+            isSetEqual = isSetEqual && otherSession.contains(attendance);
+        }
         return otherSession.getSessionName().equals(getSessionName())
-                && otherSession.internalSet.equals(internalSet);
+                && isSetEqual;
     }
 
     @Override
