@@ -3,8 +3,6 @@ package seedu.superta.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 
-import javax.swing.text.View;
-
 import seedu.superta.commons.core.EventsCenter;
 import seedu.superta.commons.events.ui.TutorialGroupSelectedEvent;
 import seedu.superta.logic.CommandHistory;

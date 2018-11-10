@@ -71,7 +71,7 @@ public class CreateAssignmentCommand extends Command {
 
         //state check
         CreateAssignmentCommand e = (CreateAssignmentCommand) other;
-        return toAdd.equals(e.toAdd )
+        return toAdd.equals(e.toAdd)
                 && tgId.equals(e.tgId);
     }
 }

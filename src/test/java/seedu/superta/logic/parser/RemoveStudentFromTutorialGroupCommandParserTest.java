@@ -1,7 +1,6 @@
 package seedu.superta.logic.parser;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.superta.logic.commands.AddStudentToTutorialGroupCommand.MESSAGE_USAGE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
@@ -11,7 +10,6 @@ import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.Test;
 
-import seedu.superta.logic.commands.AddStudentToTutorialGroupCommand;
 import seedu.superta.logic.commands.RemoveStudentFromTutorialGroupCommand;
 import seedu.superta.model.student.StudentId;
 
