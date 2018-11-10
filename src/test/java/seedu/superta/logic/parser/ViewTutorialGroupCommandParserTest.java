@@ -1,23 +1,14 @@
 package seedu.superta.logic.parser;
 
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_TITLE;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
 import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.superta.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import javax.swing.text.View;
-
 import org.junit.Test;
 
-import seedu.superta.logic.commands.CreateAssignmentCommand;
 import seedu.superta.logic.commands.ViewTutorialGroupCommand;
-import seedu.superta.model.assignment.Assignment;
-import seedu.superta.model.assignment.Title;
 
 public class ViewTutorialGroupCommandParserTest {
     private ViewTutorialGroupCommandParser parser = new ViewTutorialGroupCommandParser();
