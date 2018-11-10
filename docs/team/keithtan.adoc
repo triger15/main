@@ -15,27 +15,30 @@ The *purpose* of this portfolio is to document my *role* in the project and the 
 
 
 == Summary of contributions
+* *Major enhancement*: added *RemoveStudentFromTutorialGroup* command. (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/90[#90])
+** What it does: Allows the user to delete students from a tutorial group.
 
-* *Minor enhancement*: added a remove student from tutorial group command that allows the user to delete a student from a tutorial group.
-
-* *Code contributed*:  [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=keithtan=]
+* *Code contributed*:  [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=keithtan]
 
 * *Other contributions*:
+** Minor enhancements:
+*** Created a `UniqueAssignmentList` so that assignments cannot have the same title. (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/71[#71])
+*** Enhanced `FindCommand` with the ability to search using multiple keywords. (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/136[#136])
+
 
 ** Project management:
 *** Added milestones and labels on GitHub
 *** Added issues and enhancement suggestions as needed on GitHub
 ** Enhancements to existing features:
-*** Created additional classes for enhancement to existing features (Pull requests https://github.com[#36], https://github.com[#38])
-*** Wrote additional tests for existing features to increase coverage from 78% to 80% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Created additional classes for enhancement to existing features: https://github.com/CS2103-AY1819S1-T16-2/main/pull/71[#71]
+*** Improved error messages for user experience: https://github.com/CS2103-AY1819S1-T16-2/main/pull/143[#143]
+*** Wrote additional tests for existing features to increase coverage from 80% to 82%: https://github.com/CS2103-AY1819S1-T16-2/main/pull/87[#87]
 ** Documentation:
-*** Added introduction and user stories to Developer Guide
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Added user stories, use case and manual testing instructions to Developer Guide: https://github.com/CS2103-AY1819S1-T16-2/main/pull/49[#49], https://github.com/CS2103-AY1819S1-T16-2/main/pull/151[#151]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103-AY1819S1-T16-2/main/pull/110[#110], https://github.com/CS2103-AY1819S1-T16-2/main/pull/134[#134]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-
-_{you can add/remove categories in the list above}_
+*** PRs reviewed: https://github.com/CS2103-AY1819S1-T16-2/main/pull/83[#83], https://github.com/CS2103-AY1819S1-T16-2/main/pull/142[#142]
+*** Reported bugs and suggestions for other teams in the cohort (examples:  https://github.com/CS2103-AY1819S1-W10-3/main/pull/132[#132], https://github.com/CS2103-AY1819S1-W10-3/main/pull/139[#139], https://github.com/CS2103-AY1819S1-W10-3/main/pull/143[#143])
 
 == Contributions to the User Guide
 
@@ -44,9 +47,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=removefromtutorialgroup]
 
 == Contributions to the Developer Guide
 
@@ -54,6 +55,9 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=introduction]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+=== Instructions for Manual Testing
+include::../DeveloperGuide.adoc[tag=testsattendance]
+
+include::../DeveloperGuide.adoc[tag=testsfeedback]

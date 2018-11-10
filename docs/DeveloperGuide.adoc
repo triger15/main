@@ -17,12 +17,14 @@ endif::[]
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
+// tag::introduction[]
 == Introduction
 Welcome to the SuperTA Developer Guide. This guide provides information to help you get started as a SuperTA contributor, allowing you to code, test and improve on the software without much hassle.
 
 SuperTA is a desktop application for Teaching Assistants and Professors in NUS School of Computing. It provides a convenient, flexible and fast method to manage students and their tutorials. This software is also designed to have the Command Line Interface (CLI) to be the primary mode of input while the GUI is used for visual feedback to the user.
 
 If you're brand new to SuperTA and want to jump into code, start with <<Setting up>>.
+// end::introduction[]
 
 == Setting up
 
@@ -567,6 +569,7 @@ b. Require developers to download those libraries manually (this creates extra w
 ** Provide a platform for Tutors/TAs to better keep track of individual students and provide help early
 
 [appendix]
+// tag::userstories[]
 == User Stories
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
@@ -641,6 +644,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |=======================================================================
 
 _{More to be added}_
+// end::userstories[]
 
 [appendix]
 == Use Cases
@@ -742,8 +746,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
-
-_{ more test cases ... }_
 
 === Deleting a student
 
@@ -858,3 +860,5 @@ _{ more test cases ... }_
    Expected: An error message showing that there is no such student.
 
 // end::testsfeedback[]
+
+_{ more test cases ... }_
