@@ -798,6 +798,25 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
+=== UC02 - Find student
+
+*MSS:*
+
+1. User requests to find students using prefix and keywords
+2. System finds the student who information matched with the keywords
+
++
+Use case ends.
+
+*Extensions:*
+
+[none]
+* 1a. Prefix entered is not supported by find command
+** 1a1. System shows an error message.
+* 2a. None of the student matched the keywords provided by user
+** 2a1. No students will be listed.
+
+[discrete]
 === UC02 - Add Tutorial Group
 
 *MSS:*
@@ -955,6 +974,20 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
+// tag::testfind[]
+=== Finding a student
+
+. Finding a student while all students are listed
+
+.. Test case: `find n/john` +
+Expected: All students with name `john` will be on the list. Since it is case-insensitive, variations such as ‘John’ or ‘joHn’ will appear on the filtered list as well.
+.. Test case: `find n/john mary` +
+Expected: All students with name `john` or ‘mary’ will be on the list. Similar to a, case-insensitive variations will appear on the filtered list.
+.. Test case: `find p/91234567 id/A0123456T` +
+Expected: All students with phone number `91234567` or with student ID `A0123456T` will appear on the filtered list.
+.. Other than the indicated prefixes (`n/`, `p/`, ‘e/’, ‘id/’), any other prefixes (ie. `tg/`, ‘m/`) will show an invalid command format error message.
+// end::testfind[]
+
 // tag::teststutorialgroup[]
 === Creating a Tutorial Group
 
@@ -1042,6 +1075,24 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `grade tg/04a st/A0166733Y as/lab2 m/30` +
    Expected: An error message showing that there is no such assignment.
 // end::testsassignment[]
+
+// tag::testupdateassignment[]
+=== Updating an assignment detail
+
+. Update an assignment detail
+.. Prerequisites: Have one tutorial group with an ID of `04a`. +
+   View the tutorial group using the `view-tutorial-group id/04a` command. +
+  Have an assignment title named `lab1` with a maximum mark of `40.0`. +
+Have an assignment title named `lab3` with a maximum mark of `50.0`.
+.. Test case: `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2` +
+   Expected: Assignment `lab1` name should now be changed to `lab2` under the `Assignments` UI panel. Maximum marks should be maintained at `40.0` marks.
+.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/50.0` +
+   Expected: Assignment `lab2` maximum marks should be changed from `40.0` marks to `50.0` marks under the `Assignments` UI panel.
+.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/lab3` +
+   Expected: An error message should be displayed, showing that assignment name already exists in the database.
+.. Test case: `update-assignment tg/04a as/lab4 m/40.0 new_m/lab5` +
+   Expected: An error message should be displayed, showing that assignment does not exist.
+// end::testupdateassignment[]
 
 // tag::testsfeedback[]
 === Giving feedback to a student
