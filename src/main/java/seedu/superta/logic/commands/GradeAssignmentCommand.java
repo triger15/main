@@ -61,4 +61,21 @@ public class GradeAssignmentCommand extends Command {
         model.commitSuperTaClient();
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GradeAssignmentCommand)) {
+            return false;
+        }
+
+        //state check
+        GradeAssignmentCommand e = (GradeAssignmentCommand) other;
+        return grade.equals(e.grade);
+    }
 }
