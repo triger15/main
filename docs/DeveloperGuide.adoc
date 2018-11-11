@@ -371,6 +371,62 @@ image::DeleteAssignmentSdForLogic.png[width="800"]
 
 // end::deleteassignment[]
 
+// tag::markattendancefeature[]
+=== Mark Attendance feature
+
+==== Current Implementation
+
+The `mark-attendance` command is facilitated by the `MarkAttendanceCommand` class.
+It extends the abstract class `Command` and is supported by `MarkAttendanceCommandParser`,
+and changes made to the `Model` are done through `Model#markAttendance()`.
+
+The `mark-attendance` command is executed in the following way:
+
+. `LogicManager` calls `parseCommand()` of `SuperTaClientParser`, with the user input as the argument.
+. `SuperTaClientParser` invokes `parse()` of `MarkAttendanceCommandParser`.
+. If arguments are valid, `parse` extracts `tutorialGroupId` string, `sessionName` and set of `studentId` strings for parsing into a `Session` and `Set<StudentId>` to instantiate a `MarkAttendanceCommand`.
+. The `MarkAttendanceCommand` is returned to `LogicManager`, which calls `execute()` on it.
+. `MarkAttendance` calls `Model#markAttendance()` using `tgtId`, `sessionName` and `studentIdSet`.
+
+The following sequence diagrams of the `mark-attendance` command shows the sequence flow from `LogicManager` to the `ModelManager`:
+
+image::SDforMarkAttendance1.png[width="1856"]
+
+A more in-depth sequence diagram to illustrate how the `Model` executes the `mark-attendance` command:
+
+image::SDforMarkAttendance2.png[width="1452"]
+
+From the in-depth sequence diagram:
+
+. `Model` calls `VersionedSuperTaClient#markAttendance`, using `tgtId`, `sessionName` and `studentIdSet`.
+. `VersionedSuperTaClient` self-invokes the method `getTutorialGroup(tgId)` to obtain the tutorial group specified.
+. `VersionedSuperTaClient` then calls `getSession(sessionName)` in the `TutorialGroup` instance obtained previously.
+. `VersionedSuperTaClient` then streams the set of student Ids obtained in `studentIdSet`, mapping them to new `Attendance` objects and collecting them as a list.
+. Finally, the `attendanceList` obtained is streamed, with each `Attendance` object being added to the `Session` instance obtained in step 3.
+
+
+==== Design Considerations
+
+===== Aspect: Implementation of `MarkAttendanceCommand`
+
+* *Alternative 1(current choice):* Store the tutorial group ID as String field, session name as a `Session` object and student ids as a set of `StudentIds` in `MarkAttendanceCommand`.
+** Pros: Easy to implement, and parse, with existing parsers built in. Ensures that parsed `Session` and `StudentId` objects are valid and abide by constraints.
+** Cons: Requires `Session` and `StudentId` objects to be instantiated. Also depends on `isSameSession()` method and `containsId()` method in `Session` and `UniqueStudentList` respectively.
+* *Alternative 2:* Store all parameters of `MarkAttendanceCommand` as String objects, including `StudentIds` as a set of Strings.
+** Pros: Easy to implement, will be able to find session and set of student ids by comparing strings.
+** Cons: Cannot ensure parsed session names and student ids are correct, valid and fit constraints.
+
+===== Aspect: Implementation of `Attendance`
+
+* *Alternative 1(current choice):* Store `Attendance` object with an encapsulated `StudentId` object and `Presence` enumeration.
+** Pros: `StudentId` is assured to be valid, while `Presence` will only be able to take fixed, constant values,
+** Cons: Requires a new `Presence` enumeration to be defined, instead of relying on simpler string values.
+* *Alternative 2:* Store presence of student as an integer or string value.
+** Pros: Easy to implement, no need to create additional enumeration.
+** Cons: Cannot ensure that only fixed, valid values will be used when creating `Attendance` objects.
+
+// end::markattendancefeature[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
