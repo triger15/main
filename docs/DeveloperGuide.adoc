@@ -817,7 +817,7 @@ Use case ends.
 ** 2a1. No students will be listed.
 
 [discrete]
-=== UC02 - Add Tutorial Group
+=== UC03 - Add Tutorial Group
 
 *MSS:*
 
@@ -836,7 +836,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== UC03 - Grade Assignment
+=== UC04 - Grade Assignment
 
 *MSS:*
 
@@ -868,7 +868,7 @@ Use case resumes at step 3.
 Use case resumes at step 5.
 
 [discrete]
-=== UC04 - Mark Attendance
+=== UC05 - Mark Attendance
 
 *MSS:*
 
@@ -893,7 +893,7 @@ Use case resumes at step 1.
 Use case resumes at step 3.
 
 [discrete]
-=== UC05 - Add feedback for student
+=== UC06 - Add feedback for student
 
 *MSS:*
 
