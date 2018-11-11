@@ -41,4 +41,21 @@ public class ViewTutorialGroupCommand extends Command {
         EventsCenter.getInstance().post(new TutorialGroupSelectedEvent(tutorialGroup));
         return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewTutorialGroupCommand)) {
+            return false;
+        }
+
+        //state check
+        ViewTutorialGroupCommand e = (ViewTutorialGroupCommand) other;
+        return tutorialGroupId.equals(e.tutorialGroupId);
+    }
 }

@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Gabriel
 image::caephler.png[width="150", align="left"]
-{empty}[https://blog.caephler.com[homepage]] [https://github.com/caephler[github]] [<<johndoe#, portfolio>>]
+{empty}[https://blog.caephler.com[homepage]] [https://github.com/caephler[github]] [<<caephler#, portfolio>>]
 
 Responsibilities: Team Lead, Integration
 
@@ -19,7 +19,7 @@ Responsibilities: Team Lead, Integration
 
 === Keith Tan
 image::keithtan.png[width="150", align="left"]
-{empty}[http://github.com/keithtan[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/keithtan[github]] [<<keithtan#, portfolio>>]
 
 Responsibilities: Documentation
 
@@ -27,7 +27,7 @@ Responsibilities: Documentation
 
 === Yu-He Ong
 image::triger15.png[width="150", align="left"]
-{empty}[http://github.com/triger15[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/triger15[github]] [<<yuheong#, portfolio>>]
 
 Responsibilities: Code Quality
 

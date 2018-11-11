@@ -358,7 +358,7 @@ The following is a sequence diagram of the `delete-assignment` command:
 
 image::DeleteAssignmentSdForLogic.png[width="800"]
 
-=== Design Considerations
+==== Design Considerations
 
 ===== Aspect: Implementation of `DeleteAssignmentCommand`
 
@@ -682,7 +682,7 @@ _{More to be added}_
 
 [appendix]
 == Use Cases
-(For all use cases, the *System* is the `SuperTA Client` and the *Actor* is `TA`.)
+(For all use cases, the *System* is the `SuperTA Client` and the *User* is `TA`.)
 
 [discrete]
 === UC01 - Delete student
@@ -690,20 +690,20 @@ _{More to be added}_
 *MSS:*
 
 1. User requests to list students
-2. SuperTA shows a list of students
+2. System shows a list of students
 3. User requests to delete a specific student in the list
-4. SuperTA deletes the student
+4. System deletes the student
 
 +
 Use case ends.
 
-*Extensions*
+*Extensions:*
 
 [none]
 * 1a. The list is empty.
 * Use case ends.
 * 2a. The given index is invalid.
-** 2a1. SuperTA shows an error message.
+** 2a1. System shows an error message.
 +
 Use case resumes at step 2.
 
@@ -714,11 +714,10 @@ Use case resumes at step 2.
 
 1. User clicks “Add Tutorial Group” button or enters command “add [tg/[NAME]] *[s/[STUDENT-ID]]”
 2. The tutorial group is created.
-
 +
 Use case ends.
 
-*Extensions*
+*Extensions:*
 
 [none]
 * 1a. User enters invalid student details.
@@ -727,6 +726,79 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[discrete]
+=== UC03 - Grade Assignment
+
+*MSS:*
+
+1. User views a tutorial group.
+2. System displays the tutorial group.
+3. User creates assignment in tutorial group.
+4. System creates assignment.
+5. User enters grade of student to be graded for an assignment.
+6. System grades the assignment for the student.
++
+Use case ends.
+
+*Extensions:*
+
+[none]
+* 1a. User enters invalid tutorial group ID.
+** 1a1. System displays an error message.
++
+Use case resumes at step 1.
+
+* 3a. User enters invalid details for new assignment.
+** 3a1. System displays an error message.
++
+Use case resumes at step 3.
+
+* 5a. User enters invalid grade/student/assignment/tutorial group.
+** 5a1. System displays an error message.
++
+Use case resumes at step 5.
+
+[discrete]
+=== UC04 - Mark Attendance
+
+*MSS:*
+
+1. User creates attendance session in tutorial group.
+2. System creates attendance session.
+3. User enters ID for student to mark attendance for the session.
+4. System marks student's attendance for the session.
++
+Use case ends.
+
+*Extensions:*
+
+[none]
+* 1a. User enters invalid details for new attendance session.
+** 1a1. System displays an error message.
++
+Use case resumes at step 1.
+
+* 3a. User enters invalid student/session.
+** 3a1. System displays an error message.
++
+Use case resumes at step 3.
+
+[discrete]
+=== UC05 - Add feedback for student
+
+*MSS:*
+
+1. User enters feedback for student.
+2. System creates feedback for student.
++
+Use case ends.
+
+*Extensions:*
+[none]
+* 1a. User enters invalid student/empty feedback.
+** 1a1. System displays an error message.
++
+Use case resumes at step 1.
 
 _{More to be added}_
 

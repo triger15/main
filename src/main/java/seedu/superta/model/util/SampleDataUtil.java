@@ -1,6 +1,5 @@
 package seedu.superta.model.util;
 
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +15,6 @@ import seedu.superta.model.student.Phone;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.tag.Tag;
-import seedu.superta.storage.SuperTaClientStorage;
 import seedu.superta.storage.XmlSuperTaClientStorage;
 
 /**
@@ -58,9 +56,8 @@ public class SampleDataUtil {
     public static ReadOnlySuperTaClient getSampleAddressBook() {
         ClassLoader classLoader = ReadOnlySuperTaClient.class.getClassLoader();
         try {
-            SuperTaClientStorage superTaClientStorage = new XmlSuperTaClientStorage(
-                    Paths.get(classLoader.getResource("seed.xml").toURI()));
-            Optional<ReadOnlySuperTaClient> client = superTaClientStorage.readSuperTaClient();
+            Optional<ReadOnlySuperTaClient> client = XmlSuperTaClientStorage.readClientFromStream(
+                    classLoader.getResourceAsStream("seed.xml"));
             if (client.isPresent()) {
                 return client.get();
             }

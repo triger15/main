@@ -82,7 +82,7 @@ Format: `list`
 
 Shows a list of all the tutorial groups, and reflects it on the UI. +
 Format: `list-tutorial-groups`
-// end:listtutorialgroups[]
+// end::listtutorialgroups[]
 
 === Editing a student : `edit`
 

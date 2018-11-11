@@ -33,4 +33,21 @@ public class Grade {
     public Double getMarks() {
         return marks;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Assignment)) {
+            return false;
+        }
+
+        Grade e = (Grade) other;
+        return tgId.equals(e.getTgId())
+                && asId.equals(e.getAsId())
+                && stId.equals(e.getStId())
+                && marks.equals(e.getMarks());
+    }
 }

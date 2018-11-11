@@ -1,5 +1,3 @@
-:imagesDir: images
-
 [[Design-TutorialGroupMaster]]
 === TutorialGroupMaster Design
 

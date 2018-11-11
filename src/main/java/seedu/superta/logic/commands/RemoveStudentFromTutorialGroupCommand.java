@@ -52,4 +52,22 @@ public class RemoveStudentFromTutorialGroupCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
 
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RemoveStudentFromTutorialGroupCommand)) {
+            return false;
+        }
+
+        //state check
+        RemoveStudentFromTutorialGroupCommand e = (RemoveStudentFromTutorialGroupCommand) other;
+        return studentId.equals(e.studentId)
+                && tutorialGroupId.equals(e.tutorialGroupId);
+    }
 }
