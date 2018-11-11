@@ -15,28 +15,21 @@ This project involves a team of Computer Science (CS) undergraduates to develop 
 
 == Summary of contributions
 
-* *Major enhancement*: enhancement made to *find command*
+* *Major enhancement*: enhancement made to *find command* (https://github.com/CS2103-AY1819S1-T16-2/main/pull/64[#64])
 ** What it does: allows the user to find students in the software and list the students according to the searched keyword.
 ** Justification: Previously, user can only search students using name. After the enhancements are made, user can now search students using other parameters such as phone number or student ID. This enhancement improves the product usability as users can now find their desired result more easily.
 ** Highlights: Further improvements on the command will be needed in the future as more parameters are added into the software such as tutorial groups and assignment grades.
 ** Credits: Most of the codes are adapted from Seedu’s Addressbook application, and further enhancements are made thereafter.
 
-* *Minor enhancement*: modified the view command that allows the TA to view past feedback given to a student. (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/83[#83])
+* *Minor enhancement*: added `UpdateAssignmentCommand` which allow users to edit an existing assignment details (ie assignment title, maximum marks) from an existing tutorial group. (https://github.com/CS2103-AY1819S1-T16-2/main/pull/152[#152])
 
-* *Code contributed*: [https://github.com/CS2103-AY1819S1-T16-2/main/blob/master/src/main/java/seedu/superta/logic/commands/FeedbackCommand.java[Functional code]] [https://github.com/CS2103-AY1819S1-T16-2/main/blob/master/src/test/java/seedu/superta/logic/commands/FeedbackCommandTest.java[Test code]]
+* *Code contributed*: (https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=darieca)
 
 * *Other contributions*:
 
-** Enhancements to existing features:
-*** Updated the GUI color scheme, title and icon (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/88[#88])
-*** Created the UI mockup for SuperTA client (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/23[#23])
-*** Removal of unnecessary Address class and related fields (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/75[#75])
 ** Documentation:
-*** Slight modifications to feedback command in the User Guide: https://github.com/CS2103-AY1819S1-T16-2/main/pull/83[#83]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T16-2/main/pull/91[#91], https://github.com/CS2103-AY1819S1-T16-2/main/pull/90[#90], https://github.com/CS2103-AY1819S1-T16-2/main/pull/73[#73]
-
-
+*** Include instructions for commands implemented in the User Guide. (https://github.com/CS2103-AY1819S1-T16-2/main/pull/107[#107])
+*** Create marketing pitch for product in AboutUs. (https://github.com/CS2103-AY1819S1-T16-2/main/pull/21[#21])
 
 == Contributions to the User Guide
 
@@ -60,4 +53,8 @@ include::../DeveloperGuide.adoc[tag=find]
 
 include::../DeveloperGuide.adoc[tag=updateassignment]
 
+=== Manual Testing Instructions
+include::../DeveloperGuide.adoc[tag=testfind]
+
+include::../DeveloperGuide.adoc[tag=testupdateassignment]
 
