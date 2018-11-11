@@ -2,6 +2,7 @@ package seedu.superta.model.tutorialgroup;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -67,8 +68,24 @@ public class TutorialGroup {
                 .forEach(session -> session.removeStudent(student));
     }
 
+    /**
+     * Updates a student with the updated value.
+     */
+    public void updateStudent(Student target, Student edited) {
+        students.removeById(target);
+        students.add(edited);
+    }
+
     public void addAssignment(Assignment assignment) {
         assignments.add(assignment);
+    }
+
+    /**
+     * @param assignmentToChange represents assignment to be changed.
+     * @param assignmentChanged represents assignment to be changed to.
+     */
+    public void updateAssignment(Assignment assignmentToChange, Assignment assignmentChanged) {
+        assignments.setAssignment(assignmentToChange, assignmentChanged);
     }
 
     public void removeAssignment(Assignment assignment) {
@@ -101,9 +118,9 @@ public class TutorialGroup {
 
     public Optional<Assignment> getAssignment(Title title) {
         return assignments.asUnmodifiableObservableList()
-            .stream()
-            .filter(as -> as.getTitle().equals(title))
-            .findFirst();
+                .stream()
+                .filter(as -> as.getTitle().equals(title))
+                .findFirst();
     }
 
     public UniqueSessionList getSessions() {
@@ -115,6 +132,23 @@ public class TutorialGroup {
                 .stream()
                 .filter(ses -> ses.isSameSession(session))
                 .findFirst();
+    }
+
+    /**
+     * Gets the attendance session by name reference, if it exists.
+     */
+    public Optional<Session> getSessionByName(String name) {
+        return attendanceSessions.asUnmodifiableObservableList()
+                .stream()
+                .filter(session -> session.getSessionName().equals(name))
+                .findFirst();
+    }
+
+    public List<Assignment> getAssignmentList(Title title) {
+        return assignments.asUnmodifiableObservableList()
+                .stream()
+                .filter(as -> as.getTitle().equals(title))
+                .collect(Collectors.toList());
     }
 
     @Override

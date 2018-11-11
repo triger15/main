@@ -11,6 +11,7 @@ import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
 import seedu.superta.model.Model;
 import seedu.superta.model.student.Student;
+import seedu.superta.model.student.exceptions.DuplicateStudentException;
 
 /**
  * Adds a student to the SuperTA client.
@@ -24,7 +25,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_STUDENT_ID + "STUDENT ID "
+            + PREFIX_STUDENT_ID + "STUDENT-ID "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -55,7 +56,11 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.addStudent(toAdd);
+        try {
+            model.addStudent(toAdd);
+        } catch (DuplicateStudentException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
         model.commitSuperTaClient();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

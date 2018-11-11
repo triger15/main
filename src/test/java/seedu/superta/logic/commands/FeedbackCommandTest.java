@@ -6,7 +6,9 @@ import static seedu.superta.logic.commands.CommandTestUtil.VALID_FEEDBACK_AMY;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_FEEDBACK_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.superta.logic.commands.FeedbackCommand.MESSAGE_INVALID_STUDENT;
 import static seedu.superta.logic.commands.FeedbackCommand.MESSAGE_SUCCESS;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
@@ -14,8 +16,6 @@ import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClien
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-//import seedu.superta.commons.events.ui.ExitAppRequestEvent;
 
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.model.Model;
@@ -27,6 +27,7 @@ import seedu.superta.model.student.StudentId;
 import seedu.superta.testutil.StudentBuilder;
 import seedu.superta.ui.testutil.EventsCollectorRule;
 
+// @@author triger15
 public class FeedbackCommandTest {
 
     private static final String FEEDBACK_STUB = "Some feedback";
@@ -60,8 +61,13 @@ public class FeedbackCommandTest {
         expectedModel.commitSuperTaClient();
 
         assertCommandSuccess(feedbackCommand, model, commandHistory, expectedMessage, expectedModel);
-        //assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
-        //assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
+    }
+
+    @Test
+    public void execute_invalidStudentAddFeedback_failure() {
+        FeedbackCommand feedbackCommand = new FeedbackCommand(new StudentId("A0000000Z"),
+                new Feedback(FEEDBACK_STUB));
+        assertCommandFailure(feedbackCommand, model, commandHistory, MESSAGE_INVALID_STUDENT);
     }
 
     @Test
@@ -78,7 +84,7 @@ public class FeedbackCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different student -> returns false
         assertFalse(standardCommand.equals(new FeedbackCommand(bob, amyFeedback)));
-        // different remark -> returns false
+        // different feedback -> returns false
         assertFalse(standardCommand.equals(new FeedbackCommand(amy, bobFeedback)));
     }
 }

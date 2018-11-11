@@ -18,7 +18,7 @@ public class ViewTutorialGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information about a specific tutorial group. \n"
         + "Parameters: "
-        + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL_GROUP_ID\n"
+        + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_TUTORIAL_GROUP_ID + "04a";
 
@@ -40,5 +40,22 @@ public class ViewTutorialGroupCommand extends Command {
         TutorialGroup tutorialGroup = model.getTutorialGroup(tutorialGroupId).get();
         EventsCenter.getInstance().post(new TutorialGroupSelectedEvent(tutorialGroup));
         return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewTutorialGroupCommand)) {
+            return false;
+        }
+
+        //state check
+        ViewTutorialGroupCommand e = (ViewTutorialGroupCommand) other;
+        return tutorialGroupId.equals(e.tutorialGroupId);
     }
 }

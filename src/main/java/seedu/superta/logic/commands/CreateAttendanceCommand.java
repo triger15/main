@@ -12,6 +12,7 @@ import seedu.superta.model.attendance.Session;
 import seedu.superta.model.attendance.exceptions.DuplicateSessionException;
 import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
+// @@author triger15
 /**
  * Command that creates an attendance session.
  */
@@ -22,12 +23,13 @@ public class CreateAttendanceCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an attendance."
         + " Parameters: "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-        + PREFIX_SESSION_NAME + "NAME \n"
+        + PREFIX_SESSION_NAME + "SESSION-NAME \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "1 "
         + PREFIX_SESSION_NAME + "W4 Tutorial ";
 
     public static final String MESSAGE_SUCCESS = "New attendance created: %1$s";
+    public static final String MESSAGE_INVALID_TUTORIAL_GROUP = "No such tutorial group.";
     public static final String MESSAGE_DUPLICATE_ATTENDANCE =
             "This attendance session already exists in the tutorial group.";
 
@@ -47,7 +49,7 @@ public class CreateAttendanceCommand extends Command {
         try {
             model.createAttendance(tgId, session);
         } catch (TutorialGroupNotFoundException e) {
-            throw new CommandException("No such tutorial group.");
+            throw new CommandException(MESSAGE_INVALID_TUTORIAL_GROUP);
         } catch (DuplicateSessionException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
         }

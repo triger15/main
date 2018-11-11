@@ -2,6 +2,7 @@ package seedu.superta.model.util;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import seedu.superta.model.student.Phone;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
 import seedu.superta.model.tag.Tag;
+import seedu.superta.storage.XmlSuperTaClientStorage;
 
 /**
  * Contains utility methods for populating {@code SuperTaClient} with sample data.
@@ -52,6 +54,17 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlySuperTaClient getSampleAddressBook() {
+        ClassLoader classLoader = ReadOnlySuperTaClient.class.getClassLoader();
+        try {
+            Optional<ReadOnlySuperTaClient> client = XmlSuperTaClientStorage.readClientFromStream(
+                    classLoader.getResourceAsStream("seed.xml"));
+            if (client.isPresent()) {
+                return client.get();
+            }
+        } catch (Exception e) {
+            // retrieve data normally
+        }
+
         SuperTaClient sampleAb = new SuperTaClient();
         for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);

@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.superta.commons.exceptions.IllegalValueException;
 import seedu.superta.model.assignment.Assignment;
 
+// @@author Caephler
 /**
  * Class for XML-Adapted Assignment
  */

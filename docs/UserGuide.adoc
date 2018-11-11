@@ -35,7 +35,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * `list` : lists all students in the directory
 * `add n/John Doe p/98765432 e/johnd@example.com id/A0123456Y` : adds a student named `John Doe` to the student directory.
-* `delete 3` : shows the 3rd contact in the current list that was deleted
+* `create-tutorial-group id/1a n/My First Tutorial Group`: Creates a tutorial group named `My First Tutorial Group` with the ID `1a`
+* `delete 3` : shows the 3rd student in the current list that was deleted
 * `exit` : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -59,7 +60,7 @@ Format: `help`
 === Adding a student: `add`
 
 Adds a student to the directory +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT-ID [t/TAG]...`
 
 [TIP]
 ====
@@ -76,15 +77,17 @@ Examples:
 Shows a list of all students in the directory. +
 Format: `list`
 
+// tag::listtutorialgroups[]
 === Listing all tutorial groups: `list-tutorial-groups`
 
 Shows a list of all the tutorial groups, and reflects it on the UI. +
 Format: `list-tutorial-groups`
+// end::listtutorialgroups[]
 
 === Editing a student : `edit`
 
 Edits an existing student in the directory. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT-ID] [t/TAG]...`
 
 ****
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index *must be a positive integer* 1, 2, 3, ...
@@ -92,6 +95,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TAG]...`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all the student's tags by typing `t/` without specifying any tags after it.
+* You cannot change a student's student ID to another existing student's one.
 ****
 
 Examples:
@@ -101,18 +105,16 @@ Edits the phone number and email address of the 1st student to be `91234567` and
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-=== Locating students by name: `find`
+=== Locating students by keywords: `find`
 
 Finds and lists all students in the SuperTA client whose information matched with the entered keywords. +
-
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID]`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT-ID]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words or numbers will be matched e.g. `Han` will not match `Hans`, `9123` will not match `91234567`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `find n/John p/91234567` will return `John` and anybody with phone number `91234567`
+* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `find n/John p/91234567` will return `John` and anybody with phone number `91234567`
 * If there are more than one exact same parameter in the command, only the latest parameter will be taken.  E.g. `find n/John n/Alice` will only return search result of `Alice`, not `John`.
 ****
 
@@ -122,6 +124,8 @@ Examples:
 Returns `john` and `John Doe`
 * `find p/91234567` +
 Returns student with phone number `91234567`
+* `find e/Johndoe@hotmail.com` +
+Returns student with email `Johndoe@hotmail.com`
 * `find n/John id/A0123456T` +
 Returns `john` and `John Doe` and student with student id `A0123456T`
 * `find n/Alice n/Hans` +
@@ -170,19 +174,21 @@ Selects the 1st student in the results of the `find` command.
 === Viewing a student's information: `view`
 
 Views a student's information and any feedback that is left for him. +
-Format: `view id/STUDENT_ID`
+Format: `view id/STUDENT-ID`
 
 Examples:
 
 * `view id/A0166733Y` +
 Views the information of the student with the ID A0166733Y.
 
+// tag::createtutorialgroup[]
 === Creating a Tutorial Group: `create-tutorial-group`
 
-Creates a tutorial group with an identifier. +
-Format: `create-tutorial-group n/NAME id/TUTORIAL-GROUP-ID`
+Creates a tutorial group with specified name and ID. +
+Format: `create-tutorial-group n/TUTORIAL-GROUP-NAME id/TUTORIAL-GROUP-ID`
 ****
-* If there is already a tutorial group with the same identifier, the identifier will have a random suffix appended to it. +
+* The ID will be used in future commands to reference to this tutorial group.
+* If there is already a tutorial group with the same identifier, the identifier will have a random suffix appended to it.
 ****
 Examples:
 
@@ -190,54 +196,79 @@ Examples:
 Creates a tutorial group named `CS1101S Studio 04A` with the identifier `04a`. +
 * `create-tutorial-group n/CS2103T id/04b` +
   `create-tutorial-group n/CS2103T id/04b` +
-  Creates a tutorial group named CS2103T with the identifier 04b and a second tutorial group with the same name and identifier 04b-dusty123.
+  Creates a tutorial group named CS2103T with the identifier 04b and a second tutorial group with the same name and identifier `04b-dusty123`.
 
+// end::createtutorialgroup[]
 
+// tag::updatetutorialgroup[]
+=== Updating a Tutorial Group: `update-tutorial-group`
+
+Updates a tutorial group's name. +
+Format: `update-tutorial-group id/TUTORIAL-GROUP-ID n/TUTORIAL-GROUP-NAME`
+
+Examples:
+
+* `update-tutorial-group id/04a n/CS2103T Tutorial Group 9` +
+Updates the tutorial group with the ID `04a` to have an updated name of `CS2103T Tutorial Group 9`.
+
+// end::updatetutorialgroup[]
+
+// tag::deletetutorialgroup[]
 === Deleting a Tutorial Group: `delete-tutorial-group`
 
-Deletes an existing tutorial group with an identifier. +
-Format: `delete-tutorial-group id/TUTORIAL_GROUP_ID`
+Deletes an existing tutorial group. +
+Format: `delete-tutorial-group id/TUTORIAL-GROUP-ID`
 
 Examples:
 
 * `delete-tutorial-group id/04a` +
-Deletes a tutorial group with the identifier `04a`.
+Deletes a tutorial group with the ID `04a`.
+// end::deletetutorialgroup[]
 
+// tag::viewtutorialgroup[]
 === View Tutorial Group: `view-tutorial-group`
 
 Views a tutorial group's details. +
-Format: `view-tutorial-group id/TUTORIAL_GROUP_ID`
+Format: `view-tutorial-group id/TUTORIAL-GROUP-ID`
 
 Examples:
 
 * `view-tutorial-group id/04a` +
 Displays the `04a` tutorial group's information .
+// end::viewtutorialgroup[]
 
+// tag::addtotutorialgroup[]
 === Add to Tutorial Group: `add-to-tutorial-group`
 
 Adds a student to a tutorial group. +
-Format: `add-to-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID`
+Format: `add-to-tutorial-group tg/TUTORIAL-GROUP-ID st/STUDENT-ID`
 
+****
+* This command only takes in 1 student at a time. +
+****
 Examples:
 
 * `add-to-tutorial-group tg/04a st/A1231231Y` +
-Adds the student with student IDs `A1231231Y` to the tutorial group with an ID of `04a`.
+Adds the student with student ID `A1231231Y` to the tutorial group with an ID of `04a`.
+// end::addtotutorialgroup[]
 
+// tag::removefromtutorialgroup[]
 === Remove from Tutorial Group: `remove-from-tutorial-group`
 
 Removes a student from a tutorial group. +
-Format: `remove-from-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID`
+Format: `remove-from-tutorial-group tg/TUTORIAL-GROUP-ID st/STUDENT-ID`
 
 Examples:
 
 * `remove-from-tutorial-group tg/1 st/A1231231Y` +
 Removes the student with student ID `A1231231Y` from the tutorial group with an ID of `1`.
+// end::removefromtutorialgroup[]
 
 // tag::attendance[]
 === Create Attendance: `create-attendance`
 
 Creates an attendance listing for a specific tutorial group, identified by its ID. +
-Format: `create-attendance tg/TUTORIAL_GROUP_ID n/NAME`
+Format: `create-attendance tg/TUTORIAL-GROUP-ID n/SESSION-NAME`
 
 Examples:
 
@@ -247,62 +278,111 @@ Creates an attendance named `W4 Tutorial` for the tutorial group with an ID of `
 === Mark Attendance: `mark-attendance`
 
 Marks attendance for students from a specific tutorial group and session name, identified by its ID and name. +
-Format: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...`
 
+Format: `mark-attendance tg/TUTORIAL-GROUP-ID n/SESSION-NAME st/STUDENT-ID ...`
+****
+* Marking a student's attendance a second time is invalid. +
+****
 Examples:
 
-* `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
+* `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y` +
 Marks students with IDs `A1234567T` and `A0123456Y` as present in tutorial session named `W4 Tutorial` for the tutorial group with an ID of `1`.
 // end::attendance[]
 
+// tag::viewsession[]
+=== View Attendance Session: `view-session`
+
+Views the session details for a particular session in a tutorial group. +
+Format: `view-attendance tg/TUTORIAL-GROUP-ID n/SESSION-NAME`
+
+Examples:
+
+* `view-attendance tg/04a n/W1Tutorial` +
+Views the details of the session `W1Tutorial` belonging to the tutorial group `04a`.
+// end::viewsession[]
+
+// tag::createassignment[]
 === Creating an Assignment: `create-assignment`
 
 Creates an assignment for a specific tutorial group. +
-Format: `create-assignment tg/TUTORIAL_GROUP_ID n/ASSIGNMENT_NAME m/MAX_MARKS`
+Format: `create-assignment tg/TUTORIAL-GROUP-ID n/ASSIGNMENT-TITLE m/MAX_MARKS`
 
 ****
-* In future commands, assignments are referenced to by its name.
+* The `MAX_MARKS` argument takes in any valid floating point number.
+* In future commands, assignments are referenced to by its title.
 ****
 
 Examples:
 
 * `create-assignment tg/04a n/lab1 m/40` +
-Creates an assignment named `lab1` for the tutorial group with an ID of `04a`, with the maximum marks for this assignment as `40`.
+Creates an assignment titled `lab1` for the tutorial group with an ID of `04a`, with the maximum marks for this assignment as `40`.
+// end::createassignment[]
 
+// tag::updateassignment[]
+=== Update an Assignment: `update-assignment`
+
+Updates an existing assignment's details such as title and maximum marks. +
+Format: `update-assignment tg/TUTORIAL-GROUP-ID as/OLD-ASSIGNMENT-TITLE m/OLD-ASSIGNMENT-MAX-MARKS
+         [new_as/NEW-ASSIGNMENT-TITLE] [new_m/NEW-ASSIGNMENT-MAX-MARKS]`
+****
+* This command does not adjust the student grades in the assignment. Therefore, do note that it is possible for existing student grades to be higher than the updated maximum marks.
+* This command will not work if the updated assignment title has already existed in the assignment list.
+****
+Examples:
+
+* `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2` +
+Updates an assignment named `lab1` to `lab2` for the tutorial group with an ID of `04a`.
+* `update-assignment tg/04a as/lab1 m/40.0 new_m/50` +
+Updates `lab1` assignment maximum marks from `40.0` to `50.0` marks for the tutorial group with an ID of `04a`.
+* `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2 new_m/50` +
+Updates an assignment named `lab1` and maximum marks of `40.0`, to assignment named `lab2` and maximum marks of `50.0` for the tutorial group with an ID of `04a`.
+// end::updateassignment[]
+
+// tag::deleteassignment[]
 === Deleting an Assignment: `delete-assignment`
 
 Deletes an existing assignment for a specific tutorial group. +
-Format: `delete-assignment as/ASSIGNMENT_NAME tg/TUTORIAL_GROUP_ID`
+Format: `delete-assignment tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE`
 
 Examples:
 
-* `delete-assignment as/lab1 tg/04a` +
+* `delete-assignment tg/04a as/lab1` +
 Deletes an assignment named 'lab1' from the tutorial group with an ID of '04a'.
 
+// end::deleteassignment[]
+
+// tag::grade[]
 === Grade Assignment for Student: `grade`
 
-Enters a grade for a student for a specific assignment, identified by its ID. +
-Format: `grade tg/TUTORIAL_GROUP_ID as/ASSIGNMENT_NAME st/STUDENT_ID m/MARKS`
+Enters a grade for a student for a specific assignment in a tutorial group. +
+Format: `grade tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE st/STUDENT-ID m/MARKS`
+
+****
+* The marks given should be between 0 and the maximum marks of the assignment.
+****
 
 Examples:
 
 * `grade tg/04a as/lab1 st/A0166733Y m/40` +
-Creates a grade with marks `40` for the student with an ID of `A0166733Y` in the tutorial group `04a` for the assignment with ID `lab1`.
+Creates a grade with marks `40` for the student with an ID of `A0166733Y` in the tutorial group `04a` for the assignment with title `lab1`.
+// end::grade[]
 
+// tag::viewassignment[]
 === View Assignment Details: `view-assignment`
 
 Views an assignment details. +
-Format: `view-assignment tg/TUTORIAL_GROUP_ID as/ASSIGNMENT_NAME`
+Format: `view-assignment tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE`
 
 Examples:
 
 * `view-assignment tg/04a as/lab1` +
 Views the assignment details for the `lab1` assignment in the `04a` tutorial group.
+// end::viewassignment[]
 
 === Feedback to Student: `feedback`
 
 Adds feedback to a student with a specified Student ID. +
-Format: `feedback id/STUDENT_ID f/FEEDBACK`
+Format: `feedback id/STUDENT-ID f/FEEDBACK`
 
 Examples:
 
@@ -345,6 +425,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
+
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
@@ -370,7 +451,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all students from the client. +
+Clears all data from the client. This includes all students, tutorial groups, assignments, etc. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -401,12 +482,21 @@ Coming in v2.0
 ====
 
 Sorts students in order of their grade for a particular assignment.
-Format: `sort tg/TUTORIAL_GROUP_ID a/ASSIGNMENT_ID`
+Format: `sort tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE`
 
 Examples:
 
-* `sort tg/1 a/1`
+* `sort tg/1 as/1`
 Displays a list of students in tutorial group `1` by their grade on assignment `1`.
+
+=== View detailed performance data of student: `view-performance`
+
+[NOTE]
+====
+Coming in v2.0
+====
+
+Displays detailed information about a student across all tutorial groups, including his performance over time.
 
 === Saving the data
 
@@ -422,41 +512,48 @@ There is no need to save manually.
 == Command Summary
 
 * *Help* : `help`
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TAG]...` +
+* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT-ID [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com id/A0123456Y t/needs-help t/on-loa`
 * *List* : `list`
 * *List Tutorial Groups* : `list-tutorial-groups`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [id/STUDENT_ID] [t/TAG]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [id/STUDENT-ID] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find [type/KEYWORD] [type/MORE_KEYWORDS]` +
+* *Find* : `find [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT-ID]` +
 e.g. `find n/John`, `find id/A0166733Y n/John`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Select* : `select INDEX` +
 e.g.`select 2`
-* *View Feedback*: `view id/STUDENT_ID` +
+* *View Feedback*: `view id/STUDENT-ID` +
 e.g. `view id/A0166733Y`
-* *Create Tutorial Group*: `create-tutorial-group n/NAME id/TUTORIAL_GROUP_ID` +
+* *Create Tutorial Group*: `create-tutorial-group n/TUTORIAL-GROUP-NAME id/TUTORIAL-GROUP-ID` +
 e.g. `create-tutorial-group n/CS1101S Studio 04A id/04a`
-* *Delete Tutorial Group*: `delete-tutorial-group id/TUTORIAL_GROUP_ID` +
+* *Update Tutorial Group*: `update-tutorial-group id/TUTORIAL-GROUP-ID n/TUTORIAL-GROUP-NAME` +
+e.g. `update-tutorial-group id/04a n/CS2103T Group 04A`
+* *Delete Tutorial Group*: `delete-tutorial-group id/TUTORIAL-GROUP-ID` +
 e.g. `delete-tutorial-group id/04a`
-* *Add Student to Tutorial Group*: `add-to-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID` +
+* *Add Student to Tutorial Group*: `add-to-tutorial-group tg/TUTORIAL-GROUP-ID st/STUDENT-ID` +
 e.g. `add-to-tutorial-group tg/04a st/A0166733Y`
-* *Remove Student from Tutorial Group*: `remove-from-tutorial-group tg/TUTORIAL_GROUP_ID st/STUDENT_ID` +
+* *Remove Student from Tutorial Group*: `remove-from-tutorial-group tg/TUTORIAL-GROUP-ID st/STUDENT-ID` +
 e.g. `remove-from-tutorial-group tg/04a st/A0166733Y`
-* *Create Attendance*: `create-attendance tg/[TUTORIAL_GROUP_ID] n/[NAME]` +
+* *Create Attendance*: `create-attendance tg/TUTORIAL-GROUP-ID n/SESSION-NAME` +
 e.g. `create-attendance tg/1 n/W4 Tutorial`
-* *Mark Attendance*: `mark-attendance tg/TUTORIAL_GROUP_ID n/NAME st/STUDENT_ID ...` +
+* *Mark Attendance*: `mark-attendance tg/TUTORIAL-GROUP-ID n/SESSION-NAME st/STUDENT-ID ...` +
 e.g. `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
-* *Create Assignment*: `create-assignment tg/TUTORIAL_GROUP_ID n/ASSIGNMENT_NAME m/MAX_MARKS` +
+* *View Attendance*: `view-session tg/TUTORIAL-GRUOP-ID n/SESSION-NAME` +
+e.g. `view-session tg/1 n/W4 Tutorial`
+* *Create Assignment*: `create-assignment tg/TUTORIAL-GROUP-ID n/ASSIGNMENT-TITLE m/MAXMARKS` +
 e.g. `create-assignment tg/04a n/lab1 m/40`
-* *Delete Assignment*: `delete-assignment as/ASSIGNMENT_TITLE tg/TUTORIAL_GROUP_ID` +
+* *Update Assignment*: `update-assignment tg/TUTORIAL-GROUP-ID as/OLD-ASSIGNMENT-TITLE m/OLD-ASSIGNMENT-MAX-MARKS
+            [new_as/NEW-ASSIGNMENT-TITLE] [new_m/NEW-ASSIGNMENT-MAX-MARKS]` +
+e.g. `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2`
+* *Delete Assignment*: `delete-assignment tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE` +
 e.g. `delete-assignment as/lab1 tg/04a`
-* *Grade Assignment*: `grade tg/TUTORIAL_GROUP_ID as/ASSIGNMENT_NAME st/STUDENT_ID m/MARKS` +
+* *Grade Assignment*: `grade tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE st/STUDENT-ID m/MARKS` +
 e.g. `grade tg/04a as/lab1 st/A0166733Y m/30`
-* *View Assignment Details*: `view-assignment tg/TUTORIAL_GROUP_ID as/ASSIGNMENT_NAME` +
+* *View Assignment Details*: `view-assignment tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE` +
 e.g. `view-assignment tg/04a as/lab1`
-* *Feedback*: `feedback id/[STUDENT_ID] f/[FEEDBACK]` +
+* *Feedback*: `feedback id/STUDENT-ID f/FEEDBACK` +
 e.g. `feedback id/A0166733Y f/Likes to sleep in class`
 * *History* : `history`
 * *Undo* : `undo`

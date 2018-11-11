@@ -119,6 +119,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasStudentWithIdentity(Student student) {
+            return false;
+        }
+
+        @Override
         public void deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -150,6 +155,11 @@ public class AddCommandTest {
 
         @Override
         public void addAssignment(String tgId, Assignment assignment) {
+
+        }
+
+        @Override
+        public void updateAssignment(String tgId, Assignment assignmentToChange, Assignment assignmentChanged) {
 
         }
 

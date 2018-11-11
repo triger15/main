@@ -39,7 +39,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new StudentBuilder().build();
+        Student editedStudent = new StudentBuilder().withStudentId("A0232413E").build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -92,9 +92,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
+        Student editedStudent = new StudentBuilder(studentInFilteredList).withName("Test Person").build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditStudentDescriptorBuilder().withName("Test Person").build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedStudent);
 
@@ -197,7 +197,7 @@ public class EditCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
-        Student editedStudent = new StudentBuilder().build();
+        Student editedStudent = new StudentBuilder().withStudentId("A2323232K").build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new SuperTaClient(model.getSuperTaClient()), new UserPrefs());

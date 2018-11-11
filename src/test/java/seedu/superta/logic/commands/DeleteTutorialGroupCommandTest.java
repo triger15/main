@@ -3,6 +3,7 @@ package seedu.superta.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.superta.logic.commands.DeleteTutorialGroupCommand.MESSAGE_FAILURE;
 import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
@@ -22,21 +23,20 @@ public class DeleteTutorialGroupCommandTest {
     private Model model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    /*
-    TODO: Fix models not equal.
     @Test
     public void execute_tutorialGroupFound_success() {
         DeleteTutorialGroupCommand deleteTutorialGroupCommand = new DeleteTutorialGroupCommand(TG_ID_TO_DELETE);
-        model.addTutorialGroup(new TutorialGroup(TG_ID_TO_DELETE, TG_NAME_TO_DELETE));
+        TutorialGroup tutorialGroup = new TutorialGroup(TG_ID_TO_DELETE, TG_NAME_TO_DELETE);
+        model.addTutorialGroup(tutorialGroup);
 
-        Model expectedModel = new ModelManager(model.getSuperTaClient(), new UserPrefs());
-        expectedModel.deleteTutorialGroup(new TutorialGroup("T01"));
+        Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+        expectedModel.addTutorialGroup(tutorialGroup);
+        expectedModel.deleteTutorialGroup(new TutorialGroup(TG_ID_TO_DELETE, "toDelete"));
         expectedModel.commitSuperTaClient();
         String expectedMessage = String.format(DeleteTutorialGroupCommand.MESSAGE_SUCCESS, TG_ID_TO_DELETE);
 
         assertCommandSuccess(deleteTutorialGroupCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-    */
 
     @Test
     public void execute_tutorialGroupNotFound_throwsCommandException() {
@@ -56,7 +56,6 @@ public class DeleteTutorialGroupCommandTest {
 
         //same String object -> returns true
         DeleteTutorialGroupCommand firstCommandCopy = new DeleteTutorialGroupCommand(TG_ID_TO_DELETE);
-        System.out.println(firstCommand.equals(firstCommandCopy));
         assertTrue(firstCommand.equals(firstCommandCopy));
 
         // different types -> returns false

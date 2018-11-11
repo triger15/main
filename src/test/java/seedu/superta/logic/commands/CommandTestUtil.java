@@ -33,7 +33,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_STUDENT_ID_AMY = "A0123456Y";
-    public static final String VALID_STUDENT_ID_BOB = "A0166733Y";
+    public static final String VALID_STUDENT_ID_BOB = "A0166734Y";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_FEEDBACK_AMY = "Smart and conscientious.";
@@ -96,6 +96,20 @@ public class CommandTestUtil {
             assertEquals(expectedCommandHistory, actualCommandHistory);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes the given {@code command} which doesn't modify the model, and confirms that <br>
+     *     - the result message matches {@code expectedMessage} <br>
+     */
+    public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
+                                            String expectedMessage) {
+        try {
+            CommandResult result = command.execute(actualModel, actualCommandHistory);
+            assertEquals(expectedMessage, result.feedbackToUser);
+        } catch (CommandException exception) {
+            throw new AssertionError("Execution of command should not fail.", exception);
         }
     }
 

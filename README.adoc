@@ -17,20 +17,12 @@ endif::[]
 
 SuperTA is a desktop management application made for TAs to keep track on students progress and attendance. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 
-ifdef::env-github[]
-image::docs/images/Ui3.png[width="600"]
-endif::[]
-
 With just a few simple commands, you can
 
 * Search for student records
 * take and track attendance of each student
 * record and view feedback for each student
 * and many more.
-
-ifdef::env-github[]
-image::docs/images/Ui4.png[width="600"]
-endif::[]
 
 == Site Map
 

@@ -3,6 +3,7 @@ package seedu.superta.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -41,6 +42,20 @@ public class XmlUtil {
         Unmarshaller um = context.createUnmarshaller();
 
         return ((T) um.unmarshal(file.toFile()));
+    }
+
+    /**
+     * Returns the xml data from a stream.
+     * @throws JAXBException thrown if the file is empty or does not have the correct format.
+     */
+    public static <T> T getDataFromStream(InputStream stream, Class<T> classToConvert) throws JAXBException {
+        requireNonNull(stream);
+        requireNonNull(classToConvert);
+
+        JAXBContext context = JAXBContext.newInstance(classToConvert);
+        Unmarshaller um = context.createUnmarshaller();
+
+        return ((T) um.unmarshal(stream));
     }
 
     /**

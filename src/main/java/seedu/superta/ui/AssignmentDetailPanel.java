@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.superta.commons.core.LogsCenter;
-import seedu.superta.model.Model;
+import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.GradeEntry;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
@@ -83,7 +83,7 @@ public class AssignmentDetailPanel extends ViewPanelContent {
     }
 
     @Override
-    public void update(Model model) {
+    public void update(ReadOnlySuperTaClient model) {
         Optional<TutorialGroup> optTutorialGroup = model.getTutorialGroup(tutorialGroup.getId());
         if (optTutorialGroup.isPresent()) {
             TutorialGroup tutorialGroup = optTutorialGroup.get();
@@ -92,7 +92,7 @@ public class AssignmentDetailPanel extends ViewPanelContent {
                 return;
             }
             Assignment fromModel = optAssignment.get();
-            if (fromModel.equals(assignment)) {
+            if (fromModel.isSameAssignment(this.assignment)) {
                 this.assignment = fromModel;
                 render();
             }

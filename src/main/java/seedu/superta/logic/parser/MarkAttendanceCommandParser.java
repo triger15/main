@@ -12,6 +12,7 @@ import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.StudentId;
 
+// @@author triger15
 /**
  * Parser for the mark-attendance command.
  */

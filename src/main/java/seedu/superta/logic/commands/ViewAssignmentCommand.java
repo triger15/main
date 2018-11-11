@@ -2,6 +2,8 @@ package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
 
 import java.util.Optional;
 
@@ -9,7 +11,6 @@ import seedu.superta.commons.core.EventsCenter;
 import seedu.superta.commons.events.ui.AssignmentSelectedEvent;
 import seedu.superta.logic.CommandHistory;
 import seedu.superta.logic.commands.exceptions.CommandException;
-import seedu.superta.logic.parser.CliSyntax;
 import seedu.superta.model.Model;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
@@ -27,11 +28,11 @@ public class ViewAssignmentCommand extends Command {
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "Assignment not found.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves detailed assignment information.\n"
         + "Parameters: "
-        + CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-        + CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE + "ASSIGNMENT-TITLE\n"
+        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
+        + PREFIX_GENERAL_ASSIGNMENT_TITLE + "ASSIGNMENT-TITLE\n"
         + "Example: " + COMMAND_WORD + " "
-        + CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
-        + CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE + "lab1";
+        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
+        + PREFIX_GENERAL_ASSIGNMENT_TITLE + "lab1";
 
     private final String tutorialGroupId;
     private final Title title;
