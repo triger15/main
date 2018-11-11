@@ -305,17 +305,17 @@ Views the details of the session `W1Tutorial` belonging to the tutorial group `0
 === Creating an Assignment: `create-assignment`
 
 Creates an assignment for a specific tutorial group. +
-Format: `create-assignment tg/TUTORIAL-GROUP-ID n/ASSIGNMENT-TITLE m/MAX_MARKS`
+Format: `create-assignment tg/TUTORIAL-GROUP-ID n/ASSIGNMENT-TITLE m/MAXMARKS`
 
 ****
-* The `MAX_MARKS` argument takes in any valid floating point number.
+* The `MAXMARKS` argument takes in any valid floating point number.
 * In future commands, assignments are referenced to by its title.
 ****
 
 Examples:
 
 * `create-assignment tg/04a n/lab1 m/40` +
-Creates an assignment titled `lab1` for the tutorial group with an ID of `04a`, with the maximum marks for this assignment as `40`.
+Creates an assignment named `lab1` for the tutorial group with an ID of `04a`, with the maximum marks for this assignment as `40`.
 // end::createassignment[]
 
 // tag::updateassignment[]
@@ -540,7 +540,7 @@ e.g. `remove-from-tutorial-group tg/04a st/A0166733Y`
 e.g. `create-attendance tg/1 n/W4 Tutorial`
 * *Mark Attendance*: `mark-attendance tg/TUTORIAL-GROUP-ID n/SESSION-NAME st/STUDENT-ID ...` +
 e.g. `mark-attendance tg/1 n/W4 Tutorial st/A1234567T st/A0123456Y`
-* *View Attendance*: `view-session tg/TUTORIAL-GRUOP-ID n/SESSION-NAME` +
+* *View Attendance*: `view-session tg/TUTORIAL-GROUP-ID n/SESSION-NAME` +
 e.g. `view-session tg/1 n/W4 Tutorial`
 * *Create Assignment*: `create-assignment tg/TUTORIAL-GROUP-ID n/ASSIGNMENT-TITLE m/MAXMARKS` +
 e.g. `create-assignment tg/04a n/lab1 m/40`
