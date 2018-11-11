@@ -21,7 +21,7 @@ public class UpdateTutorialGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates a tutorial group. "
         + "Parameters: "
         + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-        + PREFIX_TUTORIAL_GROUP_NAME + "TUTORIAL-GROUP-NAME "
+        + PREFIX_TUTORIAL_GROUP_NAME + "TUTORIAL-GROUP-NAME \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_TUTORIAL_GROUP_ID + "04a "
         + PREFIX_TUTORIAL_GROUP_NAME + "CS2100 Tutorial Group 04A";
