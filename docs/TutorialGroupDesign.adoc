@@ -1,4 +1,5 @@
 [[Design-TutorialGroupMaster]]
+:imagesDir: images
 === TutorialGroupMaster Design
 
 .Structure of the TutorialGroupMaster

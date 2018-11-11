@@ -206,7 +206,7 @@ link:{repoURL}/src/main/java/seedu/superta/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a student) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete assignment as/lab1 tg/04a")` API call.
 
 .Interactions Inside the Logic Component for the `delete-assignment as/lab1 tg/04a` Command
 image::DeleteAssignmentSdForLogic.png[width="800"]
@@ -223,7 +223,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the SuperTA client data.
-* exposes an unmodifiable `ObservableList<Student>` and `ObservableList<TutorialGroup>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Student>`,`ObservableList<Attendance>` and `ObservableList<TutorialGroup>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
