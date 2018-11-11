@@ -4,7 +4,7 @@
 :toc-title:
 :toc-placement: preamble
 :sectnums:
-:imagesDVir: images
+:imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
 ifdef::env-github[]
