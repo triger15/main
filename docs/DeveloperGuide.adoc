@@ -371,6 +371,96 @@ image::DeleteAssignmentSdForLogic.png[width="800"]
 
 // end::deleteassignment[]
 
+// tag::find[]
+=== Find feature
+
+==== Current Implementation
+
+The `find` command is facilitated by the `FindCommand` class.
+It extends the abstract class `Command`,
+and it is triggered when the user entered `find` into `SuperTaClient`.
+
+The sequence diagram below shows the overview when `FindCommand` is called:
+
+image::SDFindCommand.png[width="800"]
+
+The `FindCommand` is implemented as follows:
+
+. `LogicManager` is called to execute the entered argument.
+. `LogicManager` calls `SuperTaClientParser`, and parses the argument through the method `parseCommand()`.
+. `SuperTaClientParser` calls its respective command parsers of the argument using `parse()`. In this case, the `FindCommandParser` is called.
+. `FindCommandParser` will now parse the arguments and turn into `name`, `phone`, `email` and `studentID` predicates. These predicates will be passed to `FindCommand`.
+. When `LogicManager` invokes `execute()`, `FindCommand` will call `updateFilteredStudentList()` to the model component and update the student list to the latest results.
+
+==== Design Considerations
+
+===== Aspect: How `FindCommandParser` parse predicates
+
+* *Alternative 1 (current choice):* Each parameter field (ie `name`, `phone`) are parsed into its respective predicates (ie. `namePredicate`, `phonePredicate`).
+** Pros: Easy to implement. Predicates are grouped into how they are parsed.
+** Cons: Less user-friendly. Users are required to remember the prefixes for each field.
+* *Alternative 2:* Parse all arguments into a general `string`, then search all the fields and stored into a main predicate.
+** Pros: More versatile and user-friendly. The `string` is able to search all the fields.
+** Cons: Slightly more tedious as compared to alternative 1. The general `string` needs to parse into respective field objects and predicates for each available parameter.
+
+// end::find[]
+
+// tag::updateassignment[]
+=== Update Assignment feature
+
+==== Current Implementation
+
+The `update-assignment` command is facilitated by `UpdateAssignmentCommand` class.
+It extends the abstract class `command`,
+and it is triggered when the user entered `update-assignment` into `SuperTaClient`.
+Actual changes of this command are made through `Model#updateAssignment()`.
+
+The `UpdateAssignmentCommand` is implemented as follows:
+
+[NOTE]
+`UpdateAssignmentCommand` only works when there is an existing assignment in an existing tutorial group,
+and the updated assignment name is not the same as other existing assignment title.
+In this implementation, it is assumed that there is a valid tutorial group and a valid existing assignment.
+
+.Logic component of the Sequence Diagram for `update-assignment` command
+image::SDUpdateAssignmentCommandLogic.png[width="800"]
+
+. `LogicManager` is called to execute the entered argument.
+. `LogicManager` calls `SuperTaClientParser`, and parses the argument through the method `parseCommand()`.
+. `SuperTaClientParser` calls its respective command parsers of the argument using `parse()`. In this case, the `UpdateAssignmentCommandParser()` is called.
+. `UpdatAassignmentCommandParser` will now parse the arguments.
+. `UpdateAssignmentCommandParser` will create a new `UpdateAssignmentDescriptor` and set the updated assignment details, which later will be passed to `UpdateAssignmentCommand`.
+. When `LogicManager` invokes `execute()`, `UpdateAssignmentCommand` will call `updateAssignment()` to the model component.
+
+.Model component of the Sequence Diagram for `update-assignment` command
+image::SDUpdateAssignmentCommandModel.png[width="800"]
+
+. When `updateAssignment()` is called in `ModelManager`, it will retrieve `tutorialGroup` and `assignment` information from `SuperTaClient` and `TutorialGroup` respectively.
+. After locating the specific `assignment` to be changed, `ModelManager` now calls `updateAssignment()` to `UiqueAssignmentList` to replace the old assignment details.
+. Updated information will be returned to the `logic` component (as ‘updated’) in the above diagram.
+
+==== Design Considerations
+
+===== Aspect: Implementation of `UpdateAssignmentDescriptor` in `UpdateAssignmentCommand`
+
+* *Alternative 1 (current choice):*  Use of `UpdateAssignmentDescriptor` in `UpdateAssignmentCommand` to store the updated `assignment` details.
+** Pros: Strengthen Single Responsibility Principle (SRP), as the `UpdateAssignmentCommand` will not need to check for differences between the old and updated `assignment` details.
+** Cons: May increase coupling. If the additional `assignment` details are added in in the future such as section maximum marks, `UpdateAssignmentDescriptor` have to change accordingly as well.
+* *Alternative 2:* Remove `UpdateAssignmentDescriptor` and parse updated `assignment` details as a new `assignment`.
+** Pros: Decreases coupling.
+** Cons: Harder to implement if user only indicate to update one field. (eg: update `assignmentTitle` only, while `maxMarks` stay the same). In this case, `UpdateAssignmentCommand` need to factor in the differences changed after the updated `assignment` details.
+
+===== Aspect: Data structure of `update-assignment` in `ModelManager`
+
+* *Alternative 1:*  Locate `assignment` from `assignmentList`, then delete old `assignment` and add updated `assignment`.
+** Pros: Easier to implement as it made use of other existing assignment commands such as `addAssignment()` and `deleteAssignment()`. No additional methods are needed for `updateAssignment()`.
+** Cons: As each assignment contains a `GradeBook` which stores all student grades, deleting the old `assignment` and add a new `assignment` may risk of losing the existing `GradeBook` records. In addition, assignment index list may be affected after deletion as well.
+* *Alternative 2 (current choice):* Locate `assignment` from `assignmentList` and replace the old `assignment` with updated `assignment` details.
+** Pros: No risk of losing `GradeBook` records as only the `assignmentTitle` and `maxMarks` are being edited.
+** Cons: An additional method, `updateAssignment()` will be implemented instead.
+
+// end::updateassignment[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
