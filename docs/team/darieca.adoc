@@ -9,9 +9,11 @@
 
 == Overview
 
-SuperTA is a class management tool created for School of Computing (SoC) Teaching Assistants (TA) and professors. It enables the TAs and professors to better manage their tutorial classes and streamline trivial process such as attendance marking and assignment marks management.
+SuperTA is a class management tool created for School of Computing (SoC) Teaching Assistants (TA) and professors.
+It enables the TAs and professors to better manage their tutorial classes and streamline trivial process such as attendance marking and assignment marks management.
 
-This project involves a team of Computer Science (CS) undergraduates to develop a software from an existing software product. The codebase was originally adapted from Seedu’s AddressBook – Level 4 application. The user of interacts with SuperTA using a CLI, and it has a GUI created with JavaFX.
+This project involves a team of Computer Science (CS) undergraduates to develop a software from an existing software product.
+The 10KoC codebase was originally adapted from Seedu’s AddressBook – Level 4 application. The user of interacts with SuperTA using a CLI, and it has a GUI created with JavaFX.
 
 == Summary of contributions
 
