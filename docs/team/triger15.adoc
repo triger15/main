@@ -64,7 +64,10 @@ The implementation of it needed to account for various exceptions, such as when 
 |===
 
 include::../UserGuide.adoc[tag=feedback]
-include::../UserGuide.adoc[tag=attendance]
+
+include::../UserGuide.adoc[tag=createattendance]
+
+include::../UserGuide.adoc[tag=markattendance]
 
 == Contributions to the Developer Guide
 
