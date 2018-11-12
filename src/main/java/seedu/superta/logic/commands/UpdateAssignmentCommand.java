@@ -1,7 +1,6 @@
 package seedu.superta.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
@@ -31,28 +30,26 @@ public class UpdateAssignmentCommand extends Command {
             + "Updates an existing assignment details (ie. assignment title, maximum marks).\n"
             + "Parameters: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "OLD-ASSIGNMENT-TITLE "
-            + PREFIX_ASSIGNMENT_MAX_MARKS + "OLD-ASSIGNMENT-MAX-MARKS \n"
+            + PREFIX_GENERAL_ASSIGNMENT_TITLE + "OLD-ASSIGNMENT-TITLE \n"
             + "[" + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + "NEW-ASSIGNMENT-TITLE] "
             + "[" + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + "NEW-ASSIGNMENT-MAX-MARKS] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "04a "
             + PREFIX_GENERAL_ASSIGNMENT_TITLE + "Lab 1 "
-            + PREFIX_ASSIGNMENT_MAX_MARKS + "40.0 "
             + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + "Lab 2 "
             + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + "50.0";
 
-    public static final String MESSAGE_SUCCESS = "Tutorial %1$s - Old Assignment details: %2$s "
-            + "New Assignment details: %3$s";
+    public static final String MESSAGE_SUCCESS = "Tutorial %1$s - Assignment %2$s details has been updated! ";
     public static final String MESSAGE_FAILURE_NO_TUTORIAL_GROUP = "Tutorial group does not exist.";
     public static final String MESSAGE_FAILURE_NO_ASSIGNMENT = "Assignment does not exist.";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT_NAME = "Assignment name already exists in the database.";
+    public static final Double INVALID_VALUE = -1.0;
 
     private final String tutorialGroupId;
-    private final Assignment assignmentToChange;
+    private final Title assignmentToChange;
     private final UpdateAssignmentDescriptor updateAssignmentDescriptor;
 
-    public UpdateAssignmentCommand(String tutorialGroupId, Assignment assignmentToChange,
+    public UpdateAssignmentCommand(String tutorialGroupId, Title assignmentToChange,
                                    UpdateAssignmentDescriptor updateAssignmentDescriptor) {
         requireNonNull(tutorialGroupId);
         requireNonNull(assignmentToChange);
@@ -81,22 +78,22 @@ public class UpdateAssignmentCommand extends Command {
 
         model.commitSuperTaClient();
         return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroupId,
-                assignmentToChange, assignmentChanged));
+                assignmentToChange));
     }
 
     /**
      * Creates and returns an {@code assignmentChanged} with the details of {@code assignmentToChange}
      * edited with {@code updateAssignmentDescriptor}.
      */
-    private static Assignment createChangedAssignment(Assignment assignmentToChange,
+    private static Assignment createChangedAssignment(Title assignmentToChange,
                                                      UpdateAssignmentDescriptor updateAssignmentDescriptor) {
         assert assignmentToChange != null;
 
         Title updatedAssignmentTitle = updateAssignmentDescriptor.getAssignmentTitle()
-                .orElse(assignmentToChange.getTitle());
-        Double updatedMaxMarks = updateAssignmentDescriptor.getMaxMarks().orElse(assignmentToChange.getMaxMarks());
+                .orElse(assignmentToChange);
+        Double updatedMaxMarks = updateAssignmentDescriptor.getMaxMarks().orElse(INVALID_VALUE);
 
-        return new Assignment(updatedAssignmentTitle, updatedMaxMarks, assignmentToChange.getGradebook());
+        return new Assignment(updatedAssignmentTitle, updatedMaxMarks);
     }
 
     @Override

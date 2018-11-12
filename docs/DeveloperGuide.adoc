@@ -1151,13 +1151,13 @@ Expected: All students with phone number `91234567` or with student ID `A0123456
    View the tutorial group using the `view-tutorial-group id/04a` command. +
   Have an assignment title named `lab1` with a maximum mark of `40.0`. +
 Have an assignment title named `lab3` with a maximum mark of `50.0`.
-.. Test case: `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2` +
+.. Test case: `update-assignment tg/04a as/lab1 new_as/lab2` +
    Expected: Assignment `lab1` name should now be changed to `lab2` under the `Assignments` UI panel. Maximum marks should be maintained at `40.0` marks.
-.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/50.0` +
+.. Test case: `update-assignment tg/04a as/lab2 new_m/50.0` +
    Expected: Assignment `lab2` maximum marks should be changed from `40.0` marks to `50.0` marks under the `Assignments` UI panel.
-.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/lab3` +
+.. Test case: `update-assignment tg/04a as/lab2 new_m/lab3` +
    Expected: An error message should be displayed, showing that assignment name already exists in the database.
-.. Test case: `update-assignment tg/04a as/lab4 m/40.0 new_m/lab5` +
+.. Test case: `update-assignment tg/04a as/lab4 new_m/lab5` +
    Expected: An error message should be displayed, showing that assignment does not exist.
 // end::testupdateassignment[]
 

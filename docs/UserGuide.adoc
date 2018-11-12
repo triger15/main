@@ -339,7 +339,7 @@ Creates an assignment named `lab1` for the tutorial group with an ID of `04a`, w
 === Update an Assignment: `update-assignment`
 
 Updates an existing assignment's details such as title and maximum marks. +
-Format: `update-assignment tg/TUTORIAL-GROUP-ID as/OLD-ASSIGNMENT-TITLE m/OLD-ASSIGNMENT-MAX-MARKS
+Format: `update-assignment tg/TUTORIAL-GROUP-ID as/OLD-ASSIGNMENT-TITLE
          [new_as/NEW-ASSIGNMENT-TITLE] [new_m/NEW-ASSIGNMENT-MAX-MARKS]`
 ****
 * This command does not adjust the student grades in the assignment. Therefore, do note that it is possible for existing student grades to be higher than the updated maximum marks.
@@ -347,11 +347,11 @@ Format: `update-assignment tg/TUTORIAL-GROUP-ID as/OLD-ASSIGNMENT-TITLE m/OLD-AS
 ****
 Examples:
 
-* `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2` +
+* `update-assignment tg/04a as/lab1 new_as/lab2` +
 Updates an assignment named `lab1` to `lab2` for the tutorial group with an ID of `04a`.
-* `update-assignment tg/04a as/lab1 m/40.0 new_m/50` +
+* `update-assignment tg/04a as/lab1 new_m/50` +
 Updates `lab1` assignment maximum marks from `40.0` to `50.0` marks for the tutorial group with an ID of `04a`.
-* `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2 new_m/50` +
+* `update-assignment tg/04a as/lab1 new_as/lab2 new_m/50` +
 Updates an assignment named `lab1` and maximum marks of `40.0`, to assignment named `lab2` and maximum marks of `50.0` for the tutorial group with an ID of `04a`.
 // end::updateassignment[]
 
