@@ -12,23 +12,25 @@ import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TIT
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP_NAME;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.superta.logic.commands.AddCommand;
+import seedu.superta.logic.commands.AddStudentToTutorialGroupCommand;
 import seedu.superta.logic.commands.ClearCommand;
 import seedu.superta.logic.commands.CreateAttendanceCommand;
+import seedu.superta.logic.commands.CreateTutorialGroupCommand;
 import seedu.superta.logic.commands.DeleteCommand;
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.ExitCommand;
@@ -39,11 +41,13 @@ import seedu.superta.logic.commands.HistoryCommand;
 import seedu.superta.logic.commands.ListCommand;
 import seedu.superta.logic.commands.MarkAttendanceCommand;
 import seedu.superta.logic.commands.RedoCommand;
+import seedu.superta.logic.commands.RemoveStudentFromTutorialGroupCommand;
 import seedu.superta.logic.commands.SelectCommand;
 import seedu.superta.logic.commands.UndoCommand;
 import seedu.superta.logic.commands.UpdateAssignmentCommand;
 import seedu.superta.logic.commands.UpdateAssignmentCommand.UpdateAssignmentDescriptor;
 import seedu.superta.logic.commands.ViewStudentFeedbackCommand;
+import seedu.superta.logic.commands.ViewTutorialGroupCommand;
 import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
@@ -102,11 +106,10 @@ public class SuperTaClientParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("n/foo", "n/bar", "n/baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        // assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-        // TODO: Fix up this test. We cannot equqate FindCommands in the old manner anymore.
+                FindCommand.COMMAND_WORD + " "
+                        + PREFIX_NAME + "alice fooh ida");
+        assertTrue(command instanceof FindCommand);
     }
 
     @Test
@@ -226,4 +229,54 @@ public class SuperTaClientParserTest {
                 ViewStudentFeedbackCommand.COMMAND_WORD + " " + PREFIX_STUDENT_ID + studentId);
         assertEquals(new ViewStudentFeedbackCommand(studentId), command);
     }
+
+    @Test
+    public void parseCommand_createTutorialGroup() throws Exception {
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
+        CreateTutorialGroupCommand command = (CreateTutorialGroupCommand) parser.parseCommand(
+                CreateTutorialGroupCommand.COMMAND_WORD + " "
+                        + PREFIX_TUTORIAL_GROUP_NAME + tutorialGroup.getName() + " "
+                        + PREFIX_TUTORIAL_GROUP_ID + tutorialGroup.getId());
+
+        assertEquals(new CreateTutorialGroupCommand(tutorialGroup), command);
+    }
+
+    @Test
+    public void parseCommand_viewTutorialGroup() throws Exception {
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
+        ViewTutorialGroupCommand command = (ViewTutorialGroupCommand) parser.parseCommand(
+                ViewTutorialGroupCommand.COMMAND_WORD + " "
+                        + PREFIX_TUTORIAL_GROUP_ID + tutorialGroup.getId());
+
+        assertEquals(new ViewTutorialGroupCommand(tutorialGroup.getId()), command);
+    }
+
+    @Test
+    public void parseCommand_addStudentToTutorialGroup() throws Exception {
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
+        Student student = new StudentBuilder().build();
+        AddStudentToTutorialGroupCommand command = (AddStudentToTutorialGroupCommand) parser.parseCommand(
+                AddStudentToTutorialGroupCommand.COMMAND_WORD + " "
+                        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tutorialGroup.getId() + " "
+                        + PREFIX_GENERAL_STUDENT_ID + student.getStudentId());
+
+        assertEquals(new AddStudentToTutorialGroupCommand(tutorialGroup.getId(), student.getStudentId()), command);
+    }
+
+    @Test
+    public void parseCommand_removeStudentFromTutorialGroup() throws Exception {
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
+        Student student = new StudentBuilder().build();
+        tutorialGroup.addStudent(student);
+
+        RemoveStudentFromTutorialGroupCommand command =
+                (RemoveStudentFromTutorialGroupCommand) parser.parseCommand(
+                RemoveStudentFromTutorialGroupCommand.COMMAND_WORD + " "
+                        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tutorialGroup.getId() + " "
+                        + PREFIX_GENERAL_STUDENT_ID + student.getStudentId());
+
+        assertEquals(new RemoveStudentFromTutorialGroupCommand(tutorialGroup.getId(), student.getStudentId()), command);
+    }
+
+
 }
