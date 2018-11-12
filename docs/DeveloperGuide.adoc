@@ -891,6 +891,7 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+// tag::usecasefour[]
 [discrete]
 === UC04 - Grade Assignment
 
@@ -923,6 +924,9 @@ Use case resumes at step 3.
 +
 Use case resumes at step 5.
 
+// end::usecasefour[]
+
+// tag::usecasefive[]
 [discrete]
 === UC05 - Mark Attendance
 
@@ -948,6 +952,9 @@ Use case resumes at step 1.
 +
 Use case resumes at step 3.
 
+// end::usecasefive[]
+
+// tag::usecasesix[]
 [discrete]
 === UC06 - Add feedback for student
 
@@ -964,6 +971,8 @@ Use case ends.
 ** 1a1. System displays an error message.
 +
 Use case resumes at step 1.
+
+// end::usecasesix[]
 
 _{More to be added}_
 
