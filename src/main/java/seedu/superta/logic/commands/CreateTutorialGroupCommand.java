@@ -15,7 +15,7 @@ import seedu.superta.model.tutorialgroup.TutorialGroup;
 public class CreateTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "create-tutorial-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a tutorial group."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a tutorial group.\n"
         + "Parameters: "
         + PREFIX_TUTORIAL_GROUP_NAME + "TUTORIAL-GROUP-NAME "
         + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID\n"

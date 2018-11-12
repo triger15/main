@@ -15,7 +15,7 @@ import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundExcepti
 public class DeleteTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "delete-tutorial-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tutorial group."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tutorial group.\n"
             + "Parameters: "
             + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID\n"
             + "Example: " + COMMAND_WORD + " "

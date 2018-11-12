@@ -18,10 +18,10 @@ import seedu.superta.model.tutorialgroup.TutorialGroup;
 public class UpdateTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "update-tutorial-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates a tutorial group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates a tutorial group.\n"
         + "Parameters: "
         + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
-        + PREFIX_TUTORIAL_GROUP_NAME + "TUTORIAL-GROUP-NAME \n"
+        + PREFIX_TUTORIAL_GROUP_NAME + "TUTORIAL-GROUP-NAME\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_TUTORIAL_GROUP_ID + "04a "
         + PREFIX_TUTORIAL_GROUP_NAME + "CS2100 Tutorial Group 04A";

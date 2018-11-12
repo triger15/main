@@ -26,7 +26,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_STUDENT_ID + "STUDENT-ID]\n "
+            + "[" + PREFIX_STUDENT_ID + "STUDENT-ID]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";

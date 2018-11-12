@@ -16,7 +16,7 @@ import seedu.superta.model.tutorialgroup.TutorialGroup;
 public class ViewTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "view-tutorial-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information about a specific tutorial group. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information about a specific tutorial group.\n"
         + "Parameters: "
         + PREFIX_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID\n"
         + "Example: " + COMMAND_WORD + " "
