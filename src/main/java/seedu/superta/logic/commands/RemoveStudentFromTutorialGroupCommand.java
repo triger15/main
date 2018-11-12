@@ -18,7 +18,7 @@ import seedu.superta.model.tutorialgroup.exceptions.TutorialGroupNotFoundExcepti
 public class RemoveStudentFromTutorialGroupCommand extends Command {
     public static final String COMMAND_WORD = "remove-from-tutorial-group";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a student from a tutorial group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a student from a tutorial group.\n"
         + "Parameters: "
         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + "TUTORIAL-GROUP-ID "
         + PREFIX_GENERAL_STUDENT_ID + "STUDENT-ID \n"
