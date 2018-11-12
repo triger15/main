@@ -378,7 +378,7 @@ image::DeleteAssignmentSdForLogic.png[width="800"]
 
 The `find` command is facilitated by the `FindCommand` class.
 It extends the abstract class `Command`,
-and it is triggered when the user entered `find` into `SuperTaClient`.
+and it is triggered when the user enters `find` into `SuperTaClient`.
 
 The sequence diagram below shows the overview when `FindCommand` is called:
 
@@ -412,7 +412,7 @@ The `FindCommand` is implemented as follows:
 
 The `update-assignment` command is facilitated by `UpdateAssignmentCommand` class.
 It extends the abstract class `command`,
-and it is triggered when the user entered `update-assignment` into `SuperTaClient`.
+and it is triggered when the user enters `update-assignment` into `SuperTaClient`.
 Actual changes of this command are made through `Model#updateAssignment()`.
 
 The `UpdateAssignmentCommand` is implemented as follows:
