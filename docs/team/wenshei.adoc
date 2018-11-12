@@ -53,3 +53,11 @@ include::../UserGuide.adoc[tag=deletetutorialgroup]
 |===
 
 include::../DeveloperGuide.adoc[tag=deleteassignment]
+
+---
+
+include::../DeveloperGuide.adoc[tag=usecasefour]
+
+include::../DeveloperGuide.adoc[tag=usecasefive]
+
+include::../DeveloperGuide.adoc[tag=usecasesix]
