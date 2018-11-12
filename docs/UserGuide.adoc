@@ -400,6 +400,7 @@ Examples:
 Views the assignment details for the `lab1` assignment in the `04a` tutorial group.
 // end::viewassignment[]
 
+// tag::feedback[]
 === Feedback to Student: `feedback`
 
 Adds feedback to a student with a specified Student ID. +
@@ -409,6 +410,7 @@ Examples:
 
 * `feedback id/A1234566T f/Is generally attentive during class. However, needs to speak up more.` +
 Adds the given feedback `Is generally attentive during class. However, needs to speak up more.` to the student with Student ID `A1234566T`.
+//end::feedback[]
 
 === Listing entered commands : `history`
 

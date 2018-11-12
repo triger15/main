@@ -8,9 +8,20 @@
 ---
 
 == Overview
+The purpose of this project portfolio is to document my contributions I have made for the project, SuperTA.
 
-SuperTA is a desktop app for Teaching Assistants and Professors of NUS School of Computing to manage their tutorials and students. It is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-It is written in Java, and it is equipped with various Continuous Integration/Deployment tools such as AppVeyor and Travis CI. JUnit tests have also been implemented to achieve a code coverage of roughly 80%.
+SuperTA is a desktop app for Teaching Assistants and Professors of NUS School of Computing to manage their tutorials and students.
+This app has been developed from an existing software product by my CS2103T team and helps TAs with their administrative tasks.
+It is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+It is written in Java, and it is equipped with various Continuous Integration/ Deployment tools such as AppVeyor and Travis CI.
+
+Some significant features of SuperTA include:
+
+* Creating of tutorial groups
+* Adding of students into tutorial groups
+* Marking attendance of students
+* Grading assignments of students
+* Giving feedback to students
 
 == Summary of contributions
 
@@ -32,6 +43,8 @@ The implementation of it needed to account for various exceptions, such as when 
 
 * *Other contributions*:
 
+** Project management:
+*** Reposense: Created config.json file and modified author names to ensure code is correctly attributed
 ** Enhancements to existing features:
 *** Updated the GUI color scheme, title and icon (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/88[#88])
 *** Created the UI mockup for SuperTA client (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/23[#23])
@@ -39,20 +52,19 @@ The implementation of it needed to account for various exceptions, such as when 
 ** Documentation:
 *** Slight modifications to feedback command in the User Guide: https://github.com/CS2103-AY1819S1-T16-2/main/pull/83[#83]
 ** Community:
-*** Reposense: Created config.json file and modified with author names to ensure code is correctly attributed
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T16-2/main/pull/91[#91], https://github.com/CS2103-AY1819S1-T16-2/main/pull/90[#90], https://github.com/CS2103-AY1819S1-T16-2/main/pull/73[#73]
+*** Reported bugs and fixed them: https://github.com/CS2103-AY1819S1-T16-2/main/pull/167[#167]
 
 
 
 == Contributions to the User Guide
 
-
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=feedback]
 include::../UserGuide.adoc[tag=attendance]
-
 
 == Contributions to the Developer Guide
 
@@ -62,7 +74,8 @@ include::../UserGuide.adoc[tag=attendance]
 
 include::../DeveloperGuide.adoc[tag=markattendancefeature]
 
-
+=== Instructions for Manual Testing
+include::../DeveloperGuide.adoc[tag=testsattendance]
 
 
 ---
