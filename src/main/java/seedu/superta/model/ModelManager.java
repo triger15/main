@@ -178,14 +178,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateAssignment(String tgId, Assignment assignmentToChange, Assignment assignmentChanged) {
+    public void updateAssignment(String tgId, Title assignmentToChange, Assignment assignmentChanged) {
         Optional<TutorialGroup> tg = versionedSuperTaClient.getTutorialGroup(tgId);
         if (!tg.isPresent()) {
             throw new TutorialGroupNotFoundException();
         }
         TutorialGroup t = tg.get();
 
-        List<Assignment> assignmentList = t.getAssignmentList(assignmentToChange.getTitle());
+        List<Assignment> assignmentList = t.getAssignmentList(assignmentToChange);
         if (assignmentList.isEmpty()) {
             throw new AssignmentNotFoundException();
         }
@@ -196,7 +196,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         Assignment a = assignmentList.get(0);
 
-        versionedSuperTaClient.updateAssignment(t, a, assignmentChanged);
+        Double maxMarks;
+        if (assignmentChanged.getMaxMarks().equals(-1.0)) {
+            maxMarks = a.getMaxMarks();
+        } else {
+            maxMarks = assignmentChanged.getMaxMarks();
+        }
+
+        Assignment assignmentFinalised = new Assignment(assignmentChanged.getTitle(), maxMarks, a.getGradebook());
+
+        versionedSuperTaClient.updateAssignment(t, a, assignmentFinalised);
         indicateSuperTaClientChanged();
     }
 
