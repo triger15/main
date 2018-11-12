@@ -24,7 +24,7 @@ The `TutorialGroupMaster` is able to handle lookup of `TutorialGroup` by ID quic
 [[Design-TutorialGroup]]
 === TutorialGroup Model
 
-.Structure of the Storage Component
+.Structure of the TutorialGroup Component
 image::TutorialGroupDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/superta/tutorialgroup/TutorialGroup.java[`TutorialGroup.java`]
@@ -39,8 +39,18 @@ The `TutorialGroup` model,
 * should only contain `Student` s that are in the main client.
 
 [NOTE]
+====
 The `TutorialGroup` model houses all other object instances that are crucial to the operation of the client. This is done because it makes logical sense - `Student` s, `Assignment` s, and `Session` s should belong to a `TutorialGroup` .
+====
 
 image::TutorialGroupObjectDiagram.png[width="800"]
 
 This is an example of the use case of a `TutorialGroup`. In this object diagram, we have a `TutorialGroup` with the name `Studio04A` and the ID `04a`. It holds lists of `Student` s, `Assignment` s, and `Session` s in its appropriate lists. Each entity is not coupled with each other - it uses the `StudentId` to find out which `Student` is associated with it. For example, The `GradeEntry` object composes of a `StudentId` object, which will allow other components to find out which is the underlying `Student` model with this `StudentId`. This is done so that we don't have to update each entity with updated copies of a `Student` when the user triggers an update event.
+
+==== Design Considerations
+
+===== Aspect: Alternative Implementation Methods
+
+* *Alternative 1*: Store `Assignment` s, `Session` s, and `Student` s in a normalised manner - that is, the `ModelManager` would instead contain lists of all of these entities. Every `TutorialGroup` would then reference an identifier if it wanted a reference to that entity.
+** Pros: Any updates to an underlying model would be propagated to every `TutorialGroup` referencing it. Normalised data is also easier to reference. Future classes can also reference these with no problem.
+** Cons: This implementation will require additional layers of abstraction, and will require many changes to the model.
