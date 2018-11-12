@@ -105,6 +105,7 @@ Edits the phone number and email address of the 1st student to be `91234567` and
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
+// tag::find[]
 === Locating students by keywords: `find`
 
 Finds and lists all students in the SuperTA client whose information matched with the entered keywords. +
@@ -130,6 +131,8 @@ Returns student with email `Johndoe@hotmail.com`
 Returns `john` and `John Doe` and student with student id `A0123456T`
 * `find n/Alice n/Hans` +
 Returns `Hans` only
+
+// end::find[]
 
 === Deleting a student : `delete`
 

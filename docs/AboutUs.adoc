@@ -35,7 +35,7 @@ Responsibilities: Code Quality
 
 === Darieca Lim
 image::darieca.png[width="150", align="left"]
-{empty}[http://github.com/darieca[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/darieca[github]] [<<darieca#, portfolio>>]
 
 Responsibilities: Testing
 
