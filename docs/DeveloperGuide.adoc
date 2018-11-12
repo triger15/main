@@ -1112,6 +1112,7 @@ Expected: All students with phone number `91234567` or with student ID `A0123456
 .. Test case: `create-assignment tg/04a n/lab1 m/-1` +
    Expected: An error message should be displayed, saying that the maximum marks should be more than 0.
 
+// tag::grade[]
 === Grading a student
 
 . Grading a student
@@ -1130,6 +1131,7 @@ Expected: All students with phone number `91234567` or with student ID `A0123456
    Expected: An error message showing that there is no such student in this tutorial group. You can also try this when there is a student in the main directory with this ID, but this student is not added to the tutorial group.
 .. Test case: `grade tg/04a st/A0166733Y as/lab2 m/30` +
    Expected: An error message showing that there is no such assignment.
+// end::grade[]
 // end::testsassignment[]
 
 // tag::testupdateassignment[]
