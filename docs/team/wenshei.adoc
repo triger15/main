@@ -20,17 +20,19 @@ SuperTA is a desktop app for Teaching Assistants and Professors of NUS School of
 
 * *Minor enhancement*: added a delete-tutorial-group command which allows the user to delete an existing tutorial group. (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/84[#84])
 
-* *Code contributed*: [RepoSense collated code](https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=wenshei)
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=wenshei[RepoSense collated code]
 
 * *Other contributions*:
 
+** Enhancements:
+*** Improved test coverage (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/157[#157])
 ** Project Management:
 *** Managed Issue tracker on GitHub
 ** Documentation:
-*** Added team's ideas into relevant appendixes: https://github.com/CS2103-AY210819S1-T16-2/main/pull/4[#4]
-*** Modified old diagrams in the Developer Guide to correspond with SuperTA: https://github.com/CS2103-AY1819S1-T16-2/main/pull/100[#100]
+*** Added team's ideas into relevant appendixes. (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/4[#4])
+*** Modified old diagrams in the Developer Guide to correspond with SuperTA. Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/100[#100])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T16-2/main/pull/97[#97]
+*** PRs reviewed (with non-trivial review comments) (Pull request https://github.com/CS2103-AY1819S1-T16-2/main/pull/97[#97])
 
 
 
