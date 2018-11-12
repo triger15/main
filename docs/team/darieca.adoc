@@ -30,7 +30,7 @@ The 10KoC codebase was originally adapted from Seedu’s AddressBook – Level 4
 * *Other contributions*:
 
 ** Documentation:
-*** Include instructions for commands implemented in the User Guide. (https://github.com/CS2103-AY1819S1-T16-2/main/pull/107[#107])
+*** Include instructions for commands implemented in the User Guide and Developer Guide. (https://github.com/CS2103-AY1819S1-T16-2/main/pull/107[#107]) (https://github.com/CS2103-AY1819S1-T16-2/main/pull/159[#159])
 *** Create marketing pitch for product in AboutUs. (https://github.com/CS2103-AY1819S1-T16-2/main/pull/21[#21])
 
 == Contributions to the User Guide
