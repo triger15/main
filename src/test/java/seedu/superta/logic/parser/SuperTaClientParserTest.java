@@ -33,7 +33,6 @@ import seedu.superta.logic.commands.ClearCommand;
 import seedu.superta.logic.commands.CreateAssignmentCommand;
 import seedu.superta.logic.commands.CreateAttendanceCommand;
 import seedu.superta.logic.commands.CreateTutorialGroupCommand;
-import seedu.superta.logic.commands.DeleteAssignmentCommand;
 import seedu.superta.logic.commands.DeleteCommand;
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.ExitCommand;
@@ -206,11 +205,11 @@ public class SuperTaClientParserTest {
                 UpdateAssignmentCommand.COMMAND_WORD + " "
                         + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tutorialGroup.getId() + " "
                         + PREFIX_GENERAL_ASSIGNMENT_TITLE + assignmentToChange.getTitle() + " "
-                        + PREFIX_ASSIGNMENT_MAX_MARKS + assignmentToChange.getMaxMarks() + " "
                         + PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE + assignmentChanged.getTitle() + " "
                         + PREFIX_ASSIGNMENT_NEW_MAX_MARKS + assignmentChanged.getMaxMarks());
 
-        assertEquals(new UpdateAssignmentCommand(tutorialGroup.getId(), assignmentToChange, descriptor), command);
+        assertEquals(new UpdateAssignmentCommand(
+                tutorialGroup.getId(), assignmentToChange.getTitle(), descriptor), command);
     }
 
     @Test
