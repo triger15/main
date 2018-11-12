@@ -42,7 +42,7 @@ public class UpdateAssignmentCommandTest {
         CommandHistory commandHistory = new CommandHistory();
         UpdateAssignmentCommand command = new UpdateAssignmentCommand(
                 TUTORIAL_GROUP,
-                assignment,
+                assignment.getTitle(),
                 updateAssignmentDescriptor);
 
         Assignment assignmentCopy = new AssignmentBuilder()
@@ -55,11 +55,11 @@ public class UpdateAssignmentCommandTest {
         Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
         expectedModel.addTutorialGroup(tutorialGroupCopy);
         expectedModel.addAssignment(TUTORIAL_GROUP, assignmentCopy);
-        expectedModel.updateAssignment(TUTORIAL_GROUP, assignment, assignment);
+        expectedModel.updateAssignment(TUTORIAL_GROUP, assignment.getTitle(), assignment);
         expectedModel.commitSuperTaClient();
 
         String expectedMessage = String.format(MESSAGE_SUCCESS, TUTORIAL_GROUP,
-                assignment, assignment);
+                assignment.getTitle());
 
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }

@@ -28,7 +28,7 @@ a| image::oldUi.png[width="800"] a| image::Ui.png[width="800"]
 image::Ui2.png[width="800"]
 |===
 
-* *Minor enhancement*: Added various view commands such as `view-session` and `list-tutorial-groups` which will trigger UI actions.
+* *Minor enhancement*: Added various view commands such as `view-session` and `list-tutorial-groups` which will trigger display relevant information in the User Interface.
 
 * *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=caephler[RepoSense collated code]
 
@@ -41,7 +41,7 @@ image::Ui2.png[width="800"]
 *** Non-trivial reviews for many Pull Requests from team members.
 ** Enhancements:
 *** Improve Test Coverage (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/41[#41], https://github.com/CS2103-AY1819S1-T16-2/main/pull/66[#66], https://github.com/CS2103-AY1819S1-T16-2/main/pull/101[#101])
-*** Bug fixes (in various PRs).
+*** Bug fixes (Pull Requests https://github.com/CS2103-AY1819S1-T16-2/main/pull/145[#145], https://github.com/CS2103-AY1819S1-T16-2/main/pull/144[#144], https://github.com/CS2103-AY1819S1-T16-2/main/pull/141[#141], https://github.com/CS2103-AY1819S1-T16-2/main/pull/138[#138], https://github.com/CS2103-AY1819S1-T16-2/main/pull/135[#135], https://github.com/CS2103-AY1819S1-T16-2/main/pull/59[#59])
 *** Reviewed many team members' pull requests.
 *** Added documentation for features implemented.
 
@@ -79,3 +79,5 @@ include::../TutorialGroupDesign.adoc[]
 
 === Manual Testing
 include::../DeveloperGuide.adoc[tag=teststutorialgroup]
+
+include::../DeveloperGuide.adoc[tag=grade]

@@ -2,7 +2,6 @@ package seedu.superta.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.superta.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
@@ -12,7 +11,6 @@ import static seedu.superta.logic.parser.ParserUtil.arePrefixesPresent;
 import seedu.superta.logic.commands.UpdateAssignmentCommand;
 import seedu.superta.logic.commands.UpdateAssignmentCommand.UpdateAssignmentDescriptor;
 import seedu.superta.logic.parser.exceptions.ParseException;
-import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
 
 /**
@@ -31,14 +29,12 @@ public class UpdateAssignmentCommandParser implements Parser<UpdateAssignmentCom
                 args,
                 PREFIX_GENERAL_TUTORIAL_GROUP_ID,
                 PREFIX_GENERAL_ASSIGNMENT_TITLE,
-                PREFIX_ASSIGNMENT_MAX_MARKS,
                 PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE,
                 PREFIX_ASSIGNMENT_NEW_MAX_MARKS);
 
         if (!arePrefixesPresent(argumentMultimap,
                 PREFIX_GENERAL_TUTORIAL_GROUP_ID,
-                PREFIX_GENERAL_ASSIGNMENT_TITLE,
-                PREFIX_ASSIGNMENT_MAX_MARKS
+                PREFIX_GENERAL_ASSIGNMENT_TITLE
         ) || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateAssignmentCommand.MESSAGE_USAGE));
@@ -52,21 +48,16 @@ public class UpdateAssignmentCommandParser implements Parser<UpdateAssignmentCom
                 argumentMultimap.getValue(PREFIX_GENERAL_ASSIGNMENT_TITLE).get()
         );
 
-        Double maxMarks = ParserUtil.parseMaxMarks(
-                argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_MARKS).get()
-        );
-
         UpdateAssignmentDescriptor updateAssignmentDescriptor = new UpdateAssignmentDescriptor();
         if (argumentMultimap.getValue(PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE).isPresent()) {
             updateAssignmentDescriptor.setAssignmentTitle(ParserUtil.parseTitle(
                     argumentMultimap.getValue(PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE).get()));
         }
         if (argumentMultimap.getValue(PREFIX_ASSIGNMENT_NEW_MAX_MARKS).isPresent()) {
-            updateAssignmentDescriptor.setMaxMarks(Double.parseDouble(
+            updateAssignmentDescriptor.setMaxMarks(ParserUtil.parseMaxMarks(
                     argumentMultimap.getValue(PREFIX_ASSIGNMENT_NEW_MAX_MARKS).get()));
         }
 
-        Assignment assignment = new Assignment(assignmentTitle, maxMarks);
-        return new UpdateAssignmentCommand(tgId, assignment, updateAssignmentDescriptor);
+        return new UpdateAssignmentCommand(tgId, assignmentTitle, updateAssignmentDescriptor);
     }
 }

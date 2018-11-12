@@ -1,4 +1,4 @@
-= SuperTA Level 4 - Developer Guide
+= SuperTA - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -615,7 +615,7 @@ Attributes left unset in `.adoc` files will use their *default value*, if any.
 |`site-section`
 |Site section that the document belongs to.
 This will cause the associated item in the navigation bar to be highlighted.
-One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
+One of: `UserGuide`, `DeveloperGuide`, `AboutUs`, `ContactUs`
 
 _{asterisk} Official SE-EDU projects only_
 |_not set_
@@ -891,6 +891,7 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+// tag::usecasefour[]
 [discrete]
 === UC04 - Grade Assignment
 
@@ -923,6 +924,9 @@ Use case resumes at step 3.
 +
 Use case resumes at step 5.
 
+// end::usecasefour[]
+
+// tag::usecasefive[]
 [discrete]
 === UC05 - Mark Attendance
 
@@ -948,6 +952,9 @@ Use case resumes at step 1.
 +
 Use case resumes at step 3.
 
+// end::usecasefive[]
+
+// tag::usecasesix[]
 [discrete]
 === UC06 - Add feedback for student
 
@@ -964,6 +971,8 @@ Use case ends.
 ** 1a1. System displays an error message.
 +
 Use case resumes at step 1.
+
+// end::usecasesix[]
 
 _{More to be added}_
 
@@ -1112,6 +1121,7 @@ Expected: All students with phone number `91234567` or with student ID `A0123456
 .. Test case: `create-assignment tg/04a n/lab1 m/-1` +
    Expected: An error message should be displayed, saying that the maximum marks should be more than 0.
 
+// tag::grade[]
 === Grading a student
 
 . Grading a student
@@ -1130,6 +1140,7 @@ Expected: All students with phone number `91234567` or with student ID `A0123456
    Expected: An error message showing that there is no such student in this tutorial group. You can also try this when there is a student in the main directory with this ID, but this student is not added to the tutorial group.
 .. Test case: `grade tg/04a st/A0166733Y as/lab2 m/30` +
    Expected: An error message showing that there is no such assignment.
+// end::grade[]
 // end::testsassignment[]
 
 // tag::testupdateassignment[]
@@ -1140,13 +1151,13 @@ Expected: All students with phone number `91234567` or with student ID `A0123456
    View the tutorial group using the `view-tutorial-group id/04a` command. +
   Have an assignment title named `lab1` with a maximum mark of `40.0`. +
 Have an assignment title named `lab3` with a maximum mark of `50.0`.
-.. Test case: `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2` +
+.. Test case: `update-assignment tg/04a as/lab1 new_as/lab2` +
    Expected: Assignment `lab1` name should now be changed to `lab2` under the `Assignments` UI panel. Maximum marks should be maintained at `40.0` marks.
-.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/50.0` +
+.. Test case: `update-assignment tg/04a as/lab2 new_m/50.0` +
    Expected: Assignment `lab2` maximum marks should be changed from `40.0` marks to `50.0` marks under the `Assignments` UI panel.
-.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/lab3` +
+.. Test case: `update-assignment tg/04a as/lab2 new_m/lab3` +
    Expected: An error message should be displayed, showing that assignment name already exists in the database.
-.. Test case: `update-assignment tg/04a as/lab4 m/40.0 new_m/lab5` +
+.. Test case: `update-assignment tg/04a as/lab4 new_m/lab5` +
    Expected: An error message should be displayed, showing that assignment does not exist.
 // end::testupdateassignment[]
 

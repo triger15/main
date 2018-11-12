@@ -23,6 +23,7 @@ import seedu.superta.model.Model;
 import seedu.superta.model.ReadOnlySuperTaClient;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.assignment.Title;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
@@ -123,7 +124,7 @@ public class CreateAssignmentCommandTest {
         }
 
         @Override
-        public void updateAssignment(String tgId, Assignment assignmentToChange, Assignment assignmentChanged) {
+        public void updateAssignment(String tgId, Title assignmentToChange, Assignment assignmentChanged) {
 
         }
 

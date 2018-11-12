@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Grade;
+import seedu.superta.model.assignment.Title;
 import seedu.superta.model.attendance.Session;
 import seedu.superta.model.student.Feedback;
 import seedu.superta.model.student.Student;
@@ -95,7 +96,7 @@ public interface Model {
      * The assignment identity of {@code assignmentChanged} must not be the same as another existing assignment in the
      * tutorial group.
      */
-    void updateAssignment(String tgId, Assignment assignmentToChange, Assignment assignmentChanged);
+    void updateAssignment(String tgId, Title assignmentToChange, Assignment assignmentChanged);
 
     /**
      * Grades a student on an assignment.
