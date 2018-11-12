@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlValue;
 import seedu.superta.model.student.Feedback;
 
 /**
- * JAXB-friendly adapted version of the Tag.
+ * JAXB-friendly adapted version of the Feedback.
  */
 public class XmlAdaptedFeedback {
 

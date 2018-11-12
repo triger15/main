@@ -6,8 +6,11 @@ import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.superta.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.superta.testutil.StudentBuilder.DEFAULT_STUDENT_ID;
+import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.superta.testutil.TypicalSuperTaClient.getTypicalSuperTaClient;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.superta.logic.CommandHistory;
@@ -19,13 +22,23 @@ import seedu.superta.model.student.StudentId;
 import seedu.superta.testutil.StudentBuilder;
 
 public class ViewStudentFeedbackCommandTest {
-    private Model model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
 
     private final StudentId amy = new StudentId(VALID_STUDENT_ID_AMY);
     private final StudentId bob = new StudentId(VALID_STUDENT_ID_BOB);
-    private final String expectedMsg = String.format("Student ID: %s, Feedback:\n", "A0166733Y");
+    private final String expectedMsg = String.format("Student ID: %s\nFeedback:\n", DEFAULT_STUDENT_ID);
+
+    private final String additionalFeedback1 = "Cool beans.";
+    private final String additionalFeedback2 = "Needs to pay more attention in class.";
+    private final String additionalFeedback3 = "Always helps others with their work.";
+
+    @Before
+    public void setUp() {
+        model = new ModelManager(getTypicalSuperTaClient(), new UserPrefs());
+        expectedModel = new ModelManager(model.getSuperTaClient(), new UserPrefs());
+    }
 
     @Test
     public void equals() {
@@ -52,17 +65,30 @@ public class ViewStudentFeedbackCommandTest {
 
     @Test
     public void execute_viewStudentFeedbackCommand_success() {
-        Student expectedStudent = new StudentBuilder()
-                .withName("Alice Pauline")
-                .withEmail("alice@example.com")
-                .withPhone("94351253")
-                .withStudentId("A0166733Y")
-                .withTags("friends").build();
-        // TODO:FIX
-        assertCommandSuccess(new ViewStudentFeedbackCommand(new StudentId("A0166733Y")),
+        assertCommandSuccess(new ViewStudentFeedbackCommand(new StudentId(DEFAULT_STUDENT_ID)),
                 model,
                 commandHistory,
                 expectedMsg,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_viewStudentMultipleFeedbackCommand_success() {
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student editedStudent = new StudentBuilder(firstStudent)
+                .withFeedback(additionalFeedback1, additionalFeedback2, additionalFeedback3).build();
+        model.updateStudent(firstStudent, editedStudent);
+        expectedModel.updateStudent(firstStudent, editedStudent);
+
+        StringBuilder expectedOutput = new StringBuilder(expectedMsg);
+        expectedOutput.append("0 " + additionalFeedback1 + "\n");
+        expectedOutput.append("1 " + additionalFeedback2 + "\n");
+        expectedOutput.append("2 " + additionalFeedback3 + "\n");
+
+        assertCommandSuccess(new ViewStudentFeedbackCommand(new StudentId(DEFAULT_STUDENT_ID)),
+                model,
+                commandHistory,
+                expectedOutput.toString(),
                 expectedModel);
     }
 
