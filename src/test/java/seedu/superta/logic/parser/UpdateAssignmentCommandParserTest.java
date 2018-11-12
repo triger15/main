@@ -25,6 +25,7 @@ public class UpdateAssignmentCommandParserTest {
         //empty argument
         assertParseFailure(parser,
                 "    ",
+
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateAssignmentCommand.MESSAGE_USAGE));
 
         //tutorial missing
