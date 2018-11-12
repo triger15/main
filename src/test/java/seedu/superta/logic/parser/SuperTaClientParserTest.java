@@ -7,11 +7,14 @@ import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_STUDENT_ID;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_TUTORIAL_GROUP_ID;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.superta.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -20,7 +23,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,9 +50,13 @@ import seedu.superta.logic.parser.exceptions.ParseException;
 import seedu.superta.model.assignment.Assignment;
 import seedu.superta.model.assignment.Title;
 import seedu.superta.model.attendance.Session;
+import seedu.superta.model.student.EmailContainsKeywordsPredicate;
 import seedu.superta.model.student.Feedback;
+import seedu.superta.model.student.NameContainsKeywordsPredicate;
+import seedu.superta.model.student.PhoneContainsKeywordsPredicate;
 import seedu.superta.model.student.Student;
 import seedu.superta.model.student.StudentId;
+import seedu.superta.model.student.StudentidContainsKeywordsPredicate;
 import seedu.superta.model.tutorialgroup.TutorialGroup;
 import seedu.superta.testutil.AssignmentBuilder;
 import seedu.superta.testutil.EditStudentDescriptorBuilder;
@@ -102,10 +108,21 @@ public class SuperTaClientParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("n/foo", "n/bar", "n/baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        // assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        List<String> nameKeywords = Arrays.asList("ida", "fiona");
+        List<String> phoneKeywords = Arrays.asList("87652533", "91825472");
+        List<String> emailKeywords = Arrays.asList("stefan@example.com", "werner@example.com");
+        List<String> studentIdKeywords = Arrays.asList("A1245563Y", "A8371546T");
+
+        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " "
+                        + PREFIX_NAME + "ida fiona "
+                        + PREFIX_PHONE + "87652533 91825472 "
+                        + PREFIX_EMAIL + "stefan@example.com werner@example.com "
+                        + PREFIX_STUDENT_ID + "A1245563Y A8371546T");
+        assertEquals(new FindCommand(
+                new NameContainsKeywordsPredicate(nameKeywords)
+                .or(new PhoneContainsKeywordsPredicate(phoneKeywords)
+                .or(new EmailContainsKeywordsPredicate(emailKeywords)
+                .or(new StudentidContainsKeywordsPredicate(studentIdKeywords))))), command);
         // TODO: Fix up this test. We cannot equqate FindCommands in the old manner anymore.
     }
 
