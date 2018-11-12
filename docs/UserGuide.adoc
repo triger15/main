@@ -80,7 +80,10 @@ Format: `list`
 // tag::listtutorialgroups[]
 === Listing all tutorial groups: `list-tutorial-groups`
 
-Shows a list of all the tutorial groups, and reflects it on the UI. +
+Shows a list of all the tutorial groups, and reflects it on the UI.
+
+image::Ui.png[width="790"]
+
 Format: `list-tutorial-groups`
 // end::listtutorialgroups[]
 
@@ -105,6 +108,7 @@ Edits the phone number and email address of the 1st student to be `91234567` and
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
+// tag::find[]
 === Locating students by keywords: `find`
 
 Finds and lists all students in the SuperTA client whose information matched with the entered keywords. +
@@ -130,6 +134,8 @@ Returns student with email `Johndoe@hotmail.com`
 Returns `john` and `John Doe` and student with student id `A0123456T`
 * `find n/Alice n/Hans` +
 Returns `Hans` only
+
+// end::find[]
 
 === Deleting a student : `delete`
 
@@ -174,6 +180,9 @@ Selects the 1st student in the results of the `find` command.
 === Viewing a student's information: `view`
 
 Views a student's information and any feedback that is left for him. +
+The UI should update to show a screen like this.
+
+image::View.png[width="790"]
 Format: `view id/STUDENT-ID`
 
 Examples:
@@ -229,6 +238,10 @@ Deletes a tutorial group with the ID `04a`.
 === View Tutorial Group: `view-tutorial-group`
 
 Views a tutorial group's details. +
+The UI should show this screen:
+
+image::ViewTutorialGroup.png[width="790"]
+
 Format: `view-tutorial-group id/TUTORIAL-GROUP-ID`
 
 Examples:
@@ -292,12 +305,16 @@ Marks students with IDs `A1234567T` and `A0123456Y` as present in tutorial sessi
 // tag::viewsession[]
 === View Attendance Session: `view-session`
 
-Views the session details for a particular session in a tutorial group. +
-Format: `view-attendance tg/TUTORIAL-GROUP-ID n/SESSION-NAME`
+Views the session details for a particular attendance session in a tutorial group. +
+The UI should show this screen:
+
+image::ViewSession.png[width="790"]
+
+Format: `view-session tg/TUTORIAL-GROUP-ID n/SESSION-NAME`
 
 Examples:
 
-* `view-attendance tg/04a n/W1Tutorial` +
+* `view-session tg/04a n/W1Tutorial` +
 Views the details of the session `W1Tutorial` belonging to the tutorial group `04a`.
 // end::viewsession[]
 
@@ -371,6 +388,10 @@ Creates a grade with marks `40` for the student with an ID of `A0166733Y` in the
 === View Assignment Details: `view-assignment`
 
 Views an assignment details. +
+The UI should show this screen:
+
+image::ViewAssignment.png[width="790"]
+
 Format: `view-assignment tg/TUTORIAL-GROUP-ID as/ASSIGNMENT-TITLE`
 
 Examples:

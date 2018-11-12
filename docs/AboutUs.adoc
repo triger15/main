@@ -27,7 +27,7 @@ Responsibilities: Documentation
 
 === Yu-He Ong
 image::triger15.png[width="150", align="left"]
-{empty}[http://github.com/triger15[github]] [<<yuheong#, portfolio>>]
+{empty}[http://github.com/triger15[github]] [<<triger15#, portfolio>>]
 
 Responsibilities: Code Quality
 
@@ -35,7 +35,7 @@ Responsibilities: Code Quality
 
 === Darieca Lim
 image::darieca.png[width="150", align="left"]
-{empty}[http://github.com/darieca[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/darieca[github]] [<<darieca#, portfolio>>]
 
 Responsibilities: Testing
 

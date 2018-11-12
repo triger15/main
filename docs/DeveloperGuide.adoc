@@ -1,4 +1,4 @@
-= SuperTA Level 4 - Developer Guide
+= SuperTA - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -206,7 +206,7 @@ link:{repoURL}/src/main/java/seedu/superta/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a student) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete assignment as/lab1 tg/04a")` API call.
 
 .Interactions Inside the Logic Component for the `delete-assignment as/lab1 tg/04a` Command
 image::DeleteAssignmentSdForLogic.png[width="800"]
@@ -223,7 +223,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the SuperTA client data.
-* exposes an unmodifiable `ObservableList<Student>` and `ObservableList<TutorialGroup>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Student>`,`ObservableList<Attendance>` and `ObservableList<TutorialGroup>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
@@ -371,6 +371,152 @@ image::DeleteAssignmentSdForLogic.png[width="800"]
 
 // end::deleteassignment[]
 
+// tag::find[]
+=== Find feature
+
+==== Current Implementation
+
+The `find` command is facilitated by the `FindCommand` class.
+It extends the abstract class `Command`,
+and it is triggered when the user enters `find` into `SuperTaClient`.
+
+The sequence diagram below shows the overview when `FindCommand` is called:
+
+image::SDFindCommand.png[width="800"]
+
+The `FindCommand` is implemented as follows:
+
+. `LogicManager` is called to execute the entered argument.
+. `LogicManager` calls `SuperTaClientParser`, and parses the argument through the method `parseCommand()`.
+. `SuperTaClientParser` calls its respective command parsers of the argument using `parse()`. In this case, the `FindCommandParser` is called.
+. `FindCommandParser` will now parse the arguments and turn into `name`, `phone`, `email` and `studentID` predicates. These predicates will be passed to `FindCommand`.
+. When `LogicManager` invokes `execute()`, `FindCommand` will call `updateFilteredStudentList()` to the model component and update the student list to the latest results.
+
+==== Design Considerations
+
+===== Aspect: How `FindCommandParser` parse predicates
+
+* *Alternative 1 (current choice):* Each parameter field (ie `name`, `phone`) are parsed into its respective predicates (ie. `namePredicate`, `phonePredicate`).
+** Pros: Easy to implement. Predicates are grouped into how they are parsed.
+** Cons: Less user-friendly. Users are required to remember the prefixes for each field.
+* *Alternative 2:* Parse all arguments into a general `string`, then search all the fields and stored into a main predicate.
+** Pros: More versatile and user-friendly. The `string` is able to search all the fields.
+** Cons: Slightly more tedious as compared to alternative 1. The general `string` needs to parse into respective field objects and predicates for each available parameter.
+
+// end::find[]
+
+// tag::updateassignment[]
+=== Update Assignment feature
+
+==== Current Implementation
+
+The `update-assignment` command is facilitated by `UpdateAssignmentCommand` class.
+It extends the abstract class `command`,
+and it is triggered when the user enters `update-assignment` into `SuperTaClient`.
+Actual changes of this command are made through `Model#updateAssignment()`.
+
+The `UpdateAssignmentCommand` is implemented as follows:
+
+[NOTE]
+`UpdateAssignmentCommand` only works when there is an existing assignment in an existing tutorial group,
+and the updated assignment name is not the same as other existing assignment title.
+In this implementation, it is assumed that there is a valid tutorial group and a valid existing assignment.
+
+.Logic component of the Sequence Diagram for `update-assignment` command
+image::SDUpdateAssignmentCommandLogic.png[width="800"]
+
+. `LogicManager` is called to execute the entered argument.
+. `LogicManager` calls `SuperTaClientParser`, and parses the argument through the method `parseCommand()`.
+. `SuperTaClientParser` calls its respective command parsers of the argument using `parse()`. In this case, the `UpdateAssignmentCommandParser()` is called.
+. `UpdatAassignmentCommandParser` will now parse the arguments.
+. `UpdateAssignmentCommandParser` will create a new `UpdateAssignmentDescriptor` and set the updated assignment details, which later will be passed to `UpdateAssignmentCommand`.
+. When `LogicManager` invokes `execute()`, `UpdateAssignmentCommand` will call `updateAssignment()` to the model component.
+
+.Model component of the Sequence Diagram for `update-assignment` command
+image::SDUpdateAssignmentCommandModel.png[width="800"]
+
+. When `updateAssignment()` is called in `ModelManager`, it will retrieve `tutorialGroup` and `assignment` information from `SuperTaClient` and `TutorialGroup` respectively.
+. After locating the specific `assignment` to be changed, `ModelManager` now calls `updateAssignment()` to `UiqueAssignmentList` to replace the old assignment details.
+. Updated information will be returned to the `logic` component (as ‘updated’) in the above diagram.
+
+==== Design Considerations
+
+===== Aspect: Implementation of `UpdateAssignmentDescriptor` in `UpdateAssignmentCommand`
+
+* *Alternative 1 (current choice):*  Use of `UpdateAssignmentDescriptor` in `UpdateAssignmentCommand` to store the updated `assignment` details.
+** Pros: Strengthen Single Responsibility Principle (SRP), as the `UpdateAssignmentCommand` will not need to check for differences between the old and updated `assignment` details.
+** Cons: May increase coupling. If the additional `assignment` details are added in in the future such as section maximum marks, `UpdateAssignmentDescriptor` have to change accordingly as well.
+* *Alternative 2:* Remove `UpdateAssignmentDescriptor` and parse updated `assignment` details as a new `assignment`.
+** Pros: Decreases coupling.
+** Cons: Harder to implement if user only indicate to update one field. (eg: update `assignmentTitle` only, while `maxMarks` stay the same). In this case, `UpdateAssignmentCommand` need to factor in the differences changed after the updated `assignment` details.
+
+===== Aspect: Data structure of `update-assignment` in `ModelManager`
+
+* *Alternative 1:*  Locate `assignment` from `assignmentList`, then delete old `assignment` and add updated `assignment`.
+** Pros: Easier to implement as it made use of other existing assignment commands such as `addAssignment()` and `deleteAssignment()`. No additional methods are needed for `updateAssignment()`.
+** Cons: As each assignment contains a `GradeBook` which stores all student grades, deleting the old `assignment` and add a new `assignment` may risk of losing the existing `GradeBook` records. In addition, assignment index list may be affected after deletion as well.
+* *Alternative 2 (current choice):* Locate `assignment` from `assignmentList` and replace the old `assignment` with updated `assignment` details.
+** Pros: No risk of losing `GradeBook` records as only the `assignmentTitle` and `maxMarks` are being edited.
+** Cons: An additional method, `updateAssignment()` will be implemented instead.
+
+// end::updateassignment[]
+
+// tag::markattendancefeature[]
+=== Mark Attendance feature
+
+==== Current Implementation
+
+The `mark-attendance` command is facilitated by the `MarkAttendanceCommand` class.
+It extends the abstract class `Command` and is supported by `MarkAttendanceCommandParser`,
+and changes made to the `Model` are done through `Model#markAttendance()`.
+
+The `mark-attendance` command is executed in the following way:
+
+. `LogicManager` calls `parseCommand()` of `SuperTaClientParser`, with the user input as the argument.
+. `SuperTaClientParser` invokes `parse()` of `MarkAttendanceCommandParser`.
+. If arguments are valid, `parse` extracts `tutorialGroupId` string, `sessionName` and set of `studentId` strings for parsing into a `Session` and `Set<StudentId>` to instantiate a `MarkAttendanceCommand`.
+. The `MarkAttendanceCommand` is returned to `LogicManager`, which calls `execute()` on it.
+. `MarkAttendance` calls `Model#markAttendance()` using `tgtId`, `sessionName` and `studentIdSet`.
+
+The following sequence diagrams of the `mark-attendance` command shows the sequence flow from `LogicManager` to the `ModelManager`:
+
+image::SDforMarkAttendance1.png[width="1856"]
+
+A more in-depth sequence diagram to illustrate how the `Model` executes the `mark-attendance` command:
+
+image::SDforMarkAttendance2.png[width="1452"]
+
+From the in-depth sequence diagram:
+
+. `Model` calls `VersionedSuperTaClient#markAttendance`, using `tgtId`, `sessionName` and `studentIdSet`.
+. `VersionedSuperTaClient` self-invokes the method `getTutorialGroup(tgId)` to obtain the tutorial group specified.
+. `VersionedSuperTaClient` then calls `getSession(sessionName)` in the `TutorialGroup` instance obtained previously.
+. `VersionedSuperTaClient` then streams the set of student Ids obtained in `studentIdSet`, mapping them to new `Attendance` objects and collecting them as a list.
+. Finally, the `attendanceList` obtained is streamed, with each `Attendance` object being added to the `Session` instance obtained in step 3.
+
+
+==== Design Considerations
+
+===== Aspect: Implementation of `MarkAttendanceCommand`
+
+* *Alternative 1(current choice):* Store the tutorial group ID as String field, session name as a `Session` object and student ids as a set of `StudentIds` in `MarkAttendanceCommand`.
+** Pros: Easy to implement, and parse, with existing parsers built in. Ensures that parsed `Session` and `StudentId` objects are valid and abide by constraints.
+** Cons: Requires `Session` and `StudentId` objects to be instantiated. Also depends on `isSameSession()` method and `containsId()` method in `Session` and `UniqueStudentList` respectively.
+* *Alternative 2:* Store all parameters of `MarkAttendanceCommand` as String objects, including `StudentIds` as a set of Strings.
+** Pros: Easy to implement, will be able to find session and set of student ids by comparing strings.
+** Cons: Cannot ensure parsed session names and student ids are correct, valid and fit constraints.
+
+===== Aspect: Implementation of `Attendance`
+
+* *Alternative 1(current choice):* Store `Attendance` object with an encapsulated `StudentId` object and `Presence` enumeration.
+** Pros: `StudentId` is assured to be valid, while `Presence` will only be able to take fixed, constant values,
+** Cons: Requires a new `Presence` enumeration to be defined, instead of relying on simpler string values.
+* *Alternative 2:* Store presence of student as an integer or string value.
+** Pros: Easy to implement, no need to create additional enumeration.
+** Cons: Cannot ensure that only fixed, valid values will be used when creating `Attendance` objects.
+
+// end::markattendancefeature[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -469,7 +615,7 @@ Attributes left unset in `.adoc` files will use their *default value*, if any.
 |`site-section`
 |Site section that the document belongs to.
 This will cause the associated item in the navigation bar to be highlighted.
-One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
+One of: `UserGuide`, `DeveloperGuide`, `AboutUs`, `ContactUs`
 
 _{asterisk} Official SE-EDU projects only_
 |_not set_
@@ -708,7 +854,26 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== UC02 - Add Tutorial Group
+=== UC02 - Find student
+
+*MSS:*
+
+1. User requests to find students using prefix and keywords
+2. System finds the student who information matched with the keywords
+
++
+Use case ends.
+
+*Extensions:*
+
+[none]
+* 1a. Prefix entered is not supported by find command
+** 1a1. System shows an error message.
+* 2a. None of the student matched the keywords provided by user
+** 2a1. No students will be listed.
+
+[discrete]
+=== UC03 - Add Tutorial Group
 
 *MSS:*
 
@@ -727,7 +892,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== UC03 - Grade Assignment
+=== UC04 - Grade Assignment
 
 *MSS:*
 
@@ -759,7 +924,7 @@ Use case resumes at step 3.
 Use case resumes at step 5.
 
 [discrete]
-=== UC04 - Mark Attendance
+=== UC05 - Mark Attendance
 
 *MSS:*
 
@@ -784,7 +949,7 @@ Use case resumes at step 1.
 Use case resumes at step 3.
 
 [discrete]
-=== UC05 - Add feedback for student
+=== UC06 - Add feedback for student
 
 *MSS:*
 
@@ -864,6 +1029,20 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
+
+// tag::testfind[]
+=== Finding a student
+
+. Finding a student while all students are listed
+
+.. Test case: `find n/john` +
+Expected: All students with name `john` will be on the list. Since it is case-insensitive, variations such as ‘John’ or ‘joHn’ will appear on the filtered list as well.
+.. Test case: `find n/john mary` +
+Expected: All students with name `john` or ‘mary’ will be on the list. Similar to a, case-insensitive variations will appear on the filtered list.
+.. Test case: `find p/91234567 id/A0123456T` +
+Expected: All students with phone number `91234567` or with student ID `A0123456T` will appear on the filtered list.
+.. Other than the indicated prefixes (`n/`, `p/`, ‘e/’, ‘id/’), any other prefixes (ie. `tg/`, ‘m/`) will show an invalid command format error message.
+// end::testfind[]
 
 // tag::teststutorialgroup[]
 === Creating a Tutorial Group
@@ -952,6 +1131,24 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `grade tg/04a st/A0166733Y as/lab2 m/30` +
    Expected: An error message showing that there is no such assignment.
 // end::testsassignment[]
+
+// tag::testupdateassignment[]
+=== Updating an assignment detail
+
+. Update an assignment detail
+.. Prerequisites: Have one tutorial group with an ID of `04a`. +
+   View the tutorial group using the `view-tutorial-group id/04a` command. +
+  Have an assignment title named `lab1` with a maximum mark of `40.0`. +
+Have an assignment title named `lab3` with a maximum mark of `50.0`.
+.. Test case: `update-assignment tg/04a as/lab1 m/40.0 new_as/lab2` +
+   Expected: Assignment `lab1` name should now be changed to `lab2` under the `Assignments` UI panel. Maximum marks should be maintained at `40.0` marks.
+.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/50.0` +
+   Expected: Assignment `lab2` maximum marks should be changed from `40.0` marks to `50.0` marks under the `Assignments` UI panel.
+.. Test case: `update-assignment tg/04a as/lab2 m/40.0 new_m/lab3` +
+   Expected: An error message should be displayed, showing that assignment name already exists in the database.
+.. Test case: `update-assignment tg/04a as/lab4 m/40.0 new_m/lab5` +
+   Expected: An error message should be displayed, showing that assignment does not exist.
+// end::testupdateassignment[]
 
 // tag::testsfeedback[]
 === Giving feedback to a student
