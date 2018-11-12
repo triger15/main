@@ -7,6 +7,7 @@ import static seedu.superta.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.superta.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_MAX_MARKS;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_NEW_MAX_MARKS;
+import static seedu.superta.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_ASSIGNMENT_TITLE;
 import static seedu.superta.logic.parser.CliSyntax.PREFIX_GENERAL_NEW_ASSIGNMENT_TITLE;
@@ -29,8 +30,10 @@ import org.junit.rules.ExpectedException;
 import seedu.superta.logic.commands.AddCommand;
 import seedu.superta.logic.commands.AddStudentToTutorialGroupCommand;
 import seedu.superta.logic.commands.ClearCommand;
+import seedu.superta.logic.commands.CreateAssignmentCommand;
 import seedu.superta.logic.commands.CreateAttendanceCommand;
 import seedu.superta.logic.commands.CreateTutorialGroupCommand;
+import seedu.superta.logic.commands.DeleteAssignmentCommand;
 import seedu.superta.logic.commands.DeleteCommand;
 import seedu.superta.logic.commands.EditCommand;
 import seedu.superta.logic.commands.ExitCommand;
@@ -180,6 +183,19 @@ public class SuperTaClientParserTest {
     }
 
     @Test
+    public void parseCommand_createAssignment() throws Exception {
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
+        Assignment assignment = new AssignmentBuilder().build();
+        CreateAssignmentCommand command = (CreateAssignmentCommand) parser.parseCommand(
+                CreateAssignmentCommand.COMMAND_WORD + " "
+                        + PREFIX_GENERAL_TUTORIAL_GROUP_ID + tutorialGroup.getId() + " "
+                        + PREFIX_ASSIGNMENT_TITLE + assignment.getTitle() + " "
+                        + PREFIX_ASSIGNMENT_MAX_MARKS + assignment.getMaxMarks());
+
+        assertEquals(new CreateAssignmentCommand(tutorialGroup.getId(), assignment), command);
+    }
+
+    @Test
     public void parseCommand_updateAssignment() throws Exception {
         TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
         Assignment assignmentToChange = new AssignmentBuilder().build();
@@ -277,6 +293,5 @@ public class SuperTaClientParserTest {
 
         assertEquals(new RemoveStudentFromTutorialGroupCommand(tutorialGroup.getId(), student.getStudentId()), command);
     }
-
 
 }
