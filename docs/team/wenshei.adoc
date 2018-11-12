@@ -54,7 +54,7 @@ include::../UserGuide.adoc[tag=deletetutorialgroup]
 
 include::../DeveloperGuide.adoc[tag=deleteassignment]
 
----
+=== Use Cases:
 
 include::../DeveloperGuide.adoc[tag=usecasefour]
 
