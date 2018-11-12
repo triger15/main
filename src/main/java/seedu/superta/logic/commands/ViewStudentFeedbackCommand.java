@@ -22,7 +22,7 @@ import seedu.superta.model.student.exceptions.StudentNotFoundException;
 public class ViewStudentFeedbackCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-    public static final String MESSAGE_SUCCESS = "Student ID: %s, Feedback:\n";
+    public static final String MESSAGE_SUCCESS = "Student ID: %s\n, Feedback:\n";
     public static final String MESSAGE_FAILURE = "Student not found!\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves the feedback given to the student"
             + " indicated by Student ID and displays them as a list with index numbers.\n"

@@ -40,6 +40,8 @@ public class ViewStudentFeedbackCommandParserTest {
         ViewStudentFeedbackCommand expectedViewStudentFeedbackCommand =
                 new ViewStudentFeedbackCommand(new StudentId("A0123456Z"));
 
-        assertParseSuccess(parser, PREFIX_STUDENT_ID + "A0123456Z", expectedViewStudentFeedbackCommand);
+        assertParseSuccess(parser, "    " + PREFIX_STUDENT_ID + "A0123456Z", expectedViewStudentFeedbackCommand);
+        // lowercase input
+        assertParseSuccess(parser, "    " + PREFIX_STUDENT_ID + "a0123456z", expectedViewStudentFeedbackCommand);
     }
 }
